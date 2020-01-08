@@ -1,0 +1,23 @@
+.app {
+    display: grid;
+    padding: 2.5em;
+    text-align: center;
+    justify-items: center;
+}
+
+.controls {
+    align-items: center;
+    display: grid;
+    justify-content: center;
+    grid-auto-flow: column;
+    grid-column-gap: 1em;
+}
+
+.githubLink {
+    font-size: xx-large;
+}
+
+.header {
+    display: grid;
+    grid-auto-flow: column;
+}
