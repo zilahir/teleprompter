@@ -21,7 +21,7 @@ const EditorSidebar = () => {
 
 	function handleFlip(boolean) {
 		// TODO: dispatch flipped actionreducer here
-		setFlipped(boolean)
+		setFlipped(boolean.target.checked)
 	}
 	return (
 		<>
