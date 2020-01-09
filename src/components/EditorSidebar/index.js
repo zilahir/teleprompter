@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
+import Toggle from 'react-toggle'
+import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
 import { scrollWidthSettngs } from '../../utils/consts'
 import styles from './EditorSidebar.module.scss'
+import './Toggle.scss'
 
 /**
 * @author zilahir
@@ -13,7 +16,13 @@ import styles from './EditorSidebar.module.scss'
 * */
 
 const EditorSidebar = () => {
+	const [isFlipped, setFlipped] = useState(false)
 	const store = useStore()
+
+	function handleFlip(boolean) {
+		// TODO: dispatch flipped actionreducer here
+		setFlipped(boolean)
+	}
 	return (
 		<>
 			<Col
@@ -45,6 +54,14 @@ const EditorSidebar = () => {
 						initialValue={5}
 						step={1}
 					/>
+					<div className="toggleWrapper">
+						<Toggle
+							onChange={bool => handleFlip(bool)}
+							defaultChecked={false}
+							checked={isFlipped}
+							icons={null}
+						/>
+					</div>
 				</div>
 			</Col>
 		</>
