@@ -12,7 +12,10 @@ const store = configureStore()
 
 const theme = createMuiTheme({
     palette: {
-        type: 'dark'
+        type: 'dark',
+        background: {
+            default: '#3A3A3A'
+        }
     }
 });
 

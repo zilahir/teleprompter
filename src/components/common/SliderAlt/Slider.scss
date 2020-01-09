@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/label';
+
+.slider {
+    display: block;
+    .rc-slider-step {
+        background: $gray-1;
+        border-radius: 24px;
+        height: 5px;
+    }
+    .rc-slider-handle {
+        width: 20px;
+        height: 20px;
+        background: $purple;
+        border: none;
+        margin-top: -8px;
+    }
+}
+
+.labelText {
+    @include labelText;
+}
+
+.sliderInner {
+    display: flex;
+    align-items: center;
+    .sliderValue {
+        margin-left: 10px;
+        color: #fff;
+        font: 400 14px/17px 'Barlow';
+    }
+}

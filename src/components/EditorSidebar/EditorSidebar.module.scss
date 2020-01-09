@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.editorSidebarContainer {
+    height: 100vh;
+    background-color: $gray-2;
+    .innerContainer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-right: 45px;
+        flex-direction: column;
+    }
+}
