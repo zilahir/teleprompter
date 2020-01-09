@@ -10,7 +10,11 @@ import configureStore from './store/configureStore'
 
 const store = configureStore()
 
-const theme = createMuiTheme({palette: {type: 'dark'}});
+const theme = createMuiTheme({
+    palette: {
+        type: 'dark'
+    }
+});
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>

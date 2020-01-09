@@ -1,4 +1,9 @@
 import React from 'react'
+import { Row } from 'react-grid-system'
+
+import EditorSidebar from '../EditorSidebar'
+import ActionSidebar from '../ActionSidebar'
+import Preview from '../Preview'
 
 /**
 * @author zilahir
@@ -6,7 +11,13 @@ import React from 'react'
 * */
 
 const Main = () => (
-	<div>Main</div>
+	<div>
+		<Row>
+			<EditorSidebar />
+			<Preview />
+			<ActionSidebar />
+		</Row>
+	</div>
 )
 
 export default Main

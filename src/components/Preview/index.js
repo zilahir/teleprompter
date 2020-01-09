@@ -4,21 +4,21 @@ import { Col } from 'react-grid-system'
 
 /**
 * @author zilahir
-* @function ActionSidebar
+* @function Preview
 * */
 
-const ActionSidebar = () => {
+const Preview = () => {
 	const store = useStore()
 
 	return (
 		<>
-			<Col lg={3}>
+			<Col lg={6}>
 				<p>
-					editorsidebar
+					preview
 				</p>
 			</Col>
 		</>
 	)
 }
 
-export default ActionSidebar
+export default Preview
