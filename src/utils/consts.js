@@ -6,3 +6,9 @@ export const Colors = {
 	gray2: '#2D2D2D',
 	gray3: '$gray-3',
 }
+
+export const scrollWidthSettngs = [
+	{ id: 1, label: '50%' },
+	{ id: 2, label: '50%' },
+	{ id: 3, label: '100%' },
+]

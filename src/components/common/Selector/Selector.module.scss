@@ -1,0 +1,24 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/paragraph';
+
+.selectorContainer {
+    display: flex;
+    .label {
+        @include paragraph(13px, #ffffff, 0px);
+        text-align: center;
+    }
+    .selectorItem {
+        padding: 7px;
+        margin-right: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 36px;
+        &:hover {
+            cursor: pointer;
+            transition: all .4s ease;
+            background-color: rgba($color: $purple, $alpha: 0.2);
+        }
+    }
+}

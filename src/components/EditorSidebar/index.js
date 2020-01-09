@@ -3,6 +3,8 @@ import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
 
 import SliderAlt from '../common/SliderAlt'
+import Selector from '../common/Selector'
+import { scrollWidthSettngs } from '../../utils/consts'
 import styles from './EditorSidebar.module.scss'
 
 /**
@@ -31,6 +33,7 @@ const EditorSidebar = () => {
 						labelText="Line height"
 						sliderName="lineHeight"
 					/>
+					<Selector items={scrollWidthSettngs} />
 				</div>
 			</Col>
 		</>
