@@ -1,7 +1,20 @@
 @import '../../styles/variables';
+@import '../../styles/mixins/label';
 
 .toggleWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 185px;
+    p {
+        margin: 0;
+        padding: 0;
+        @include labelText;
+        margin-bottom: 20px;
+        margin-left: -10px;
+    }
     .react-toggle {
+        position: relative;
+        margin-left: -10px;
         &.react-toggle--checked {
             .react-toggle-thumb {
                 border: none;
@@ -12,12 +25,6 @@
             background-color: $gray-1;
             width: 65px;
             height: 25px;
-            .react-toggle-track-check {
-
-            }
-            .react-toggle-track-x {
-
-            }
         }
         .react-toggle-thumb {
             width: 36px;

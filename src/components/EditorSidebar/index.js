@@ -47,7 +47,12 @@ const EditorSidebar = () => {
 						initialValue={1.5}
 						step={0.1}
 					/>
-					<Selector items={scrollWidthSettngs} />
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+								Scroll width
+						</p>
+						<Selector items={scrollWidthSettngs} />
+					</div>
 					<SliderAlt
 						labelText="Scroll speed"
 						sliderName="scrollSpeed"
@@ -55,6 +60,9 @@ const EditorSidebar = () => {
 						step={1}
 					/>
 					<div className="toggleWrapper">
+						<p>
+							Flip for reflection
+						</p>
 						<Toggle
 							onChange={bool => handleFlip(bool)}
 							defaultChecked={false}

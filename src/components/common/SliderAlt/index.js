@@ -13,7 +13,7 @@ import './Slider.scss'
 
 const SliderContanier = styled.div`
 	width: 185px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 `
 
 const SliderAlt = props => {
