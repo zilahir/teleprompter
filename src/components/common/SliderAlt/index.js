@@ -17,8 +17,8 @@ const SliderContanier = styled.div`
 `
 
 const SliderAlt = props => {
-	const { labelText, sliderName } = props
-	const [value, setValue] = useState(26)
+	const { labelText, sliderName, initialValue, step } = props
+	const [value, setValue] = useState(initialValue)
 
 	function handleValeChange(v) {
 		// TODO: dispatch setFontSize action here
@@ -35,6 +35,7 @@ const SliderAlt = props => {
 					value={value}
 					onChange={val => handleValeChange(val)}
 					name={sliderName}
+					step={step}
 				/>
 				<p className="sliderValue">
 					{value}
@@ -44,9 +45,16 @@ const SliderAlt = props => {
 	)
 }
 
+SliderAlt.defaultProps = {
+	initialValue: 10,
+	step: 1,
+}
+
 SliderAlt.propTypes = {
+	initialValue: PropTypes.number,
 	labelText: PropTypes.string.isRequired,
 	sliderName: PropTypes.string.isRequired,
+	step: PropTypes.number,
 }
 
 export default SliderAlt

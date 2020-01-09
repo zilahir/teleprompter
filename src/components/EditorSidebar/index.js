@@ -24,16 +24,27 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Text size"
 						sliderName="fontSize"
+						initialValue={25}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"
 						sliderName="letterSpacing"
+						initialValue={1.5}
+						step={0.1}
 					/>
 					<SliderAlt
 						labelText="Line height"
 						sliderName="lineHeight"
+						initialValue={1.5}
+						step={0.1}
 					/>
 					<Selector items={scrollWidthSettngs} />
+					<SliderAlt
+						labelText="Scroll speed"
+						sliderName="scrollSpeed"
+						initialValue={5}
+						step={1}
+					/>
 				</div>
 			</Col>
 		</>

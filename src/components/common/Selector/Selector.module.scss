@@ -3,12 +3,13 @@
 
 .selectorContainer {
     display: flex;
+    width: 185px;
     .label {
         @include paragraph(13px, #ffffff, 0px);
         text-align: center;
     }
     .selectorItem {
-        padding: 7px;
+        padding: 3wpx;
         margin-right: 3px;
         display: flex;
         align-items: center;
