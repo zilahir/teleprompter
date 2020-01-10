@@ -39,7 +39,7 @@ const Segment = props => {
 		>
 			<div className={styles.segmentHeader}>
 				<h1>
-					{segmentName}
+					{segmentName} {segmentId}
 				</h1>
 				<div className={styles.deleteIconContainer}>
 					<PrompterIcon
