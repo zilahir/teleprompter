@@ -20,7 +20,7 @@ const ActionSidebar = () => {
 				lg={3}
 				className={styles.actionSidebarContainer}
 			>
-				<div>
+				<div className={styles.innerContainer}>
 					<TextPreview
 						text="Fusce nulla tortor, dapibus quis enim a,"
 					/>

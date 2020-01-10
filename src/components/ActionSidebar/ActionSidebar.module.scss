@@ -3,4 +3,7 @@
 .actionSidebarContainer {
     height: 100h;
     background-color: $gray-2;
+    .innerContainer {
+        margin: 50px 40px;
+    }
 }

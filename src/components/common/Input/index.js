@@ -15,7 +15,9 @@ const Input = props => {
 	return (
 		<div className={styles.inputContainer}>
 			<label className={styles.label}>
-				{labelText}
+				<span className={styles.labelText}>
+					{labelText}
+				</span>
 				<input
 					className={styles.input}
 					type="text"

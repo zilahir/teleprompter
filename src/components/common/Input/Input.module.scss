@@ -2,10 +2,14 @@
 @import '../../../styles/mixins/paragraph';
 
 .inputContainer {
+    margin: 30px 0;
     .label {
         display: flex;
         flex-direction: column;
-        @include paragraph(16px, $gray-4, 0.39px);
+        @include paragraph(16px, #fff, 0.39px);
+        .labelText {
+            margin-bottom: 17px;
+        }
         .input {
             &:focus {
                 outline: none;
@@ -13,8 +17,10 @@
             border: none;
             border-radius: 30px;
             background: $gray-1;
-            width: 240px;
+            width: 220px;
             height: 45px;
+            @include paragraph(16px, $gray-4, 0.39px);
+            padding-left: 20px;
         }
     }
 }
