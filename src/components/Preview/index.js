@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
 
 import { segmentColors } from '../../utils/consts'
+import Segments from '../Segment'
 import styles from './Preview.module.scss'
 
 /**
@@ -12,12 +13,25 @@ import styles from './Preview.module.scss'
 
 const Preview = () => {
 	const store = useStore()
+	const [segments, setSegments] = useState([])
 
+	useEffect(() => store.subscribe(() => {
+		const allSegments = store.getState().segments.segments
+		setSegments(allSegments)
+	}), [store])
 	return (
 		<>
 			<Col lg={6}>
 				<div className={styles.previewContainer}>
-
+					{
+						segments.map(segment => (
+							<Segments
+								segmentName={segment.segmentName}
+								segmentText={segment.segmentText}
+								color="#ff0000"
+							/>
+						))
+					}
 				</div>
 			</Col>
 		</>

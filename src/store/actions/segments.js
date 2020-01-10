@@ -1,6 +1,6 @@
 import { GET_ALL_SEGMENTS } from './actionTypes'
 
-export const segSegments = segments => dispatch => new Promise(resolve => {
+export const setSegments = segments => dispatch => new Promise(resolve => {
 	dispatch({
 		type: GET_ALL_SEGMENTS,
 		payload: {
