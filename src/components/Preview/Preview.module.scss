@@ -5,7 +5,18 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    &:hover {
+        cursor: pointer;
+        p {
+            text-decoration: underline;
+            cursor: inherit;
+        }
+    }
     .addIconContainer {
+        div {
+            position: relative;
+            top: -2px;
+        }
         width: 16px;
         height: 16px;
         background-color: $purple;
@@ -15,5 +26,6 @@
     p {
         @include paragraph(15px, #fff);
         font-weight: 600;
+        margin-left: 10px;
     }
 }
