@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
+import Icon from 'react-icons-kit'
+import { plus } from 'react-icons-kit/feather/plus'
 
-import { segmentColors } from '../../utils/consts'
+import { segmentColors, Colors } from '../../utils/consts'
+import PropterIcon from '../common/Icon'
 import Segments from '../Segment'
 import styles from './Preview.module.scss'
 
@@ -22,6 +25,20 @@ const Preview = () => {
 	return (
 		<>
 			<Col lg={6}>
+				<div className={styles.segmentsHeader}>
+					<div className={styles.addIconContainer}>
+						<PropterIcon
+							color={Colors.gray4}
+							onClick={() => alert("hello")}
+							icon={
+								<Icon siz="1em" icon={plus} />
+							}
+						/>
+					</div>
+					<p>
+						Add segment
+					</p>
+				</div>
 				<div className={styles.previewContainer}>
 					{
 						segments.map((segment, index) => (

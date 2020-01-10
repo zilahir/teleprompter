@@ -1,3 +1,19 @@
-.previewContainer {
-    
+@import '../../styles/variables';
+@import '../../styles/mixins/paragraph';
+
+.segmentsHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .addIconContainer {
+        width: 16px;
+        height: 16px;
+        background-color: $purple;
+        padding: 3px;
+        border-radius: 100%;
+    }
+    p {
+        @include paragraph(15px, #fff);
+        font-weight: 600;
+    }
 }
