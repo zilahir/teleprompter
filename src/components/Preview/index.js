@@ -53,6 +53,7 @@ const Preview = () => {
 									segmentName={segment.segmentName}
 									segmentText={segment.segmentText}
 									segmentColor={segmentColors[index % segmentColors.length]}
+									segmentId={segment.id}
 								/>
 							))
 						}
