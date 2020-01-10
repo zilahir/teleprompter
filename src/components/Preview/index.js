@@ -25,36 +25,38 @@ const Preview = () => {
 	return (
 		<>
 			<Col lg={6}>
-				<div className={styles.segmentsHeader}>
-					<button
-						type="button"
-						onClick={() => alert("hello")}
-						onKeyDown={null}
-						className={styles.button}
-					>
-						<div className={styles.addIconContainer}>
-							<PropterIcon
-								color={Colors.gray4}
-								icon={
-									<Icon siz="1em" icon={plus} />
-								}
-							/>
-						</div>
-						<p>
-							Add segment
-						</p>
-					</button>
-				</div>
 				<div className={styles.previewContainer}>
-					{
-						segments.map((segment, index) => (
-							<Segments
-								segmentName={segment.segmentName}
-								segmentText={segment.segmentText}
-								segmentColor={segmentColors[index % segmentColors.length]}
-							/>
-						))
-					}
+					<div className={styles.innerContainer}>
+						<div className={styles.segmentsHeader}>
+							<button
+								type="button"
+								onClick={() => alert("hello")}
+								onKeyDown={null}
+								className={styles.button}
+							>
+								<div className={styles.addIconContainer}>
+									<PropterIcon
+										color={Colors.gray4}
+										icon={
+											<Icon siz="1em" icon={plus} />
+										}
+									/>
+								</div>
+								<p>
+									Add segment
+								</p>
+							</button>
+						</div>
+						{
+							segments.map((segment, index) => (
+								<Segments
+									segmentName={segment.segmentName}
+									segmentText={segment.segmentText}
+									segmentColor={segmentColors[index % segmentColors.length]}
+								/>
+							))
+						}
+					</div>
 				</div>
 			</Col>
 		</>

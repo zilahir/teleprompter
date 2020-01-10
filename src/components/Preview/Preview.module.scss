@@ -43,3 +43,24 @@
         margin-left: 10px;
     }
 }
+
+.previewContainer {
+    padding: 50px 0;
+    .innerContainer {
+        margin: 0 80px;
+    }
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 100vh;
+    &::-webkit-scrollbar-thumb {
+        background: #3C3F48;
+        border-radius: 20px;
+        position: relative;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        margin: 30px 0;
+    }
+}
