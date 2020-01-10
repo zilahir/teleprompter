@@ -5,6 +5,7 @@ export const Colors = {
 	gray1: '#1E1E1E',
 	gray2: '#2D2D2D',
 	gray3: '$gray-3',
+	gray4: '#3A3A3A',
 }
 
 export const scrollWidthSettngs = [
@@ -12,3 +13,5 @@ export const scrollWidthSettngs = [
 	{ id: 2, label: '50%' },
 	{ id: 3, label: '100%' },
 ]
+
+export const segmentColors = ['#DF4BCB', '#CFEB70', '#C1C1C1', '#5FA3E8', '#F4A836']
