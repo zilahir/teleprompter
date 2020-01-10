@@ -21,7 +21,7 @@ const SliderContanier = styled.div`
 `
 
 const SliderAlt = props => {
-	const { labelText, sliderName, initialValue, step } = props
+	const { labelText, sliderName, initialValue, step, maxValue } = props
 	const [value, setValue] = useState(initialValue)
 	const dispatch = useDispatch()
 	function handleValeChange(v) {
@@ -43,6 +43,7 @@ const SliderAlt = props => {
 					onChange={val => handleValeChange(val)}
 					name={sliderName}
 					step={step}
+					max={maxValue}
 				/>
 				<p className="sliderValue">
 					{value}
@@ -54,12 +55,14 @@ const SliderAlt = props => {
 
 SliderAlt.defaultProps = {
 	initialValue: 10,
+	maxValue: 100,
 	step: 1,
 }
 
 SliderAlt.propTypes = {
 	initialValue: PropTypes.number,
 	labelText: PropTypes.string.isRequired,
+	maxValue: PropTypes.number,
 	sliderName: PropTypes.string.isRequired,
 	step: PropTypes.number,
 }
