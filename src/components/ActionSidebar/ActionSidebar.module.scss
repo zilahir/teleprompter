@@ -4,5 +4,9 @@
     background-color: $gray-2;
     .innerContainer {
         margin: 50px 40px;
+        .playButtonContainer {
+            position: absolute;
+            bottom: 60px;
+        }
     }
 }

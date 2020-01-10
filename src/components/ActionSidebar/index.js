@@ -31,7 +31,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Remote control address"
 					/>
-					<div className={styles.playButtonContaine}>
+					<div className={styles.playButtonContainer}>
 						<Button
 							onClick={() => alert("lofasz")}
 							labelText="play"
