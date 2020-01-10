@@ -14,7 +14,7 @@ const sliderStyle = { margin: 0 }
 * */
 
 const Slider = props => {
-	const { min, max, value, onChange} = props
+	const { min, max, value, onChange } = props
 	return (
 		<MuiThemeProvider muiTheme={theme}>
 			<div className={styles.sliderContainer}>

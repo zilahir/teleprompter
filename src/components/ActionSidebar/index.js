@@ -14,7 +14,6 @@ import styles from './ActionSidebar.module.scss'
 
 const ActionSidebar = () => {
 	const store = useStore()
-
 	return (
 		<>
 			<Col

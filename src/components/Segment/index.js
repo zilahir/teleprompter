@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useStore, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { times } from 'react-icons-kit/fa/times'
 
 import PrompterIcon from '../common/Icon'
 import { Colors } from '../../utils/consts'
+import { setSegments } from '.././../store/actions/segments'
 import styles from './Segment.module.scss'
 
 /**
@@ -18,7 +20,18 @@ const SegmentContainer = styled.div`
 `
 
 const Segment = props => {
-	const { segmentText, segmentName, segmentColor } = props
+	const { segmentText, segmentName, segmentColor, segmentId } = props
+	const store = useStore()
+	const dispatch = useDispatch()
+	function handleSegmentDelete() {
+		const allSegments = store.getState().segments.segments
+		const filtered = allSegments.filter(segment => (
+			segment.id !== segmentId
+		))
+		Promise.all([
+			dispatch(setSegments(filtered)),
+		])
+	}
 	return (
 		<SegmentContainer
 			className={styles.segmentContainer}
@@ -26,12 +39,12 @@ const Segment = props => {
 		>
 			<div className={styles.segmentHeader}>
 				<h1>
-					{segmentName}
+					{segmentName} {segmentId}
 				</h1>
 				<div className={styles.deleteIconContainer}>
 					<PrompterIcon
 						color={Colors.gray4}
-						onClick={() => alert("clicked")}
+						onClick={() => handleSegmentDelete()}
 						icon={
 							<Icon icon={times} size="1em" />
 						}
@@ -47,6 +60,7 @@ const Segment = props => {
 
 Segment.propTypes = {
 	segmentColor: PropTypes.string.isRequired,
+	segmentId: PropTypes.number.isRequired,
 	segmentName: PropTypes.string.isRequired,
 	segmentText: PropTypes.string.isRequired,
 }

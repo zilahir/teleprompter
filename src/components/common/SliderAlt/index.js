@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Slider from 'rc-slider'
+import { useDispatch } from 'react-redux'
+
+import { SET_FONT_SIZE } from '../../../store/actions/actionTypes'
+import { setFontSize } from '../../../store/actions/text'
 import 'rc-slider/assets/index.css'
 
 import './Slider.scss'
@@ -17,11 +21,14 @@ const SliderContanier = styled.div`
 `
 
 const SliderAlt = props => {
-	const { labelText, sliderName, initialValue, step } = props
+	const { labelText, sliderName, initialValue, step, maxValue } = props
 	const [value, setValue] = useState(initialValue)
-
+	const dispatch = useDispatch()
 	function handleValeChange(v) {
-		// TODO: dispatch setFontSize action here
+		console.debug('fontSize', v)
+		if (sliderName === SET_FONT_SIZE) {
+			dispatch(setFontSize(v))
+		}
 		setValue(v)
 	}
 	return (
@@ -36,6 +43,7 @@ const SliderAlt = props => {
 					onChange={val => handleValeChange(val)}
 					name={sliderName}
 					step={step}
+					max={maxValue}
 				/>
 				<p className="sliderValue">
 					{value}
@@ -47,12 +55,14 @@ const SliderAlt = props => {
 
 SliderAlt.defaultProps = {
 	initialValue: 10,
+	maxValue: 100,
 	step: 1,
 }
 
 SliderAlt.propTypes = {
 	initialValue: PropTypes.number,
 	labelText: PropTypes.string.isRequired,
+	maxValue: PropTypes.number,
 	sliderName: PropTypes.string.isRequired,
 	step: PropTypes.number,
 }
