@@ -2,6 +2,9 @@ import React from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
 
+import { segmentColors } from '../../utils/consts'
+import styles from './Preview.module.scss'
+
 /**
 * @author zilahir
 * @function Preview
@@ -13,9 +16,9 @@ const Preview = () => {
 	return (
 		<>
 			<Col lg={6}>
-				<p>
-					preview
-				</p>
+				<div className={styles.previewContainer}>
+
+				</div>
 			</Col>
 		</>
 	)
