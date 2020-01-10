@@ -1,7 +1,8 @@
-import { SET_FONT_SIZE } from '../actions/actionTypes'
+import { SET_FONT_SIZE, SET_TEXT } from '../actions/actionTypes'
 
 const initialState = {
 	fontSize: 18,
+	text: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			fontSize: action.payload.fontSize,
+		}
+	case SET_TEXT:
+		return {
+			...state,
+			text: action.payload.text,
 		}
 	default:
 		return state

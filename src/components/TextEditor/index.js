@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useStore, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
+import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
 
 /**
@@ -14,17 +15,18 @@ const TextArea = styled.textarea`
 `
 
 const TextEditor = () => {
-	const [text, setText] = useState()
+	const [text, setVal] = useState()
 	const [fontSize, setFontSize] = useState(18)
 	const store = useStore()
-
+	const dispatch = useDispatch()
 	useEffect(() => store.subscribe(() => {
 		const size = store.getState().text.fontSize
 		setFontSize(size)
 	}), [store])
 
 	function handleTextChange(e) {
-		setText(e.target.value)
+		setVal(e.target.value)
+		dispatch(setText(e.target.value))
 	}
 	return (
 		<div className={styles.textEditorContainer}>
