@@ -31,7 +31,6 @@ const Preview = () => {
 							<button
 								type="button"
 								onClick={() => alert("hello")}
-								onKeyDown={null}
 								className={styles.button}
 							>
 								<div className={styles.addIconContainer}>
@@ -45,6 +44,13 @@ const Preview = () => {
 								<p>
 									Add segment
 								</p>
+							</button>
+							<button
+								type="button"
+								className={styles.button}
+								onClick={() => alert("hello")}
+							>
+								Clear all
 							</button>
 						</div>
 						{

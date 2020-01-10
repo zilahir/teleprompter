@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    justify-content: space-between;
     .button {
         background: transparent;
         border: none;
@@ -12,18 +13,22 @@
         width: fit-content;
         display: flex;
         align-items: center;
+        &:last-of-type {
+            @include paragraph(14px, #fff);
+            font-weight: 400;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
         &:focus {
             outline: none;
         }
         &:hover {
             cursor: pointer;
-        }
-    }
-    &:hover {
-        cursor: pointer;
-        p {
-            text-decoration: underline;
-            cursor: inherit;
+            p {
+                text-decoration: underline;
+                cursor: inherit;
+            }
         }
     }
     .addIconContainer {
