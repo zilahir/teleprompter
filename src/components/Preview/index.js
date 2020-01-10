@@ -24,11 +24,11 @@ const Preview = () => {
 			<Col lg={6}>
 				<div className={styles.previewContainer}>
 					{
-						segments.map(segment => (
+						segments.map((segment, index) => (
 							<Segments
 								segmentName={segment.segmentName}
 								segmentText={segment.segmentText}
-								color="#ff0000"
+								segmentColor={segmentColors[index % segmentColors.length]}
 							/>
 						))
 					}

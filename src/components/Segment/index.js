@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import styles from './Segment.module.scss'
+import segmentApi from '../../utils/fakeApi/segments'
 
 /**
 * @author zilahir
@@ -15,6 +16,7 @@ const SegmentContainer = styled.div`
 
 const Segment = props => {
 	const { segmentText, segmentName, segmentColor } = props
+	console.debug('segmentColor', segmentColor)
 	return (
 		<SegmentContainer
 			className={styles.segmentContainer}

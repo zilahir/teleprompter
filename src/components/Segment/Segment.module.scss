@@ -4,6 +4,10 @@
 
 .segmentContainer {
     padding: 25px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 20px;
+    margin-bottom: 20px;
     h1 {
         @include paragraph(15px);
     }
