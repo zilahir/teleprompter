@@ -12,7 +12,16 @@ const TextPreview = props => {
 	const { text } = props
 	return (
 		<div className={styles.textpreviewContainer}>
-			{text}
+			<div className={styles.mirroredContainer}>
+				<p className={styles.mirrored}>
+					{text}
+				</p>
+			</div>
+			<div className={styles.textContainer}>
+				<p className={styles.text}>
+					{text}
+				</p>
+			</div>
 		</div>
 	)
 }
