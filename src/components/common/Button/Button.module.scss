@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/paragraph';
+
+.buttonContainer {
+    .button {
+        width: 242px;
+        height: 57px;
+        border-radius: 32px;
+        background-color: $purple;
+        text-transform: uppercase;
+        @include paragraph(17px, #fff, 0.85px);
+    }
+}

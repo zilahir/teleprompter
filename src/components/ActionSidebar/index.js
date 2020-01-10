@@ -27,6 +27,9 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 					/>
+					<Input
+						labelText="Remote control address"
+					/>
 				</div>
 			</Col>
 		</>
