@@ -8,6 +8,7 @@ import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
 import Logo from '../common/Logo'
 import { scrollWidthSettngs } from '../../utils/consts'
+import { SET_FONT_SIZE } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
 
@@ -34,8 +35,8 @@ const EditorSidebar = () => {
 					<Logo />
 					<SliderAlt
 						labelText="Text size"
-						sliderName="fontSize"
-						initialValue={25}
+						sliderName={SET_FONT_SIZE}
+						initialValue={store.getState().text.fontSize}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"

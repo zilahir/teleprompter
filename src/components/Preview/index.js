@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
@@ -6,6 +7,7 @@ import { plus } from 'react-icons-kit/feather/plus'
 import classnames from 'classnames'
 
 import { segmentColors, Colors } from '../../utils/consts'
+import TextEditor from '../TextEditor'
 import PropterIcon from '../common/Icon'
 import Segments from '../Segment'
 import styles from './Preview.module.scss'
@@ -91,7 +93,11 @@ const Preview = () => {
 									}
 								</div>
 							)
-							: null
+							: activeButton === 1
+								? (
+									<TextEditor />
+								)
+								: null
 					}
 				</div>
 			</Col>
