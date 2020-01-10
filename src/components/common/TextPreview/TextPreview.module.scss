@@ -14,6 +14,7 @@
             padding: 20px;
             @include heading;
             opacity: 0.9;
+            transform: scaleY(-1);
         }
     }
     .textContainer {
