@@ -3,6 +3,7 @@ import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
 
 import TextPreview from '../common/TextPreview'
+import Input from '../common/Input'
 import styles from './ActionSidebar.module.scss'
 
 /**
@@ -22,6 +23,9 @@ const ActionSidebar = () => {
 				<div>
 					<TextPreview
 						text="Fusce nulla tortor, dapibus quis enim a,"
+					/>
+					<Input
+						labelText="Stream address"
 					/>
 				</div>
 			</Col>

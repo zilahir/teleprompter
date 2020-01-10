@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/paragraph';
+
+.inputContainer {
+    .label {
+        display: flex;
+        flex-direction: column;
+        @include paragraph(16px, $gray-4, 0.39px);
+        .input {
+            &:focus {
+                outline: none;
+            }
+            border: none;
+            border-radius: 30px;
+            background: $gray-1;
+            width: 240px;
+            height: 45px;
+        }
+    }
+}
