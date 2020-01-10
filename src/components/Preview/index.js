@@ -26,18 +26,24 @@ const Preview = () => {
 		<>
 			<Col lg={6}>
 				<div className={styles.segmentsHeader}>
-					<div className={styles.addIconContainer}>
-						<PropterIcon
-							color={Colors.gray4}
-							onClick={() => alert("hello")}
-							icon={
-								<Icon siz="1em" icon={plus} />
-							}
-						/>
-					</div>
-					<p>
-						Add segment
-					</p>
+					<button
+						type="button"
+						onClick={() => alert("hello")}
+						onKeyDown={null}
+						className={styles.button}
+					>
+						<div className={styles.addIconContainer}>
+							<PropterIcon
+								color={Colors.gray4}
+								icon={
+									<Icon siz="1em" icon={plus} />
+								}
+							/>
+						</div>
+						<p>
+							Add segment
+						</p>
+					</button>
 				</div>
 				<div className={styles.previewContainer}>
 					{
