@@ -10,16 +10,18 @@ import styles from './TextEditor.module.scss'
 * */
 
 const TextArea = styled.textarea`
-	font-size: ${props => props.fontSize}px;
+	font-size: ${props => props.fontSize};
 `
 
 const TextEditor = () => {
 	const [text, setText] = useState()
+	const [fontSize, setFontSize] = useState(18)
 	const store = useStore()
 
-	useEffect(() => {
-		console.debug('render')
-	}, [store])
+	useEffect(() => store.subscribe(() => {
+		const size = store.getState().text.fontSize
+		setFontSize(size)
+	}), [store])
 
 	function handleTextChange(e) {
 		setText(e.target.value)
@@ -30,7 +32,7 @@ const TextEditor = () => {
 				className={styles.textArea}
 				onChange={e => handleTextChange(e)}
 				value={text}
-				fontSize={store.getState().text.fontSize}
+				fontSize={`${fontSize}px`}
 			/>
 		</div>
 	)
