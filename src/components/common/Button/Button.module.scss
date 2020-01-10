@@ -9,5 +9,12 @@
         background-color: $purple;
         text-transform: uppercase;
         @include paragraph(17px, #fff, 0.85px);
+        border: none;
+        &:hover {
+            cursor: pointer;
+        }
+        &:focus {
+            outline: none;
+        }
     }
 }
