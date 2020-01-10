@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { times } from 'react-icons-kit/fa/times'
 
+import PrompterIcon from '../common/Icon'
+import { Colors } from '../../utils/consts'
 import styles from './Segment.module.scss'
-import segmentApi from '../../utils/fakeApi/segments'
 
 /**
 * @author zilahir
@@ -16,15 +19,25 @@ const SegmentContainer = styled.div`
 
 const Segment = props => {
 	const { segmentText, segmentName, segmentColor } = props
-	console.debug('segmentColor', segmentColor)
 	return (
 		<SegmentContainer
 			className={styles.segmentContainer}
 			segmentColor={segmentColor}
 		>
-			<h1>
-				{segmentName}
-			</h1>
+			<div className={styles.segmentHeader}>
+				<h1>
+					{segmentName}
+				</h1>
+				<div className={styles.deleteIconContainer}>
+					<PrompterIcon
+						color={Colors.gray4}
+						onClick={() => alert("clicked")}
+						icon={
+							<Icon icon={times} size="1em" />
+						}
+					/>
+				</div>
+			</div>
 			<p>
 				{segmentText}
 			</p>

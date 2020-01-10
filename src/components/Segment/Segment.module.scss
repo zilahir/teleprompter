@@ -8,8 +8,29 @@
     border-style: solid;
     border-radius: 20px;
     margin-bottom: 20px;
-    h1 {
-        @include paragraph(15px);
+    .segmentHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        .deleteIconContainer {
+            display: block;
+            background-color: $gray-4;
+            border-radius: 100%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            padding: 3px;
+            div {
+                position: relative;
+                top: -1px;
+            }
+        }
+        h1 {
+            @include paragraph(15px);
+            margin: 0;
+        }
     }
     p {
         @include paragraph(14px, #fff, 0.42px);
