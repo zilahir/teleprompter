@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import screenfull from 'screenfull'
+import { useStore } from 'react-redux'
 import { Button, FormControlLabel, Switch, TextField } from '@material-ui/core'
 import { Description, FastForward, Fullscreen, SwapHoriz, TextFields } from '@material-ui/icons'
 
@@ -18,14 +19,17 @@ const Player = () => {
 	const [fontSize, setFontSize] = useState(1)
 	const [flipX, setFlipX] = useState(false)
 	const ScrollerRef = useRef(null)
+	const store = useStore()
 	function onFullScreenButtonClick() {
 		if (screenfull.enabled) {
 			screenfull.request()
 		}
 	}
-	function onTextInputChange(e) {
-		setText(e.target.value)
-	}
+	useEffect(() => store.subscribe(() => {
+		const value = store.getState().text.text
+		setText(value)
+	}), [store])
+
 	function handleScrollSpeedChange(value) {
 		setScrollSpeed(value)
 	}
@@ -42,16 +46,6 @@ const Player = () => {
 		<div className={styles.app}>
 			<header className={styles.header}>
 				<div className={styles.controls}>
-					<FormControlLabel
-						control={(
-							<TextField
-								placeholder="Enter script."
-								value={text}
-								onChange={e => onTextInputChange(e)}
-							/>
-						)}
-						label={<Description />}
-					/>
 					<FormControlLabel
 						control={(
 							<Slider
