@@ -26,4 +26,5 @@ ReactDOM.render(
         </Provider>
     </MuiThemeProvider>,
     document.getElementById('root'));
-registerServiceWorker();
+
+serviceWorker.unregister()
