@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './App'
 import './index.css'
-import registerServiceWorker from './registerServiceWorker'
+import * as serviceWorker from './serviceWorker'
 import configureStore from './store/configureStore'
 
 const store = configureStore()
@@ -26,4 +26,5 @@ ReactDOM.render(
         </Provider>
     </MuiThemeProvider>,
     document.getElementById('root'));
-registerServiceWorker();
+
+serviceWorker.unregister()
