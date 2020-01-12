@@ -25,10 +25,9 @@ const Player = () => {
 			screenfull.request()
 		}
 	}
-	useEffect(() => store.subscribe(() => {
-		const value = store.getState().text.text
-		setText(value)
-	}), [store])
+	useEffect(() => {
+		setText(store.getState().text.text)
+	}, [])
 
 	function handleScrollSpeedChange(value) {
 		setScrollSpeed(value)

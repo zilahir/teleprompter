@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
+import { useHistory } from 'react-router'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -14,6 +15,7 @@ import styles from './ActionSidebar.module.scss'
 
 const ActionSidebar = () => {
 	const store = useStore()
+	const history = useHistory()
 	return (
 		<>
 			<Col
@@ -32,7 +34,7 @@ const ActionSidebar = () => {
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => alert("lofasz")}
+							onClick={() => history.push('/player')}
 							labelText="play"
 						/>
 					</div>
