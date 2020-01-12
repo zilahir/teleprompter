@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, HashRouter } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Player from '../components/Player'
 import Main from '../components/Main'
@@ -11,10 +11,10 @@ import Main from '../components/Main'
 
 const App = () => (
 	<div>
-		<HashRouter>
+		<Router>
 			<Route path="/" exact component={Main} />
 			<Route path="/player" exact component={Player} />
-		</HashRouter>
+		</Router>
 	</div>
 )
 
