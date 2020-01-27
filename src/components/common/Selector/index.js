@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStore } from 'react-redux'
@@ -12,7 +13,7 @@ import styles from './Selector.module.scss'
 * */
 
 const Item = styled.div`
-	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)}
+	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)};
 	border-top-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
 	border-bottom-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
 	border-top-right-radius: ${props => (props.isLast ? '10px' : '0px')};

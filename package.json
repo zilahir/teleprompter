@@ -36,6 +36,7 @@
     "redux-thunk": "^2.3.0",
     "screenfull": "^3.3.2",
     "showdown": "^1.9.1",
+    "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1"
   },
   "scripts": {
