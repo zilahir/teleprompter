@@ -1,7 +1,7 @@
-import React from 'react'
-import { useStore } from 'react-redux'
+import React, { useState } from 'react'
 import { Col } from 'react-grid-system'
-import { useHistory } from 'react-router'
+import io from 'socket.io-client'
+
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -14,8 +14,14 @@ import styles from './ActionSidebar.module.scss'
 * */
 
 const ActionSidebar = () => {
-	const store = useStore()
-	const history = useHistory()
+	const [isPlaying, setIsPlaying] = useState(false)
+
+	const socket = io.connect('http://localhost:5000')
+
+	function togglePlaying() {
+		setIsPlaying(!isPlaying)
+		socket.emit('isPlaying', isPlaying)
+	}
 	return (
 		<>
 			<Col
@@ -34,8 +40,8 @@ const ActionSidebar = () => {
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => history.push('/player')}
-							labelText="play"
+							onClick={() => togglePlaying()}
+							labelText={!isPlaying ? 'play' : 'stop'}
 						/>
 					</div>
 				</div>
