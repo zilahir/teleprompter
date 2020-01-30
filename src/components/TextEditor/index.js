@@ -11,7 +11,7 @@ import styles from './TextEditor.module.scss'
 * */
 
 const TextArea = styled.textarea`
-	font-size: ${props => props.fontSize};
+	font-size: 16px;
 `
 
 const TextEditor = () => {

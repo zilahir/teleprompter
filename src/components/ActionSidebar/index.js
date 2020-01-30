@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
-import io from 'socket.io-client'
+import useSocket from 'use-socket.io-client'
 
 
 import TextPreview from '../common/TextPreview'
@@ -16,12 +16,14 @@ import styles from './ActionSidebar.module.scss'
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 
-	const socket = io.connect('http://localhost:5000')
-
+	const [socket] = useSocket('http://localhost:5000')
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
-		socket.emit('isPlaying', isPlaying)
+		socket.emit('isPlaying', !isPlaying)
 	}
+	useEffect(() => {
+		socket.connect()
+	}, [])
 	return (
 		<>
 			<Col

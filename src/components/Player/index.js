@@ -3,6 +3,7 @@ import screenfull from 'screenfull'
 import { useStore } from 'react-redux'
 import { Button, FormControlLabel, Switch, TextField } from '@material-ui/core'
 import { Description, FastForward, Fullscreen, SwapHoriz, TextFields } from '@material-ui/icons'
+import io from 'socket.io-client'
 
 import Slider from '../common/Slider'
 import TextScroller from '../TextScroller'
@@ -27,7 +28,11 @@ const Player = () => {
 	}
 	useEffect(() => {
 		setText(store.getState().text.text)
-	}, [])
+		const socket = io.connect('http://localhost:5000')
+		socket.on('isPlaying', ({ id, msg }) => {
+			console.debug('id', id, 'msg', msg)
+		})
+	}, [store])
 
 	function handleScrollSpeedChange(value) {
 		setScrollSpeed(value)

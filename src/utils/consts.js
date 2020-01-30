@@ -9,8 +9,8 @@ export const Colors = {
 }
 
 export const scrollWidthSettngs = [
-	{ id: 1, label: '25%' },
-	{ id: 2, label: '50%' },
+	{ id: 1, label: '50%' },
+	{ id: 2, label: '75%' },
 	{ id: 3, label: '100%' },
 ]
 
