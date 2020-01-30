@@ -20,7 +20,7 @@ const Main = () => {
 		Promise.all([
 			dispatch(setSegments(segmentApi.getAllSegments())),
 		])
-	})
+	}, [])
 	return (
 		<div className={styles.mainContainer}>
 			<Container

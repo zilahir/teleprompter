@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
 
-
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
