@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
+import { useStore } from 'react-redux'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -14,12 +15,17 @@ import styles from './ActionSidebar.module.scss'
 
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
-
+	const [text, setText] = useState('')
+	const store = useStore()
 	const [socket] = useSocket('http://localhost:5000')
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 	}
+	useEffect(() => store.subscribe(() => {
+		const t = store.getState().text.text
+		setText(t)
+	}), [store])
 	useEffect(() => {
 		socket.connect()
 	}, [])
@@ -31,7 +37,7 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text="Fusce nulla tortor, dapibus quis enim a,"
+						text={text}
 					/>
 					<Input
 						labelText="Stream address"
