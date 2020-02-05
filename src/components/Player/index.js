@@ -28,13 +28,23 @@ const Player = () => {
 			screenfull.request()
 		}
 	}
+	function handleStart() {
+		ScrollerRef.current.scroll()
+	}
+	function handleStop() {
+		// TODO: implement stop
+	}
 	useEffect(() => {
-		// socket.connect()
+		socket.connect()
 		setText(store.getState().text.text)
 		socket.on('isPlaying', playing => {
-			console.debug('isPLaying', playing)
+			setIsPlaying(playing)
+			if (playing) {
+				handleStart()
+			} else {
+				handleStop()
+			}
 		})
-		console.debug('socket', socket)
 	}, [store, isPlaying, socket])
 
 	function handleScrollSpeedChange(value) {
@@ -45,9 +55,6 @@ const Player = () => {
 	}
 	function onFlipXSwitchChange(isChecked) {
 		setFlipX(isChecked.target.checked)
-	}
-	function handleStart() {
-		ScrollerRef.current.scroll()
 	}
 	return (
 		<div className={styles.app}>
@@ -104,7 +111,7 @@ const Player = () => {
 			</header>
 			<TextScroller
 				ref={ScrollerRef}
-				text={isPlaying ? 'playing' : 'notplaying'}
+				text={text}
 				fontSize={`${(6 * fontSize) + 2}em`}
 				flipX={flipX}
 				scrollDurationLine={8000 * (1 - scrollSpeed) + 192}
