@@ -18,6 +18,7 @@ const ActionSidebar = () => {
 	const [text, setText] = useState('')
 	const store = useStore()
 	const [socket] = useSocket('http://localhost:5000')
+	socket.connect()
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
@@ -25,9 +26,9 @@ const ActionSidebar = () => {
 	useEffect(() => store.subscribe(() => {
 		const t = store.getState().text.text
 		setText(t)
-	}), [store])
+	}), [store, text])
 	useEffect(() => {
-		socket.connect()
+		// socket.connect()
 	}, [])
 	return (
 		<>
@@ -37,7 +38,7 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text={text}
+						text={text.split(' ')}
 					/>
 					<Input
 						labelText="Stream address"

@@ -8,6 +8,7 @@ import styles from './TextPreview.module.scss'
 const Text = styled.p`
 	font-size: ${props => props.fontSize} !important;
 	line-height: ${props => props.lineHeight} !important;
+	letter-spacing: ${props => props.letterSpacing}vw !important;
 `
 
 /**
@@ -20,12 +21,17 @@ const TextPreview = props => {
 	const store = useStore()
 	const [fontSize, setFontSize] = useState(null)
 	const [lineHeight, setLineHeight] = useState(null)
+	const [letterSpacing, setLetterSpacing] = useState(null)
+	const [visibleText, setVisibleText] = useState([])
 	useEffect(() => store.subscribe(() => {
 		const fs = store.getState().text.fontSize
 		const ln = store.getState().text.lineHeight
+		const ls = store.getState().text.letterSpacing
 		setFontSize(fs)
 		setLineHeight(ln)
-	}), [store, fontSize])
+		setLetterSpacing(ls)
+		setVisibleText(text.slice(0, 20))
+	}), [store, fontSize, text])
 	return (
 		<div className={styles.textpreviewContainer}>
 			<div className={styles.mirroredContainer}>
@@ -33,13 +39,27 @@ const TextPreview = props => {
 					className={styles.mirrored}
 					fontSize={`${fontSize}px`}
 					lineHeight={lineHeight}
+					letterSpacing={letterSpacing}
 				>
-					{text}
+					{
+						visibleText.map(currText => (
+							`${currText} `
+						))
+					}
 				</Text>
 			</div>
 			<div className={styles.textContainer}>
-				<Text className={styles.text}>
-					{text}
+				<Text
+					className={styles.text}
+					fontSize={`${fontSize}px`}
+					lineHeight={lineHeight}
+					letterSpacing={letterSpacing}
+				>
+					{
+						visibleText.map(currText => (
+							`${currText} `
+						))
+					}
 				</Text>
 			</div>
 		</div>
