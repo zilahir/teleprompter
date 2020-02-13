@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -25,5 +25,12 @@ export const setLineHeight = lineHeight => ({
 	type: SET_LINE_HEIGHT,
 	payload: {
 		lineHeight,
+	},
+})
+
+export const toggleFlipped = isFlipped => ({
+	type: TOGGLE_FLIPPED,
+	payload: {
+		isFlipped,
 	},
 })
