@@ -12,6 +12,9 @@
         width: 222px;
         height: 116px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .mirrored {
             padding: 20px;
             @include heading;
@@ -27,6 +30,9 @@
         width: 222px;
         height: 116px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .text {
             padding: 20px;
             @include heading;

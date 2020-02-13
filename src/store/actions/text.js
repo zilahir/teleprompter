@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -32,5 +32,12 @@ export const toggleFlipped = isFlipped => ({
 	type: TOGGLE_FLIPPED,
 	payload: {
 		isFlipped,
+	},
+})
+
+export const setScrollWidth = scrollWidth => ({
+	type: SET_SCROLL_WIDTH,
+	payload: {
+		scrollWidth,
 	},
 })

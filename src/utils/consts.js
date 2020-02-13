@@ -9,9 +9,9 @@ export const Colors = {
 }
 
 export const scrollWidthSettngs = [
-	{ id: 1, label: '50%' },
-	{ id: 2, label: '75%' },
-	{ id: 3, label: '100%' },
+	{ id: 0, label: '50%' },
+	{ id: 1, label: '75%' },
+	{ id: 2, label: '100%' },
 ]
 
 export const segmentColors = ['#DF4BCB', '#CFEB70', '#C1C1C1', '#5FA3E8', '#F4A836']
