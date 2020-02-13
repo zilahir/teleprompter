@@ -24,6 +24,7 @@
 .labelText {
     @include labelText;
     margin-left: -10px;
+    margin-bottom: 0;
 }
 
 .sliderInner {
