@@ -1,7 +1,7 @@
 import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING } from '../actions/actionTypes'
 
 const initialState = {
-	fontSize: 18,
+	fontSize: 2,
 	text: '',
 	lineHeight: 1,
 	letterSpacing: 0,

@@ -30,7 +30,6 @@ const SliderAlt = props => {
 		} else if (sliderName === SET_LETTER_SPACING) {
 			dispatch(setLetterSpacing(v))
 		} else if (sliderName === SET_LINE_HEIGHT) {
-			console.debug('value', v)
 			dispatch(setLineHeight(v))
 		}
 		setValue(v)

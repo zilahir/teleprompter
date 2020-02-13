@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import styles from './TextPreview.module.scss'
 
 const Text = styled.p`
-	font-size: ${props => props.fontSize} !important;
+	font-size: ${props => props.fontSize}vw !important;
 	line-height: ${props => props.lineHeight} !important;
 	letter-spacing: ${props => props.letterSpacing}vw !important;
 `
@@ -37,7 +37,7 @@ const TextPreview = props => {
 			<div className={styles.mirroredContainer}>
 				<Text
 					className={styles.mirrored}
-					fontSize={`${fontSize}px`}
+					fontSize={`${fontSize}`}
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 				>
@@ -51,7 +51,7 @@ const TextPreview = props => {
 			<div className={styles.textContainer}>
 				<Text
 					className={styles.text}
-					fontSize={`${fontSize}px`}
+					fontSize={`${fontSize}`}
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 				>
