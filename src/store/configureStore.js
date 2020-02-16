@@ -1,9 +1,16 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 import test from './reducers/Test'
 import segments from './reducers/segments'
 import text from './reducers/text'
+
+const persistConfig = {
+	key: 'root',
+	storage,
+}
 
 const rootReducer = combineReducers({
 	test,
@@ -11,9 +18,10 @@ const rootReducer = combineReducers({
 	text,
 })
 
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const configureStore = () => createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
-
-export default configureStore
+export const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)))
+export const persistor = persistStore(store)

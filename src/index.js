@@ -3,12 +3,13 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import App from './App'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 import configureStore from './store/configureStore'
 
-const store = configureStore()
+import { store, persistor } from './store/configureStore'
 
 const theme = createMuiTheme({
     palette: {
@@ -22,7 +23,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <Provider store={store}>
-            <App/>
+            <PersistGate loading={null} persistor={persistor}>
+                <App/>
+            </PersistGate>
         </Provider>
     </MuiThemeProvider>,
     document.getElementById('root'));
