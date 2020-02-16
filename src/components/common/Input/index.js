@@ -10,7 +10,7 @@ import styles from './Input.module.scss'
 * */
 
 const Input = props => {
-	const { labelText } = props
+	const { labelText, isDisabled, inheritedValue } = props
 	const [value, setValue] = useState(null)
 	return (
 		<div className={styles.inputContainer}>
@@ -22,14 +22,22 @@ const Input = props => {
 					className={styles.input}
 					type="text"
 					onChange={e => setValue(e.target.value)}
-					value={value}
+					value={value || inheritedValue}
+					disabled={isDisabled}
 				/>
 			</label>
 		</div>
 	)
 }
 
+Input.defaultProps = {
+	inheritedValue: '',
+	isDisabled: false,
+}
+
 Input.propTypes = {
+	inheritedValue: PropTypes.string,
+	isDisabled: PropTypes.bool,
 	labelText: PropTypes.string.isRequired,
 }
 

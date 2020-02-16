@@ -60,7 +60,7 @@ const Preview = () => {
 									<div className={styles.segmentsHeader}>
 										<button
 											type="button"
-											onClick={() => alert("hello")}
+											onClick={() => null}
 											className={styles.button}
 										>
 											<div className={styles.addIconContainer}>
@@ -78,7 +78,7 @@ const Preview = () => {
 										<button
 											type="button"
 											className={styles.button}
-											onClick={() => alert("hello")}
+											onClick={() => null}
 										>
 											Clear all
 										</button>

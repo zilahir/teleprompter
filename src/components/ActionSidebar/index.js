@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
 import { useStore } from 'react-redux'
+import uuidv4 from 'uuid'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -16,6 +17,7 @@ import styles from './ActionSidebar.module.scss'
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')
+	const [streamAddress, setStreamAddress] = useState('')
 	const store = useStore()
 	const [socket] = useSocket('http://localhost:5000')
 	socket.connect()
@@ -29,6 +31,7 @@ const ActionSidebar = () => {
 	}), [store, text])
 	useEffect(() => {
 		// socket.connect()
+		setStreamAddress(uuidv4())
 	}, [])
 	return (
 		<>
@@ -42,9 +45,12 @@ const ActionSidebar = () => {
 					/>
 					<Input
 						labelText="Stream address"
+						isDisabled
+						inheritedValue={streamAddress.split('-')[0]}
 					/>
 					<Input
 						labelText="Remote control address"
+						isDisabled
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button
