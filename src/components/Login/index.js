@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { LOGIN, REGISTER, PASSWORD } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD, LOAD } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
@@ -67,8 +67,28 @@ const Login = props => {
 									buttonClass={styles.loginBtn}
 								/>
 							</div>
-						)
-						: null
+						) : type === LOAD
+							? (
+								<div className={classnames(
+									styles.loginBoxContainer,
+									styles.itemBoxContainer,
+									isVisible ? styles.show : styles.hidden,
+								)}
+								>
+									<ul className={styles.savedItems}>
+										<li>
+											Project name
+										</li>
+										<li>
+											Project name
+										</li>
+										<li>
+											Project name
+										</li>
+									</ul>
+								</div>
+							)
+							: null
 			}
 		</>
 	)

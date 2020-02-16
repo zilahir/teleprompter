@@ -14,13 +14,21 @@ import Login from '../Login'
 const ActionHeader = () => {
 	const [showLogin, toggleLogin] = useState(false)
 	const [showRegister, toggleRegister] = useState(false)
+	const [showLoad, toggleLoad] = useState(false)
 	function openLoginBox() {
 		toggleRegister(false)
+		toggleLoad(false)
 		toggleLogin(!showLogin)
 	}
 	function openRegisterBox() {
 		toggleLogin(false)
+		toggleLoad(false)
 		toggleRegister(!showRegister)
+	}
+	function openLoad() {
+		toggleLogin(false)
+		toggleRegister(false)
+		toggleLoad(!showLoad)
 	}
 	const isLoggedIn = true
 	return (
@@ -50,7 +58,7 @@ const ActionHeader = () => {
 							<li>
 								<Button
 									labelText="Load"
-									onClick={() => null}
+									onClick={() => openLoad()}
 									type={LINK}
 								/>
 							</li>
@@ -97,6 +105,10 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showRegister}
 				type={REGISTER}
+			/>
+			<Login
+				isVisible={showLoad}
+				type={LOAD}
 			/>
 		</div>
 	)
