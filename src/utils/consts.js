@@ -1,4 +1,5 @@
 export const COLOR_DARK = 'COLOR_DARK'
+export const COLOR_LIGHT = 'COLOR_LIGHT'
 
 export const Colors = {
 	purple: '#8380FF',
