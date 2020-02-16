@@ -44,6 +44,6 @@ export const refreshToken = token => dispatch => new Promise(resolve => {
 })
 
 export const logOutUser = () => dispatch => new Promise(resolve => {
-	dispatch(setUser(null))
+	dispatch(setUser({}))
 	resolve(true)
 })

@@ -24,9 +24,7 @@ const Login = props => {
 	function handleLogin() {
 		Promise.all([
 			authPromsie,
-		]).then(() => {
-			alert('done')
-		})
+		])
 	}
 	return (
 		<>

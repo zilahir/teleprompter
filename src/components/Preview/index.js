@@ -17,8 +17,6 @@ import styles from './Preview.module.scss'
 * */
 
 const Preview = () => {
-	// const store = useStore()
-	// const [segments, setSegments] = useState([])
 	const [activeButton, setActiveButton] = useState(1)
 	return (
 		<>
