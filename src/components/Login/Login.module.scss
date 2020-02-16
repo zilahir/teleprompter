@@ -46,10 +46,22 @@
                 border-bottom: 1px solid rgba($color: $gray-4, $alpha: 0.5);
                 padding: 10px 0;
                 transition: all .2s ease;
+                display: flex;
+                justify-content: space-between;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);
                     transition: all .2s ease;
+                }
+                .icon {
+                    color: $purple;
+                    transform: rotate(90deg);
+                    svg {
+                        fill: $purple;
+                    }
+                }
+                &:last-of-type {
+                    border: none;
                 }
             }
         }

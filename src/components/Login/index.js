@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from 'react-icons-kit'
+import { triangle } from 'react-icons-kit/feather/triangle'
 import classnames from 'classnames'
 
 import { LOGIN, REGISTER, PASSWORD, LOAD } from '../../utils/consts'
@@ -76,15 +78,16 @@ const Login = props => {
 								)}
 								>
 									<ul className={styles.savedItems}>
-										<li>
+										{
+											Array(5).fill().map(currItem => (
+												<li key={currItem}>
 											Project name
-										</li>
-										<li>
-											Project name
-										</li>
-										<li>
-											Project name
-										</li>
+													<div className={styles.icon}>
+														<Icon icon={triangle} size="1em" />
+													</div>
+												</li>
+											))
+										}
 									</ul>
 								</div>
 							)
