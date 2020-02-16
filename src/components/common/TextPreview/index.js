@@ -9,7 +9,8 @@ const Text = styled.p`
 	font-size: ${props => props.fontSize}vw !important;
 	line-height: ${props => props.lineHeight} !important;
 	letter-spacing: ${props => props.letterSpacing}vw !important;
-	max-width: ${props => props.scrollWidth}
+	max-width: ${props => props.scrollWidth};
+	max-width: 10ch;
 `
 
 /**
@@ -24,7 +25,6 @@ const TextPreview = props => {
 	const [lineHeight, setLineHeight] = useState(null)
 	const [letterSpacing, setLetterSpacing] = useState(null)
 	const [scrollWidth, setScrollWidth] = useState(null)
-	const [visibleText, setVisibleText] = useState([])
 	useEffect(() => store.subscribe(() => {
 		const fs = store.getState().text.fontSize
 		const ln = store.getState().text.lineHeight
@@ -33,7 +33,6 @@ const TextPreview = props => {
 		setFontSize(fs)
 		setLineHeight(ln)
 		setLetterSpacing(ls)
-		setVisibleText(text.slice(0, 20))
 		setScrollWidth(sw)
 	}), [store, fontSize, text, scrollWidth])
 	return (
@@ -46,11 +45,7 @@ const TextPreview = props => {
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 				>
-					{
-						visibleText.map(currText => (
-							`${currText} `
-						))
-					}
+					{text}
 				</Text>
 			</div>
 			<div className={styles.textContainer}>
@@ -61,11 +56,7 @@ const TextPreview = props => {
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 				>
-					{
-						visibleText.map(currText => (
-							`${currText} `
-						))
-					}
+					{text}
 				</Text>
 			</div>
 		</div>

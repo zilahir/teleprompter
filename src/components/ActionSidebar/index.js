@@ -38,7 +38,7 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text={text.split(' ')}
+						text={text}
 					/>
 					<Input
 						labelText="Stream address"
