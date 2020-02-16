@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+
+.loginBoxContainer {
+    position: absolute;
+    border-radius: $login-box-border-radius;
+    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.8);
+    background-color: $login-box-bg-color;
+    top: 50px;
+    right: 50px;
+    padding: 20px;
+    &.hidden {
+        display: none;
+    }
+    &.visible {
+        display: block;
+    }
+    .loginInput {
+        margin: 0 10px;
+    }
+}

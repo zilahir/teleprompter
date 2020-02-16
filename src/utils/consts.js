@@ -19,3 +19,5 @@ export const segmentColors = ['#DF4BCB', '#CFEB70', '#C1C1C1', '#5FA3E8', '#F4A8
 
 export const BUTTON = 'BUTTON'
 export const LINK = 'LINK'
+export const LOGIN = 'LOGIN'
+export const REGISTER = 'REGISTER'
