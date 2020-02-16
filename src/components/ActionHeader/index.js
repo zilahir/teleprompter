@@ -13,20 +13,28 @@ import Login from '../Login'
 const ActionHeader = () => {
 	const [showLogin, toggleLogin] = useState(false)
 	const [showRegister, toggleRegister] = useState(false)
+	function openLoginBox() {
+		toggleRegister(false)
+		toggleLogin(!showLogin)
+	}
+	function openRegisterBox() {
+		toggleLogin(false)
+		toggleRegister(!showRegister)
+	}
 	return (
 		<div className={styles.actionHeaderContainer}>
 			<ul className={styles.actionList}>
 				<li>
 					<Button
 						labelText="Sign Up"
-						onClick={() => toggleRegister(!showRegister)}
+						onClick={() => openRegisterBox()}
 						type={LINK}
 					/>
 				</li>
 				<li>
 					<Button
 						labelText="Login"
-						onClick={() => toggleLogin(!showLogin)}
+						onClick={() => openLoginBox()}
 						type={LINK}
 					/>
 				</li>
