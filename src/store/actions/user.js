@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { AUTH_USER } from './actionTypes'
+import { AUTH_USER, REMOVE_USER } from './actionTypes'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 
 const headers = {
@@ -15,6 +15,14 @@ export const setUser = user => dispatch => new Promise(resolve => {
 		},
 	})
 	resolve(user)
+})
+
+export const removeUser = () => dispatch => new Promise(resolve => {
+	dispatch({
+		type: REMOVE_USER,
+		payload: {},
+	})
+	resolve(true)
 })
 
 export const authUser = user => dispatch => new Promise(resolve => {
@@ -44,6 +52,6 @@ export const refreshToken = token => dispatch => new Promise(resolve => {
 })
 
 export const logOutUser = () => dispatch => new Promise(resolve => {
-	dispatch(setUser({}))
+	dispatch(removeUser())
 	resolve(true)
 })

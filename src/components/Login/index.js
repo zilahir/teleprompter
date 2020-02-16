@@ -20,10 +20,9 @@ import { setUser } from '../../store/actions/user'
 const Login = props => {
 	const { type, isVisible } = props
 	const dispatch = useDispatch()
-	const authPromsie = dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' }))
 	function handleLogin() {
 		Promise.all([
-			authPromsie,
+			dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' })),
 		])
 	}
 	return (

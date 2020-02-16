@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch } from 'react-redux'
 
-import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, LOGGED_IN } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
@@ -51,7 +51,7 @@ const ActionHeader = () => {
 		])
 	}
 	useEffect(() => store.subscribe(() => {
-		if (store.getState().user.user) {
+		if (store.getState().user.loggedIn) {
 			setIsLoggedIn(true)
 		} else {
 			setIsLoggedIn(false)

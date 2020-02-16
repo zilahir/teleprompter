@@ -1,7 +1,8 @@
-import { AUTH_USER } from '../actions/actionTypes'
+import { AUTH_USER, REMOVE_USER } from '../actions/actionTypes'
 
 const initialState = {
 	user: null,
+	loggedIn: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,13 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			user: action.payload.user,
+			loggedIn: true,
+		}
+	case REMOVE_USER:
+		return {
+			...state,
+			user: null,
+			loggedIn: false,
 		}
 	default:
 		return state
