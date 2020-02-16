@@ -18,4 +18,18 @@
             outline: none;
         }
     }
+    .linkButton {
+        border: none;
+        background-color: transparent;
+        @include paragraph(14px, #fff, 0.85px);
+        transition: all .2s ease;
+        &:hover {
+            cursor: pointer;
+            color: $purple;
+            transition: all .2s ease;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
 }

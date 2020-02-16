@@ -16,3 +16,6 @@ export const scrollWidthSettngs = [
 ]
 
 export const segmentColors = ['#DF4BCB', '#CFEB70', '#C1C1C1', '#5FA3E8', '#F4A836']
+
+export const BUTTON = 'BUTTON'
+export const LINK = 'LINK'

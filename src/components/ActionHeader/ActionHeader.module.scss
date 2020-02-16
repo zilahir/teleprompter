@@ -1,3 +1,13 @@
 .actionHeaderContainer {
-    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 20px;
+    .actionList {
+        list-style-type: none;
+        display: inline-flex;
+        li {
+            margin-right: 20px;
+        }
+    }
 }

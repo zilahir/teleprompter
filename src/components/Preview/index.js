@@ -7,6 +7,7 @@ import { plus } from 'react-icons-kit/feather/plus'
 import classnames from 'classnames'
 
 import { segmentColors, Colors } from '../../utils/consts'
+import ActionHeader from '../ActionHeader'
 import TextEditor from '../TextEditor'
 import PropterIcon from '../common/Icon'
 import Segments from '../Segment'
@@ -28,6 +29,7 @@ const Preview = () => {
 	return (
 		<>
 			<Col lg={6}>
+				<ActionHeader />
 				<div className={styles.previewContainer}>
 					<div className={styles.tabContainer}>
 						<button

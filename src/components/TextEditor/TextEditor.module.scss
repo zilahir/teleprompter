@@ -2,7 +2,7 @@
 @import '../../styles/mixins/paragraph';
 
 .textEditorContainer {
-    height: 100vw;
+    height: 40vw;
     overflow: hidden;
     margin: 0 25px;
     .textArea {
@@ -15,5 +15,8 @@
         border-radius: 20px;
         font-family: 'Barlow';
         letter-spacing: 1.2px;
+        &:focus {
+            outline: none;
+        }
     }
 }
