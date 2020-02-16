@@ -46,7 +46,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={streamAddress.split('-')[0]}
+						inheritedValue={`https://prompter.me/${streamAddress.split('-')[0]}`}
 					/>
 					<Input
 						labelText="Remote control address"
