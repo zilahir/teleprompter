@@ -5,7 +5,7 @@ import Icon from 'react-icons-kit'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import classnames from 'classnames'
 
-import { LOGIN, REGISTER, PASSWORD, LOAD } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
@@ -90,8 +90,26 @@ const Login = props => {
 										}
 									</ul>
 								</div>
-							)
-							: null
+							) : type === SAVE
+								? (
+									<div className={classnames(
+										styles.loginBoxContainer,
+										styles.itemBoxContainer,
+										isVisible ? styles.show : styles.hidden,
+									)}
+									>
+										<Input
+											inheritedValue="Project name"
+											inputClassName={styles.loginInput}
+										/>
+										<Button
+											labelText="SAVE"
+											onClick={() => null}
+											buttonClass={styles.loginBtn}
+										/>
+									</div>
+								)
+								: null
 			}
 		</>
 	)

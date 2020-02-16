@@ -15,20 +15,30 @@ const ActionHeader = () => {
 	const [showLogin, toggleLogin] = useState(false)
 	const [showRegister, toggleRegister] = useState(false)
 	const [showLoad, toggleLoad] = useState(false)
+	const [showSave, toggleSave] = useState(false)
 	function openLoginBox() {
 		toggleRegister(false)
 		toggleLoad(false)
+		toggleSave(false)
 		toggleLogin(!showLogin)
 	}
 	function openRegisterBox() {
 		toggleLogin(false)
 		toggleLoad(false)
+		toggleSave(false)
 		toggleRegister(!showRegister)
 	}
 	function openLoad() {
 		toggleLogin(false)
 		toggleRegister(false)
+		toggleSave(false)
 		toggleLoad(!showLoad)
+	}
+	function openSave() {
+		toggleLogin(false)
+		toggleRegister(false)
+		toggleLoad(false)
+		toggleSave(!showSave)
 	}
 	const isLoggedIn = true
 	return (
@@ -44,7 +54,7 @@ const ActionHeader = () => {
 							<li>
 								<Button
 									labelText="Save"
-									onClick={() => null}
+									onClick={() => openSave()}
 									type={LINK}
 								/>
 							</li>
@@ -109,6 +119,10 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showLoad}
 				type={LOAD}
+			/>
+			<Login
+				isVisible={showSave}
+				type={SAVE}
 			/>
 		</div>
 	)
