@@ -50,6 +50,9 @@ const ActionHeader = () => {
 			dispatch(logOutUser()),
 		])
 	}
+	function requestClose(val) {
+		alert(val)
+	}
 	useEffect(() => store.subscribe(() => {
 		if (store.getState().user.loggedIn) {
 			setIsLoggedIn(true)
@@ -127,6 +130,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showLogin}
 				type={LOGIN}
+				requestClose={() => toggleLogin(false)}
 			/>
 			<Login
 				isVisible={showRegister}

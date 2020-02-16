@@ -18,12 +18,14 @@ import { setUser } from '../../store/actions/user'
 * */
 
 const Login = props => {
-	const { type, isVisible } = props
+	const { type, isVisible, requestClose } = props
 	const dispatch = useDispatch()
 	function handleLogin() {
 		Promise.all([
 			dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' })),
-		])
+		]).then(() => {
+			requestClose()
+		})
 	}
 	return (
 		<>
@@ -123,9 +125,14 @@ const Login = props => {
 	)
 }
 
+Login.defaultProps = {
+	requestClose: null,
+}
+
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 	type: PropTypes.string.isRequired,
+	requestClose: PropTypes.func,
 }
 
 export default Login
