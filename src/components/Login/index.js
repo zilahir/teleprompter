@@ -2,6 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
+import { useDispatch } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import classnames from 'classnames'
 
@@ -9,6 +10,7 @@ import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
+import { setUser } from '../../store/actions/user'
 
 /**
 * @author zilahir
@@ -17,6 +19,15 @@ import Button from '../common/Button'
 
 const Login = props => {
 	const { type, isVisible } = props
+	const dispatch = useDispatch()
+	const authPromsie = dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' }))
+	function handleLogin() {
+		Promise.all([
+			authPromsie,
+		]).then(() => {
+			alert('done')
+		})
+	}
 	return (
 		<>
 			{
@@ -37,7 +48,7 @@ const Login = props => {
 							/>
 							<Button
 								labelText="LOG IN"
-								onClick={() => null}
+								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
 						</div>

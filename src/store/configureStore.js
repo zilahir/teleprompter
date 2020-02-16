@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import test from './reducers/Test'
 import segments from './reducers/segments'
 import text from './reducers/text'
+import user from './reducers/user'
 
 const persistConfig = {
 	key: 'root',
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
 	test,
 	segments,
 	text,
+	user,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

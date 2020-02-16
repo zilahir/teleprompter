@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
+import { useStore, useDispatch } from 'react-redux'
 
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
+import { logOutUser } from '../../store/actions/user'
 
 /**
 * @author zilahir
@@ -16,6 +18,9 @@ const ActionHeader = () => {
 	const [showRegister, toggleRegister] = useState(false)
 	const [showLoad, toggleLoad] = useState(false)
 	const [showSave, toggleSave] = useState(false)
+	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const store = useStore()
+	const dispatch = useDispatch()
 	function openLoginBox() {
 		toggleRegister(false)
 		toggleLoad(false)
@@ -40,7 +45,18 @@ const ActionHeader = () => {
 		toggleLoad(false)
 		toggleSave(!showSave)
 	}
-	const isLoggedIn = true
+	function logOut() {
+		Promise.all([
+			dispatch(logOutUser()),
+		])
+	}
+	useEffect(() => store.subscribe(() => {
+		if (store.getState().user.user) {
+			setIsLoggedIn(true)
+		} else {
+			setIsLoggedIn(false)
+		}
+	}), [isLoggedIn])
 	return (
 		<div className={classnames(
 			styles.actionHeaderContainer,
@@ -101,7 +117,7 @@ const ActionHeader = () => {
 							<li>
 								<Button
 									labelText="Log Out"
-									onClick={() => openRegisterBox()}
+									onClick={() => logOut()}
 									type={LINK}
 								/>
 							</li>

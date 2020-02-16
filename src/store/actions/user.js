@@ -42,3 +42,8 @@ export const refreshToken = token => dispatch => new Promise(resolve => {
 			resolve(resp.data)
 		})
 })
+
+export const logOutUser = () => dispatch => new Promise(resolve => {
+	dispatch(setUser(null))
+	resolve(true)
+})
