@@ -1,9 +1,19 @@
 .actionHeaderContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 0 20px;
+    &.alignEnd {
+        justify-content: flex-end;
+    }
     .actionList {
+        list-style-type: none;
+        display: inline-flex;
+        li {
+            margin-right: 20px;
+        }
+    }
+    .loggedInActionList {
         list-style-type: none;
         display: inline-flex;
         li {
