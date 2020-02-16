@@ -1,10 +1,12 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { LOGIN } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
+import Button from '../common/Button'
 
 /**
 * @author zilahir
@@ -31,9 +33,42 @@ const Login = props => {
 								inheritedValue="Password"
 								inputClassName={styles.loginInput}
 							/>
+							<Button
+								labelText="LOG IN"
+								onClick={() => null}
+								buttonClass={styles.loginBtn}
+							/>
 						</div>
 					)
-					: null
+					: type === REGISTER
+						? (
+							<div className={classnames(
+								styles.loginBoxContainer,
+								isVisible ? styles.show : styles.hidden,
+							)}
+							>
+								<Input
+									inheritedValue="Email (required)"
+									inputClassName={styles.loginInput}
+								/>
+								<Input
+									inheritedValue="Password  (requited min 8 chars)"
+									inputClassName={styles.loginInput}
+									type={PASSWORD}
+								/>
+								<Input
+									inheritedValue="Password  (again)"
+									inputClassName={styles.loginInput}
+									type={PASSWORD}
+								/>
+								<Button
+									labelText="LOG IN"
+									onClick={() => null}
+									buttonClass={styles.loginBtn}
+								/>
+							</div>
+						)
+						: null
 			}
 		</>
 	)

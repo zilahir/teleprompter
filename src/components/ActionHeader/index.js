@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { LINK, LOGIN } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
@@ -12,13 +12,14 @@ import Login from '../Login'
 
 const ActionHeader = () => {
 	const [showLogin, toggleLogin] = useState(false)
+	const [showRegister, toggleRegister] = useState(false)
 	return (
 		<div className={styles.actionHeaderContainer}>
 			<ul className={styles.actionList}>
 				<li>
 					<Button
 						labelText="Sign Up"
-						onClick={() => null}
+						onClick={() => toggleRegister(!showRegister)}
 						type={LINK}
 					/>
 				</li>
@@ -33,6 +34,10 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showLogin}
 				type={LOGIN}
+			/>
+			<Login
+				isVisible={showRegister}
+				type={REGISTER}
 			/>
 		</div>
 	)

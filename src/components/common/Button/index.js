@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 import { BUTTON, LINK } from '../../../utils/consts'
@@ -11,13 +12,17 @@ import styles from './Button.module.scss'
 * */
 
 const Button = props => {
-	const { labelText, onClick, type } = props
+	const { labelText, onClick, type, buttonClass } = props
 	return (
 		<>
 			{
 				type === BUTTON
 					? (
-						<div className={styles.buttonContainer}>
+						<div className={classnames(
+							styles.buttonContainer,
+							buttonClass,
+						)}
+						>
 							<button
 								type="button"
 								onClick={onClick}
@@ -46,10 +51,12 @@ const Button = props => {
 }
 
 Button.defaultProps = {
+	buttonClass: null,
 	type: BUTTON,
 }
 
 Button.propTypes = {
+	buttonClass: PropTypes.string,
 	labelText: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
 	type: PropTypes.string,
