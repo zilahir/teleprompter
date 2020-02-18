@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useStore } from 'react-redux'
+import { useDispatch, useStore } from 'react-redux'
 import styled from 'styled-components'
 
+import { setScrollWidth } from '../../../store/actions/text'
 import { Colors as teleprompterColors } from '../../../utils/consts'
 import styles from './Selector.module.scss'
 
@@ -12,7 +14,7 @@ import styles from './Selector.module.scss'
 * */
 
 const Item = styled.div`
-	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)}
+	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)};
 	border-top-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
 	border-bottom-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
 	border-top-right-radius: ${props => (props.isLast ? '10px' : '0px')};
@@ -22,10 +24,14 @@ const Item = styled.div`
 
 const Selector = props => {
 	const { items } = props
-	const [isActive, setActive] = useState(0)
+	const [isActive, setActive] = useState(2)
 	const store = useStore()
-
+	const dispatch = useDispatch()
 	function handleChange(index) {
+		const chosenValue = items.find(item => (
+			item.id === index
+		))
+		dispatch(setScrollWidth(chosenValue.label))
 		setActive(index)
 	}
 	return (

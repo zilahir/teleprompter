@@ -24,12 +24,15 @@
 .labelText {
     @include labelText;
     margin-left: -10px;
+    margin-bottom: 0;
 }
 
 .sliderInner {
     display: flex;
     align-items: center;
     .sliderValue {
+        position: relative;
+        right: -10px;
         margin-left: 10px;
         color: #fff;
         font: 400 14px/17px 'Barlow';

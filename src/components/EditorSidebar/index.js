@@ -8,7 +8,7 @@ import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
 import Logo from '../common/Logo'
 import { scrollWidthSettngs } from '../../utils/consts'
-import { SET_FONT_SIZE } from '../../store/actions/actionTypes'
+import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
 
@@ -37,19 +37,24 @@ const EditorSidebar = () => {
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
 						initialValue={store.getState().text.fontSize}
-						maxValue={180}
+						maxValue={3}
+						step={0.1}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"
-						sliderName="letterSpacing"
-						initialValue={1.5}
-						step={0.1}
+						sliderName={SET_LETTER_SPACING}
+						initialValue={0}
+						minValue={0}
+						maxValue={2}
+						step={0.01}
 					/>
 					<SliderAlt
 						labelText="Line height"
-						sliderName="lineHeight"
-						initialValue={1.5}
+						sliderName={SET_LINE_HEIGHT}
+						initialValue={store.getState().text.lineHeight}
 						step={0.1}
+						maxValue={3}
+						minValue={1}
 					/>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>

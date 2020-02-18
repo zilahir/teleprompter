@@ -2,7 +2,6 @@
 @import '../../../styles/mixins/heading';
 
 .textpreviewContainer {
-    width: 242px;
     p {
         margin: 0;
     }
@@ -10,20 +9,34 @@
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         background: rgba($color: #000000, $alpha: 0.3);
+        width: 222px;
+        height: 116px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .mirrored {
             padding: 20px;
             @include heading;
             opacity: 0.9;
             transform: scaleY(-1);
+            word-break: break-all;
         }
     }
     .textContainer {
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background: rgba($color: #000000, $alpha: 1.0);
+        width: 222px;
+        height: 116px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .text {
             padding: 20px;
             @include heading;
+            word-break: break-all;
         }
     }
 }

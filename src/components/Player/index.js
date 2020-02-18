@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import screenfull from 'screenfull'
 import { useStore } from 'react-redux'
+import useSocket from 'use-socket.io-client'
 import { Button, FormControlLabel, Switch, TextField } from '@material-ui/core'
 import { Description, FastForward, Fullscreen, SwapHoriz, TextFields } from '@material-ui/icons'
 
@@ -17,18 +18,34 @@ const Player = () => {
 	const [text, setText] = useState('')
 	const [scrollSpeed, setScrollSpeed] = useState(0)
 	const [fontSize, setFontSize] = useState(1)
+	const [isPlaying, setIsPlaying] = useState(false)
 	const [flipX, setFlipX] = useState(false)
 	const ScrollerRef = useRef(null)
 	const store = useStore()
+	const [socket] = useSocket('http://localhost:5000')
 	function onFullScreenButtonClick() {
 		if (screenfull.enabled) {
 			screenfull.request()
 		}
 	}
-	useEffect(() => store.subscribe(() => {
-		const value = store.getState().text.text
-		setText(value)
-	}), [store])
+	function handleStart() {
+		ScrollerRef.current.scroll()
+	}
+	function handleStop() {
+		// TODO: implement stop
+	}
+	useEffect(() => {
+		socket.connect()
+		setText(store.getState().text.text)
+		socket.on('isPlaying', playing => {
+			setIsPlaying(playing)
+			if (playing) {
+				handleStart()
+			} else {
+				handleStop()
+			}
+		})
+	}, [store, isPlaying, socket])
 
 	function handleScrollSpeedChange(value) {
 		setScrollSpeed(value)
@@ -38,9 +55,6 @@ const Player = () => {
 	}
 	function onFlipXSwitchChange(isChecked) {
 		setFlipX(isChecked.target.checked)
-	}
-	function handleStart() {
-		ScrollerRef.current.scroll()
 	}
 	return (
 		<div className={styles.app}>

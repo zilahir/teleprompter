@@ -1,0 +1,69 @@
+@import '../../styles/variables';
+@import '../../styles/mixins/paragraph';
+
+.loginBoxContainer {
+    position: absolute;
+    border-radius: $login-box-border-radius;
+    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.8);
+    background-color: $login-box-bg-color;
+    top: 50px;
+    right: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &.hidden {
+        display: none;
+    }
+    &.visible {
+        display: block;
+    }
+    .loginInput {
+        margin: 0 10px;
+        input {
+            font-size: 14px !important;
+        }
+    }
+    .loginBtn {
+        margin: 0;
+        margin-top: 20px;
+        button {
+            height: 45px;
+        }
+    }
+    &.itemBoxContainer {
+        left: 100px;
+        right: unset;
+        padding-top: 0;
+        .savedItems {
+            list-style-type: none;
+            margiin: 0;
+            padding: 0;
+            width: 260px;
+            li {
+                @include paragraph(17px, #ffffff);
+                border-bottom: 1px solid rgba($color: $gray-4, $alpha: 0.5);
+                padding: 10px 0;
+                transition: all .2s ease;
+                display: flex;
+                justify-content: space-between;
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba($color: $gray-3, $alpha: 1.0);
+                    transition: all .2s ease;
+                }
+                .icon {
+                    color: $purple;
+                    transform: rotate(90deg);
+                    svg {
+                        fill: $purple;
+                    }
+                }
+                &:last-of-type {
+                    border: none;
+                }
+            }
+        }
+    }
+}

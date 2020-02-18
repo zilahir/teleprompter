@@ -19,7 +19,7 @@
             background: $gray-1;
             width: 220px;
             height: 45px;
-            @include paragraph(16px, $gray-4, 0.39px);
+            @include paragraph(14px, $gray-4, 0.39px);
             padding-left: 20px;
         }
     }
