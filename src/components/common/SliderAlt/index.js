@@ -36,9 +36,14 @@ const SliderAlt = props => {
 	}
 	return (
 		<SliderContanier>
-			<p className="labelText">
-				{labelText}
-			</p>
+			<div className="top">
+				<p className="labelText">
+					{labelText}
+				</p>
+				<p className="sliderValue">
+					{value}
+				</p>
+			</div>
 			<div className="sliderInner">
 				<Slider
 					className="slider"
@@ -49,9 +54,6 @@ const SliderAlt = props => {
 					max={maxValue}
 					min={minValue}
 				/>
-				<p className="sliderValue">
-					{value}
-				</p>
 			</div>
 		</SliderContanier>
 	)

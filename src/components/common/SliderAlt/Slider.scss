@@ -30,6 +30,13 @@
 .sliderInner {
     display: flex;
     align-items: center;
+    width: 100%;
+
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
     .sliderValue {
         position: relative;
         right: -10px;
