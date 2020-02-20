@@ -19,6 +19,7 @@
             .react-toggle-thumb {
                 border: none;
                 background-color: $purple;
+                box-shadow: none;
             }
         }
         .react-toggle-track {
@@ -31,6 +32,9 @@
             height: 25px;
             border-radius: 37px;
             border: none;
+            &:focus {
+                outline: none;
+            }
         }
     }
 }
@@ -41,4 +45,13 @@
 
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
     background: rgba($color: $gray-1, $alpha: 0.5);
+}
+
+.react-toggle--focus {
+    .react-toggle-thumb {
+        &:focus {
+            outline: none;
+        }
+        box-shadow: none;
+    }
 }
