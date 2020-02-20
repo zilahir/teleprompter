@@ -5,11 +5,12 @@ import Icon from 'react-icons-kit'
 import { plus } from 'react-icons-kit/feather/plus'
 import classnames from 'classnames'
 
-import { Colors } from '../../utils/consts'
+import { Colors, HELPER_TOP } from '../../utils/consts'
 import ActionHeader from '../ActionHeader'
 import TextEditor from '../TextEditor'
 import PropterIcon from '../common/Icon'
 import styles from './Preview.module.scss'
+import Instruction from '../common/Instruction'
 
 /**
 * @author zilahir
@@ -23,6 +24,9 @@ const Preview = () => {
 			<Col lg={6}>
 				<ActionHeader />
 				<div className={styles.previewContainer}>
+					<Instruction
+						text={HELPER_TOP}
+					/>
 					<div className={styles.tabContainer}>
 						<button
 							className={classnames(

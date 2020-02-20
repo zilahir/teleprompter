@@ -2,9 +2,12 @@
 @import '../../../styles/mixins/paragraph.scss';
 
 .instructionContainer {
-    padding: 10px;
+    padding: 30px;
     p {
         @include paragraph(14px, $gray-4);
         letter-spacing: 0.42px;
+    }
+    &.noPadding {
+        padding: 0;
     }
 }
