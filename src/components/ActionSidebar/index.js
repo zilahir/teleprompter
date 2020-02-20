@@ -8,6 +8,8 @@ import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
+import { HELPER_SIDEBAR } from '../../utils/consts'
+import Instruction from '../common/Instruction'
 
 /**
 * @author zilahir
@@ -51,6 +53,11 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Remote control address"
 						isDisabled
+					/>
+					<Instruction
+						text={HELPER_SIDEBAR}
+						hasPadding={false}
+						maxWidth={250}
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button

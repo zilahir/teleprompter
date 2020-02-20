@@ -19,6 +19,9 @@
             box-shadow: 0 0 0 5px $gray-2;
         }
     }
+    .rc-slider-track {
+        height: unset;
+    }
 }
 
 .labelText {

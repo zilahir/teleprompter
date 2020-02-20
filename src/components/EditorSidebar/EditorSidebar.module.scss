@@ -14,7 +14,8 @@
         .selectorContainer {
             position: relative;
             left: -10px;
-            margin-bottom: 40px;
+            margin: 0px -10px;
+            margin-bottom: 20px;
             .widthLabel {
                 margin-top: 0;
                 @include labelText;
