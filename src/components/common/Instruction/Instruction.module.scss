@@ -1,0 +1,10 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/paragraph.scss';
+
+.instructionContainer {
+    padding: 10px;
+    p {
+        @include paragraph(14px, $gray-4);
+        letter-spacing: 0.42px;
+    }
+}
