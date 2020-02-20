@@ -30,6 +30,14 @@
 .sliderInner {
     display: flex;
     align-items: center;
+    width: 100%;
+
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
     .sliderValue {
         position: relative;
         right: -10px;
@@ -37,4 +45,8 @@
         color: #fff;
         font: 400 14px/17px 'Barlow';
     }
+}
+
+.rc-slider-rail {
+    background-color: unset;
 }
