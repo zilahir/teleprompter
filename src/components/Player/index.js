@@ -13,12 +13,11 @@ import styles from './Player.module.scss'
 const Player = () => {
 	const [text, setText] = useState('')
 	const [isPlaying, setIsPlaying] = useState(false)
-	const ScrollerRef = useRef(null)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 
 	function handleStart() {
-		ScrollerRef.current.scroll()
+
 	}
 	function handleStop() {
 
@@ -39,7 +38,6 @@ const Player = () => {
 	return (
 		<div className={styles.app}>
 			<TextScroller
-				ref={ScrollerRef}
 				text={text}
 			/>
 		</div>
