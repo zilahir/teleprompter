@@ -10,7 +10,7 @@ import styles from './TextScroller.module.scss'
 * */
 
 const TextScroller = props => {
-	const { text } = props
+	const { text, scrollSpeed } = props
 	const controls = useAnimation()
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
@@ -27,7 +27,6 @@ const TextScroller = props => {
 	useEffect(() => {
 		const { clientHeight } = textRef.current
 		setHeight(clientHeight)
-		console.debug('container', clientHeight)
 		setTimeout(() => {
 			controls.start('end')
 		}, 100)
@@ -37,7 +36,7 @@ const TextScroller = props => {
 			<motion.div
 				animate={controls}
 				variants={container}
-				transition={{ ease: 'linear', duration: 10 }}
+				transition={{ ease: 'linear', duration: scrollSpeed }}
 				className={styles.scroller}
 			>
 				<p
@@ -51,6 +50,7 @@ const TextScroller = props => {
 }
 
 TextScroller.propTypes = {
+	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
 }
 
