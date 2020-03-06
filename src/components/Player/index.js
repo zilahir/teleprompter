@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStore } from 'react-redux'
 import useSocket from 'use-socket.io-client'
 
 import TextScroller from '../TextScroller'
-import styles from './Player.module.scss'
 
 /**
 * @author zilahir
@@ -36,7 +35,7 @@ const Player = () => {
 	}, [store, isPlaying, socket])
 
 	return (
-		<div className={styles.app}>
+		<div>
 			<TextScroller
 				text={text}
 			/>
