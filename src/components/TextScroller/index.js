@@ -47,13 +47,17 @@ export default class TextScroller extends PureComponent {
     render() {
         const {text, fontSize, flipX, width, height} = this.props;
 
-        return <div className={classNames(styles.displayTextContainer, {[styles.flipX]: flipX})}
-                    style={{width: width, height: height}}>
-            <p ref={this.refDisplayText}
-               className={styles.displayText}
-               style={{fontSize: fontSize}}>
-                {text}
-            </p>
-        </div>
+        return (
+            <div
+                className={classNames(styles.displayTextContainer, {[styles.flipX]: flipX})}
+                style={{width: width, height: height}}>
+                <p ref={this.refDisplayText}
+                    className={styles.displayText}
+                    style={{fontSize: fontSize}}
+                >
+                        {text}
+                </p>
+            </div>
+        )
     }
 }

@@ -21,7 +21,7 @@ const ActionSidebar = () => {
 	const [text, setText] = useState('')
 	const [streamAddress, setStreamAddress] = useState('')
 	const store = useStore()
-	const [socket] = useSocket('http://localhost:5000')
+	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
@@ -32,7 +32,7 @@ const ActionSidebar = () => {
 		setText(t)
 	}), [store, text])
 	useEffect(() => {
-		// socket.connect()
+		socket.connect()
 		setStreamAddress(uuidv4())
 	}, [])
 	return (

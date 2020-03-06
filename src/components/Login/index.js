@@ -91,7 +91,7 @@ const Login = props => {
 										{
 											Array(5).fill().map(currItem => (
 												<li key={currItem}>
-											Project name
+													Project name
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
 													</div>
@@ -131,8 +131,8 @@ Login.defaultProps = {
 
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
-	type: PropTypes.string.isRequired,
 	requestClose: PropTypes.func,
+	type: PropTypes.string.isRequired,
 }
 
 export default Login
