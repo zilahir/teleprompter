@@ -10,7 +10,7 @@ import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
-import { setUser } from '../../store/actions/user'
+import { authUser } from '../../store/actions/authUser'
 
 /**
 * @author zilahir
@@ -22,7 +22,7 @@ const Login = props => {
 	const dispatch = useDispatch()
 	function handleLogin() {
 		Promise.all([
-			dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' })),
+			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
 		]).then(() => {
 			requestClose()
 		})

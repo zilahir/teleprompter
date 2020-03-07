@@ -14,7 +14,7 @@ export const setAllPrompterForUser = usersPrompters => dispatch => new Promise(r
 	resolve(usersPrompters)
 })
 
-export const getAllDeMinimis = (userId, authToken) => dispatch => new Promise(resolve => {
+export const getAllUserPrompter = (userId, authToken) => dispatch => new Promise(resolve => {
 	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
 	axios.get(`${apiEndpoints.getAllPrompterForUser}/${userId}`, {
 		headers,
