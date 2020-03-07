@@ -8,7 +8,7 @@ import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { HELPER_SIDEBAR } from '../../utils/consts'
+import { HELPER_SIDEBAR, LINK } from '../../utils/consts'
 import Instruction from '../common/Instruction'
 
 /**
@@ -20,21 +20,29 @@ const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')
 	const [streamAddress, setStreamAddress] = useState('')
+	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
+
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 	}
+
 	useEffect(() => store.subscribe(() => {
 		const t = store.getState().text.text
 		setText(t)
 	}), [store, text])
+
 	useEffect(() => {
 		socket.connect()
 		setStreamAddress(uuidv4())
 	}, [])
+
+	function testAnimation() {
+		toggleAnimation(!isAnimationStarted)
+	}
 	return (
 		<>
 			<Col
@@ -44,7 +52,18 @@ const ActionSidebar = () => {
 				<div className={styles.innerContainer}>
 					<TextPreview
 						text={text}
+						isAnimationRunning={isAnimationStarted}
+						scrollSpeed={10}
 					/>
+					<div className={styles.testAnimation}>
+						<Button
+							type={LINK}
+							onClick={() => testAnimation()}
+							labelText={
+								!isAnimationStarted ? 'start scroll' : 'stop scroll'
+							}
+						/>
+					</div>
 					<Input
 						labelText="Stream address"
 						isDisabled

@@ -51,7 +51,7 @@ const ActionHeader = () => {
 		])
 	}
 	function requestClose(val) {
-		alert(val)
+		return true
 	}
 	useEffect(() => store.subscribe(() => {
 		if (store.getState().user.loggedIn) {

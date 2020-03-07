@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
