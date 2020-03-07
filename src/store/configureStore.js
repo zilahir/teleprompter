@@ -3,10 +3,10 @@ import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import test from './reducers/Test'
 import segments from './reducers/segments'
 import text from './reducers/text'
 import user from './reducers/user'
+import userPrompters from './reducers/prompter'
 
 const persistConfig = {
 	key: 'root',
@@ -14,10 +14,10 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-	test,
 	segments,
 	text,
 	user,
+	userPrompters,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -20,6 +20,7 @@ export const getAllUserPrompter = (userId, authToken) => dispatch => new Promise
 		headers,
 	})
 		.then(resp => {
+			console.debug('resp.data', resp.data)
 			dispatch(setAllPrompterForUser(resp.data))
 			resolve(resp.data)
 		})
