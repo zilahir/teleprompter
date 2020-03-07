@@ -12,26 +12,15 @@ import TextScroller from '../TextScroller'
 
 const Player = () => {
 	const [text, setText] = useState('')
-	const [isPlaying, setIsPlaying] = useState(false)
+	const [isPlaying, togglePlaying] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	const { slug } = useParams()
-	function handleStart() {
-
-	}
-	function handleStop() {
-
-	}
 	useEffect(() => {
 		// socket.connect()
 		setText(store.getState().text.text)
 		socket.on('isPlaying', playing => {
-			setIsPlaying(playing)
-			if (playing) {
-				handleStart()
-			} else {
-				handleStop()
-			}
+			togglePlaying(playing)
 		})
 	}, [store, isPlaying, socket])
 
@@ -39,6 +28,7 @@ const Player = () => {
 		<div>
 			<TextScroller
 				text={text}
+				slug={slug}
 			/>
 		</div>
 	)
