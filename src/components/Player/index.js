@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useStore } from 'react-redux'
 import useSocket from 'use-socket.io-client'
 
@@ -14,7 +15,7 @@ const Player = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
-
+	const { slug } = useParams()
 	function handleStart() {
 
 	}
@@ -24,6 +25,7 @@ const Player = () => {
 	useEffect(() => {
 		// socket.connect()
 		setText(store.getState().text.text)
+		console.debug('slug', slug)
 		socket.on('isPlaying', playing => {
 			setIsPlaying(playing)
 			if (playing) {

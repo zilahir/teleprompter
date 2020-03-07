@@ -13,7 +13,7 @@ const App = () => (
 	<div>
 		<Router>
 			<Route path="/" exact component={Main} />
-			<Route path="/player" exact component={Player} />
+			<Route path="/player/:slug" exact component={Player} />
 		</Router>
 	</div>
 )

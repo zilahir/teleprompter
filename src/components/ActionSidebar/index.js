@@ -29,6 +29,9 @@ const ActionSidebar = () => {
 	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
+		setTimeout(() => {
+			window.open('/player/demo', '_blank')
+		})
 	}
 
 	useEffect(() => store.subscribe(() => {
