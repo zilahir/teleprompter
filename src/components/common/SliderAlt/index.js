@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import Slider from 'rc-slider'
 import { useDispatch } from 'react-redux'
 
-import { SET_FONT_SIZE, SET_LETTER_SPACING, SET_LINE_HEIGHT } from '../../../store/actions/actionTypes'
-import { setFontSize, setLetterSpacing, setLineHeight } from '../../../store/actions/text'
+import { SET_FONT_SIZE, SET_LETTER_SPACING, SET_LINE_HEIGHT, SET_SCROLL_SPEED } from '../../../store/actions/actionTypes'
+import { setFontSize, setLetterSpacing, setLineHeight, setScrollSpeed } from '../../../store/actions/text'
 import 'rc-slider/assets/index.css'
 
 import './Slider.scss'
@@ -31,6 +31,8 @@ const SliderAlt = props => {
 			dispatch(setLetterSpacing(v))
 		} else if (sliderName === SET_LINE_HEIGHT) {
 			dispatch(setLineHeight(v))
+		} else if (sliderName === SET_SCROLL_SPEED) {
+			dispatch(setScrollSpeed(v))
 		}
 		setValue(v)
 	}

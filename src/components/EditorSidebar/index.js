@@ -8,7 +8,7 @@ import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
 import Logo from '../common/Logo'
 import { scrollWidthSettngs } from '../../utils/consts'
-import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING } from '../../store/actions/actionTypes'
+import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
 
@@ -64,7 +64,7 @@ const EditorSidebar = () => {
 					</div>
 					<SliderAlt
 						labelText="Scroll speed"
-						sliderName="scrollSpeed"
+						sliderName={SET_SCROLL_SPEED}
 						initialValue={5}
 						step={1}
 					/>
