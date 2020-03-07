@@ -65,7 +65,8 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Scroll speed"
 						sliderName={SET_SCROLL_SPEED}
-						initialValue={5}
+						initialValue={1}
+						maxValue={10}
 						step={1}
 					/>
 					<div className="toggleWrapper">

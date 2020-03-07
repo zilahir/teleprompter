@@ -21,6 +21,7 @@ const ActionSidebar = () => {
 	const [text, setText] = useState('')
 	const [streamAddress, setStreamAddress] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
+	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
@@ -32,8 +33,10 @@ const ActionSidebar = () => {
 
 	useEffect(() => store.subscribe(() => {
 		const t = store.getState().text.text
+		const sp = store.getState().text.scrollSpeed
+		setScrollSpeed(sp)
 		setText(t)
-	}), [store, text])
+	}), [store, text, scrollSpeed])
 
 	useEffect(() => {
 		socket.connect()
@@ -43,6 +46,7 @@ const ActionSidebar = () => {
 	function testAnimation() {
 		toggleAnimation(!isAnimationStarted)
 	}
+
 	return (
 		<>
 			<Col
@@ -53,7 +57,7 @@ const ActionSidebar = () => {
 					<TextPreview
 						text={text}
 						isAnimationRunning={isAnimationStarted}
-						scrollSpeed={10}
+						scrollSpeed={scrollSpeed}
 					/>
 					<div className={styles.testAnimation}>
 						<Button

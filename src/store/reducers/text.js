@@ -6,7 +6,7 @@ const initialState = {
 	lineHeight: 1,
 	letterSpacing: 0,
 	scrollWidth: '100%',
-	scrollSpeed: 10,
+	scrollSpeed: 1,
 }
 
 const reducer = (state = initialState, action) => {
