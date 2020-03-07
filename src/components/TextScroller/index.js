@@ -31,12 +31,13 @@ const TextScroller = props => {
 			controls.start('end')
 		}, 100)
 	}, [text])
+
 	return (
 		<>
 			<motion.div
 				animate={controls}
 				variants={container}
-				transition={{ ease: 'linear', duration: scrollSpeed }}
+				transition={{ ease: 'linear', duration: scrollSpeed || 100 }}
 				className={styles.scroller}
 			>
 				<p

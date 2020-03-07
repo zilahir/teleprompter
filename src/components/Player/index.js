@@ -25,7 +25,6 @@ const Player = () => {
 	useEffect(() => {
 		// socket.connect()
 		setText(store.getState().text.text)
-		console.debug('slug', slug)
 		socket.on('isPlaying', playing => {
 			setIsPlaying(playing)
 			if (playing) {
