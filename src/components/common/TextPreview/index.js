@@ -10,7 +10,6 @@ const Text = styled.p`
 	line-height: ${props => props.lineHeight} !important;
 	letter-spacing: ${props => props.letterSpacing}vw !important;
 	max-width: ${props => props.scrollWidth};
-	max-width: 10ch;
 `
 
 const TextMirrored = styled.p`
@@ -18,7 +17,6 @@ const TextMirrored = styled.p`
 	line-height: ${props => props.lineHeight} !important;
 	letter-spacing: ${props => props.letterSpacing}vw !important;
 	max-width: ${props => props.scrollWidth};
-	max-width: 10ch;
 `
 
 /**
