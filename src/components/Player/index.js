@@ -4,6 +4,7 @@ import { useStore } from 'react-redux'
 import useSocket from 'use-socket.io-client'
 
 import TextScroller from '../TextScroller'
+import Loader from '../Loader'
 
 /**
 * @author zilahir
@@ -13,6 +14,7 @@ import TextScroller from '../TextScroller'
 const Player = () => {
 	const [text, setText] = useState('')
 	const [isPlaying, togglePlaying] = useState(false)
+	const [isLoading, toggleIsLoading] = useState(true)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	const { slug } = useParams()
@@ -26,10 +28,16 @@ const Player = () => {
 
 	return (
 		<div>
-			<TextScroller
-				text={text}
-				slug={slug}
-			/>
+			{
+				!isLoading
+					? (
+						<TextScroller
+							text={text}
+							slug={slug}
+						/>
+					)
+					: <Loader isLoading={isLoading} />
+			}
 		</div>
 	)
 }

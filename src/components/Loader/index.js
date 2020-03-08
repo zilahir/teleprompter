@@ -12,14 +12,15 @@ import { Colors } from '../../utils/consts'
 
 const Loader = ({ isLoading, color }) => (
 	<>
-		isLoading
 		{
 			isLoading
 				? (
 					<div className={styles.loadingOverlay}>
 						<ReactLoading
-							type="sping"
+							type="spin"
 							color={color}
+							height={30}
+							width={30}
 						/>
 					</div>
 				)
