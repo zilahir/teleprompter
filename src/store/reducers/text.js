@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH } from '../actions/actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED } from '../actions/actionTypes'
 
 const initialState = {
 	fontSize: 2,
@@ -6,6 +6,7 @@ const initialState = {
 	lineHeight: 1,
 	letterSpacing: 0,
 	scrollWidth: '100%',
+	scrollSpeed: 1,
 }
 
 const reducer = (state = initialState, action) => {
@@ -34,6 +35,12 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			scrollWidth: action.payload.scrollWidth,
+		}
+	}
+	case SET_SCROLL_SPEED: {
+		return {
+			...state,
+			scrollSpeed: action.payload.scrollSpeed,
 		}
 	}
 	default:

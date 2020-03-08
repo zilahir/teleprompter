@@ -2,6 +2,10 @@
 @import '../../../styles/mixins/heading';
 
 .textpreviewContainer {
+    .innerContainer {
+        display: flex;
+        justify-content: center;
+    }
     p {
         margin: 0;
     }
@@ -19,7 +23,7 @@
             padding: 20px;
             @include heading;
             opacity: 0.9;
-            transform: scaleY(-1);
+            // transform: scaleY(-1);
             word-break: break-all;
         }
     }

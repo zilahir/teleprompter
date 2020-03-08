@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import classnames from 'classnames'
 
@@ -10,7 +10,8 @@ import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
-import { setUser } from '../../store/actions/user'
+import { authUser } from '../../store/actions/authUser'
+import { getAllUserPrompter } from '../../store/actions/prompter'
 
 /**
 * @author zilahir
@@ -20,13 +21,16 @@ import { setUser } from '../../store/actions/user'
 const Login = props => {
 	const { type, isVisible, requestClose } = props
 	const dispatch = useDispatch()
+	const store = useStore()
 	function handleLogin() {
 		Promise.all([
-			dispatch(setUser({ username: 'zilahi@gmail.com', password: 'demo' })),
+			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
 		]).then(() => {
+			dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
 			requestClose()
 		})
 	}
+	const { usersPrompters } = store.getState().userPrompters
 	return (
 		<>
 			{
@@ -89,9 +93,9 @@ const Login = props => {
 								>
 									<ul className={styles.savedItems}>
 										{
-											Array(5).fill().map(currItem => (
-												<li key={currItem}>
-											Project name
+											usersPrompters.map(currItem => (
+												<li key={currItem.id}>
+													Project name
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
 													</div>
@@ -131,8 +135,8 @@ Login.defaultProps = {
 
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
-	type: PropTypes.string.isRequired,
 	requestClose: PropTypes.func,
+	type: PropTypes.string.isRequired,
 }
 
 export default Login

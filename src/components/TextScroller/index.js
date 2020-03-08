@@ -1,59 +1,56 @@
-/*eslint-disable*/
-
-import classNames from 'classnames'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import React, {PureComponent} from 'react'
-import Scroll from 'react-scroll'
+import { motion, useAnimation } from 'framer-motion'
+
 import styles from './TextScroller.module.scss'
 
-export default class TextScroller extends PureComponent {
-    static propTypes = {
-        text: PropTypes.string,
-        fontSize: PropTypes.string,
-        flipX: PropTypes.bool,
-        width: PropTypes.string,
-        height: PropTypes.string,
-        scrollDurationLine: PropTypes.number
-    };
+/**
+* @author zilahir
+* @function TextScroller
+* */
 
-    static defaultProps = {
-        text: '',
-        fontSize: 'xx-large',
-        flipX: false,
-        width: 'auto',
-        height: 'auto',
-        scrollDurationLine: 1000
-    };
-    scroll = () => {
-        const {scrollDurationLine} = this.props;
-        const displayText = this.refDisplayText.current;
-        const numLines = displayText.getClientRects().length;
-        const {top, height} = displayText.getBoundingClientRect();
+const TextScroller = props => {
+	const { text, scrollSpeed } = props
+	const controls = useAnimation()
+	const textRef = useRef(null)
+	const [height, setHeight] = useState(null)
 
-        const bottom = window.scrollY + top + height;
+	const container = {
+		start: {
+			y: 0,
+		},
+		end: {
+			y: -height - 100,
+		},
+	}
 
-        Scroll.animateScroll.scrollTo(bottom, {
-            duration: scrollDurationLine * numLines,
-            smooth: 'linear',
-            offset: height
-        });
-    };
+	useEffect(() => {
+		const { clientHeight } = textRef.current
+		setHeight(clientHeight)
+		controls.start('end')
+	}, [text])
 
-    constructor() {
-        super();
-        this.refDisplayText = React.createRef();
-    }
-
-    render() {
-        const {text, fontSize, flipX, width, height} = this.props;
-
-        return <div className={classNames(styles.displayTextContainer, {[styles.flipX]: flipX})}
-                    style={{width: width, height: height}}>
-            <p ref={this.refDisplayText}
-               className={styles.displayText}
-               style={{fontSize: fontSize}}>
-                {text}
-            </p>
-        </div>
-    }
+	return (
+		<>
+			<motion.div
+				animate={controls}
+				variants={container}
+				transition={{ ease: 'linear', duration: scrollSpeed || 100 }}
+				className={styles.scroller}
+			>
+				<p
+					ref={textRef}
+				>
+					{text}
+				</p>
+			</motion.div>
+		</>
+	)
 }
+
+TextScroller.propTypes = {
+	scrollSpeed: PropTypes.number.isRequired,
+	text: PropTypes.string.isRequired,
+}
+
+export default TextScroller

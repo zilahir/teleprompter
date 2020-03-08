@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { motion, useAnimation } from 'framer-motion'
 import { useStore } from 'react-redux'
 import styled from 'styled-components'
 
 import styles from './TextPreview.module.scss'
 
-const Text = styled.p`
-	font-size: ${props => props.fontSize}vw !important;
-	line-height: ${props => props.lineHeight} !important;
-	letter-spacing: ${props => props.letterSpacing}vw !important;
-	max-width: ${props => props.scrollWidth};
-	max-width: 10ch;
+const Text = styled.div`
+	p {
+		transform: scale(${props => props.fontSize});
+		line-height: ${props => props.lineHeight} !important;
+		letter-spacing: ${props => props.letterSpacing}vw !important;
+		max-width: ${props => props.scrollWidth};
+	}
+`
+
+const TextMirrored = styled.div`
+	p {
+		transform: scale(${props => props.fontSize}, -${props => props.fontSize});
+		line-height: ${props => props.lineHeight} !important;
+		letter-spacing: ${props => props.letterSpacing}vw !important;
+		max-width: ${props => props.scrollWidth};
+	}
 `
 
 /**
@@ -19,12 +30,21 @@ const Text = styled.p`
 * */
 
 const TextPreview = props => {
-	const { text } = props
+	const { text, isAnimationRunning, scrollSpeed } = props
 	const store = useStore()
 	const [fontSize, setFontSize] = useState(null)
 	const [lineHeight, setLineHeight] = useState(null)
 	const [letterSpacing, setLetterSpacing] = useState(null)
 	const [scrollWidth, setScrollWidth] = useState(null)
+	const controls = useAnimation()
+	const container = {
+		start: {
+			y: 0,
+		},
+		end: {
+			y: -500,
+		},
+	}
 	useEffect(() => store.subscribe(() => {
 		const fs = store.getState().text.fontSize
 		const ln = store.getState().text.lineHeight
@@ -35,18 +55,36 @@ const TextPreview = props => {
 		setLetterSpacing(ls)
 		setScrollWidth(sw)
 	}), [store, fontSize, text, scrollWidth])
+
+	useEffect(() => {
+		if (isAnimationRunning) {
+			controls.start('end')
+		} else {
+			controls.stop()
+		}
+	}, [isAnimationRunning])
+
 	return (
 		<div className={styles.textpreviewContainer}>
 			<div className={styles.mirroredContainer}>
-				<Text
+				<TextMirrored
 					className={styles.mirrored}
 					fontSize={`${fontSize}`}
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 				>
-					{text}
-				</Text>
+					<motion.div
+						animate={controls}
+						variants={container}
+						transition={{ ease: 'linear', duration: scrollSpeed * 0.5 }}
+						className={styles.innerContainer}
+					>
+						<p>
+							{text}
+						</p>
+					</motion.div>
+				</TextMirrored>
 			</div>
 			<div className={styles.textContainer}>
 				<Text
@@ -56,7 +94,16 @@ const TextPreview = props => {
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 				>
-					{text}
+					<motion.div
+						className={styles.innerContainer}
+						animate={controls}
+						variants={container}
+						transition={{ ease: 'linear', duration: scrollSpeed * 0.5 }}
+					>
+						<p>
+							{text}
+						</p>
+					</motion.div>
 				</Text>
 			</div>
 		</div>
@@ -64,6 +111,8 @@ const TextPreview = props => {
 }
 
 TextPreview.propTypes = {
+	isAnimationRunning: PropTypes.bool.isRequired,
+	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
 }
 

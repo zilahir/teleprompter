@@ -6,7 +6,7 @@ import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, LOGGED_IN } from '../.
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
-import { logOutUser } from '../../store/actions/user'
+import { logOutUser } from '../../store/actions/authUser'
 
 /**
 * @author zilahir
@@ -51,7 +51,7 @@ const ActionHeader = () => {
 		])
 	}
 	function requestClose(val) {
-		alert(val)
+		return true
 	}
 	useEffect(() => store.subscribe(() => {
 		if (store.getState().user.loggedIn) {

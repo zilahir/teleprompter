@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -39,5 +39,12 @@ export const setScrollWidth = scrollWidth => ({
 	type: SET_SCROLL_WIDTH,
 	payload: {
 		scrollWidth,
+	},
+})
+
+export const setScrollSpeed = scrollSpeed => ({
+	type: SET_SCROLL_SPEED,
+	payload: {
+		scrollSpeed: (scrollSpeed * scrollSpeed) + 10,
 	},
 })

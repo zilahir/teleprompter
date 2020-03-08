@@ -4,6 +4,13 @@
     background-color: $gray-2;
     .innerContainer {
         margin: 50px 40px;
+
+        .testAnimation {
+            padding: 15px 10px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
         .playButtonContainer {
             position: absolute;
             bottom: 60px;
