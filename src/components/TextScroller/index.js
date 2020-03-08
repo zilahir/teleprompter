@@ -10,7 +10,7 @@ import styles from './TextScroller.module.scss'
 * */
 
 const TextScroller = props => {
-	const { text, scrollSpeed } = props
+	const { text, scrollSpeed, isPlaying } = props
 	const controls = useAnimation()
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
@@ -27,7 +27,7 @@ const TextScroller = props => {
 	useEffect(() => {
 		const { clientHeight } = textRef.current
 		setHeight(clientHeight)
-		controls.start('end')
+		// controls.start('end')
 	}, [text])
 
 	return (
@@ -49,6 +49,7 @@ const TextScroller = props => {
 }
 
 TextScroller.propTypes = {
+	isPlaying: PropTypes.bool.isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
 }

@@ -14,7 +14,7 @@ import Loader from '../Loader'
 const Player = () => {
 	const [text, setText] = useState('')
 	const [isPlaying, togglePlaying] = useState(false)
-	const [isLoading, toggleIsLoading] = useState(true)
+	const [isLoading, toggleIsLoading] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	const { slug } = useParams()
@@ -34,6 +34,7 @@ const Player = () => {
 						<TextScroller
 							text={text}
 							slug={slug}
+							isPlaying={isPlaying}
 						/>
 					)
 					: <Loader isLoading={isLoading} />
