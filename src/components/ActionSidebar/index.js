@@ -30,7 +30,7 @@ const ActionSidebar = () => {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		setTimeout(() => {
-			window.open('/player/demo', '_blank')
+			// window.open('/player/demo', '_blank')  //  TODO: turn this back on
 		})
 	}
 
@@ -67,7 +67,7 @@ const ActionSidebar = () => {
 							type={LINK}
 							onClick={() => testAnimation()}
 							labelText={
-								!isAnimationStarted ? 'start scroll' : 'stop scroll'
+								!isAnimationStarted ? 'test scroll' : 'stop scroll'
 							}
 						/>
 					</div>
