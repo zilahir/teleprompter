@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
@@ -22,6 +22,7 @@ const Login = props => {
 	const { type, isVisible, requestClose } = props
 	const dispatch = useDispatch()
 	const store = useStore()
+	const [projectName, setProjectName] = useState(null)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -29,6 +30,13 @@ const Login = props => {
 			dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
 			requestClose()
 		})
+	}
+
+	function handleSave() {
+		const saveObject = {
+			projectName,
+		}
+		console.debug('saveObject', saveObject)
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -115,10 +123,11 @@ const Login = props => {
 										<Input
 											inheritedValue="Project name"
 											inputClassName={styles.loginInput}
+											getBackValue={v => setProjectName(v)}
 										/>
 										<Button
 											labelText="SAVE"
-											onClick={() => null}
+											onClick={() => handleSave()}
 											buttonClass={styles.loginBtn}
 										/>
 									</div>

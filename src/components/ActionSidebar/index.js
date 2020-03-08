@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
 import { useStore } from 'react-redux'
-import uuidv4 from 'uuid'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -19,7 +18,6 @@ import Instruction from '../common/Instruction'
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')
-	const [streamAddress, setStreamAddress] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const store = useStore()
@@ -43,12 +41,13 @@ const ActionSidebar = () => {
 
 	useEffect(() => {
 		socket.connect()
-		setStreamAddress(uuidv4())
 	}, [])
 
 	function testAnimation() {
 		toggleAnimation(!isAnimationStarted)
 	}
+
+	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 
 	return (
 		<>
@@ -74,7 +73,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`https://prompter.me/${streamAddress.split('-')[0]}`}
+						inheritedValue={`https://prompter.me/${prompterSlug}`}
 					/>
 					<Input
 						labelText="Remote control address"

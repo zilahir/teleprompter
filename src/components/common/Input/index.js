@@ -11,8 +11,15 @@ import styles from './Input.module.scss'
 * */
 
 const Input = props => {
-	const { labelText, isDisabled, inheritedValue, inputClassName, inputType } = props
+	const { labelText, isDisabled, inheritedValue, inputClassName, inputType, getBackValue } = props
 	const [value, setValue] = useState(null)
+
+	function handleChange(v) {
+		setValue(v)
+		if (getBackValue) {
+			getBackValue(v)
+		}
+	}
 	return (
 		<div className={classnames(
 			styles.inputContainer,
@@ -26,7 +33,7 @@ const Input = props => {
 				<input
 					className={styles.input}
 					type={inputType.toLowerCase()}
-					onChange={e => setValue(e.target.value)}
+					onChange={e => handleChange(e.target.value)}
 					value={value || inheritedValue}
 					disabled={isDisabled}
 				/>
@@ -36,6 +43,7 @@ const Input = props => {
 }
 
 Input.defaultProps = {
+	getBackValue: null,
 	inheritedValue: '',
 	inputClassName: null,
 	inputType: 'text',
@@ -44,6 +52,7 @@ Input.defaultProps = {
 }
 
 Input.propTypes = {
+	getBackValue: PropTypes.func,
 	inheritedValue: PropTypes.string,
 	inputClassName: PropTypes.string,
 	inputType: PropTypes.string,
