@@ -16,6 +16,27 @@
     &.saveContainer {
         width: 280px;
         height: 150px;
+        .success {
+            &.hidden {
+                display: none;
+            }
+            &.visible {
+                display: block;
+            }
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba($color: #00993C, $alpha: 0.8);
+            p {
+                text-transform: uppercase;
+            }
+        }
     }
     &.hidden {
         display: none;

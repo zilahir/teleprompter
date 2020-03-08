@@ -25,6 +25,7 @@ const Login = props => {
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
+	const [isSaved, setIsSaved] = useState(false)
 	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 	function handleLogin() {
 		Promise.all([
@@ -42,6 +43,9 @@ const Login = props => {
 		}
 		// requestClose()
 		toggleSavingLoader(true)
+		setTimeout(() => {
+			setIsSaved(true)
+		}, 1000)
 		console.debug('saveObject', saveObject)
 	}
 	const { usersPrompters } = store.getState().userPrompters
@@ -130,9 +134,20 @@ const Login = props => {
 										{
 											isSaving
 												? (
-													<Loader
-														isLoading={isSaving}
-													/>
+													<>
+														<Loader
+															isLoading={isSaving}
+														/>
+														<div className={classnames(
+															styles.success,
+															isSaved ? styles.show : styles.hidden,
+														)}
+														>
+															<p>
+																Saved
+															</p>
+														</div>
+													</>
 												)
 												: (
 													<>
