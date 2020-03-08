@@ -144,6 +144,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showSave}
 				type={SAVE}
+				requestClose={() => toggleSave(false)}
 			/>
 		</div>
 	)

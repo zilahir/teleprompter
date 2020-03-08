@@ -13,6 +13,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    &.saveContainer {
+        width: 280px;
+        height: 150px;
+    }
     &.hidden {
         display: none;
     }
