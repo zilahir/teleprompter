@@ -63,7 +63,7 @@ const TextPreview = props => {
 			controls.stop()
 		}
 	}, [isAnimationRunning])
-
+	console.debug('scrollSpeed', scrollSpeed)
 	return (
 		<div className={styles.textpreviewContainer}>
 			<div className={styles.mirroredContainer}>
@@ -77,7 +77,7 @@ const TextPreview = props => {
 					<motion.div
 						animate={controls}
 						variants={container}
-						transition={{ ease: 'linear', duration: scrollSpeed * 0.5 }}
+						transition={{ ease: 'linear', duration: (scrollSpeed * scrollSpeed) * 0.5 }}
 						className={styles.innerContainer}
 					>
 						<p>
@@ -98,7 +98,7 @@ const TextPreview = props => {
 						className={styles.innerContainer}
 						animate={controls}
 						variants={container}
-						transition={{ ease: 'linear', duration: scrollSpeed * 0.5 }}
+						transition={{ ease: 'linear', duration: (scrollSpeed * scrollSpeed) * 0.5 }}
 					>
 						<p>
 							{text}
