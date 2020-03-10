@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import KeyboardEventHandler from 'react-keyboard-event-handler'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
@@ -44,6 +45,9 @@ const TextScroller = props => {
 		}
 	}, [text, isPlaying])
 
+	function handleKeyPress(key, e) {
+		e.preventDefault()
+	}
 	return (
 		<>
 			<Scroller
@@ -66,6 +70,16 @@ const TextScroller = props => {
 					</p>
 				</motion.div>
 			</Scroller>
+			<KeyboardEventHandler
+				handleKeys={[
+					'space',
+					'pageup',
+					'pagedown',
+					'up',
+					'down',
+				]}
+				onKeyEvent={(key, e) => handleKeyPress(key, e)}
+			/>
 		</>
 	)
 }
