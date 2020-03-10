@@ -11,6 +11,7 @@ import styles from './TextScroller.module.scss'
 * */
 
 const Scroller = styled.div`
+	max-width: ${props => props.scrollWidth};
 	p {
 		font-size: ${props => props.fontSize}px;
 		letter-spacing: ${props => props.letterSpacing}vw;
@@ -50,6 +51,7 @@ const TextScroller = props => {
 				fontSize={prompterObject.fontSize * 10}
 				lineHeight={prompterObject.lineHeight}
 				letterSpacing={prompterObject.letterSpacing}
+				scrollWidth={prompterObject.scrollWidth}
 			>
 				<motion.div
 					animate={controls}
