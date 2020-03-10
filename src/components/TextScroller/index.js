@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
 
 import styles from './TextScroller.module.scss'
+import { keyListeners } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -71,13 +72,7 @@ const TextScroller = props => {
 				</motion.div>
 			</Scroller>
 			<KeyboardEventHandler
-				handleKeys={[
-					'space',
-					'pageup',
-					'pagedown',
-					'up',
-					'down',
-				]}
+				handleKeys={[...keyListeners]}
 				onKeyEvent={(key, e) => handleKeyPress(key, e)}
 			/>
 		</>

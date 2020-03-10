@@ -35,3 +35,11 @@ export const INLINE_LOADER = 'INLINE_LOADER'
 export const headers = {
 	'Content-Type': 'application/json',
 }
+
+export const keyListeners = [
+	'space',
+	'pageup',
+	'pagedown',
+	'up',
+	'down',
+]
