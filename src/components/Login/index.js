@@ -113,7 +113,7 @@ const Login = props => {
 										{
 											usersPrompters.map(currItem => (
 												<li key={currItem.id}>
-													Project name
+													{currItem.projectName}
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
 													</div>

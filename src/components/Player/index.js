@@ -5,6 +5,7 @@ import useSocket from 'use-socket.io-client'
 
 import TextScroller from '../TextScroller'
 import Loader from '../Loader'
+import Header from './Header'
 
 /**
 * @author zilahir
@@ -27,19 +28,22 @@ const Player = () => {
 	}, [store, isPlaying, socket])
 
 	return (
-		<div>
-			{
-				!isLoading
-					? (
-						<TextScroller
-							text={text}
-							slug={slug}
-							isPlaying={isPlaying}
-						/>
-					)
-					: <Loader isLoading={isLoading} />
-			}
-		</div>
+		<>
+			<Header />
+			<div>
+				{
+					!isLoading
+						? (
+							<TextScroller
+								text={text}
+								slug={slug}
+								isPlaying={isPlaying}
+							/>
+						)
+						: <Loader isLoading={isLoading} />
+				}
+			</div>
+		</>
 	)
 }
 

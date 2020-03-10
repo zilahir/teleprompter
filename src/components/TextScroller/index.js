@@ -27,8 +27,12 @@ const TextScroller = props => {
 	useEffect(() => {
 		const { clientHeight } = textRef.current
 		setHeight(clientHeight)
-		// controls.start('end')
-	}, [text])
+		if (isPlaying) {
+			controls.start('end')
+		} else {
+			controls.stop()
+		}
+	}, [text, isPlaying])
 
 	return (
 		<>
