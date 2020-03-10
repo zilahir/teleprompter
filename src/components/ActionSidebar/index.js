@@ -24,12 +24,16 @@ const ActionSidebar = () => {
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
 
-	function togglePlaying() {
+	const { prompterSlug } = store.getState().userPrompters
+
+	function togglePlaying(bool) {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
-		setTimeout(() => {
-			// window.open('/player/demo', '_blank')  //  TODO: turn this back on
-		})
+		if (!bool) {
+			setTimeout(() => {
+				window.open(`/player/${prompterSlug}`, '_blank')
+			}, 100)
+		}
 	}
 
 	useEffect(() => store.subscribe(() => {
@@ -46,8 +50,6 @@ const ActionSidebar = () => {
 	function testAnimation() {
 		toggleAnimation(!isAnimationStarted)
 	}
-
-	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 
 	return (
 		<>
@@ -73,7 +75,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`https://prompter.me/${prompterSlug}`}
+						inheritedValue={`https://prompter.me/${prompterSlug.split('-')[0]}`}
 					/>
 					<Input
 						labelText="Remote control address"
@@ -86,7 +88,7 @@ const ActionSidebar = () => {
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => togglePlaying()}
+							onClick={() => togglePlaying(isPlaying)}
 							labelText={!isPlaying ? 'play' : 'stop'}
 						/>
 					</div>
