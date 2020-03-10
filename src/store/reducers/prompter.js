@@ -1,7 +1,8 @@
-import { GET_ALL_PROMPTER } from '../actions/actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG } from '../actions/actionTypes'
 
 const initialState = {
 	usersPrompters: [],
+	prompterSlug: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			usersPrompters: action.payload.usersPrompters,
+		}
+	case SET_PROMPTER_SLUG:
+		return {
+			...state,
+			prompterSlug: action.payload.prompterSlug,
 		}
 	default:
 		return state

@@ -45,6 +45,6 @@ export const setScrollWidth = scrollWidth => ({
 export const setScrollSpeed = scrollSpeed => ({
 	type: SET_SCROLL_SPEED,
 	payload: {
-		scrollSpeed: (scrollSpeed * scrollSpeed) + 10,
+		scrollSpeed,
 	},
 })

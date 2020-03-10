@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
@@ -12,6 +12,7 @@ import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter } from '../../store/actions/prompter'
+import Loader from '../Loader'
 
 /**
 * @author zilahir
@@ -22,6 +23,10 @@ const Login = props => {
 	const { type, isVisible, requestClose } = props
 	const dispatch = useDispatch()
 	const store = useStore()
+	const [projectName, setProjectName] = useState(null)
+	const [isSaving, toggleSavingLoader] = useState(false)
+	const [isSaved, setIsSaved] = useState(false)
+	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -29,6 +34,19 @@ const Login = props => {
 			dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
 			requestClose()
 		})
+	}
+
+	function handleSave() {
+		const saveObject = {
+			projectName,
+			prompterSlug,
+		}
+		// requestClose()
+		toggleSavingLoader(true)
+		setTimeout(() => {
+			setIsSaved(true)
+		}, 1000)
+		console.debug('saveObject', saveObject)
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -95,7 +113,7 @@ const Login = props => {
 										{
 											usersPrompters.map(currItem => (
 												<li key={currItem.id}>
-													Project name
+													{currItem.projectName}
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
 													</div>
@@ -109,18 +127,43 @@ const Login = props => {
 									<div className={classnames(
 										styles.loginBoxContainer,
 										styles.itemBoxContainer,
+										styles.saveContainer,
 										isVisible ? styles.show : styles.hidden,
 									)}
 									>
-										<Input
-											inheritedValue="Project name"
-											inputClassName={styles.loginInput}
-										/>
-										<Button
-											labelText="SAVE"
-											onClick={() => null}
-											buttonClass={styles.loginBtn}
-										/>
+										{
+											isSaving
+												? (
+													<>
+														<Loader
+															isLoading={isSaving}
+														/>
+														<div className={classnames(
+															styles.success,
+															isSaved ? styles.show : styles.hidden,
+														)}
+														>
+															<p>
+																Saved
+															</p>
+														</div>
+													</>
+												)
+												: (
+													<>
+														<Input
+															inheritedValue="Project name"
+															inputClassName={styles.loginInput}
+															getBackValue={v => setProjectName(v)}
+														/>
+														<Button
+															labelText="SAVE"
+															onClick={() => handleSave()}
+															buttonClass={styles.loginBtn}
+														/>
+													</>
+												)
+										}
 									</div>
 								)
 								: null

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
 import { useStore } from 'react-redux'
-import uuidv4 from 'uuid'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -19,19 +18,22 @@ import Instruction from '../common/Instruction'
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')
-	const [streamAddress, setStreamAddress] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
 
-	function togglePlaying() {
+	const { prompterSlug } = store.getState().userPrompters
+
+	function togglePlaying(bool) {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
-		setTimeout(() => {
-			// window.open('/player/demo', '_blank')  //  TODO: turn this back on
-		})
+		if (!bool) {
+			setTimeout(() => {
+				// window.open(`/player/${prompterSlug}`, '_blank')
+			}, 0)
+		}
 	}
 
 	useEffect(() => store.subscribe(() => {
@@ -43,7 +45,6 @@ const ActionSidebar = () => {
 
 	useEffect(() => {
 		socket.connect()
-		setStreamAddress(uuidv4())
 	}, [])
 
 	function testAnimation() {
@@ -60,7 +61,7 @@ const ActionSidebar = () => {
 					<TextPreview
 						text={text}
 						isAnimationRunning={isAnimationStarted}
-						scrollSpeed={scrollSpeed}
+						scrollSpeed={15 - scrollSpeed}
 					/>
 					<div className={styles.testAnimation}>
 						<Button
@@ -74,7 +75,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`https://prompter.me/${streamAddress.split('-')[0]}`}
+						inheritedValue={`https://prompter.me/${prompterSlug.split('-')[0]}`}
 					/>
 					<Input
 						labelText="Remote control address"
@@ -87,7 +88,7 @@ const ActionSidebar = () => {
 					/>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => togglePlaying()}
+							onClick={() => togglePlaying(isPlaying)}
 							labelText={!isPlaying ? 'play' : 'stop'}
 						/>
 					</div>

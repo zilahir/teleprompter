@@ -60,6 +60,7 @@ const ActionHeader = () => {
 			setIsLoggedIn(false)
 		}
 	}), [isLoggedIn])
+
 	return (
 		<div className={classnames(
 			styles.actionHeaderContainer,
@@ -143,6 +144,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showSave}
 				type={SAVE}
+				requestClose={() => toggleSave(false)}
 			/>
 		</div>
 	)

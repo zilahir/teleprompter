@@ -24,9 +24,13 @@ const Item = styled.div`
 
 const Selector = props => {
 	const { items } = props
-	const [isActive, setActive] = useState(2)
 	const store = useStore()
 	const dispatch = useDispatch()
+	const getActiveWidth = items.find(curr => (
+		curr.label === store.getState().text.scrollWidth
+	))
+
+	const [isActive, setActive] = useState(getActiveWidth.id)
 	function handleChange(index) {
 		const chosenValue = items.find(item => (
 			item.id === index

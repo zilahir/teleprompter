@@ -37,13 +37,13 @@ const EditorSidebar = () => {
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
 						initialValue={store.getState().text.fontSize}
-						maxValue={3}
-						step={0.1}
+						maxValue={100}
+						step={1}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"
 						sliderName={SET_LETTER_SPACING}
-						initialValue={0}
+						initialValue={store.getState().text.letterSpacing}
 						minValue={0}
 						maxValue={2}
 						step={0.01}
@@ -65,7 +65,7 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Scroll speed"
 						sliderName={SET_SCROLL_SPEED}
-						initialValue={1}
+						initialValue={store.getState().text.scrollSpeed}
 						maxValue={10}
 						step={1}
 					/>

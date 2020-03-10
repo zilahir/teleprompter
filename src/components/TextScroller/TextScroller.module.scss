@@ -1,3 +1,13 @@
-.scroller {
-    padding: 50px;
+.scrollerContainer {
+    overflow-wrap: break-word;
+    margin-left: auto;
+    margin-right: auto;
+    .scroller {
+        padding: 50px;
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
 }

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { Row, Container } from 'react-grid-system'
 import { useDispatch } from 'react-redux'
 
 import EditorSidebar from '../EditorSidebar'
 import ActionSidebar from '../ActionSidebar'
 import Preview from '../Preview'
-import { setSegments } from '../../store/actions/segments'
-import segmentApi from '../../utils/fakeApi/segments'
 import styles from './Main.module.scss'
+import { setPrompterSlug } from '../../store/actions/prompter'
 
 /**
 * @author zilahir
@@ -18,7 +18,7 @@ const Main = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		Promise.all([
-			dispatch(setSegments(segmentApi.getAllSegments())),
+			dispatch(setPrompterSlug(uuidv4())),
 		])
 	}, [])
 	return (
