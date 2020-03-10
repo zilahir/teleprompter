@@ -37,8 +37,8 @@ const EditorSidebar = () => {
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
 						initialValue={store.getState().text.fontSize}
-						maxValue={3}
-						step={0.1}
+						maxValue={100}
+						step={1}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"

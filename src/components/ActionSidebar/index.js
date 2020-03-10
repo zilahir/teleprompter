@@ -31,8 +31,8 @@ const ActionSidebar = () => {
 		socket.emit('isPlaying', !isPlaying)
 		if (!bool) {
 			setTimeout(() => {
-				window.open(`/player/${prompterSlug}`, '_blank')
-			}, 100)
+				// window.open(`/player/${prompterSlug}`, '_blank')
+			}, 0)
 		}
 	}
 

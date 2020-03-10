@@ -38,6 +38,7 @@ const Player = () => {
 								text={text}
 								slug={slug}
 								isPlaying={isPlaying}
+								prompterObject={store.getState().text}
 							/>
 						)
 						: <Loader isLoading={isLoading} />

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
 
 import styles from './TextScroller.module.scss'
@@ -9,8 +10,14 @@ import styles from './TextScroller.module.scss'
 * @function TextScroller
 * */
 
+const Scroller = styled.div`
+	p {
+		font-size: ${props => props.fontSize}px;
+	}
+`
+
 const TextScroller = props => {
-	const { text, scrollSpeed, isPlaying } = props
+	const { text, scrollSpeed, isPlaying, prompterObject } = props
 	const controls = useAnimation()
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
@@ -36,24 +43,30 @@ const TextScroller = props => {
 
 	return (
 		<>
-			<motion.div
-				animate={controls}
-				variants={container}
-				transition={{ ease: 'linear', duration: scrollSpeed || 100 }}
-				className={styles.scroller}
+			<Scroller
+				className={styles.scrollerContainer}
+				fontSize={prompterObject.fontSize * 10}
 			>
-				<p
-					ref={textRef}
+				<motion.div
+					animate={controls}
+					variants={container}
+					transition={{ ease: 'linear', duration: scrollSpeed || 100 }}
+					className={styles.scroller}
 				>
-					{text}
-				</p>
-			</motion.div>
+					<p
+						ref={textRef}
+					>
+						{text}
+					</p>
+				</motion.div>
+			</Scroller>
 		</>
 	)
 }
 
 TextScroller.propTypes = {
 	isPlaying: PropTypes.bool.isRequired,
+	prompterObject: PropTypes.objectOf(PropTypes.any).isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
 }
