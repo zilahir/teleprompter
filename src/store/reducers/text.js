@@ -4,7 +4,7 @@ const initialState = {
 	fontSize: 20,
 	text: '',
 	lineHeight: 1,
-	letterSpacing: 0,
+	letterSpacing: 1,
 	scrollWidth: '100%',
 	scrollSpeed: 1,
 }
