@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
+import { useStore, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { Row, Container } from 'react-grid-system'
-import { useDispatch } from 'react-redux'
 
 import EditorSidebar from '../EditorSidebar'
 import ActionSidebar from '../ActionSidebar'
 import Preview from '../Preview'
 import styles from './Main.module.scss'
-import { setPrompterSlug } from '../../store/actions/prompter'
+import { setPrompterSlug, getAllUserPrompter } from '../../store/actions/prompter'
+import { clearText } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -16,10 +17,16 @@ import { setPrompterSlug } from '../../store/actions/prompter'
 
 const Main = () => {
 	const dispatch = useDispatch()
+	const store = useStore()
 	useEffect(() => {
 		Promise.all([
+			dispatch(clearText()),
 			dispatch(setPrompterSlug(uuidv4())),
-		])
+		]).then(() => {
+			if (store.getState().user.loggedIn) {
+				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
+			}
+		})
 	}, [])
 	return (
 		<div className={styles.mainContainer}>

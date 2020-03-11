@@ -20,28 +20,30 @@ const ActionSidebar = () => {
 	const [text, setText] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
+	const [prompterSlug, setPrompterSlug] = useState(null)
 	const store = useStore()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
-
-	const { prompterSlug } = store.getState().userPrompters
 
 	function togglePlaying(bool) {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		if (!bool) {
 			setTimeout(() => {
-				// window.open(`/player/${prompterSlug}`, '_blank')
-			}, 0)
+				window.open(`/player/${prompterSlug}`, '_blank')
+			}, 10)
 		}
 	}
 
 	useEffect(() => store.subscribe(() => {
 		const t = store.getState().text.text
 		const sp = store.getState().text.scrollSpeed
+		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
+			setPrompterSlug(store.getState().userPrompters.prompterSlug.split('-')[0])
+		}
 		setScrollSpeed(sp)
 		setText(t)
-	}), [store, text, scrollSpeed])
+	}), [store, text, scrollSpeed, prompterSlug])
 
 	useEffect(() => {
 		socket.connect()
@@ -75,7 +77,7 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`https://prompter.me/${prompterSlug.split('-')[0]}`}
+						inheritedValue={`https://prompter.me/${prompterSlug || ''}`}
 					/>
 					<Input
 						labelText="Remote control address"

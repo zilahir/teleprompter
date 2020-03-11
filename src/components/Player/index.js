@@ -37,9 +37,8 @@ const Player = () => {
 							<TextScroller
 								text={text}
 								slug={slug}
-								isPlaying={isPlaying}
 								prompterObject={store.getState().text}
-								scrollSpeed={15 - store.getState().text.scrollSpeed}
+								scrollSpeed={store.getState().text.scrollSpeed}
 							/>
 						)
 						: <Loader isLoading={isLoading} />

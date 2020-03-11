@@ -7,6 +7,7 @@ import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
 import { logOutUser } from '../../store/actions/authUser'
+import { clearUserPrompters } from '../../store/actions/prompter'
 
 /**
 * @author zilahir
@@ -47,6 +48,7 @@ const ActionHeader = () => {
 	}
 	function logOut() {
 		Promise.all([
+			dispatch(clearUserPrompters()),
 			dispatch(logOutUser()),
 		])
 	}
@@ -140,6 +142,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showLoad}
 				type={LOAD}
+				requestClose={() => toggleLoad(false)}
 			/>
 			<Login
 				isVisible={showSave}

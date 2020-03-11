@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
@@ -11,8 +12,9 @@ import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
-import { getAllUserPrompter } from '../../store/actions/prompter'
+import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -26,7 +28,6 @@ const Login = props => {
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
-	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -39,7 +40,7 @@ const Login = props => {
 	function handleSave() {
 		const saveObject = {
 			projectName,
-			prompterSlug,
+			prompterSlug: store.getState().userPrompters.prompterSlug.split('-')[0],
 		}
 		// requestClose()
 		toggleSavingLoader(true)
@@ -47,6 +48,23 @@ const Login = props => {
 			setIsSaved(true)
 		}, 1000)
 		console.debug('saveObject', saveObject)
+	}
+
+	function handleLoad(selectedPrompter) {
+		dispatch(clearText())
+		Promise.all([
+			dispatch(setText(selectedPrompter.text)),
+			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
+			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
+			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
+			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
+			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
+			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
+			dispatch(setPrompterSlug(selectedPrompter.id)),
+		]).then((res) => {
+			requestClose()
+		})
+		return selectedPrompter
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -112,7 +130,13 @@ const Login = props => {
 									<ul className={styles.savedItems}>
 										{
 											usersPrompters.map(currItem => (
-												<li key={currItem.id}>
+												<li
+													role="button"
+													key={currItem.id}
+													onKeyPress={null}
+													tabIndex={-1}
+													onClick={() => handleLoad(currItem)}
+												>
 													{currItem.projectName}
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
