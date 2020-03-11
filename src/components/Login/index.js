@@ -14,7 +14,7 @@ import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -53,6 +53,7 @@ const Login = props => {
 	function handleLoad(selectedPrompter) {
 		dispatch(clearText())
 		Promise.all([
+			dispatch(setText(selectedPrompter.text)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
 			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
