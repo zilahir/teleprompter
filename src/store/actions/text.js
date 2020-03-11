@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -12,6 +12,11 @@ export const setText = text => ({
 	payload: {
 		text,
 	},
+})
+
+export const clearText = () => ({
+	type: CLEAR_TEXT,
+	payload: {},
 })
 
 export const setLetterSpacing = letterSpacing => ({

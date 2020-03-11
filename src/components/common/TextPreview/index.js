@@ -63,7 +63,6 @@ const TextPreview = props => {
 			controls.stop()
 		}
 	}, [isAnimationRunning])
-	console.debug('scrollSpeed', scrollSpeed)
 	return (
 		<div className={styles.textpreviewContainer}>
 			<div className={styles.mirroredContainer}>

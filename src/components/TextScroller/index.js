@@ -40,7 +40,6 @@ const TextScroller = props => {
 		const { clientHeight } = textRef.current
 		setHeight(clientHeight)
 		if (isPlaying) {
-			console.debug('scrollSpeed', scrollSpeed)
 			controls.start('end')
 		} else {
 			controls.stop()

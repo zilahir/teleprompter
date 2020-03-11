@@ -14,7 +14,7 @@ import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -28,7 +28,6 @@ const Login = props => {
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
-	const prompterSlug = store.getState().userPrompters.prompterSlug.split('-')[0]
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -41,7 +40,7 @@ const Login = props => {
 	function handleSave() {
 		const saveObject = {
 			projectName,
-			prompterSlug,
+			prompterSlug: store.getState().userPrompters.prompterSlug.split('-')[0],
 		}
 		// requestClose()
 		toggleSavingLoader(true)
@@ -52,17 +51,16 @@ const Login = props => {
 	}
 
 	function handleLoad(selectedPrompter) {
-		console.debug('loadingPrompter', selectedPrompter)
+		dispatch(clearText())
 		Promise.all([
-			dispatch(setPrompterSlug(selectedPrompter.id)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
 			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
+			dispatch(setPrompterSlug(selectedPrompter.id)),
 		]).then((res) => {
-			console.debug(res)
 			requestClose()
 		})
 		return selectedPrompter
