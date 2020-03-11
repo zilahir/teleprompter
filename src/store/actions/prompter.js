@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { headers } from '../../utils/consts'
 import { apiEndpoints } from '../../utils/apiEndpoints'
-import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG } from './actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME } from './actionTypes'
 
 export const setAllPrompterForUser = usersPrompters => dispatch => new Promise(resolve => {
 	dispatch({
@@ -33,4 +33,15 @@ export const setPrompterSlug = prompterSlug => dispatch => new Promise(resolve =
 		},
 	})
 	resolve(prompterSlug)
+})
+
+
+export const setPrompterProjectName = projectName => dispatch => new Promise(resolve => {
+	dispatch({
+		type: SET_PROJECT_NAME,
+		payload: {
+			projectName,
+		},
+	})
+	resolve(projectName)
 })

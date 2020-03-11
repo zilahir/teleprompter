@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
@@ -11,7 +12,7 @@ import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
-import { getAllUserPrompter } from '../../store/actions/prompter'
+import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
 
 /**
@@ -47,6 +48,16 @@ const Login = props => {
 			setIsSaved(true)
 		}, 1000)
 		console.debug('saveObject', saveObject)
+	}
+
+	function handleLoad(selectedPrompter) {
+		console.debug('loadingPrompter', selectedPrompter)
+		Promise.all([
+			dispatch(setPrompterSlug(selectedPrompter.id)),
+			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
+		])
+		requestClose()
+		return selectedPrompter
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -112,7 +123,13 @@ const Login = props => {
 									<ul className={styles.savedItems}>
 										{
 											usersPrompters.map(currItem => (
-												<li key={currItem.id}>
+												<li
+													role="button"
+													key={currItem.id}
+													onKeyPress={null}
+													tabIndex={-1}
+													onClick={() => handleLoad(currItem)}
+												>
 													{currItem.projectName}
 													<div className={styles.icon}>
 														<Icon icon={triangle} size="1em" />
