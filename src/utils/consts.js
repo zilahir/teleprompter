@@ -36,10 +36,16 @@ export const headers = {
 	'Content-Type': 'application/json',
 }
 
+export const SPACE = 'space'
+export const PAGEUP = 'pageup'
+export const PAGE_DOWN = 'pagedown'
+export const UP = 'up'
+export const DOWN = 'down'
+
 export const keyListeners = [
-	'space',
-	'pageup',
-	'pagedown',
-	'up',
-	'down',
+	SPACE,
+	PAGEUP,
+	PAGE_DOWN,
+	UP,
+	DOWN,
 ]

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners } from '../../utils/consts'
+import { keyListeners, SPACE } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -22,10 +22,11 @@ const Scroller = styled.div`
 `
 
 const TextScroller = props => {
-	const { text, scrollSpeed, isPlaying, prompterObject } = props
+	const { text, scrollSpeed, prompterObject } = props
 	const controls = useAnimation()
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
+	const [isPlaying, togglePlaying] = useState(false)
 
 	const container = {
 		start: {
@@ -39,15 +40,18 @@ const TextScroller = props => {
 	useEffect(() => {
 		const { clientHeight } = textRef.current
 		setHeight(clientHeight)
-		if (isPlaying) {
-			controls.start('end')
-		} else {
-			controls.stop()
-		}
 	}, [text, isPlaying])
 
 	function handleKeyPress(key, e) {
 		e.preventDefault()
+		if (key === SPACE) {
+			togglePlaying(!isPlaying)
+			if (isPlaying) {
+				controls.stop()
+			} else {
+				controls.start('end')
+			}
+		}
 	}
 	return (
 		<>
@@ -61,7 +65,7 @@ const TextScroller = props => {
 				<motion.div
 					animate={controls}
 					variants={container}
-					transition={{ ease: 'linear', duration: (scrollSpeed * scrollSpeed) * 0.5 }}
+					transition={{ ease: 'linear', duration: (scrollSpeed * scrollSpeed) * 3 }}
 					className={styles.scroller}
 				>
 					<p
