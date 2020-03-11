@@ -84,7 +84,6 @@ const TextScroller = props => {
 }
 
 TextScroller.propTypes = {
-	isPlaying: PropTypes.bool.isRequired,
 	prompterObject: PropTypes.objectOf(PropTypes.any).isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
