@@ -14,6 +14,7 @@ import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -55,8 +56,14 @@ const Login = props => {
 		Promise.all([
 			dispatch(setPrompterSlug(selectedPrompter.id)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
-		])
-		requestClose()
+			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
+			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
+			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
+			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
+			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
+		]).then(() => {
+			requestClose()
+		})
 		return selectedPrompter
 	}
 	const { usersPrompters } = store.getState().userPrompters
@@ -128,7 +135,7 @@ const Login = props => {
 													key={currItem.id}
 													onKeyPress={null}
 													tabIndex={-1}
-													onClick={() => handleLoad(currItem)}
+													onClick={() => null}
 												>
 													{currItem.projectName}
 													<div className={styles.icon}>

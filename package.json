@@ -43,7 +43,7 @@
     "showdown": "^1.9.1",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
-    "use-socket.io-client": "^1.0.4",
+    "use-socket.io-client": "^1.1.0",
     "uuid": "^3.4.0"
   },
   "scripts": {

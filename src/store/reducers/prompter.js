@@ -2,7 +2,7 @@ import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME } from '../action
 
 const initialState = {
 	usersPrompters: [],
-	prompterSlug: null,
+	prompterSlug: '',
 	projectName: null,
 }
 
