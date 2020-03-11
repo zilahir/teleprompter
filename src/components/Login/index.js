@@ -61,7 +61,8 @@ const Login = props => {
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
-		]).then(() => {
+		]).then((res) => {
+			console.debug(res)
 			requestClose()
 		})
 		return selectedPrompter
@@ -135,7 +136,7 @@ const Login = props => {
 													key={currItem.id}
 													onKeyPress={null}
 													tabIndex={-1}
-													onClick={() => null}
+													onClick={() => handleLoad(currItem)}
 												>
 													{currItem.projectName}
 													<div className={styles.icon}>

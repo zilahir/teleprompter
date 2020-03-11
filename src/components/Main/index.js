@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Row, Container } from 'react-grid-system'
 import { useDispatch } from 'react-redux'
@@ -16,22 +16,31 @@ import { setPrompterSlug } from '../../store/actions/prompter'
 
 const Main = () => {
 	const dispatch = useDispatch()
+	const [isLoading, toggleLoading] = useState(false)
 	useEffect(() => {
 		Promise.all([
 			dispatch(setPrompterSlug(uuidv4())),
-		])
-	}, [])
+		]).then(() => {
+			toggleLoading(true)
+		})
+	}, [isLoading])
 	return (
 		<div className={styles.mainContainer}>
-			<Container
-				fluid
-			>
-				<Row>
-					<EditorSidebar />
-					<Preview />
-					<ActionSidebar />
-				</Row>
-			</Container>
+			{
+				isLoading
+					? (
+						<Container
+							fluid
+						>
+							<Row>
+								<EditorSidebar />
+								<Preview />
+								<ActionSidebar />
+							</Row>
+						</Container>
+					)
+					: null
+			}
 		</div>
 	)
 }

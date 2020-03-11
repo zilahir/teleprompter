@@ -1,4 +1,4 @@
-import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME } from '../actions/actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER } from '../actions/actionTypes'
 
 const initialState = {
 	usersPrompters: [],
@@ -22,6 +22,11 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			projectName: action.payload.projectName,
+		}
+	case CLEAR_ALL_PROMPTER:
+		return {
+			...state,
+			usersPrompters: [],
 		}
 	default:
 		return state

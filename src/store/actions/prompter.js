@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { headers } from '../../utils/consts'
 import { apiEndpoints } from '../../utils/apiEndpoints'
-import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME } from './actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER } from './actionTypes'
 
 export const setAllPrompterForUser = usersPrompters => dispatch => new Promise(resolve => {
 	dispatch({
@@ -14,12 +14,24 @@ export const setAllPrompterForUser = usersPrompters => dispatch => new Promise(r
 	resolve(usersPrompters)
 })
 
+export const clearUserPrompters = () => dispatch => new Promise(resolve => {
+	dispatch({
+		type: CLEAR_ALL_PROMPTER,
+		payload: {},
+	})
+	resolve({
+		success: true,
+	})
+})
+
 export const getAllUserPrompter = (userId, authToken) => dispatch => new Promise(resolve => {
 	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
 	axios.get(`${apiEndpoints.getAllPrompterForUser}/${userId}`, {
 		headers,
 	})
 		.then(resp => {
+			console.debug('resp', resp)
+			dispatch(clearUserPrompters())
 			dispatch(setAllPrompterForUser(resp.data))
 			resolve(resp.data)
 		})

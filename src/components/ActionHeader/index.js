@@ -140,6 +140,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showLoad}
 				type={LOAD}
+				requestClose={() => toggleLoad(false)}
 			/>
 			<Login
 				isVisible={showSave}
