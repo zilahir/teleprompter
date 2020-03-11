@@ -19,7 +19,7 @@
     "hex-to-rgba": "^2.0.1",
     "material-ui": "^0.20.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.7.1",
     "react": "^16.12.0",
