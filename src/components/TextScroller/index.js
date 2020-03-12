@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
-import Fullscreen from 'react-full-screen'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
