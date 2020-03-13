@@ -8,7 +8,6 @@
     background-color: $login-box-bg-color;
     top: 50px;
     right: 50px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,6 +72,7 @@
                 transition: all .2s ease;
                 display: flex;
                 justify-content: space-between;
+                padding: 10px 0px;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);

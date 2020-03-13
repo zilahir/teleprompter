@@ -61,7 +61,7 @@ const Login = props => {
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
 			dispatch(setPrompterSlug(selectedPrompter.id)),
-		]).then((res) => {
+		]).then(() => {
 			requestClose()
 		})
 		return selectedPrompter

@@ -91,7 +91,7 @@ const ActionSidebar = () => {
 					<div className={styles.playButtonContainer}>
 						<Button
 							onClick={() => togglePlaying(isPlaying)}
-							labelText={!isPlaying ? 'play' : 'stop'}
+							labelText="Open"
 						/>
 					</div>
 				</div>

@@ -21,6 +21,7 @@ const TextMirrored = styled.div`
 		line-height: ${props => props.lineHeight} !important;
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
+		transform: scaleY(-1);
 	}
 `
 
