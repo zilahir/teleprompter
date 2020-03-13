@@ -1,0 +1,15 @@
+.mobileContainer {
+	display: flex;
+	justify-content: center;
+	padding: 100px 0;
+	flex-direction: column;
+	align-items: center;
+
+	.innerContainer {
+		display: flex;
+		justify-content: center;
+		span {
+			text-align: center;
+		}
+	}
+}
