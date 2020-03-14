@@ -28,7 +28,11 @@ const Modal = (
 	},
 ) => (isShowing ? ReactDOM.createPortal(
 	<>
-		<ModalOverlay overlayColor={overlayColor} className={overlayClassName} />
+		<ModalOverlay
+			overlayColor={overlayColor}
+			className={overlayClassName}
+			onClick={hide}
+		/>
 		<div className={modalClassName} aria-modal aria-hidden tabIndex={-1} role="dialog">
 			<div className={ModalStyle.modal}>
 				<div className={ModalStyle.header}>
