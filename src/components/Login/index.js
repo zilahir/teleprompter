@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
+import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
 
 import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
@@ -65,6 +66,10 @@ const Login = props => {
 			requestClose()
 		})
 		return selectedPrompter
+	}
+
+	function handleDelete(e) {
+		e.stopPropagation()
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -138,8 +143,23 @@ const Login = props => {
 													onClick={() => handleLoad(currItem)}
 												>
 													{currItem.projectName}
-													<div className={styles.icon}>
-														<Icon icon={triangle} size="1em" />
+													<div className={styles.rootIcon}>
+														<div
+															className={styles.icon}
+															role="button"
+															onKeyDown={null}
+															tabIndex={-1}
+															onClick={e => handleDelete(e)}
+														>
+															<Icon icon={trash} size="1em" />
+														</div>
+														<div className={classnames(
+															styles.icon,
+															styles.rotate,
+														)}
+														>
+															<Icon icon={triangle} size="1em" />
+														</div>
 													</div>
 												</li>
 											))
