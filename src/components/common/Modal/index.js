@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
@@ -33,8 +34,12 @@ const Modal = (
 			className={overlayClassName}
 			onClick={hide}
 		/>
-		<div className={modalClassName} aria-modal aria-hidden tabIndex={-1} role="dialog">
-			<div className={ModalStyle.modal}>
+		<div className={ModalStyle.modalWrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
+			<div className={classnames(
+				ModalStyle.modal,
+				modalClassName,
+			)}
+			>
 				<div className={ModalStyle.header}>
 					{
 						modalTitle
@@ -73,7 +78,7 @@ const Modal = (
 
 Modal.defaultProps = {
 	hasCloseIcon: true,
-	modalClassName: ModalStyle.modalWrapper,
+	modalClassName: null,
 	modalTitle: null,
 	overlayClassName: ModalStyle.modalOverlay,
 	overlayColor: null,

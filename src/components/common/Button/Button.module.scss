@@ -3,6 +3,7 @@
 
 .buttonContainer {
     .button {
+
         width: 242px;
         height: 57px;
         border-radius: 32px;
@@ -11,11 +12,17 @@
         @include paragraph(17px, #fff, 0.85px);
         border: none;
         font-weight: 800;
+
         &:hover {
             cursor: pointer;
         }
+
         &:focus {
             outline: none;
+        }
+
+        &.negative {
+            background: rgba($color: $gray-6, $alpha: 1.0);
         }
     }
     .linkButton {

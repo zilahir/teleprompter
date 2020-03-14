@@ -24,12 +24,12 @@
 }
 
 .modalWrapper {
+	width: fit-content;
+	height: fit-content;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	width: 500px;
-	height: 230px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -40,15 +40,14 @@
 	margin-bottom: auto;
 	bottom: 0;
 	outline: none;
-	border-radius: 10px;
+	border-radius: $login-box-border-radius;
 	z-index: 9;
 	animation: opacity 0.3s;
 
 	.modal {
-		width: 100%;
-		height: 100%;
 		display: flex;
 		flex-direction: column;
+		padding: 30px;
 
 		div {
 			.header {

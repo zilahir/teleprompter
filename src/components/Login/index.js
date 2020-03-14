@@ -30,7 +30,8 @@ const Login = props => {
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
-	const [isModalOpen, toggleModalOpen]  = useState(false)
+	const [isModalOpen, toggleModalOpen] = useState(false)
+	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -70,8 +71,9 @@ const Login = props => {
 		return selectedPrompter
 	}
 
-	function handleDelete(e) {
+	function handleDelete(e, projectToDelete) {
 		e.stopPropagation()
+		setProjectToDel(projectToDelete)
 		toggleModalOpen(!isModalOpen)
 	}
 	const { usersPrompters } = store.getState().userPrompters
@@ -152,7 +154,7 @@ const Login = props => {
 															role="button"
 															onKeyDown={null}
 															tabIndex={-1}
-															onClick={e => handleDelete(e)}
+															onClick={e => handleDelete(e, currItem)}
 														>
 															<Icon icon={trash} size="1em" />
 														</div>
@@ -219,10 +221,29 @@ const Login = props => {
 				isShowing={isModalOpen}
 				hide={() => toggleModalOpen(false)}
 				hasCloseIcon={false}
+				modalTitle="Are you sure you want to delete your project?"
+				modalClassName={styles.modal}
 			>
-				<p>
-					hello
-				</p>
+				{
+					delProject
+						? (
+							<p>
+								{delProject.projectName}
+							</p>
+						)
+						: null
+				}
+				<div className={styles.buttonContainer}>
+					<Button
+						labelText="Cancel"
+						onClick={() => toggleModalOpen(false)}
+						isNegative
+					/>
+					<Button
+						labelText="Delete"
+						onClick={() => toggleModalOpen(false)}
+					/>
+				</div>
 			</Modal>
 		</>
 	)

@@ -104,3 +104,26 @@
         }
     }
 }
+
+.modal {
+    padding: 30px;
+
+    h3 {
+        @include paragraph(14px, #ffffff);
+        font-weight: 300;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    p {
+        @include paragraph(14px, #ffffff);
+    }
+
+    .buttonContainer {
+        display: flex;
+        padding-top: 30px;
+        button {
+            margin: 0 10px;
+        }
+    }
+}
