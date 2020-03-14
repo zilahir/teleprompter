@@ -218,6 +218,7 @@ const Login = props => {
 			<Modal
 				isShowing={isModalOpen}
 				hide={() => toggleModalOpen(false)}
+				hasCloseIcon={false}
 			>
 				<p>
 					hello
