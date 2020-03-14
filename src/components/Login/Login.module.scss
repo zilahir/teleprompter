@@ -71,7 +71,7 @@
                 transition: all .2s ease;
                 display: flex;
                 justify-content: space-between;
-                padding: 10px 0px;
+                padding: 20px 10px;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);
@@ -124,6 +124,7 @@
         padding-top: 30px;
         button {
             margin: 0 10px;
+            font-weight: 300;
         }
     }
 }
