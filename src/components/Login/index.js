@@ -16,6 +16,7 @@ import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
+import Modal from '../common/Modal'
 
 /**
 * @author zilahir
@@ -29,6 +30,7 @@ const Login = props => {
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
+	const [isModalOpen, toggleModalOpen]  = useState(false)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -70,6 +72,7 @@ const Login = props => {
 
 	function handleDelete(e) {
 		e.stopPropagation()
+		toggleModalOpen(!isModalOpen)
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -212,6 +215,14 @@ const Login = props => {
 								)
 								: null
 			}
+			<Modal
+				isShowing={isModalOpen}
+				hide={() => toggleModalOpen(false)}
+			>
+				<p>
+					hello
+				</p>
+			</Modal>
 		</>
 	)
 }
