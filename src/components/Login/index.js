@@ -73,6 +73,7 @@ const Login = props => {
 
 	function handleDelete(e, projectToDelete) {
 		e.stopPropagation()
+		requestClose()
 		setProjectToDel(projectToDelete)
 		toggleModalOpen(!isModalOpen)
 	}
