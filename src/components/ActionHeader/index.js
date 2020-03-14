@@ -143,6 +143,7 @@ const ActionHeader = () => {
 				isVisible={showLoad}
 				type={LOAD}
 				requestClose={() => toggleLoad(false)}
+				noPadding
 			/>
 			<Login
 				isVisible={showSave}

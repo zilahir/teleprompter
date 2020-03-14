@@ -12,6 +12,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+
     &.saveContainer {
         width: 280px;
         height: 150px;
@@ -59,7 +61,7 @@
     &.itemBoxContainer {
         left: 100px;
         right: unset;
-        padding-top: 0;
+        padding: 0;
         .savedItems {
             list-style-type: none;
             padding: 0;
