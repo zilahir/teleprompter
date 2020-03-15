@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
 
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
-import modalStyle from '../Login/Login.module.scss'
 import Login from '../Login'
 import { logOutUser } from '../../store/actions/authUser'
-import { clearUserPrompters } from '../../store/actions/prompter'
+import { clearUserPrompters, setPrompterSlug } from '../../store/actions/prompter'
 import Modal from '../common/Modal'
+import { resetPrompter } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -65,6 +66,12 @@ const ActionHeader = () => {
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleSave(false)
+	}
+
+	function clearCurrentPrompter() {
+		dispatch(setPrompterSlug(uuidv4()))
+		dispatch(resetPrompter())
+		toggleNewModal(false)
 	}
 
 	function logOut() {
@@ -195,8 +202,8 @@ const ActionHeader = () => {
 						isNegative
 					/>
 					<Button
-						labelText="Delete"
-						onClick={() => null}
+						labelText="Clear"
+						onClick={() => clearCurrentPrompter()}
 					/>
 				</div>
 			</Modal>

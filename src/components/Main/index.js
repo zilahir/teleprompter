@@ -7,8 +7,9 @@ import EditorSidebar from '../EditorSidebar'
 import ActionSidebar from '../ActionSidebar'
 import Preview from '../Preview'
 import styles from './Main.module.scss'
-import { setPrompterSlug, getAllUserPrompter } from '../../store/actions/prompter'
+import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
 import { clearText } from '../../store/actions/text'
+import { toggleUpdateBtn } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -21,10 +22,12 @@ const Main = () => {
 	useEffect(() => {
 		Promise.all([
 			dispatch(clearText()),
+			dispatch(clearPrompterObject()),
+			dispatch(toggleUpdateBtn(false)),
 			dispatch(setPrompterSlug(uuidv4())),
 		]).then(() => {
 			if (store.getState().user.loggedIn) {
-				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
+				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: change hardcoded user id fro user object
 			}
 		})
 	}, [])

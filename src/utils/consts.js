@@ -30,6 +30,8 @@ export const NEW_PROMPTER = 'NEW_PROMPTER'
 
 export const HELPER_TOP = 'Write or paste your script into the input field below. You can adjust the prompter settings on the left and see a preview on the top right. Press Play to open the prompter in a new tab. If you make changes, press Update to send those changes to the prompter feed. You can open the prompter feed in any device by opening the Stream address in a web browser. To use your phone as a remote control, open the Remote control address in your phone\'s web browser.'
 export const HELPER_SIDEBAR = 'This is an alpha release, which means it\'s not finished. You can report bugs, give feedback or suggest features by emailing info@prompter.me.'
+export const INFOBOX_TOP = 'INFOBOX_TOP'
+export const INFOBOX_SIDEBAR = 'INFOBOX_SIDEBAR'
 export const FULL_LOADER = 'FULL_LOADER'
 export const INLINE_LOADER = 'INLINE_LOADER'
 

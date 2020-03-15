@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Slider from 'rc-slider'
-import { useDispatch } from 'react-redux'
+import { useDispatch, shallowEqual, useStore } from 'react-redux'
+import 'rc-slider/assets/index.css'
 
 import { SET_FONT_SIZE, SET_LETTER_SPACING, SET_LINE_HEIGHT, SET_SCROLL_SPEED } from '../../../store/actions/actionTypes'
 import { setFontSize, setLetterSpacing, setLineHeight, setScrollSpeed } from '../../../store/actions/text'
-import 'rc-slider/assets/index.css'
-
 import './Slider.scss'
+import { toggleUpdateBtn } from '../../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -24,6 +24,7 @@ const SliderAlt = props => {
 	const { labelText, sliderName, initialValue, step, maxValue, minValue } = props
 	const [value, setValue] = useState(initialValue)
 	const dispatch = useDispatch()
+	const store = useStore()
 	function handleValeChange(v) {
 		if (sliderName === SET_FONT_SIZE) {
 			dispatch(setFontSize(v))
@@ -35,6 +36,14 @@ const SliderAlt = props => {
 			dispatch(setScrollSpeed(v))
 		}
 		setValue(v)
+		if (store.getState().userPrompters.prompterObject) {
+			const result = shallowEqual(
+				store.getState().text, store.getState().userPrompters.prompterObject,
+			)
+			if (!result) {
+				dispatch(toggleUpdateBtn(true))
+			}
+		}
 	}
 	return (
 		<SliderContanier>

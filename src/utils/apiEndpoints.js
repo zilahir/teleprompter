@@ -5,4 +5,6 @@ export const apiEndpoints = {
 	newUser: `${apiRoot}/user`,
 	newPrompter: `${apiRoot}/prompter`,
 	getAllPrompterForUser: `${apiRoot}/allprompterbyuserid`,
+	delPrompter: `${apiRoot}/prompter`,
+	modifyPrompter: `${apiRoot}/prompter`,
 }

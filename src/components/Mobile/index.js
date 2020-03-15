@@ -23,7 +23,7 @@ const Mobile = () => {
 			</div>
 			<Button
 				labelText="GO"
-				onClick={() => alert("hello")}
+				onClick={() => null}
 			/>
 		</div>
 	)

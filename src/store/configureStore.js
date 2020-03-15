@@ -7,6 +7,7 @@ import segments from './reducers/segments'
 import text from './reducers/text'
 import user from './reducers/user'
 import userPrompters from './reducers/prompter'
+import misc from './reducers/misc'
 
 const persistConfig = {
 	key: 'root',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	text,
 	user,
 	userPrompters,
+	misc,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

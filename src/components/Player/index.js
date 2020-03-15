@@ -21,7 +21,7 @@ const Player = () => {
 	const { slug } = useParams()
 	useEffect(() => {
 		// socket.connect()
-		setText(store.getState().text.text)
+		setText(store.getState().userPrompters.prompterObject.text)
 		socket.on('isPlaying', playing => {
 			togglePlaying(playing)
 		})
@@ -37,7 +37,7 @@ const Player = () => {
 							<TextScroller
 								text={text}
 								slug={slug}
-								prompterObject={store.getState().text}
+								prompterObject={store.getState().userPrompters.prompterObject}
 								scrollSpeed={store.getState().text.scrollSpeed}
 							/>
 						)
