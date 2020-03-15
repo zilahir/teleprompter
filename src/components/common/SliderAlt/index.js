@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Slider from 'rc-slider'
-import { useDispatch } from 'react-redux'
+import { useDispatch, shallowEqual, useStore } from 'react-redux'
 
 import { SET_FONT_SIZE, SET_LETTER_SPACING, SET_LINE_HEIGHT, SET_SCROLL_SPEED } from '../../../store/actions/actionTypes'
 import { setFontSize, setLetterSpacing, setLineHeight, setScrollSpeed } from '../../../store/actions/text'
@@ -24,9 +24,15 @@ const SliderAlt = props => {
 	const { labelText, sliderName, initialValue, step, maxValue, minValue } = props
 	const [value, setValue] = useState(initialValue)
 	const dispatch = useDispatch()
+	const store = useStore()
 	function handleValeChange(v) {
 		if (sliderName === SET_FONT_SIZE) {
 			dispatch(setFontSize(v))
+			if (store.getState().userPrompters.prompterObject) {
+				const result = shallowEqual(
+					store.getState().text, store.getState().userPrompters.prompterObject
+				)
+			}
 		} else if (sliderName === SET_LETTER_SPACING) {
 			dispatch(setLetterSpacing(v))
 		} else if (sliderName === SET_LINE_HEIGHT) {

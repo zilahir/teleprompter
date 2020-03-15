@@ -1,4 +1,4 @@
-import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER, COPY_PROMPTER_OBJECT } from '../actions/actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER, COPY_PROMPTER_OBJECT, CLEAR_PROMPTER_OBJECT } from '../actions/actionTypes'
 
 const initialState = {
 	usersPrompters: [],
@@ -33,6 +33,11 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			prompterObject: action.payload.prompterObject,
+		}
+	case CLEAR_PROMPTER_OBJECT:
+		return {
+			...state,
+			prompterObject: null,
 		}
 	default:
 		return state

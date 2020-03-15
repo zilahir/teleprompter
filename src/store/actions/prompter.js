@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { headers } from '../../utils/consts'
 import { apiEndpoints } from '../../utils/apiEndpoints'
-import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER, COPY_PROMPTER_OBJECT } from './actionTypes'
+import { GET_ALL_PROMPTER, SET_PROMPTER_SLUG, SET_PROJECT_NAME, CLEAR_ALL_PROMPTER, COPY_PROMPTER_OBJECT, CLEAR_PROMPTER_OBJECT } from './actionTypes'
 
 export const setAllPrompterForUser = usersPrompters => dispatch => new Promise(resolve => {
 	dispatch({
@@ -65,4 +65,12 @@ export const copyPrompterObject = prompterObject => dispatch => new Promise(reso
 		},
 	})
 	resolve(prompterObject)
+})
+
+export const clearPrompterObject = () => dispatch => new Promise(resolve => {
+	dispatch({
+		type: CLEAR_PROMPTER_OBJECT,
+		payload: {},
+	})
+	resolve(true)
 })

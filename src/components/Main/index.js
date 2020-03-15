@@ -7,7 +7,7 @@ import EditorSidebar from '../EditorSidebar'
 import ActionSidebar from '../ActionSidebar'
 import Preview from '../Preview'
 import styles from './Main.module.scss'
-import { setPrompterSlug, getAllUserPrompter } from '../../store/actions/prompter'
+import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
 import { clearText } from '../../store/actions/text'
 
 /**
@@ -21,6 +21,7 @@ const Main = () => {
 	useEffect(() => {
 		Promise.all([
 			dispatch(clearText()),
+			dispatch(clearPrompterObject()),
 			dispatch(setPrompterSlug(uuidv4())),
 		]).then(() => {
 			if (store.getState().user.loggedIn) {
