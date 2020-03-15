@@ -1,3 +1,5 @@
+@import '../../styles/mixins/paragraph.scss';
+
 .actionHeaderContainer {
     display: flex;
     align-items: center;
@@ -18,6 +20,31 @@
         display: inline-flex;
         li {
             margin-right: 20px;
+        }
+    }
+}
+
+.modal {
+    padding: 30px;
+
+    h3 {
+        @include paragraph(14px, #ffffff);
+        font-weight: 300;
+        margin: 0;
+        margin-bottom: 20px;
+        max-width: 500px;
+    }
+
+    p {
+        @include paragraph(14px, #ffffff);
+    }
+
+    .buttonContainer {
+        display: flex;
+        padding-top: 30px;
+        button {
+            margin: 0 10px;
+            font-weight: 300;
         }
     }
 }
