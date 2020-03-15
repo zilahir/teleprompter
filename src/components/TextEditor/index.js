@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useStore } from 'react-redux'
 import styled from 'styled-components'
 
 import { setText } from '../../store/actions/text'
@@ -17,11 +17,14 @@ const TextArea = styled.textarea`
 const TextEditor = () => {
 	const [text, setVal] = useState()
 	const dispatch = useDispatch()
-
+	const store = useStore()
 	function handleTextChange(e) {
-		setVal(e.target.value)
 		dispatch(setText(e.target.value))
 	}
+	useEffect(() => store.subscribe(() => {
+		const currText = store.getState().text.text
+		setVal(currText)
+	}), [text])
 	return (
 		<div className={styles.textEditorContainer}>
 			<TextArea

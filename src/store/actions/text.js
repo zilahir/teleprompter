@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -52,4 +52,14 @@ export const setScrollSpeed = scrollSpeed => ({
 	payload: {
 		scrollSpeed,
 	},
+})
+
+export const resetPrompter = () => dispatch => new Promise(resolve => {
+	dispatch({
+		type: RESET_PROMPTER,
+		payload: {},
+	})
+	resolve({
+		success: true,
+	})
 })

@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT } from '../actions/actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER } from '../actions/actionTypes'
 
 const initialState = {
 	fontSize: 20,
@@ -49,6 +49,10 @@ const reducer = (state = initialState, action) => {
 			text: '',
 		}
 	}
+	case RESET_PROMPTER:
+		return {
+			...initialState,
+		}
 	default:
 		return state
 	}
