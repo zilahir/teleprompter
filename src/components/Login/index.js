@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
@@ -13,7 +14,7 @@ import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser } from '../../store/actions/authUser'
-import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
+import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
 import Modal from '../common/Modal'
@@ -76,6 +77,14 @@ const Login = props => {
 		requestClose()
 		setProjectToDel(projectToDelete)
 		toggleModalOpen(!isModalOpen)
+	}
+
+	function handlePrompterDelte(delObject) {
+		Promise.all([
+			deletePrompter(delObject._id),
+		]).then(() => {
+			toggleModalOpen(false)
+		})
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -242,7 +251,7 @@ const Login = props => {
 					/>
 					<Button
 						labelText="Delete"
-						onClick={() => toggleModalOpen(false)}
+						onClick={() => handlePrompterDelte(delProject)}
 					/>
 				</div>
 			</Modal>

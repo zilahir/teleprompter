@@ -87,3 +87,16 @@ export const createNewPrompter = (newPrompterObject, authToken) => new Promise(r
 			})
 		})
 })
+
+export const deletePrompter = (idToDel, authToken) => new Promise(resolve => {
+	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	axios.delete(`${apiEndpoints.delPrompter}/${idToDel}`, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
