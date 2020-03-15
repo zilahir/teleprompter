@@ -17,10 +17,15 @@ const InstructionContainer = styled.p`
 const Instruction = props => {
 	const { text, hasPadding, maxWidth } = props
 	return (
-		<div className={classnames(
-			styles.instructionContainer,
-			!hasPadding ? styles.noPadding : null,
-		)}
+		<div
+			className={classnames(
+				styles.instructionContainer,
+				!hasPadding ? styles.noPadding : null,
+			)}
+			role="button"
+			onKeyDown={null}
+			onClick={() => alert("hello")}
+			tabIndex={-1}
 		>
 			<InstructionContainer maxWidth={maxWidth}>
 				{text}

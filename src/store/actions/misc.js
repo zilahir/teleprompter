@@ -18,4 +18,7 @@ export const hideInstruction = (whichInstruction, boolean) => dispatch => new Pr
 			boolean,
 		},
 	})
+	resolve({
+		success: true,
+	})
 })
