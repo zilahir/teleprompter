@@ -111,12 +111,18 @@ const ActionSidebar = () => {
 						labelText="Remote control address"
 						isDisabled
 					/>
-					<Instruction
-						text={HELPER_SIDEBAR}
-						hasPadding={false}
-						maxWidth={250}
-						type={INFOBOX_SIDEBAR}
-					/>
+					{
+						store.getState().misc.instructions[INFOBOX_SIDEBAR]
+							? (
+								<Instruction
+									text={HELPER_SIDEBAR}
+									hasPadding={false}
+									maxWidth={250}
+									type={INFOBOX_SIDEBAR}
+								/>
+							)
+							: null
+					}
 					<div className={styles.playButtonContainer}>
 						{
 							!showUpdateBtn
