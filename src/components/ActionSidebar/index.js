@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import useSocket from 'use-socket.io-client'
-import { useStore } from 'react-redux'
+import { useStore, useDispatch } from 'react-redux'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -9,6 +9,7 @@ import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
 import { HELPER_SIDEBAR, LINK } from '../../utils/consts'
 import Instruction from '../common/Instruction'
+import { copyPrompterObject } from '../../store/actions/prompter'
 
 /**
 * @author zilahir
@@ -21,7 +22,9 @@ const ActionSidebar = () => {
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const [prompterSlug, setPrompterSlug] = useState(null)
+
 	const store = useStore()
+	const dispatch = useDispatch()
 	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
 	socket.connect()
 
@@ -29,9 +32,13 @@ const ActionSidebar = () => {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		if (!bool) {
-			setTimeout(() => {
-				window.open(`/player/${prompterSlug}`, '_blank')
-			}, 10)
+			Promise.all([
+				dispatch(copyPrompterObject(store.getState().text)),
+			]).then(() => {
+				setTimeout(() => {
+					window.open(`/player/${prompterSlug}`, '_blank')
+				}, 10)
+			})
 		}
 	}
 
