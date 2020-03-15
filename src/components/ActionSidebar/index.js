@@ -9,7 +9,7 @@ import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
 import { HELPER_SIDEBAR, LINK } from '../../utils/consts'
 import Instruction from '../common/Instruction'
-import { copyPrompterObject } from '../../store/actions/prompter'
+import { copyPrompterObject, createNewPrompter } from '../../store/actions/prompter'
 
 /**
 * @author zilahir
@@ -32,9 +32,27 @@ const ActionSidebar = () => {
 	function togglePlaying(bool) {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
+		const newPrompterObject = store.getState().text
+		const { user } = store.getState().user
+		const slug = store.getState().userPrompters.prompterSlug
 		if (!bool) {
+			const saveObject = {
+				slug,
+				text: newPrompterObject.text,
+				userId: '5e63f4ba19a0555a4fbbe5da',
+				projectName: `project_${slug}`,
+				meta: {
+					fontSize: newPrompterObject.fontSize,
+					lineHeight: newPrompterObject.lineHeight,
+					letterSpacing: newPrompterObject.letterSpacing,
+					scrollWidth: newPrompterObject.scrollWidth,
+					scrollSpeed: newPrompterObject.scrollSpeed,
+				},
+			}
 			Promise.all([
 				dispatch(copyPrompterObject(store.getState().text)),
+				createNewPrompter(saveObject, user.accessToken),
+				// TODO: change hardcoded user id fro user object
 			]).then(() => {
 				setTimeout(() => {
 					window.open(`/player/${prompterSlug}`, '_blank')
