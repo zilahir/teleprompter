@@ -9,6 +9,7 @@ import Preview from '../Preview'
 import styles from './Main.module.scss'
 import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
 import { clearText } from '../../store/actions/text'
+import { toggleUpdateBtn } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -22,6 +23,7 @@ const Main = () => {
 		Promise.all([
 			dispatch(clearText()),
 			dispatch(clearPrompterObject()),
+			dispatch(toggleUpdateBtn(false)),
 			dispatch(setPrompterSlug(uuidv4())),
 		]).then(() => {
 			if (store.getState().user.loggedIn) {

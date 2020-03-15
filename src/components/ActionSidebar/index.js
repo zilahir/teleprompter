@@ -22,6 +22,7 @@ const ActionSidebar = () => {
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const [prompterSlug, setPrompterSlug] = useState(null)
+	const [showUpdateBtn, toggleShowUpdateBtn] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -45,6 +46,8 @@ const ActionSidebar = () => {
 	useEffect(() => store.subscribe(() => {
 		const t = store.getState().text.text
 		const sp = store.getState().text.scrollSpeed
+		const uBtn = store.getState().misc.showActiveBtn
+		toggleShowUpdateBtn(uBtn)
 		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
 			setPrompterSlug(store.getState().userPrompters.prompterSlug.split('-')[0])
 		}
@@ -96,10 +99,21 @@ const ActionSidebar = () => {
 						maxWidth={250}
 					/>
 					<div className={styles.playButtonContainer}>
-						<Button
-							onClick={() => togglePlaying(isPlaying)}
-							labelText="Open"
-						/>
+						{
+							!showUpdateBtn
+								? (
+									<Button
+										onClick={() => togglePlaying(isPlaying)}
+										labelText="Open"
+									/>
+								)
+								: (
+									<Button
+										onClick={() => null}
+										labelText="Update"
+									/>
+								)
+						}
 					</div>
 				</div>
 			</Col>
