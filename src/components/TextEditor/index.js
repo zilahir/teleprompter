@@ -6,7 +6,7 @@ import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
 
 /**
-* @author
+* @author zilahir
 * @function TextEditor
 * */
 
