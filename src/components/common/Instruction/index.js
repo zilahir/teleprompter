@@ -29,15 +29,19 @@ const Instruction = props => {
 				styles.instructionContainer,
 				!hasPadding ? styles.noPadding : null,
 			)}
-			role="button"
-			onKeyDown={null}
-			onClick={() => hideThisInfoBox()}
-			tabIndex={-1}
 		>
 			<InstructionContainer
 				maxWidth={maxWidth}
 			>
 				{text}
+				<span
+					onClick={() => hideThisInfoBox()}
+					role="button"
+					onKeyDown={null}
+					tabIndex={-1}
+				>
+					Hide this guide
+				</span>
 			</InstructionContainer>
 		</div>
 	)
