@@ -10,6 +10,7 @@ $gray-2: #2D2D2D;
 $gray-3: #3A3A3A;
 $gray-4: #C1C1C1;
 $gray-5: #2E2E2E;
+$gray-6: #444444;
 
 /* BREAKPOINTS */
 
@@ -21,4 +22,9 @@ $screen-xl-min: 1200px;
 /* VARIABLES */
 
 $login-box-border-radius: 20px;
-$login-box-bg-color: #2D2D2D;
+$login-box-bg-color: $gray-2;
+$modal-drop-shadow-color: #000000;
+$modal-border-radius: 20px;
+$modal-backdrop-blur-value: 5px;
+$modal-background-color: $gray-2;
+$overlay-bg-color: $gray-1;

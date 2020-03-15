@@ -8,11 +8,12 @@
     background-color: $login-box-bg-color;
     top: 50px;
     right: 50px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+
     &.saveContainer {
         width: 280px;
         height: 150px;
@@ -55,15 +56,15 @@
         margin-top: 20px;
         button {
             height: 45px;
+            font-weight: 300;
         }
     }
     &.itemBoxContainer {
         left: 100px;
         right: unset;
-        padding-top: 0;
+        padding: 0;
         .savedItems {
             list-style-type: none;
-            margiin: 0;
             padding: 0;
             width: 260px;
             li {
@@ -73,22 +74,60 @@
                 transition: all .2s ease;
                 display: flex;
                 justify-content: space-between;
+                padding: 20px 10px;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);
                     transition: all .2s ease;
                 }
-                .icon {
-                    color: $purple;
-                    transform: rotate(90deg);
-                    svg {
-                        fill: $purple;
+                .rootIcon {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 10px;
+                    .icon {
+                        &:focus {
+                            outline: none;
+                        }
+                        margin-left: 10px;
+                        &.rotate {
+                            transform: rotate(90deg);
+                            position: relative;
+                            top: 3px;
+                        }
+                        color: $purple;
+                        svg {
+                            fill: $purple;
+                        }
                     }
                 }
                 &:last-of-type {
                     border: none;
                 }
             }
+        }
+    }
+}
+
+.modal {
+    padding: 30px;
+
+    h3 {
+        @include paragraph(14px, #ffffff);
+        font-weight: 300;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    p {
+        @include paragraph(14px, #ffffff);
+    }
+
+    .buttonContainer {
+        display: flex;
+        padding-top: 30px;
+        button {
+            margin: 0 10px;
+            font-weight: 300;
         }
     }
 }

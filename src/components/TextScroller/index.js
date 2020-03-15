@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import { motion, useAnimation } from 'framer-motion'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE } from '../../utils/consts'
+import { keyListeners, SPACE, F6 } from '../../utils/consts'
+import { toggleFullScreen } from '../../utils/fullScreen'
 
 /**
 * @author zilahir
@@ -27,7 +28,6 @@ const TextScroller = props => {
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
 	const [isPlaying, togglePlaying] = useState(false)
-
 	const container = {
 		start: {
 			y: 0,
@@ -51,6 +51,8 @@ const TextScroller = props => {
 			} else {
 				controls.start('end')
 			}
+		} else if (key === F6) {
+			toggleFullScreen()
 		}
 	}
 	return (

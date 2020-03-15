@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch } from 'react-redux'
 
-import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, LOGGED_IN } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
+import modalStyle from '../Login/Login.module.scss'
 import Login from '../Login'
 import { logOutUser } from '../../store/actions/authUser'
 import { clearUserPrompters } from '../../store/actions/prompter'
+import Modal from '../common/Modal'
 
 /**
 * @author zilahir
@@ -20,41 +22,58 @@ const ActionHeader = () => {
 	const [showLoad, toggleLoad] = useState(false)
 	const [showSave, toggleSave] = useState(false)
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [showNewModal, toggleNewModal] = useState(false)
+
 	const store = useStore()
 	const dispatch = useDispatch()
+
 	function openLoginBox() {
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleSave(false)
 		toggleLogin(!showLogin)
+		toggleNewModal(false)
 	}
+
 	function openRegisterBox() {
 		toggleLogin(false)
 		toggleLoad(false)
 		toggleSave(false)
 		toggleRegister(!showRegister)
+		toggleNewModal(false)
 	}
+
 	function openLoad() {
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleSave(false)
 		toggleLoad(!showLoad)
+		toggleNewModal(false)
 	}
+
 	function openSave() {
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleSave(!showSave)
+		toggleNewModal(false)
 	}
+
+	function toggleConfirmNew() {
+		toggleNewModal(true)
+		toggleLogin(false)
+		toggleRegister(false)
+		toggleLoad(false)
+		toggleSave(false)
+	}
+
 	function logOut() {
 		Promise.all([
 			dispatch(clearUserPrompters()),
 			dispatch(logOutUser()),
 		])
 	}
-	function requestClose(val) {
-		return true
-	}
+
 	useEffect(() => store.subscribe(() => {
 		if (store.getState().user.loggedIn) {
 			setIsLoggedIn(true)
@@ -73,6 +92,13 @@ const ActionHeader = () => {
 				isLoggedIn
 					? (
 						<ul className={styles.loggedInActionList}>
+							<li>
+								<Button
+									labelText="New"
+									onClick={() => toggleConfirmNew()}
+									type={LINK}
+								/>
+							</li>
 							<li>
 								<Button
 									labelText="Save"
@@ -131,6 +157,11 @@ const ActionHeader = () => {
 					)
 			}
 			<Login
+				isVisible={showNewModal}
+				type={NEW_PROMPTER}
+				requestClose={() => toggleNewModal(false)}
+			/>
+			<Login
 				isVisible={showLogin}
 				type={LOGIN}
 				requestClose={() => toggleLogin(false)}
@@ -143,12 +174,32 @@ const ActionHeader = () => {
 				isVisible={showLoad}
 				type={LOAD}
 				requestClose={() => toggleLoad(false)}
+				noPadding
 			/>
 			<Login
 				isVisible={showSave}
 				type={SAVE}
 				requestClose={() => toggleSave(false)}
 			/>
+			<Modal
+				isShowing={showNewModal}
+				hide={() => toggleNewModal(false)}
+				hasCloseIcon={false}
+				modalTitle="You have unsaved content in your open project. Are you sure you want to clear everything and start a new one?"
+				modalClassName={styles.modal}
+			>
+				<div className={styles.buttonContainer}>
+					<Button
+						labelText="Cancel"
+						onClick={() => toggleNewModal(false)}
+						isNegative
+					/>
+					<Button
+						labelText="Delete"
+						onClick={() => null}
+					/>
+				</div>
+			</Modal>
 		</div>
 	)
 }

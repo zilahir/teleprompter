@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
+import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
 
 import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
@@ -15,6 +16,7 @@ import { authUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName } from '../../store/actions/prompter'
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
+import Modal from '../common/Modal'
 
 /**
 * @author zilahir
@@ -28,6 +30,8 @@ const Login = props => {
 	const [projectName, setProjectName] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
+	const [isModalOpen, toggleModalOpen] = useState(false)
+	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
@@ -61,10 +65,17 @@ const Login = props => {
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
 			dispatch(setPrompterSlug(selectedPrompter.id)),
-		]).then((res) => {
+		]).then(() => {
 			requestClose()
 		})
 		return selectedPrompter
+	}
+
+	function handleDelete(e, projectToDelete) {
+		e.stopPropagation()
+		requestClose()
+		setProjectToDel(projectToDelete)
+		toggleModalOpen(!isModalOpen)
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -138,8 +149,23 @@ const Login = props => {
 													onClick={() => handleLoad(currItem)}
 												>
 													{currItem.projectName}
-													<div className={styles.icon}>
-														<Icon icon={triangle} size="1em" />
+													<div className={styles.rootIcon}>
+														<div
+															className={styles.icon}
+															role="button"
+															onKeyDown={null}
+															tabIndex={-1}
+															onClick={e => handleDelete(e, currItem)}
+														>
+															<Icon icon={trash} size="1em" />
+														</div>
+														<div className={classnames(
+															styles.icon,
+															styles.rotate,
+														)}
+														>
+															<Icon icon={triangle} size="1em" />
+														</div>
 													</div>
 												</li>
 											))
@@ -192,6 +218,34 @@ const Login = props => {
 								)
 								: null
 			}
+			<Modal
+				isShowing={isModalOpen}
+				hide={() => toggleModalOpen(false)}
+				hasCloseIcon={false}
+				modalTitle="Are you sure you want to delete your project?"
+				modalClassName={styles.modal}
+			>
+				{
+					delProject
+						? (
+							<p>
+								{delProject.projectName}
+							</p>
+						)
+						: null
+				}
+				<div className={styles.buttonContainer}>
+					<Button
+						labelText="Cancel"
+						onClick={() => toggleModalOpen(false)}
+						isNegative
+					/>
+					<Button
+						labelText="Delete"
+						onClick={() => toggleModalOpen(false)}
+					/>
+				</div>
+			</Modal>
 		</>
 	)
 }
