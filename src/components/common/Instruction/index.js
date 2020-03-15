@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import styled from 'styled-components'
 
 import styles from './Instruction.module.scss'
+import { hideInstruction } from '../../../store/actions/misc'
+import { INFOBOX_SIDEBAR } from '../../../utils/consts'
 
 /**
 * @author zilahir
@@ -15,7 +18,11 @@ const InstructionContainer = styled.p`
 `
 
 const Instruction = props => {
-	const { text, hasPadding, maxWidth } = props
+	const { text, hasPadding, maxWidth, type } = props
+	const dispatch = useDispatch()
+	function hideThisInfoBox() {
+		dispatch(hideInstruction(type, false))
+	}
 	return (
 		<div
 			className={classnames(
@@ -24,10 +31,12 @@ const Instruction = props => {
 			)}
 			role="button"
 			onKeyDown={null}
-			onClick={() => alert("hello")}
+			onClick={() => hideThisInfoBox()}
 			tabIndex={-1}
 		>
-			<InstructionContainer maxWidth={maxWidth}>
+			<InstructionContainer
+				maxWidth={maxWidth}
+			>
 				{text}
 			</InstructionContainer>
 		</div>
@@ -43,6 +52,7 @@ Instruction.propTypes = {
 	hasPadding: PropTypes.bool,
 	maxWidth: PropTypes.number,
 	text: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 }
 
 export default Instruction

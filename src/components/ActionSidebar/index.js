@@ -7,7 +7,7 @@ import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { HELPER_SIDEBAR, LINK } from '../../utils/consts'
+import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
 import Instruction from '../common/Instruction'
 import { copyPrompterObject, createNewPrompter } from '../../store/actions/prompter'
 
@@ -115,6 +115,7 @@ const ActionSidebar = () => {
 						text={HELPER_SIDEBAR}
 						hasPadding={false}
 						maxWidth={250}
+						type={INFOBOX_SIDEBAR}
 					/>
 					<div className={styles.playButtonContainer}>
 						{

@@ -1,11 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
+import { useStore } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Icon from 'react-icons-kit'
 import { plus } from 'react-icons-kit/feather/plus'
 import classnames from 'classnames'
 
-import { Colors, HELPER_TOP } from '../../utils/consts'
+import { Colors, HELPER_TOP, INFOBOX_TOP } from '../../utils/consts'
 import ActionHeader from '../ActionHeader'
 import TextEditor from '../TextEditor'
 import PropterIcon from '../common/Icon'
@@ -19,14 +20,22 @@ import Instruction from '../common/Instruction'
 
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
+	const store = useStore()
 	return (
 		<>
 			<Col lg={6}>
 				<ActionHeader />
 				<div className={styles.previewContainer}>
-					<Instruction
-						text={HELPER_TOP}
-					/>
+					{
+						store.getState().misc.instructions[INFOBOX_TOP]
+							? (
+								<Instruction
+									text={HELPER_TOP}
+									type={INFOBOX_TOP}
+								/>
+							)
+							: null
+					}
 					<div className={styles.tabContainer}>
 						<button
 							className={classnames(
