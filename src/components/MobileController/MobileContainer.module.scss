@@ -13,6 +13,17 @@
     flex: 1;
     height: 100vh;
     .top {
+        &:before {
+            width: 135px;
+            height: 135px;
+            background-repeat: no-repeat;
+            position: absolute;
+            bottom: -30px;
+            transform: rotate(180deg);
+            display: flex;
+            justify-content: flex-end;
+        }
+        position: relative;
         display: flex;
         flex: 1;
         justify-content: center;
@@ -30,6 +41,7 @@
         flex: 1;
         width: 80%;
         .oneButton {
+            position: relative;
             &:first-of-type {
                 position: absolute;
                 left: 0;
@@ -53,8 +65,20 @@
         }
     }
     .bottom {
+        &:before {
+            width: 135px;
+            height: 135px;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: -30px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        position: relative;
         display: flex;
         flex: 1;
+        width: 100%;
+        justify-content: center;
         img {
             transform: scale(1.5);
             display: flex;
