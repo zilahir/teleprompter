@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Logo from '../common/Logo'
 import styles from './Mobile.module.scss'
@@ -12,6 +13,7 @@ import Button from '../common/Button'
 * */
 
 const Mobile = () => {
+	const history = useHistory()
 	return (
 		<div className={styles.mobileContainer}>
 			<Logo />
@@ -23,7 +25,7 @@ const Mobile = () => {
 			</div>
 			<Button
 				labelText="GO"
-				onClick={() => null}
+				onClick={() => history.push('/controller')}
 			/>
 		</div>
 	)

@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100vh;
+    .oneButton {
+        &.playPause {
+            background: rgba($color: $purple, $alpha: 1.0);
+            width: 150px;
+            height: 150px;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+    }
+}
