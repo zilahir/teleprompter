@@ -6,16 +6,34 @@
     align-items: center;
     flex: 1;
     height: 100vh;
-    .oneButton {
-        &.playPause {
-            background: rgba($color: $purple, $alpha: 1.0);
-            width: 140px;
-            height: 140px;
-            border-radius: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
+    .middle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex: 1;
+        margin: 0 50px;
+        .oneButton {
+            &:first-of-type {
+                position: absolute;
+                left: 0;
+            }
+            &:last-of-type {
+                position: absolute;
+                right: 0;
+            }
+            &.playPause {
+                background: rgba($color: $purple, $alpha: 1.0);
+                width: 140px;
+                height: 140px;
+                border-radius: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            &.dirButton {
+                transform: scale(2);
+            }
         }
     }
 }
