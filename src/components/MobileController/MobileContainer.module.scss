@@ -45,10 +45,34 @@
             &:first-of-type {
                 position: absolute;
                 left: 0;
+                &:before {
+                    background-image: url(/static/media/bg.3a7b6b4c.svg);
+                    width: 135px;
+                    height: 135px;
+                    position: absolute;
+                    background-repeat: no-repeat;
+                    transform: scale(1);
+                    transform: rotate(90deg);
+                    top: -59px;
+                    left: -90px;
+                    z-index: -1;
+                }
             }
             &:last-of-type {
                 position: absolute;
                 right: 0;
+                &:before {
+                    background-image: url(/static/media/bg.3a7b6b4c.svg);
+                    width: 135px;
+                    height: 135px;
+                    position: absolute;
+                    background-repeat: no-repeat;
+                    transform: scale(1);
+                    transform: rotate(-90deg);
+                    top: -59px;
+                    left: -30px;
+                    z-index: -1;
+                }
             }
             &.playPause {
                 background: rgba($color: $purple, $alpha: 1.0);
@@ -60,7 +84,7 @@
                 align-items: center;
             }
             &.dirButton {
-                transform: scale(1.5);
+
             }
         }
     }

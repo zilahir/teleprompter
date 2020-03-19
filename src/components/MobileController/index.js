@@ -40,15 +40,15 @@ const MobileController = ({ prompterId }) => {
 				<img src={up} alt="up" />
 			</BTN>
 			<div className={styles.middle}>
-				<div
+				<BTN
 					className={classnames(
 						styles.oneButton,
 						styles.dirButton,
 					)}
 				>
 					<img src={backward} alt="backwards" />
-				</div>
-				<BTN
+				</BTN>
+				<div
 					className={classnames(
 						styles.oneButton,
 						styles.playPause,
@@ -59,7 +59,7 @@ const MobileController = ({ prompterId }) => {
 					tabIndex={-1}
 				>
 					<img alt="play" src={playPause} />
-				</BTN>
+				</div>
 				<BTN
 					className={classnames(
 						styles.oneButton,
