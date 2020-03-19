@@ -28,7 +28,7 @@
         flex: 1;
         justify-content: center;
         img {
-            transform: scale(1.5);
+            transform: scale(1);
             display: flex;
             align-self: flex-end;
         }
@@ -60,7 +60,7 @@
                 align-items: center;
             }
             &.dirButton {
-                transform: scale(2);
+                transform: scale(1.5);
             }
         }
     }
@@ -80,7 +80,7 @@
         width: 100%;
         justify-content: center;
         img {
-            transform: scale(1.5);
+            transform: scale(1);
             display: flex;
             align-self: flex-start;
         }
