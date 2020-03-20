@@ -17,7 +17,7 @@ const Player = () => {
 	const [isPlaying, togglePlaying] = useState(false)
 	const [isLoading, toggleIsLoading] = useState(false)
 	const store = useStore()
-	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	const { slug } = useParams()
 	useEffect(() => {
 		// socket.connect()

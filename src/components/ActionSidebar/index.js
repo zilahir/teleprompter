@@ -26,7 +26,7 @@ const ActionSidebar = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
-	const [socket] = useSocket('https://radiant-plains-03261.herokuapp.com/')
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	socket.connect()
 
 	function togglePlaying(bool) {
