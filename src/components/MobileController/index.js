@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
+import { MorphReplace } from 'react-svg-morph'
 
 import play from '../../assets/controls/play.svg'
 import pause from '../../assets/controls/pause.svg'
@@ -31,6 +32,7 @@ const MobileController = () => {
 	const [isPlaying, togglePlaying] = useState(false)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
+		console.debug('clicked', isPlaying)
 		togglePlaying(!isPlaying)
 		/* socket.emit('isPlaying', {
 			prompterId: slug,
@@ -67,7 +69,17 @@ const MobileController = () => {
 					onKeyDown={null}
 					tabIndex={-1}
 				>
-					<img alt="play" src={isPlaying ? pause : play} />
+					<MorphReplace>
+						{
+							!isPlaying
+								? (
+									<svg xmlns="http://www.w3.org/2000/svg" width="27.459" height="31.384" viewBox="0 0 27.459 31.384"><path fill="#ffffff" d="M26.014,13.19,4.438.435A2.926,2.926,0,0,0,0,2.966v25.5A2.94,2.94,0,0,0,4.438,31L26.014,18.253a2.939,2.939,0,0,0,0-5.063Z" transform="translate(0 -0.032)" /></svg>
+								)
+								: (
+									<svg id="icon_pause" width="70" height="70" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M13 7h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1m7 0h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1" /></svg>
+								)
+						}
+					</MorphReplace>
 				</div>
 				<BTN
 					className={classnames(
