@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
@@ -39,6 +39,9 @@ const MobileController = () => {
 			isPlaying: true,
 		}) */
 	}
+	useEffect(() => {
+		console.debug('hello')
+	}, [isPlaying])
 	return (
 		<div className={styles.mainContainer}>
 			<BTN
@@ -69,14 +72,17 @@ const MobileController = () => {
 					onKeyDown={null}
 					tabIndex={-1}
 				>
-					<MorphReplace>
+					<MorphReplace
+						width={!isPlaying ? 40 : 50}
+						height={50}
+					>
 						{
 							!isPlaying
 								? (
-									<svg xmlns="http://www.w3.org/2000/svg" width="27.459" height="31.384" viewBox="0 0 27.459 31.384"><path fill="#ffffff" d="M26.014,13.19,4.438.435A2.926,2.926,0,0,0,0,2.966v25.5A2.94,2.94,0,0,0,4.438,31L26.014,18.253a2.939,2.939,0,0,0,0-5.063Z" transform="translate(0 -0.032)" /></svg>
+									<svg key="on" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 30 30"><path fill="#ffffff" d="M26.014,13.19,4.438.435A2.926,2.926,0,0,0,0,2.966v25.5A2.94,2.94,0,0,0,4.438,31L26.014,18.253a2.939,2.939,0,0,0,0-5.063Z" /></svg>
 								)
 								: (
-									<svg id="icon_pause" width="70" height="70" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M13 7h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1m7 0h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1" /></svg>
+									<svg key="off" id="icon_pause" width="100" height="100" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M13 7h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1m7 0h-3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1" /></svg>
 								)
 						}
 					</MorphReplace>
