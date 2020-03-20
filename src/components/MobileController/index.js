@@ -6,8 +6,6 @@ import classnames from 'classnames'
 import styled from 'styled-components'
 import { MorphReplace } from 'react-svg-morph'
 
-import play from '../../assets/controls/play.svg'
-import pause from '../../assets/controls/pause.svg'
 import backward from '../../assets/controls/backward.svg'
 import forward from '../../assets/controls/forward.svg'
 import styles from './MobileContainer.module.scss'
@@ -34,14 +32,12 @@ const MobileController = () => {
 	function handleStartStop() {
 		console.debug('clicked', isPlaying)
 		togglePlaying(!isPlaying)
-		/* socket.emit('isPlaying', {
+		socket.emit('isPlaying', {
 			prompterId: slug,
 			isPlaying: true,
-		}) */
+		})
 	}
-	useEffect(() => {
-		console.debug('hello')
-	}, [isPlaying])
+
 	return (
 		<div className={styles.mainContainer}>
 			<BTN
