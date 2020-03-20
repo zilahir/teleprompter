@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
 .mainContainer {
+    overflow: hidden;
     div {
         &:focus {
             outline: none;

@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
 import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
@@ -25,11 +25,12 @@ const BTN = styled.div`
 	}
 `
 
-const MobileController = ({ prompterId }) => {
+const MobileController = () => {
+	const { slug } = useParams()
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
 		socket.emit('isPlaying', {
-			prompterId: '',
+			prompterId: slug,
 			isPlaying: true,
 		})
 	}
@@ -83,10 +84,6 @@ const MobileController = ({ prompterId }) => {
 			</BTN>
 		</div>
 	)
-}
-
-MobileController.propTypes = {
-	prompterId: PropTypes.string.isRequired,
 }
 
 export default MobileController

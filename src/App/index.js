@@ -17,7 +17,7 @@ const App = () => (
 		<Router>
 			<Route path="/" exact component={!isMobile ? Main : Mobile} />
 			<Route path="/player/:slug" exact component={Player} />
-			<Route path="/controller" exact component={MobileController} />
+			<Route path="/controller/:slug" exact component={MobileController} />
 		</Router>
 	</div>
 )
