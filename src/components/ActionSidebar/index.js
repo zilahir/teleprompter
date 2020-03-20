@@ -67,7 +67,7 @@ const ActionSidebar = () => {
 		const uBtn = store.getState().misc.showActiveBtn
 		toggleShowUpdateBtn(uBtn)
 		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
-			setPrompterSlug(store.getState().userPrompters.prompterSlug.split('-')[0])
+			setPrompterSlug(store.getState().userPrompters.prompterSlug)
 		}
 		setScrollSpeed(sp)
 		setText(t)

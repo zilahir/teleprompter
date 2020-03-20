@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import React from 'react'
 import PropTypes from 'prop-types'
+import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
 
@@ -25,8 +26,12 @@ const BTN = styled.div`
 `
 
 const MobileController = ({ prompterId }) => {
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
-		alert('hello')
+		socket.emit('isPlaying', {
+			prompterId: '',
+			isPlaying: true,
+		})
 	}
 	return (
 		<div className={styles.mainContainer}>

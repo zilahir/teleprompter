@@ -24,7 +24,7 @@ const Main = () => {
 			dispatch(clearText()),
 			dispatch(clearPrompterObject()),
 			dispatch(toggleUpdateBtn(false)),
-			dispatch(setPrompterSlug(uuidv4())),
+			dispatch(setPrompterSlug(uuidv4().split('-')[0])),
 		]).then(() => {
 			if (store.getState().user.loggedIn) {
 				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: change hardcoded user id fro user object
