@@ -45,7 +45,7 @@ const Login = props => {
 	function handleSave() {
 		const saveObject = {
 			projectName,
-			prompterSlug: store.getState().userPrompters.prompterSlug.split('-')[0],
+			prompterSlug: store.getState().userPrompters.prompterSlug,
 		}
 		// requestClose()
 		toggleSavingLoader(true)

@@ -36,6 +36,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-scroll": "^1.7.9",
+    "react-svg-morph": "^0.2.1",
     "react-toggle": "^4.1.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -43,7 +44,6 @@
     "redux-thunk": "^2.3.0",
     "screenfull": "^3.3.2",
     "showdown": "^1.9.1",
-    "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
     "use-socket.io-client": "^1.1.0",
     "uuid": "^3.4.0"

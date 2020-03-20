@@ -33,7 +33,7 @@ const Header = () => {
 				</div>
 				<div>
 					<p>
-						Your session ID is <span>{prompterSlug.split('-')[0]}</span>
+						Your session ID is <span>{prompterSlug}</span>
 					</p>
 				</div>
 				<div>

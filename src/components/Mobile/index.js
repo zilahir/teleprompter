@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Logo from '../common/Logo'
 import styles from './Mobile.module.scss'
@@ -12,18 +13,20 @@ import Button from '../common/Button'
 * */
 
 const Mobile = () => {
+	const history = useHistory()
+	const [prompterSlug, setPrompterSlug] = useState(null)
 	return (
 		<div className={styles.mobileContainer}>
 			<Logo />
 			<div className={styles.innerContainer}>
 				<Input
 					labelText="Enter your session id"
-					getBackValue={val => console.debug('val', val)}
+					getBackValue={val => setPrompterSlug(val.target.value)}
 				/>
 			</div>
 			<Button
 				labelText="GO"
-				onClick={() => null}
+				onClick={() => history.push(`/controller/${prompterSlug}`)}
 			/>
 		</div>
 	)
