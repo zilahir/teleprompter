@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStore } from 'react-redux'
@@ -14,7 +15,7 @@ import Header from './Header'
 
 const Player = () => {
 	const [text, setText] = useState('')
-	const [isPlaying, togglePlaying] = useState(false)
+	// const [isPlaying, togglePlaying] = useState(false)
 	const [isLoading, toggleIsLoading] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
@@ -22,10 +23,11 @@ const Player = () => {
 	useEffect(() => {
 		// socket.connect()
 		setText(store.getState().userPrompters.prompterObject.text)
-		socket.on('isPlaying', playing => {
-			togglePlaying(playing)
+		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
+			// togglePlaying(playing)
+			console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
 		})
-	}, [store, isPlaying, socket])
+	}, [store, socket])
 
 	return (
 		<>

@@ -1,11 +1,12 @@
 /* eslint-disable no-alert */
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
 
-import playPause from '../../assets/controls/play.svg'
+import play from '../../assets/controls/play.svg'
+import pause from '../../assets/controls/pause.svg'
 import backward from '../../assets/controls/backward.svg'
 import forward from '../../assets/controls/forward.svg'
 import styles from './MobileContainer.module.scss'
@@ -27,12 +28,14 @@ const BTN = styled.div`
 
 const MobileController = () => {
 	const { slug } = useParams()
+	const [isPlaying, togglePlaying] = useState(false)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
-		socket.emit('isPlaying', {
+		togglePlaying(!isPlaying)
+		/* socket.emit('isPlaying', {
 			prompterId: slug,
 			isPlaying: true,
-		})
+		}) */
 	}
 	return (
 		<div className={styles.mainContainer}>
@@ -64,7 +67,7 @@ const MobileController = () => {
 					onKeyDown={null}
 					tabIndex={-1}
 				>
-					<img alt="play" src={playPause} />
+					<img alt="play" src={isPlaying ? pause : play} />
 				</div>
 				<BTN
 					className={classnames(
