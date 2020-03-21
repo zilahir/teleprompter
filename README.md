@@ -23,6 +23,10 @@ This project heavily depends on the following `open source` projects.
 8. [`hex-to-rgba`](https://github.com/misund/hex-to-rgba)
 9. [... and a lot other](https://github.com/zilahir/teleprompter/blob/master/package.json)
 
+## Misc
+
+This project is deployed via [netlify](https://netlify.com)
+
 ## Licence
 
 This is a _free_ product, and it's licenced under `BSD 3-Clause License`. 
