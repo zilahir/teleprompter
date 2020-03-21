@@ -34,6 +34,7 @@ const Login = props => {
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isRegistering, toggleRegisteringNewUser] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
+	const [isRegistered, setIsRegistered] = useState(false)
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
@@ -101,7 +102,16 @@ const Login = props => {
 		}
 		Promise.all([
 			createNewUser(newUserObject),
-		])
+		]).then(() => {
+			setTimeout(() => {
+				toggleRegisteringNewUser(false)
+				setIsRegistered(true)
+				setTimeout(() => {
+					setIsRegistered(false)
+					requestClose()
+				}, 1000)
+			}, 1000)
+		})
 	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
@@ -135,11 +145,11 @@ const Login = props => {
 								styles.loginBoxContainer,
 								styles.regContainer,
 								isVisible ? styles.show : styles.hidden,
-								isRegistering ? styles.registering : null,
+								isRegistering || isRegistered ? styles.registering : null,
 							)}
 							>
 								{
-									isRegistering
+									isRegistering || isRegistered
 										? (
 											<Loader
 												isLoading={isRegistering}
