@@ -14,6 +14,34 @@
     align-items: center;
     padding: 20px;
 
+    .additionalInfo {
+        width: 275px;
+
+        p {
+            @include paragraph(14px, #ffffff);
+            letter-spacing: 0;
+            line-height: 1.7;
+            padding: 10px 20px;
+
+            a {
+                color: $purple;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &.registering {
+        transition: all .3s ease;
+        width: 280px;
+        height: 100px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
     &.saveContainer {
         width: 280px;
         height: 150px;

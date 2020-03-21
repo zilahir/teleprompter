@@ -55,3 +55,12 @@ export const logOutUser = () => dispatch => new Promise(resolve => {
 	dispatch(removeUser())
 	resolve(true)
 })
+
+export const createNewUser = newUserObject => new Promise(resolve => {
+	axios.post(apiEndpoints.newUser, JSON.stringify(newUserObject), {
+		headers,
+	})
+		.then(resp => {
+			resolve(resp.data)
+		})
+})

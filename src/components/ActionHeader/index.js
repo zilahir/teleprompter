@@ -176,6 +176,7 @@ const ActionHeader = () => {
 			<Login
 				isVisible={showRegister}
 				type={REGISTER}
+				requestClose={() => toggleRegister(false)}
 			/>
 			<Login
 				isVisible={showLoad}

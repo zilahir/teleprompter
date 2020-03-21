@@ -13,7 +13,7 @@ import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
-import { authUser } from '../../store/actions/authUser'
+import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
@@ -29,8 +29,12 @@ const Login = props => {
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
+	const [chosenEmail, setChosenEmail] = useState(null)
+	const [chosenPassword, setChosenPassword] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
+	const [isRegistering, toggleRegisteringNewUser] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
+	const [isRegistered, setIsRegistered] = useState(false)
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
@@ -47,12 +51,15 @@ const Login = props => {
 			projectName,
 			prompterSlug: store.getState().userPrompters.prompterSlug,
 		}
-		// requestClose()
 		toggleSavingLoader(true)
 		setTimeout(() => {
 			setIsSaved(true)
+			toggleSavingLoader(false)
+			setTimeout(() => {
+				setIsSaved(false)
+				requestClose()
+			}, 1000)
 		}, 1000)
-		console.debug('saveObject', saveObject)
 	}
 
 	function handleLoad(selectedPrompter) {
@@ -86,6 +93,26 @@ const Login = props => {
 			toggleModalOpen(false)
 		})
 	}
+
+	function regNewUser() {
+		toggleRegisteringNewUser(true)
+		const newUserObject = {
+			email: chosenEmail,
+			password: chosenPassword,
+		}
+		Promise.all([
+			createNewUser(newUserObject),
+		]).then(() => {
+			setTimeout(() => {
+				toggleRegisteringNewUser(false)
+				setIsRegistered(true)
+				setTimeout(() => {
+					setIsRegistered(false)
+					requestClose()
+				}, 1000)
+			}, 1000)
+		})
+	}
 	const { usersPrompters } = store.getState().userPrompters
 	return (
 		<>
@@ -116,28 +143,48 @@ const Login = props => {
 						? (
 							<div className={classnames(
 								styles.loginBoxContainer,
+								styles.regContainer,
 								isVisible ? styles.show : styles.hidden,
+								isRegistering || isRegistered ? styles.registering : null,
 							)}
 							>
-								<Input
-									inheritedValue="Email (required)"
-									inputClassName={styles.loginInput}
-								/>
-								<Input
-									inheritedValue="Password  (requited min 8 chars)"
-									inputClassName={styles.loginInput}
-									type={PASSWORD}
-								/>
-								<Input
-									inheritedValue="Password  (again)"
-									inputClassName={styles.loginInput}
-									type={PASSWORD}
-								/>
-								<Button
-									labelText="LOG IN"
-									onClick={() => null}
-									buttonClass={styles.loginBtn}
-								/>
+								{
+									isRegistering || isRegistered
+										? (
+											<Loader
+												isLoading={isRegistering}
+											/>
+										) : (
+											<>
+												<Input
+													placeholder="Email (required)"
+													inputClassName={styles.loginInput}
+													getBackValue={v => setChosenEmail(v)}
+												/>
+												<Input
+													placeholder="Password  (requited min 8 chars)"
+													inputClassName={styles.loginInput}
+													type={PASSWORD}
+													getBackValue={v => setChosenPassword(v)}
+												/>
+												<Input
+													placeholder="Password  (again)"
+													inputClassName={styles.loginInput}
+													type={PASSWORD}
+												/>
+												<div className={styles.additionalInfo}>
+													<p>
+														By signing up, you agree to our <a href="/policy">Privacy Policy</a>
+													</p>
+												</div>
+												<Button
+													labelText="SIGN UP"
+													onClick={() => regNewUser()}
+													buttonClass={styles.loginBtn}
+												/>
+											</>
+										)
+								}
 							</div>
 						) : type === LOAD
 							? (
@@ -191,7 +238,7 @@ const Login = props => {
 									)}
 									>
 										{
-											isSaving
+											isSaving || isSaved
 												? (
 													<>
 														<Loader
@@ -211,7 +258,7 @@ const Login = props => {
 												: (
 													<>
 														<Input
-															inheritedValue="Project name"
+															placeholder="Project name"
 															inputClassName={styles.loginInput}
 															getBackValue={v => setProjectName(v)}
 														/>
