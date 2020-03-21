@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Container, Col } from 'react-grid-system'
 import { useHistory } from 'react-router-dom'
 
-import styles from './About.module.scss'
+import styles from './Policy.module.scss'
 import Button from '../common/Button'
 
 /**

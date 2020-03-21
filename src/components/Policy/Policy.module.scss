@@ -26,4 +26,11 @@
 			list-style-type: none;
 		}
 	}
+
+	h1 {
+		@include paragraph(15px, #ffffff, 0.39px);
+		line-height: 1.7;
+		margin: 10px 0;
+		font-weight: 700;
+	}
 }
