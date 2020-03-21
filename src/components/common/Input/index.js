@@ -11,7 +11,15 @@ import styles from './Input.module.scss'
 * */
 
 const Input = props => {
-	const { labelText, isDisabled, inheritedValue, inputClassName, inputType, getBackValue } = props
+	const {
+		labelText,
+		isDisabled,
+		inheritedValue,
+		inputClassName,
+		inputType,
+		getBackValue,
+		placeholder,
+	} = props
 	const [value, setValue] = useState(null)
 
 	function handleChange(v) {
@@ -36,6 +44,7 @@ const Input = props => {
 					onChange={e => handleChange(e.target.value)}
 					value={value || inheritedValue}
 					disabled={isDisabled}
+					placeholder={placeholder}
 				/>
 			</label>
 		</div>
@@ -49,6 +58,7 @@ Input.defaultProps = {
 	inputType: 'text',
 	isDisabled: false,
 	labelText: '',
+	placeholder: '',
 }
 
 Input.propTypes = {
@@ -58,6 +68,7 @@ Input.propTypes = {
 	inputType: PropTypes.string,
 	isDisabled: PropTypes.bool,
 	labelText: PropTypes.string,
+	placeholder: PropTypes.string,
 }
 
 export default Input
