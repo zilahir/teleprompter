@@ -6,7 +6,7 @@ import Player from '../components/Player'
 import Main from '../components/Main'
 import Mobile from '../components/Mobile'
 import MobileController from '../components/MobileController'
-import About from '../components/About'
+import Policy from '../components/Policy'
 
 /**
 * @author
@@ -19,7 +19,7 @@ const App = () => (
 			<Route path="/" exact component={!isMobile ? Main : Mobile} />
 			<Route path="/player/:slug" exact component={Player} />
 			<Route path="/controller/:slug" exact component={MobileController} />
-			<Route path="/about" exact component={About} />
+			<Route path="/policy" exact component={Policy} />
 		</Router>
 	</div>
 )
