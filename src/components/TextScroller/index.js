@@ -23,11 +23,11 @@ const Scroller = styled.div`
 `
 
 const TextScroller = props => {
-	const { text, scrollSpeed, prompterObject } = props
+	const { text, scrollSpeed, prompterObject, playing } = props
 	const controls = useAnimation()
 	const textRef = useRef(null)
 	const [height, setHeight] = useState(null)
-	const [isPlaying, togglePlaying] = useState(false)
+	const [isPlaying, togglePlaying] = useState(playing)
 	const container = {
 		start: {
 			y: 0,
@@ -86,6 +86,7 @@ const TextScroller = props => {
 }
 
 TextScroller.propTypes = {
+	playing: PropTypes.bool.isRequired,
 	prompterObject: PropTypes.objectOf(PropTypes.any).isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,

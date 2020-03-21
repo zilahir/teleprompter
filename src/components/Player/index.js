@@ -15,7 +15,7 @@ import Header from './Header'
 
 const Player = () => {
 	const [text, setText] = useState('')
-	// const [isPlaying, togglePlaying] = useState(false)
+	const [playing, togglePlaying] = useState(false)
 	const [isLoading, toggleIsLoading] = useState(false)
 	const store = useStore()
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
@@ -24,10 +24,10 @@ const Player = () => {
 		// socket.connect()
 		setText(store.getState().userPrompters.prompterObject.text)
 		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
-			// togglePlaying(playing)
+			togglePlaying(isPlaying)
 			console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
 		})
-	}, [store, socket])
+	}, [store, playing, socket])
 
 	return (
 		<>
@@ -41,6 +41,7 @@ const Player = () => {
 								slug={slug}
 								prompterObject={store.getState().userPrompters.prompterObject}
 								scrollSpeed={store.getState().text.scrollSpeed}
+								isPlaying={playing}
 							/>
 						)
 						: <Loader isLoading={isLoading} />
