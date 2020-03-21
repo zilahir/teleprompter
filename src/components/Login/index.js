@@ -133,8 +133,13 @@ const Login = props => {
 									inputClassName={styles.loginInput}
 									type={PASSWORD}
 								/>
+								<div className={styles.additionalInfo}>
+									<p>
+										By signing up, you agree to our <a href="/policy">Privacy Policy</a>
+									</p>
+								</div>
 								<Button
-									labelText="LOG IN"
+									labelText="SIGN UP"
 									onClick={() => null}
 									buttonClass={styles.loginBtn}
 								/>
