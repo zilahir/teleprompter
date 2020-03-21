@@ -30,7 +30,7 @@ const About = () => {
 								What is Prompter.me?
 							</h1>
 							<p>
-								Prompter.me is a free, open source teleprompter on the web. Using it doesn&apos;t
+								Prompter.me is a free, <a href="https://github.com/zilahir/teleprompter">open source</a> teleprompter on the web. Using it doesn&apos;t
 								require you to download anything or to sign up for anything.
 								It was made to give content creators an actually useful free teleprompter,
 								which would allow them to use it on their own without any additional apps or hacks.
