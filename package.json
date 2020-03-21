@@ -44,7 +44,7 @@
     "redux-thunk": "^2.3.0",
     "screenfull": "^3.3.2",
     "showdown": "^1.9.1",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.0.1",
     "use-socket.io-client": "^1.1.0",
     "uuid": "^3.4.0"
   },
