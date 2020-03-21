@@ -50,12 +50,15 @@ const Login = props => {
 			projectName,
 			prompterSlug: store.getState().userPrompters.prompterSlug,
 		}
-		// requestClose()
 		toggleSavingLoader(true)
 		setTimeout(() => {
 			setIsSaved(true)
+			toggleSavingLoader(false)
+			setTimeout(() => {
+				setIsSaved(false)
+				requestClose()
+			}, 1000)
 		}, 1000)
-		console.debug('saveObject', saveObject)
 	}
 
 	function handleLoad(selectedPrompter) {
@@ -225,7 +228,7 @@ const Login = props => {
 									)}
 									>
 										{
-											isSaving
+											isSaving || isSaved
 												? (
 													<>
 														<Loader
