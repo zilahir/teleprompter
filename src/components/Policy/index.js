@@ -23,6 +23,7 @@ const Policy = () => {
 						<Button
 							labelText="Back"
 							onClick={() => history.goBack()}
+							buttonClass={styles.buttonContainer}
 						/>
 						<div className={styles.textContainer}>
 							<p>

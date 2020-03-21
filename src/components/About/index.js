@@ -23,6 +23,7 @@ const About = () => {
 						<Button
 							labelText="Back"
 							onClick={() => history.goBack()}
+							buttonClass={styles.buttonContainer}
 						/>
 						<div className={styles.textContainer}>
 							<h1>
@@ -54,7 +55,7 @@ const About = () => {
 								data and deep data analysis.
 								Richard is the co-host of the
 								podcast &quot;Szauna Szenátus&quot;, in Hungarian language.
-								Check out some of Richard&apos;s work on his GitHub page and his website.
+								Check out some of Richard&apos;s work on his <a href="https://github.com/zilahir">GitHub page</a> and his <a href="https://richardzilahi.hu">website</a>.
 							</p>
 							<h1>
 								How to use Prompter.me?
