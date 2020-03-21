@@ -1,3 +1,29 @@
+@import '../../styles/variables';
+@import '../../styles/mixins/paragraph';
+
 .aboutWrapper {
-	
+	.dark {
+		background: rgba($color: $gray-2, $alpha: 1.0);
+	}
+
+	.middle {
+		padding: 50px 20px;
+			.textContainer {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				max-width: 620px;
+				margin-left: auto;
+    		margin-right: auto;
+			}
+	}
+
+	p {
+		@include paragraph(15px, #ffffff, 0.39px);
+		line-height: 1.7;
+		margin: 10px 0;
+		ul {
+			list-style-type: none;
+		}
+	}
 }
