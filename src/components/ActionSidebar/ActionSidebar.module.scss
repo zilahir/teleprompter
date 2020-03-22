@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/mixins/paragraph.scss';
 
 .actionSidebarContainer {
     background-color: $gray-2;
@@ -14,6 +15,19 @@
         .playButtonContainer {
             position: absolute;
             bottom: 60px;
+        }
+
+        .about {
+            a {
+                @include paragraph(14px, #ffffff, 0.42px);
+                text-decoration: none;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                    color: $purple;
+                }
+            }
         }
     }
 }

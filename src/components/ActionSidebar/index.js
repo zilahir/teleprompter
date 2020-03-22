@@ -10,6 +10,7 @@ import styles from './ActionSidebar.module.scss'
 import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
 import Instruction from '../common/Instruction'
 import { copyPrompterObject, createNewPrompter } from '../../store/actions/prompter'
+import { apiEndpoints } from '../../utils/apiEndpoints'
 
 /**
 * @author zilahir
@@ -51,8 +52,7 @@ const ActionSidebar = () => {
 			}
 			Promise.all([
 				dispatch(copyPrompterObject(store.getState().text)),
-				createNewPrompter(saveObject, user.accessToken),
-				// TODO: change hardcoded user id fro user object
+				createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompterWithoutAuth),
 			]).then(() => {
 				setTimeout(() => {
 					window.open(`/player/${prompterSlug}`, '_blank')
@@ -121,7 +121,11 @@ const ActionSidebar = () => {
 									type={INFOBOX_SIDEBAR}
 								/>
 							)
-							: null
+							: (
+								<p className={styles.about}>
+									<a href="/about">About Prompter.me</a>
+								</p>
+							)
 					}
 					<div className={styles.playButtonContainer}>
 						{
