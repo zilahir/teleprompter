@@ -7,4 +7,5 @@ export const apiEndpoints = {
 	getAllPrompterForUser: `${apiRoot}/allprompterbyuserid`,
 	delPrompter: `${apiRoot}/prompter`,
 	modifyPrompter: `${apiRoot}/prompter`,
+	newPrompterWithoutAuth: `${apiRoot}/prompternoauth`,
 }
