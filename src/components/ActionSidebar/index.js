@@ -121,7 +121,11 @@ const ActionSidebar = () => {
 									type={INFOBOX_SIDEBAR}
 								/>
 							)
-							: null
+							: (
+								<p className={styles.about}>
+									<a href="/about">About Prompter.me</a>
+								</p>
+							)
 					}
 					<div className={styles.playButtonContainer}>
 						{
