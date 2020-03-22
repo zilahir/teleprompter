@@ -14,10 +14,11 @@ import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
-import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter } from '../../store/actions/prompter'
+import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
 import Modal from '../common/Modal'
+import { apiEndpoints } from '../../utils/apiEndpoints'
 
 /**
 * @author zilahir
@@ -47,19 +48,35 @@ const Login = props => {
 	}
 
 	function handleSave() {
-		const saveObject = {
-			projectName,
-			prompterSlug: store.getState().userPrompters.prompterSlug,
-		}
 		toggleSavingLoader(true)
-		setTimeout(() => {
-			setIsSaved(true)
-			toggleSavingLoader(false)
+		const newPrompterObject = store.getState().text
+		const { user } = store.getState().user
+		const slug = store.getState().userPrompters.prompterSlug
+		const saveObject = {
+			slug,
+			text: newPrompterObject.text,
+			userId: '5e63f4ba19a0555a4fbbe5da',
+			projectName: `project_${slug}`,
+			meta: {
+				fontSize: newPrompterObject.fontSize,
+				lineHeight: newPrompterObject.lineHeight,
+				letterSpacing: newPrompterObject.letterSpacing,
+				scrollWidth: newPrompterObject.scrollWidth,
+				scrollSpeed: newPrompterObject.scrollSpeed,
+			},
+		}
+		Promise.all([
+			createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompter),
+		]).then(() => {
 			setTimeout(() => {
-				setIsSaved(false)
-				requestClose()
+				setIsSaved(true)
+				toggleSavingLoader(false)
+				setTimeout(() => {
+					setIsSaved(false)
+					requestClose()
+				}, 1000)
 			}, 1000)
-		}, 1000)
+		})
 	}
 
 	function handleLoad(selectedPrompter) {

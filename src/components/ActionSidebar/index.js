@@ -50,12 +50,9 @@ const ActionSidebar = () => {
 					scrollSpeed: newPrompterObject.scrollSpeed,
 				},
 			}
-			const newPrompterAction = store.getState().user.loggedIn
-				? createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompter)
-				: createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompterWithoutAuth)
 			Promise.all([
 				dispatch(copyPrompterObject(store.getState().text)),
-				newPrompterAction,
+				createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompterWithoutAuth),
 			]).then(() => {
 				setTimeout(() => {
 					window.open(`/player/${prompterSlug}`, '_blank')
