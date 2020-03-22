@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useSocket from 'use-socket.io-client'
 import classnames from 'classnames'
@@ -30,13 +30,15 @@ const MobileController = () => {
 	const [isPlaying, togglePlaying] = useState(false)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
-		console.debug('clicked', isPlaying)
 		togglePlaying(!isPlaying)
+	}
+
+	useEffect(() => {
 		socket.emit('isPlaying', {
 			prompterId: slug,
-			isPlaying: true,
+			isPlaying,
 		})
-	}
+	}, [isPlaying])
 
 	return (
 		<div className={styles.mainContainer}>
