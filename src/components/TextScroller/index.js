@@ -47,6 +47,11 @@ const TextScroller = props => {
 	socket.on('isPlaying', ({ prompterId, isPlaying }) => {
 		togglePlaying(isPlaying)
 		console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
+		if (isPlaying) {
+			controls.start('end')
+		} else {
+			controls.stop()
+		}
 	})
 
 	function handleKeyPress(key, e) {
