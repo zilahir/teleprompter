@@ -35,6 +35,7 @@ const TextScroller = props => {
 		const scroller = document.querySelector('#scroller')
 		setInterval(() => {
 			setPosition(position + 1)
+			console.debug('position', position)
 			scroller.scroll({
 				top: position,
 			})
@@ -50,6 +51,10 @@ const TextScroller = props => {
 			// START
 		}
 	})
+
+	useEffect(() => {
+		console.debug('position', position)
+	}, [position])
 
 	useEffect(() => {
 		console.debug('isPlaying', playing)
