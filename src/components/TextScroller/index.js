@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+/* eslint-disable no-console */
+import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import useSocket from 'use-socket.io-client'
 import PropTypes from 'prop-types'
@@ -27,6 +28,19 @@ const TextScroller = props => {
 	const { text, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
 	const [playing, togglePlaying] = useState(false)
+	const [position, setPosition] = useState(0)
+	const scrollerRef = useRef(null)
+
+	function startScroll() {
+		const scroller = document.querySelector('#scroller')
+		setInterval(() => {
+			setPosition(position + 1)
+			scroller.scroll({
+				top: position,
+			})
+		}, 100)
+	}
+
 	socket.on('isPlaying', ({ prompterId, isPlaying }) => {
 		togglePlaying(isPlaying)
 		console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
@@ -37,12 +51,26 @@ const TextScroller = props => {
 		}
 	})
 
+	useEffect(() => {
+		console.debug('isPlaying', playing)
+		if (playing) {
+			startScroll()
+		}
+	}, [playing])
+
+	useEffect(() => {
+		const scroller = document.querySelector('#scroller')
+		scroller.addEventListener('scroll', event => {
+			setPosition(event.currentTarget.scrollTop)
+		})
+	}, [position])
+
 	function handleKeyPress(key, e) {
 		e.preventDefault()
 		if (key === SPACE) {
 			togglePlaying(!playing)
 			if (playing) {
-				// START
+				// startScroll()
 			} else {
 				// STOP
 			}
@@ -61,6 +89,8 @@ const TextScroller = props => {
 			>
 				<div
 					className={styles.scroller}
+					ref={scrollerRef}
+					id="scroller"
 				>
 					<p
 						ref={textRef}
