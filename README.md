@@ -4,6 +4,10 @@
 
 ![preview](./images/preview1.png)
 
+## Server
+
+The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server)
+
 ## Contributors
 
 - :nail_care: _design_: Mikko Oitinen 🇫🇮
