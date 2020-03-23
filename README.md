@@ -6,7 +6,7 @@
 
 ## Contributors
 
-- :nail_care: _design_ Mikko Oitinen 🇫🇮
+- :nail_care: _design_: Mikko Oitinen 🇫🇮
 - :computer: _dev_: Richard Zilahi [http](https://richardzilahi.hu) 🇭🇺
 
 ## Project dependencies
