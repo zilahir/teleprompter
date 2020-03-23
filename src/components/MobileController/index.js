@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useSocket from 'use-socket.io-client'
+import { useSocket } from '@zilahir/use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
 import { MorphReplace } from 'react-svg-morph'
@@ -34,10 +34,12 @@ const MobileController = () => {
 	}
 
 	useEffect(() => {
-		socket.emit('isPlaying', {
-			prompterId: slug,
-			isPlaying,
-		})
+		if (socket) {
+			socket.emit('isPlaying', {
+				prompterId: slug,
+				isPlaying,
+			})
+		}
 	}, [isPlaying])
 
 	return (

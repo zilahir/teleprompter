@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
-import useSocket from 'use-socket.io-client'
+import { useSocket } from '@zilahir/use-socket.io-client'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -63,20 +63,22 @@ const TextScroller = props => {
 		})
 	}, playing ? scrollSpeed : null)
 
-	socket.on('isPlaying', ({ prompterId, isPlaying }) => {
-		console.debug('prompterObject', prompterObject)
-		if (prompterId === slug) {
-			togglePlaying(isPlaying)
-		} else {
-			console.debug('this is not your prompt')
-		}
-		console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
-		if (isPlaying) {
-			// STOP
-		} else {
-			// START
-		}
-	})
+	if (socket) {
+		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
+			console.debug('prompterObject', prompterObject)
+			if (prompterId === slug) {
+				togglePlaying(isPlaying)
+			} else {
+				console.debug('this is not your prompt')
+			}
+			console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
+			if (isPlaying) {
+				// STOP
+			} else {
+				// START
+			}
+		})
+	}
 
 	const scrollHandler = event => {
 		setPosition(event.currentTarget.scrollTop)

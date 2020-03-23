@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/react-fontawesome": "0.0.20",
+    "@zilahir/use-socket.io-client": "^1.2.0",
     "axios": "^0.19.1",
     "classnames": "^2.2.6",
     "framer-motion": "^1.9.1",
@@ -39,10 +40,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "screenfull": "^3.3.2",
-    "showdown": "^1.9.1",
     "styled-components": "^4.4.1",
-    "use-socket.io-client": "^1.1.0",
     "uuid": "^3.4.0"
   },
   "scripts": {
