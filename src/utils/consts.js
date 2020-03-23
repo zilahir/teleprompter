@@ -45,6 +45,8 @@ export const PAGE_DOWN = 'pagedown'
 export const UP = 'up'
 export const DOWN = 'down'
 export const F6 = 'f6'
+export const LEFT = 'left'
+export const RIGHT = 'right'
 
 export const keyListeners = [
 	SPACE,
@@ -53,4 +55,6 @@ export const keyListeners = [
 	UP,
 	DOWN,
 	F6,
+	LEFT,
+	RIGHT,
 ]

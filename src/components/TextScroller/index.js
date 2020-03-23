@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6 } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 
 /**
@@ -53,6 +53,7 @@ const TextScroller = props => {
 	const textRef = useRef(null)
 	const [playing, togglePlaying] = useState(false)
 	const [position, setPosition] = useState(0)
+	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
 
@@ -61,7 +62,7 @@ const TextScroller = props => {
 		scrollerRef.current.scroll({
 			top: position,
 		})
-	}, playing ? scrollSpeed : null)
+	}, playing ? scrollSpeedValue : null)
 
 	if (socket) {
 		// socket.emit('room', slug) // TODO: finnish this
@@ -83,6 +84,7 @@ const TextScroller = props => {
 	}, [])
 
 	function handleKeyPress(key, e) {
+		console.debug('key', key)
 		e.preventDefault()
 		if (key === SPACE) {
 			togglePlaying(!playing)
@@ -93,6 +95,10 @@ const TextScroller = props => {
 			}
 		} else if (key === F6) {
 			toggleFullScreen()
+		} else if (key === LEFT) {
+			setScrollSpeedValue(scrollSpeedValue + 5)
+		} else if (key === RIGHT) {
+			setScrollSpeedValue(scrollSpeedValue - 5)
 		}
 	}
 	return (
