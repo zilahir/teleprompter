@@ -64,6 +64,7 @@ const TextScroller = props => {
 	}, playing ? scrollSpeed : null)
 
 	if (socket) {
+		socket.emit('create', slug)
 		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
 			console.debug('prompterObject', prompterObject)
 			if (prompterId === slug) {

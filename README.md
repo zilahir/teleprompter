@@ -29,6 +29,8 @@ This project heavily depends on the following `open source` projects.
 
 This project is deployed via [netlify](https://netlify.com)
 
+Special thanks to [@munkacsimark](https://github.com/munkacsimark/) for helping me out with the scrolling function. :wave:
+
 ## Licence
 
 This is a _free_ product, and it's licenced under `BSD 3-Clause License`. 
