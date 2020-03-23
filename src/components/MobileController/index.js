@@ -47,7 +47,7 @@ const MobileController = () => {
 				role="button"
 				onKeyDown={null}
 				tabIndex={-1}
-				onClick={() => alert("hello")}
+				onClick={() => alert('hello')}
 			>
 				<img src={up} alt="up" />
 			</BTN>
