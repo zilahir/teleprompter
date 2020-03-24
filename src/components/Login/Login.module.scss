@@ -134,6 +134,16 @@
             }
         }
     }
+
+    .errorContainer {
+        &.hidden {
+            display: none;
+        }
+        padding-top: 10px;
+        p {
+            @include paragraph(14px, $orange, 0);
+        }
+    }
 }
 
 .modal {

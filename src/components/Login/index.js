@@ -163,6 +163,15 @@ const Login = props => {
 								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
+							<div className={classnames(
+								styles.errorContainer,
+								!isLoginError ? styles.hidden : null,
+							)}
+							>
+								<p>
+									Invalid email or password. Try again.
+								</p>
+							</div>
 						</div>
 					)
 					: type === REGISTER
