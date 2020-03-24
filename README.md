@@ -6,7 +6,7 @@
 
 ## Server
 
-The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server)
+The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server).
 
 ## Contributors
 

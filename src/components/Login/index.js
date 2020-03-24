@@ -33,6 +33,8 @@ const Login = props => {
 	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
 	const [chosenPassword, setChosenPassword] = useState(null)
+	const [confirmedPassowrd, setConfirmedPassword] = useState(null)
+	const [passwordMismatch, togglePasswordMismatch] = useState(null)
 	const [email, setEmail] = useState(null)
 	const [password, setPassword] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
@@ -120,6 +122,15 @@ const Login = props => {
 		})
 	}
 
+	function handlePasswordConfirmation(pw) {
+		setConfirmedPassword(pw)
+		if (pw !== chosenPassword) {
+			togglePasswordMismatch(true)
+		} else {
+			togglePasswordMismatch(false)
+		}
+	}
+
 	function regNewUser() {
 		toggleRegisteringNewUser(true)
 		const newUserObject = {
@@ -205,15 +216,30 @@ const Login = props => {
 													getBackValue={v => setChosenPassword(v)}
 												/>
 												<Input
-													placeholder="Password  (again)"
-													inputClassName={styles.loginInput}
+													placeholder="Confirm password"
+													inputClassName={
+														passwordMismatch ? styles.loginInputWError : styles.loginInput
+													}
 													type={PASSWORD}
+													getBackValue={v => handlePasswordConfirmation(v)}
 												/>
+
+												<div className={classnames(
+													styles.errorContainer,
+													!passwordMismatch ? styles.hidden : null,
+												)}
+												>
+													<p>
+														Passwords arent&apos;t matching
+													</p>
+												</div>
+
 												<div className={styles.additionalInfo}>
 													<p>
 														By signing up, you agree to our <a href="/policy">Privacy Policy</a>
 													</p>
 												</div>
+
 												<Button
 													labelText="SIGN UP"
 													onClick={() => regNewUser()}
