@@ -16,7 +16,7 @@ import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 
@@ -74,6 +74,7 @@ const Login = props => {
 				letterSpacing: newPrompterObject.letterSpacing,
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
+				isFlipped: newPrompterObject.isFlipped,
 			},
 		}
 		Promise.all([
@@ -101,6 +102,7 @@ const Login = props => {
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
 			dispatch(setPrompterSlug(selectedPrompter.id)),
+			dispatch(toggleMirror(selectedPrompter.meta.isFlipped)),
 		]).then(() => {
 			requestClose()
 		})

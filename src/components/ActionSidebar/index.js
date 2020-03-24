@@ -42,7 +42,7 @@ const ActionSidebar = () => {
 			const saveObject = {
 				slug,
 				text: newPrompterObject.text,
-				userId: '5e63f4ba19a0555a4fbbe5da',
+				userId: '5e63f4ba19a0555a4fbbe5da', // TODO: change the user id here from auth object
 				projectName: `project_${slug}`,
 				meta: {
 					fontSize: newPrompterObject.fontSize,
@@ -50,6 +50,7 @@ const ActionSidebar = () => {
 					letterSpacing: newPrompterObject.letterSpacing,
 					scrollWidth: newPrompterObject.scrollWidth,
 					scrollSpeed: newPrompterObject.scrollSpeed,
+					isFlipped: newPrompterObject.isFlipped,
 				},
 			}
 			Promise.all([
