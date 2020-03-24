@@ -1,7 +1,7 @@
 import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER, TOGGLE_FLIPPED } from '../actions/actionTypes'
 
 const initialState = {
-	fontSize: 20,
+	fontSize: 2,
 	text: '',
 	lineHeight: 1,
 	letterSpacing: 1,

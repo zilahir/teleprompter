@@ -8,7 +8,7 @@ import styles from './TextPreview.module.scss'
 
 const Text = styled.div`
 	p {
-		font-size: ${props => props.fontSize}px;
+		font-size: ${props => props.fontSize * 10}px;
 		line-height: ${props => props.lineHeight} !important;
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
@@ -17,7 +17,7 @@ const Text = styled.div`
 
 const TextMirrored = styled.div`
 	p {
-		font-size: ${props => props.fontSize}px;
+		font-size: ${props => props.fontSize * 10}px;
 		line-height: ${props => props.lineHeight} !important;
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};

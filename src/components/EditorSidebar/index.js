@@ -38,7 +38,7 @@ const EditorSidebar = () => {
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
 						initialValue={store.getState().text.fontSize}
-						maxValue={100}
+						maxValue={10}
 						step={1}
 					/>
 					<SliderAlt
