@@ -37,7 +37,7 @@ const useInterval = (callback, delay) => {
 }
 
 const Scroller = styled.div`
-	max-width: ${props => props.scrollWidth}
+	max-width: ${props => props.scrollWidth};
 	p {
 		font-size: ${props => props.fontSize}px;
 		letter-spacing: ${props => props.letterSpacing}vw;
