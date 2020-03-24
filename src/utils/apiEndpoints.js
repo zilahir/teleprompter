@@ -1,4 +1,4 @@
-const apiRoot = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.BACKEND
+const apiRoot = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND
 
 export const apiEndpoints = {
 	authUser: `${apiRoot}/auth`,
