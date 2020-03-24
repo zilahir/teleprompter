@@ -14,6 +14,7 @@ import Header from './Header'
 
 const Player = () => {
 	const [text, setText] = useState('')
+	// eslint-disable-next-line no-unused-vars
 	const [isLoading, toggleIsLoading] = useState(false)
 	const store = useStore()
 	const { slug } = useParams()

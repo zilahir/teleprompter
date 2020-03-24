@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useStore, useDispatch } from 'react-redux'
@@ -7,7 +8,7 @@ import { times } from 'react-icons-kit/fa/times'
 
 import PrompterIcon from '../common/Icon'
 import { Colors } from '../../utils/consts'
-import { setSegments } from '.././../store/actions/segments'
+// import { setSegments } from '.././../store/actions/segments'
 import styles from './Segment.module.scss'
 
 /**
