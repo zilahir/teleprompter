@@ -21,7 +21,7 @@
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "rc-slider": "^9.2.3",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.12.0",
     "react-grid-system": "^6.0.7",
