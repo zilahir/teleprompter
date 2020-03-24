@@ -212,7 +212,7 @@ const Login = props => {
 												<Input
 													placeholder="Password  (requited min 8 chars)"
 													inputClassName={styles.loginInput}
-													type={PASSWORD}
+													inputType={PASSWORD}
 													getBackValue={v => setChosenPassword(v)}
 												/>
 												<Input
@@ -220,7 +220,7 @@ const Login = props => {
 													inputClassName={
 														passwordMismatch ? styles.loginInputWError : styles.loginInput
 													}
-													type={PASSWORD}
+													inputType={PASSWORD}
 													getBackValue={v => handlePasswordConfirmation(v)}
 												/>
 
