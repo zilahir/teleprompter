@@ -31,7 +31,7 @@ This project heavily depends on the following `open source` projects.
 
 ## Misc
 
-This project is deployed via [netlify](https://netlify.com)
+This project is deployed via [netlify](https://netlify.com).
 
 Special thanks to [@munkacsimark](https://github.com/munkacsimark/) for helping me out with the scrolling function. :wave:
 

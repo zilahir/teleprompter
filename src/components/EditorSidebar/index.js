@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStore } from 'react-redux'
+import { useStore, useDispatch } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
@@ -11,6 +11,7 @@ import { scrollWidthSettngs } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
+import { toggleMirror } from '../../store/actions/text'
 
 /**
 * @author zilahir
@@ -20,9 +21,9 @@ import './Toggle.scss'
 const EditorSidebar = () => {
 	const [isFlipped, setFlipped] = useState(false)
 	const store = useStore()
-
+	const dispatch = useDispatch()
 	function handleFlip(boolean) {
-		// TODO: dispatch flipped actionreducer here
+		dispatch(toggleMirror(boolean.target.checked))
 		setFlipped(boolean.target.checked)
 	}
 	return (
