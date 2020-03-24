@@ -30,8 +30,11 @@ const Login = props => {
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
+	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
 	const [chosenPassword, setChosenPassword] = useState(null)
+	const [email, setEmail] = useState(null)
+	const [password, setPassword] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isRegistering, toggleRegisteringNewUser] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
@@ -40,10 +43,14 @@ const Login = props => {
 	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
 		Promise.all([
-			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
-		]).then(() => {
-			dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
-			requestClose()
+			dispatch(authUser({ email, password })),
+		]).then(res => {
+			if (res[0].isSuccess) {
+				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: add auth user id here
+				requestClose()
+			} else if (res[0].reason === 401 || res[0].reason === 404) {
+				setLoginError(true)
+			}
 		})
 	}
 
@@ -142,12 +149,14 @@ const Login = props => {
 						)}
 						>
 							<Input
-								inheritedValue="Email"
+								placeholder="Email"
 								inputClassName={styles.loginInput}
+								getBackValue={v => setEmail(v)}
 							/>
 							<Input
-								inheritedValue="Password"
+								placeholder="Password"
 								inputClassName={styles.loginInput}
+								getBackValue={v => setPassword(v)}
 							/>
 							<Button
 								labelText="LOG IN"
