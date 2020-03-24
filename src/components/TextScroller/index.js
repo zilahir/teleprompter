@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
+import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
-import useSocket from 'use-socket.io-client'
+import { useSocket } from '@zilahir/use-socket.io-client'
+import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { motion, useAnimation } from 'framer-motion'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6 } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 
 /**
@@ -14,8 +16,28 @@ import { toggleFullScreen } from '../../utils/fullScreen'
 * @function TextScroller
 * */
 
+const useInterval = (callback, delay) => {
+	const savedCallback = useRef()
+
+	useEffect(() => {
+		savedCallback.current = callback
+	}, [callback])
+
+	useEffect(() => {
+		function tick() {
+			savedCallback.current()
+		}
+		if (delay !== null) {
+			const id = setInterval(tick, delay)
+			return () => {
+				clearInterval(id)
+			}
+		}
+	}, [delay])
+}
+
 const Scroller = styled.div`
-	max-width: ${props => props.scrollWidth};
+	max-width: ${props => props.scrollWidth}
 	p {
 		font-size: ${props => props.fontSize}px;
 		letter-spacing: ${props => props.letterSpacing}vw;
@@ -23,43 +45,60 @@ const Scroller = styled.div`
 	}
 `
 
+const STEP = 5
+
 const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	const { text, scrollSpeed, prompterObject } = props
-	const controls = useAnimation()
 	const textRef = useRef(null)
-	const [height, setHeight] = useState(null)
 	const [playing, togglePlaying] = useState(false)
-	const container = {
-		start: {
-			y: 0,
-		},
-		end: {
-			y: -height - 100,
-		},
+	const [position, setPosition] = useState(0)
+	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
+	const scrollerRef = useRef(null)
+	const { slug } = useParams()
+
+	useInterval(() => {
+		setPosition(position + STEP)
+		scrollerRef.current.scroll({
+			top: position,
+		})
+	}, playing ? scrollSpeedValue : null)
+
+	if (socket) {
+		// socket.emit('room', slug) // TODO: finnish this
+		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
+			if (prompterId === slug) {
+				togglePlaying(isPlaying)
+			}
+			console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
+		})
+	}
+
+	const scrollHandler = event => {
+		setPosition(event.currentTarget.scrollTop)
 	}
 
 	useEffect(() => {
-		const { clientHeight } = textRef.current
-		setHeight(clientHeight)
-	}, [text])
-
-	socket.on('isPlaying', ({ prompterId, isPlaying }) => {
-		togglePlaying(isPlaying)
-		console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
-	})
+		scrollerRef.current.addEventListener('scroll', scrollHandler)
+		return () => scrollerRef.current.removeEventListener('scroll', scrollHandler)
+	}, [])
 
 	function handleKeyPress(key, e) {
+		console.debug('key', key)
 		e.preventDefault()
 		if (key === SPACE) {
 			togglePlaying(!playing)
 			if (playing) {
-				controls.stop()
+				// startScroll()
 			} else {
-				controls.start('end')
+				// STOP
 			}
 		} else if (key === F6) {
 			toggleFullScreen()
+		} else if (key === LEFT) {
+			setScrollSpeedValue(scrollSpeedValue + 5)
+		} else if (key === RIGHT) {
+			setScrollSpeedValue(scrollSpeedValue - 5)
 		}
 	}
 	return (
@@ -70,11 +109,9 @@ const TextScroller = props => {
 				lineHeight={prompterObject.lineHeight}
 				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
+				ref={scrollerRef}
 			>
-				<motion.div
-					animate={controls}
-					variants={container}
-					transition={{ ease: 'linear', duration: (scrollSpeed * scrollSpeed) * 0.5 }}
+				<div
 					className={styles.scroller}
 				>
 					<p
@@ -82,7 +119,7 @@ const TextScroller = props => {
 					>
 						{text}
 					</p>
-				</motion.div>
+				</div>
 			</Scroller>
 			<KeyboardEventHandler
 				handleKeys={[...keyListeners]}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
-import useSocket from 'use-socket.io-client'
+import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
 
 import TextPreview from '../common/TextPreview'
@@ -28,7 +28,9 @@ const ActionSidebar = () => {
 	const store = useStore()
 	const dispatch = useDispatch()
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
-	socket.connect()
+	if (socket) {
+		socket.connect()
+	}
 
 	function togglePlaying(bool) {
 		setIsPlaying(!isPlaying)
@@ -72,10 +74,6 @@ const ActionSidebar = () => {
 		setScrollSpeed(sp)
 		setText(t)
 	}), [store, text, scrollSpeed, prompterSlug])
-
-	useEffect(() => {
-		socket.connect()
-	}, [])
 
 	function testAnimation() {
 		toggleAnimation(!isAnimationStarted)

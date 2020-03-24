@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useSocket from 'use-socket.io-client'
+import { useSocket } from '@zilahir/use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
 import { MorphReplace } from 'react-svg-morph'
@@ -30,13 +30,17 @@ const MobileController = () => {
 	const [isPlaying, togglePlaying] = useState(false)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
 	function handleStartStop() {
-		console.debug('clicked', isPlaying)
 		togglePlaying(!isPlaying)
-		socket.emit('isPlaying', {
-			prompterId: slug,
-			isPlaying: true,
-		})
 	}
+
+	useEffect(() => {
+		if (socket) {
+			socket.emit('isPlaying', {
+				prompterId: slug,
+				isPlaying,
+			})
+		}
+	}, [isPlaying])
 
 	return (
 		<div className={styles.mainContainer}>
@@ -45,7 +49,7 @@ const MobileController = () => {
 				role="button"
 				onKeyDown={null}
 				tabIndex={-1}
-				onClick={() => alert("hello")}
+				onClick={() => alert('hello')}
 			>
 				<img src={up} alt="up" />
 			</BTN>
