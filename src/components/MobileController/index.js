@@ -28,7 +28,7 @@ const BTN = styled.div`
 const MobileController = () => {
 	const { slug } = useParams()
 	const [isPlaying, togglePlaying] = useState(false)
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.NODE_ENV === 'production')
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.BACKEND)
 	function handleStartStop() {
 		togglePlaying(!isPlaying)
 	}
