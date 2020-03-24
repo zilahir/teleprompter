@@ -28,7 +28,7 @@ const ActionSidebar = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.BACKEND)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
 	if (socket) {
 		socket.connect()
 	}

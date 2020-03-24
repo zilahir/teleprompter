@@ -48,7 +48,7 @@ const Scroller = styled.div`
 const STEP = 5
 
 const TextScroller = props => {
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.BACKEND)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
 	const { text, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
 	const [playing, togglePlaying] = useState(false)
