@@ -1,8 +1,12 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot)
 
-## Teleprompter 
+# Teleprompter 
 
 ![preview](./images/preview1.png)
+
+## What is Prompter.me?
+
+Prompter.me is a _free_, _open source_ teleprompter on the web. Using it doesn't require you to download anything or to sign up for anything. It was made to give content creators an actually useful free teleprompter, which would allow them to use it on their own without any additional apps or hacks. After all, a lot of video content creators out there are one-person operations, and we know using a prompter without help can be a real pain in the tuchus.
 
 ## Server
 
