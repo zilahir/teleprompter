@@ -33,6 +33,22 @@ This project heavily depends on the following `open source` projects.
 8. [`hex-to-rgba`](https://github.com/misund/hex-to-rgba)
 9. [... and a lot other](https://github.com/zilahir/teleprompter/blob/master/package.json)
 
+## Developing
+
+Contribution is very welcome! You need to clone this, and the [server](https://github.com/zilahir/teleprompter-server) repository. 
+
+For the client: 
+
+1. `npm i`
+2. `npm run start`
+3. The client is listening on `:4444`
+
+For the server: 
+
+1. `npm install`
+2. `npm run dev`
+3. The server is listening on `:5000`
+
 ## Misc
 
 This project is deployed via [netlify](https://netlify.com).
