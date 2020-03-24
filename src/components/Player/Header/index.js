@@ -2,8 +2,6 @@ import React from 'react'
 import { useStore } from 'react-redux'
 
 import styles from '../Player.module.scss'
-import { getOS } from '../../../utils/getOS'
-import { MAC_OS } from '../../../utils/consts'
 
 /**
 * @author zilahir
@@ -40,7 +38,7 @@ const Header = () => {
 				</div>
 				<div>
 					<p>
-						Pres { getOS() !== MAC_OS ? 'F11' : 'F6' } to toggle fullscreen
+						Pres F6 to toggle fullscreen
 					</p>
 				</div>
 			</div>
