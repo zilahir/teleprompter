@@ -1,12 +1,16 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot)
 
-## Teleprompter 
+# Teleprompter 
 
 ![preview](./images/preview1.png)
 
+## What is Prompter.me?
+
+Prompter.me is a _free_, _open source_ teleprompter on the web. Using it doesn't require you to download anything or to sign up for anything. It was made to give content creators an actually useful free teleprompter, which would allow them to use it on their own without any additional apps or hacks. After all, a lot of video content creators out there are one-person operations, and we know using a prompter without help can be a real pain in the tuchus.
+
 ## Server
 
-The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server)
+The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server).
 
 ## Contributors
 
@@ -29,9 +33,25 @@ This project heavily depends on the following `open source` projects.
 8. [`hex-to-rgba`](https://github.com/misund/hex-to-rgba)
 9. [... and a lot other](https://github.com/zilahir/teleprompter/blob/master/package.json)
 
+## Developing
+
+Contribution is very welcome! You need to clone this, and the [server](https://github.com/zilahir/teleprompter-server) repository. 
+
+For the client: 
+
+1. `npm i`
+2. `npm run start`
+3. The client is listening on `:4444`
+
+For the server: 
+
+1. `npm install`
+2. `npm run dev`
+3. The server is listening on `:5000`
+
 ## Misc
 
-This project is deployed via [netlify](https://netlify.com)
+This project is deployed via [netlify](https://netlify.com).
 
 Special thanks to [@munkacsimark](https://github.com/munkacsimark/) for helping me out with the scrolling function. :wave:
 

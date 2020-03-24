@@ -70,7 +70,17 @@ const TextScroller = props => {
 			if (prompterId === slug) {
 				togglePlaying(isPlaying)
 			}
-			console.debug(`prompterId: ${prompterId}, isPlaying: ${isPlaying}`)
+		})
+
+		socket.on('incSpeed', ({ prompterId }) => {
+			if (prompterId === slug) {
+				setScrollSpeedValue(scrollSpeedValue - 1)
+			}
+		})
+		socket.on('decSpeed', ({ prompterId }) => {
+			if (prompterId === slug) {
+				setScrollSpeedValue(scrollSpeedValue + 1)
+			}
 		})
 	}
 
@@ -96,9 +106,9 @@ const TextScroller = props => {
 		} else if (key === F6) {
 			toggleFullScreen()
 		} else if (key === LEFT) {
-			setScrollSpeedValue(scrollSpeedValue + 5)
+			setScrollSpeedValue(scrollSpeedValue + 1)
 		} else if (key === RIGHT) {
-			setScrollSpeedValue(scrollSpeedValue - 5)
+			setScrollSpeedValue(scrollSpeedValue - 1)
 		}
 	}
 	return (

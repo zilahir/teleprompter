@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			user: action.payload.user,
-			loggedIn: true,
+			loggedIn: action.payload.user.isSuccess,
 		}
 	case REMOVE_USER:
 		return {

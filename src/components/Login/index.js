@@ -16,7 +16,7 @@ import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 
@@ -30,8 +30,13 @@ const Login = props => {
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
+	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
 	const [chosenPassword, setChosenPassword] = useState(null)
+	const [confirmedPassowrd, setConfirmedPassword] = useState(null)
+	const [passwordMismatch, togglePasswordMismatch] = useState(null)
+	const [email, setEmail] = useState(null)
+	const [password, setPassword] = useState(null)
 	const [isSaving, toggleSavingLoader] = useState(false)
 	const [isRegistering, toggleRegisteringNewUser] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
@@ -40,10 +45,16 @@ const Login = props => {
 	const [delProject, setProjectToDel] = useState(null)
 	function handleLogin() {
 		Promise.all([
-			dispatch(authUser({ email: 'zilahi@gmail.com', password: 'demo' })),
-		]).then(() => {
-			dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da'))
-			requestClose()
+			dispatch(authUser({ email, password })),
+		]).then(res => {
+			if (res[0].isSuccess) {
+				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: add auth user id here
+				requestClose()
+				setEmail(null)
+				setPassword(null)
+			} else if (res[0].reason === 401 || res[0].reason === 404) {
+				setLoginError(true)
+			}
 		})
 	}
 
@@ -63,6 +74,7 @@ const Login = props => {
 				letterSpacing: newPrompterObject.letterSpacing,
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
+				isFlipped: newPrompterObject.isFlipped,
 			},
 		}
 		Promise.all([
@@ -90,6 +102,7 @@ const Login = props => {
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
 			dispatch(setPrompterSlug(selectedPrompter.id)),
+			dispatch(toggleMirror(selectedPrompter.meta.isFlipped)),
 		]).then(() => {
 			requestClose()
 		})
@@ -109,6 +122,15 @@ const Login = props => {
 		]).then(() => {
 			toggleModalOpen(false)
 		})
+	}
+
+	function handlePasswordConfirmation(pw) {
+		setConfirmedPassword(pw)
+		if (pw !== chosenPassword) {
+			togglePasswordMismatch(true)
+		} else {
+			togglePasswordMismatch(false)
+		}
 	}
 
 	function regNewUser() {
@@ -142,18 +164,30 @@ const Login = props => {
 						)}
 						>
 							<Input
-								inheritedValue="Email"
+								placeholder="Email"
 								inputClassName={styles.loginInput}
+								getBackValue={v => setEmail(v)}
 							/>
 							<Input
-								inheritedValue="Password"
+								placeholder="Password"
 								inputClassName={styles.loginInput}
+								getBackValue={v => setPassword(v)}
+								inputType={PASSWORD}
 							/>
 							<Button
 								labelText="LOG IN"
 								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
+							<div className={classnames(
+								styles.errorContainer,
+								!isLoginError ? styles.hidden : null,
+							)}
+							>
+								<p>
+									Invalid email or password. Try again.
+								</p>
+							</div>
 						</div>
 					)
 					: type === REGISTER
@@ -181,23 +215,41 @@ const Login = props => {
 												<Input
 													placeholder="Password  (requited min 8 chars)"
 													inputClassName={styles.loginInput}
-													type={PASSWORD}
+													inputType={PASSWORD}
 													getBackValue={v => setChosenPassword(v)}
 												/>
 												<Input
-													placeholder="Password  (again)"
-													inputClassName={styles.loginInput}
-													type={PASSWORD}
+													placeholder="Confirm password"
+													inputClassName={
+														passwordMismatch ? styles.loginInputWError : styles.loginInput
+													}
+													inputType={PASSWORD}
+													getBackValue={v => handlePasswordConfirmation(v)}
 												/>
+
+												<div className={classnames(
+													styles.errorContainer,
+													!passwordMismatch ? styles.hidden : null,
+												)}
+												>
+													<p>
+														Passwords arent&apos;t matching
+													</p>
+												</div>
+
 												<div className={styles.additionalInfo}>
 													<p>
 														By signing up, you agree to our <a href="/policy">Privacy Policy</a>
 													</p>
 												</div>
+
 												<Button
 													labelText="SIGN UP"
 													onClick={() => regNewUser()}
 													buttonClass={styles.loginBtn}
+													disabled={
+														!!(passwordMismatch == null || passwordMismatch === true)
+													}
 												/>
 											</>
 										)

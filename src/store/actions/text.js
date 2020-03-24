@@ -33,7 +33,7 @@ export const setLineHeight = lineHeight => ({
 	},
 })
 
-export const toggleFlipped = isFlipped => ({
+export const toggleMirror = isFlipped => ({
 	type: TOGGLE_FLIPPED,
 	payload: {
 		isFlipped,

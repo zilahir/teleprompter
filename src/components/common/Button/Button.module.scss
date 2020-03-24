@@ -3,7 +3,6 @@
 
 .buttonContainer {
     .button {
-
         width: 242px;
         height: 57px;
         border-radius: 32px;
@@ -22,6 +21,9 @@
         }
 
         &.negative {
+            background: rgba($color: $gray-6, $alpha: 1.0);
+        }
+        &:disabled {
             background: rgba($color: $gray-6, $alpha: 1.0);
         }
     }
