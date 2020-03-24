@@ -1,3 +1,5 @@
+@import '../../styles/mixins/hideScrollbar';
+
 .scrollerContainer {
     overflow-wrap: break-word;
     margin-left: auto;
@@ -13,3 +15,5 @@
     }
 
 }
+
+@include hideScrollBar('scrollerContainer')
