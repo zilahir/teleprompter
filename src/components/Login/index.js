@@ -48,6 +48,8 @@ const Login = props => {
 			if (res[0].isSuccess) {
 				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: add auth user id here
 				requestClose()
+				setEmail(null)
+				setPassword(null)
 			} else if (res[0].reason === 401 || res[0].reason === 404) {
 				setLoginError(true)
 			}
