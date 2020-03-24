@@ -103,10 +103,11 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`https://prompter.me/${prompterSlug || ''}`}
+						inheritedValue={`prompter.me/${prompterSlug || ''}`}
 					/>
 					<Input
 						labelText="Remote control address"
+						inheritedValue={`prompter.me/remote/${prompterSlug || ''}`}
 						isDisabled
 					/>
 					{
