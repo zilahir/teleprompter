@@ -12,7 +12,7 @@ import styles from './Button.module.scss'
 * */
 
 const Button = props => {
-	const { labelText, onClick, type, buttonClass, isNegative } = props
+	const { labelText, onClick, type, buttonClass, isNegative, disabled } = props
 	return (
 		<>
 			{
@@ -25,6 +25,7 @@ const Button = props => {
 						>
 							<button
 								type="button"
+								disabled={disabled}
 								onClick={onClick}
 								className={classnames(
 									styles.button,
@@ -55,12 +56,14 @@ const Button = props => {
 
 Button.defaultProps = {
 	buttonClass: null,
+	disabled: false,
 	isNegative: false,
 	type: BUTTON,
 }
 
 Button.propTypes = {
 	buttonClass: PropTypes.string,
+	disabled: PropTypes.bool,
 	isNegative: PropTypes.bool,
 	labelText: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,

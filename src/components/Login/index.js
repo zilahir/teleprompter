@@ -244,6 +244,9 @@ const Login = props => {
 													labelText="SIGN UP"
 													onClick={() => regNewUser()}
 													buttonClass={styles.loginBtn}
+													disabled={
+														!!(passwordMismatch == null || passwordMismatch === true)
+													}
 												/>
 											</>
 										)
