@@ -33,6 +33,22 @@ const MobileController = () => {
 		togglePlaying(!isPlaying)
 	}
 
+	function incScrollingSpeed() {
+		if (socket) {
+			socket.emit('incSpeed', {
+				prompterId: slug,
+			})
+		}
+	}
+
+	function decScrollingSpeed() {
+		if (socket) {
+			socket.emit('decSpeed', {
+				prompterId: slug,
+			})
+		}
+	}
+
 	useEffect(() => {
 		if (socket) {
 			socket.emit('isPlaying', {
@@ -59,6 +75,7 @@ const MobileController = () => {
 						styles.oneButton,
 						styles.dirButton,
 					)}
+					onClick={() => decScrollingSpeed()}
 				>
 					<img src={backward} alt="backwards" />
 				</BTN>
@@ -95,7 +112,7 @@ const MobileController = () => {
 					role="button"
 					onKeyDown={null}
 					tabIndex={-1}
-					onClick={() => alert("hello")}
+					onClick={() => incScrollingSpeed()}
 				>
 					<img src={forward} alt="backwards" />
 				</BTN>

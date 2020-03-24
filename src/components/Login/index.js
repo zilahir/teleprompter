@@ -172,6 +172,7 @@ const Login = props => {
 								placeholder="Password"
 								inputClassName={styles.loginInput}
 								getBackValue={v => setPassword(v)}
+								inputType={PASSWORD}
 							/>
 							<Button
 								labelText="LOG IN"
