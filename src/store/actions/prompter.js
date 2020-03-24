@@ -76,9 +76,9 @@ export const clearPrompterObject = () => dispatch => new Promise(resolve => {
 })
 
 export const createNewPrompter = (
-	newPrompterObject, authToken, endPoint,
+	newPrompterObject, endPoint,
 ) => new Promise(resolve => {
-	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	// axios.defaults.headers.common.authorization = `Bearer ${authToken}`
 	axios.post(`${endPoint}`, newPrompterObject, {
 		headers,
 	})

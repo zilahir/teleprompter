@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { useStore, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
+// eslint-disable-next-line no-unused-vars
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'

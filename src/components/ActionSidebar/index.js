@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import { useSocket } from '@zilahir/use-socket.io-client'
@@ -55,7 +56,7 @@ const ActionSidebar = () => {
 			}
 			Promise.all([
 				dispatch(copyPrompterObject(store.getState().text)),
-				createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompterWithoutAuth),
+				createNewPrompter(saveObject, apiEndpoints.newPrompterWithoutAuth),
 			]).then(() => {
 				setTimeout(() => {
 					window.open(`/player/${prompterSlug}`, '_blank')
