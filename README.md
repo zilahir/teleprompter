@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot)
 
 ## Teleprompter 
 
