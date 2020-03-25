@@ -17,7 +17,7 @@ import { toggleUpdateBtn } from '../../../store/actions/misc'
 
 const SliderContanier = styled.div`
 	width: 185px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 `
 
 const SliderAlt = props => {

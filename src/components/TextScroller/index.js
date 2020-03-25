@@ -41,6 +41,7 @@ const Scroller = styled.div`
 		font-size: ${props => props.fontSize}px;
 		letter-spacing: ${props => props.letterSpacing}vw;
 		line-height: ${props => props.lineHeight};
+		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
 	}
 `
 
@@ -138,6 +139,7 @@ const TextScroller = props => {
 				lineHeight={prompterObject.lineHeight}
 				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
+				isFlipped={prompterObject.isFlipped}
 				ref={scrollerRef}
 			>
 				<div ref={topRef} />
