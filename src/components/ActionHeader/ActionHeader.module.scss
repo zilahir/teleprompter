@@ -4,7 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 20px;
+    margin-left: -30px;
+
     &.alignEnd {
         justify-content: flex-end;
     }
@@ -12,7 +13,7 @@
         list-style-type: none;
         display: inline-flex;
         li {
-            margin-right: 20px;
+            margin-right: 10px;
         }
     }
     .loggedInActionList {

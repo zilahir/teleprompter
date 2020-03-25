@@ -26,7 +26,7 @@ const Mobile = () => {
 			</div>
 			<Button
 				labelText="GO"
-				onClick={() => history.push(`/controller/${prompterSlug}`)}
+				onClick={() => history.push(`/remote/${prompterSlug}`)}
 			/>
 		</div>
 	)

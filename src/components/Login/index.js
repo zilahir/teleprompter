@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
@@ -49,7 +51,7 @@ const Login = props => {
 			dispatch(authUser({ email, password })),
 		]).then(res => {
 			if (res[0].isSuccess) {
-				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: add auth user id here
+				dispatch(getAllUserPrompter(res[0].userId))
 				requestClose()
 				setEmail(null)
 				setPassword(null)
@@ -67,7 +69,7 @@ const Login = props => {
 		const saveObject = {
 			slug,
 			text: newPrompterObject.text,
-			userId: '5e63f4ba19a0555a4fbbe5da',
+			userId: user.userId,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -156,6 +158,19 @@ const Login = props => {
 	const { usersPrompters } = store.getState().userPrompters
 	return (
 		<>
+			{
+				isVisible
+					? ReactDOM.createPortal(
+						<div
+							onClick={() => requestClose()}
+							className={styles.overLay}
+							role="button"
+							onKeyDown={null}
+							tabIndex={-1}
+						/>, document.body,
+					)
+					: null
+			}
 			{
 				type === LOGIN
 					? (

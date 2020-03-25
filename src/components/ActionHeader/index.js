@@ -126,6 +126,7 @@ const ActionHeader = () => {
 									labelText="Load"
 									onClick={() => openLoad()}
 									type={LINK}
+									isVisible={store.getState().userPrompters.usersPrompters.length}
 								/>
 							</li>
 						</ul>

@@ -41,6 +41,7 @@ const Scroller = styled.div`
 		font-size: ${props => props.fontSize}px;
 		letter-spacing: ${props => props.letterSpacing}vw;
 		line-height: ${props => props.lineHeight};
+		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
 	}
 `
 
@@ -74,16 +75,12 @@ const TextScroller = props => {
 		})
 
 		socket.on('incSpeed', ({ prompterId }) => {
-			console.debug('incSpeed', prompterId)
 			if (prompterId === slug) {
-				console.debug('incSpeed', prompterId, slug)
 				setScrollSpeedValue(scrollSpeedValue - 1)
 			}
 		})
 		socket.on('decSpeed', ({ prompterId }) => {
-			console.debug('decSpeed', prompterId)
 			if (prompterId === slug) {
-				console.debug('decSpeed', prompterId, slug)
 				setScrollSpeedValue(scrollSpeedValue + 1)
 			}
 		})
@@ -142,6 +139,7 @@ const TextScroller = props => {
 				lineHeight={prompterObject.lineHeight}
 				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
+				isFlipped={prompterObject.isFlipped}
 				ref={scrollerRef}
 			>
 				<div ref={topRef} />

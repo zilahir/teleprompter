@@ -14,6 +14,9 @@
     flex: 1;
     height: 100vh;
     .top {
+        &:active {
+            opacity: .4;
+        }
         &:before {
             width: 135px;
             height: 135px;
@@ -40,9 +43,17 @@
         align-items: center;
         position: relative;
         flex: 1;
-        width: 80%;
+        width: 100%;
         .oneButton {
+            &:active {
+                opacity: .4;
+            }
             position: relative;
+            height: 200px;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:first-of-type {
                 position: absolute;
                 left: 0;
@@ -54,8 +65,8 @@
                     background-repeat: no-repeat;
                     transform: scale(1);
                     transform: rotate(90deg);
-                    top: -59px;
-                    left: -90px;
+                    top: unset;
+                    left: -30px;
                     z-index: -1;
                 }
             }
@@ -70,8 +81,8 @@
                     background-repeat: no-repeat;
                     transform: scale(1);
                     transform: rotate(-90deg);
-                    top: -59px;
-                    left: -30px;
+                    top: unset;
+                    left: 45px;
                     z-index: -1;
                 }
             }
@@ -90,6 +101,9 @@
         }
     }
     .bottom {
+        &:active {
+            opacity: .4;
+        }
         &:before {
             width: 135px;
             height: 135px;
