@@ -43,7 +43,7 @@ const ActionSidebar = () => {
 			const saveObject = {
 				slug,
 				text: newPrompterObject.text,
-				userId: '5e63f4ba19a0555a4fbbe5da', // TODO: change the user id here from auth object
+				userId: user.userId,
 				projectName: `project_${slug}`,
 				meta: {
 					fontSize: newPrompterObject.fontSize,

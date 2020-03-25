@@ -51,7 +51,7 @@ const Login = props => {
 			dispatch(authUser({ email, password })),
 		]).then(res => {
 			if (res[0].isSuccess) {
-				dispatch(getAllUserPrompter('5e63f4ba19a0555a4fbbe5da')) // TODO: add auth user id here
+				dispatch(getAllUserPrompter(res[0].userId))
 				requestClose()
 				setEmail(null)
 				setPassword(null)
@@ -69,7 +69,7 @@ const Login = props => {
 		const saveObject = {
 			slug,
 			text: newPrompterObject.text,
-			userId: '5e63f4ba19a0555a4fbbe5da',
+			userId: user.userId,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
