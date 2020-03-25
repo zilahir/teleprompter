@@ -59,3 +59,6 @@ export const keyListeners = [
 	LEFT,
 	RIGHT,
 ]
+
+export const INC_SPEED = 'INC_SPEED'
+export const DEC_SPEED = 'DEC_SPEED'
