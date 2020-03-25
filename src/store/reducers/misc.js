@@ -2,7 +2,10 @@ import { TOGGLE_UPDATE_BTN, HIDE_INSTRUCTION } from '../actions/actionTypes'
 
 const initialState = {
 	showActiveBtn: false,
-	instructions: {},
+	instructions: {
+		HELPER_SIDEBAR: true,
+		INFOBOX_SIDEBAR: true,
+	},
 }
 
 const reducer = (state = initialState, action) => {
