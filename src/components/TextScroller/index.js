@@ -74,16 +74,12 @@ const TextScroller = props => {
 		})
 
 		socket.on('incSpeed', ({ prompterId }) => {
-			console.debug('incSpeed', prompterId)
 			if (prompterId === slug) {
-				console.debug('incSpeed', prompterId, slug)
 				setScrollSpeedValue(scrollSpeedValue - 1)
 			}
 		})
 		socket.on('decSpeed', ({ prompterId }) => {
-			console.debug('decSpeed', prompterId)
 			if (prompterId === slug) {
-				console.debug('decSpeed', prompterId, slug)
 				setScrollSpeedValue(scrollSpeedValue + 1)
 			}
 		})
