@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
@@ -156,6 +158,19 @@ const Login = props => {
 	const { usersPrompters } = store.getState().userPrompters
 	return (
 		<>
+			{
+				isVisible
+					? ReactDOM.createPortal(
+						<div
+							onClick={() => requestClose()}
+							className={styles.overLay}
+							role="button"
+							onKeyDown={null}
+							tabIndex={-1}
+						/>, document.body,
+					)
+					: null
+			}
 			{
 				type === LOGIN
 					? (
