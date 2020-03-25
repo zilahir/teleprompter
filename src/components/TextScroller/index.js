@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6, LEFT, RIGHT } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 
 /**
@@ -18,7 +18,6 @@ import { toggleFullScreen } from '../../utils/fullScreen'
 
 const useInterval = (callback, delay) => {
 	const savedCallback = useRef()
-
 	useEffect(() => {
 		savedCallback.current = callback
 	}, [callback])
@@ -51,6 +50,8 @@ const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
 	const { text, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
+	const topRef = useRef(null)
+	const bottomRef = useRef(null)
 	const [playing, togglePlaying] = useState(false)
 	const [position, setPosition] = useState(0)
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
@@ -109,6 +110,24 @@ const TextScroller = props => {
 			setScrollSpeedValue(scrollSpeedValue + 1)
 		} else if (key === RIGHT) {
 			setScrollSpeedValue(scrollSpeedValue - 1)
+		} else if (key === DOWN) {
+			console.debug('down')
+			const newPos = position + 20 + STEP
+			setPosition(newPos)
+			scrollerRef.current.scroll({
+				top: position,
+			})
+		} else if (key === UP) {
+			console.debug('down')
+			const newPos = position - 500
+			setPosition(newPos)
+			scrollerRef.current.scroll({
+				top: position,
+			})
+		} else if (key === PAGEUP) {
+			topRef.current.scrollIntoView({ behavior: 'smooth' })
+		} else if (key === PAGE_DOWN) {
+			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
 	}
 	return (
@@ -121,6 +140,7 @@ const TextScroller = props => {
 				scrollWidth={prompterObject.scrollWidth}
 				ref={scrollerRef}
 			>
+				<div ref={topRef} />
 				<div
 					className={styles.scroller}
 				>
@@ -130,6 +150,7 @@ const TextScroller = props => {
 						{text}
 					</p>
 				</div>
+				<div ref={bottomRef} />
 			</Scroller>
 			<KeyboardEventHandler
 				handleKeys={[...keyListeners]}
