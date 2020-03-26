@@ -71,7 +71,7 @@ const ActionHeader = () => {
 	}
 
 	function clearCurrentPrompter() {
-		dispatch(setPrompterSlug(uuidv4()))
+		dispatch(setPrompterSlug(uuidv4().split('-')[0]))
 		dispatch(resetPrompter())
 		toggleNewModal(false)
 	}
