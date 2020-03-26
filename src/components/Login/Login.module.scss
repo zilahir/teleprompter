@@ -121,8 +121,14 @@
                     align-items: center;
                     margin-right: 10px;
                     .icon {
+                        opacity: 0.6;
                         &:focus {
                             outline: none;
+                        }
+                        &:hover {
+                            transition: all .2s ease;
+                            opacity: 1;
+                            cursor: pointer;
                         }
                         margin-left: 10px;
                         &.rotate {
