@@ -121,10 +121,12 @@ const Login = props => {
 	}
 
 	function handlePrompterDelte(delObject) {
+		const { user } = store.getState().user
 		Promise.all([
 			deletePrompter(delObject._id),
 		]).then(() => {
 			toggleModalOpen(false)
+			dispatch(getAllUserPrompter(user.userId, user.accessToken222))
 		})
 	}
 

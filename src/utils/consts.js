@@ -48,6 +48,7 @@ export const DOWN = 'down'
 export const F6 = 'f6'
 export const LEFT = 'left'
 export const RIGHT = 'right'
+export const ENTER = 'enter'
 
 export const keyListeners = [
 	SPACE,
