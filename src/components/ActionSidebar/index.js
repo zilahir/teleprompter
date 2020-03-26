@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import { useSocket } from '@zilahir/use-socket.io-client'
@@ -10,7 +9,7 @@ import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
 import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
 import Instruction from '../common/Instruction'
-import { copyPrompterObject, createNewPrompter } from '../../store/actions/prompter'
+import { copyPrompterObject, createNewPrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 
 /**
@@ -56,7 +55,7 @@ const ActionSidebar = () => {
 			}
 			Promise.all([
 				dispatch(copyPrompterObject(store.getState().text)),
-				createNewPrompter(saveObject, apiEndpoints.newPrompterWithoutAuth),
+				createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
 			]).then(() => {
 				setTimeout(() => {
 					window.open(`/player/${prompterSlug}`, '_blank')

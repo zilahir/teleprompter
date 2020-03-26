@@ -25,6 +25,7 @@ const ActionHeader = () => {
 	const [showSave, toggleSave] = useState(false)
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [showNewModal, toggleNewModal] = useState(false)
+	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -83,6 +84,8 @@ const ActionHeader = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
+		const savedPrompters = store.getState().userPrompters.usersPrompters.length
+		setIsLoadVisible(savedPrompters)
 		if (store.getState().user.loggedIn) {
 			setIsLoggedIn(true)
 		} else {
@@ -126,7 +129,7 @@ const ActionHeader = () => {
 									labelText="Load"
 									onClick={() => openLoad()}
 									type={LINK}
-									isVisible={store.getState().userPrompters.usersPrompters.length}
+									isVisible={isLoadBtnVisible}
 								/>
 							</li>
 						</ul>

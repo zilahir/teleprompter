@@ -70,7 +70,7 @@ const Login = props => {
 			slug,
 			text: newPrompterObject.text,
 			userId: user.userId,
-			projectName: `project_${slug}`,
+			projectName,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
 				lineHeight: newPrompterObject.lineHeight,
@@ -81,9 +81,10 @@ const Login = props => {
 			},
 		}
 		Promise.all([
-			createNewPrompter(saveObject, user.accessToken, apiEndpoints.newPrompter),
+			createNewPrompter(saveObject, user.accessToken),
 		]).then(() => {
 			setTimeout(() => {
+				dispatch(getAllUserPrompter(user.userId, user.accessToken222))
 				setIsSaved(true)
 				toggleSavingLoader(false)
 				setTimeout(() => {
