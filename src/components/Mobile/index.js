@@ -21,7 +21,7 @@ const Mobile = () => {
 			<div className={styles.innerContainer}>
 				<Input
 					labelText="Enter your session id"
-					getBackValue={val => setPrompterSlug(val.target.value)}
+					getBackValue={val => setPrompterSlug(val)}
 				/>
 			</div>
 			<Button
