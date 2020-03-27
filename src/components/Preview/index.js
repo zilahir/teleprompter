@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
 import { useStore } from 'react-redux'
@@ -21,13 +22,14 @@ import Instruction from '../common/Instruction'
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
 	const store = useStore()
+	console.debug('the infobox visibility status', store.getState().misc.instructions[INFOBOX_TOP])
 	return (
 		<>
 			<Col lg={6}>
 				<ActionHeader />
 				<div className={styles.previewContainer}>
 					{
-						!store.getState().misc.instructions[INFOBOX_TOP]
+						store.getState().misc.instructions[INFOBOX_TOP]
 							? (
 								<Instruction
 									text={HELPER_TOP}
