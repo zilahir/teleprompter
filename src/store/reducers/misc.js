@@ -3,8 +3,7 @@ import { TOGGLE_UPDATE_BTN, HIDE_INSTRUCTION } from '../actions/actionTypes'
 const initialState = {
 	showActiveBtn: false,
 	instructions: {
-		HELPER_SIDEBAR: true,
-		INFOBOX_SIDEBAR: true,
+		INFOBOX_TOP: true,
 	},
 }
 

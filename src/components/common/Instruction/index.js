@@ -19,7 +19,7 @@ const InstructionContainer = styled.p`
 `
 
 const Instruction = props => {
-	const { text, hasPadding, maxWidth, type } = props
+	const { text, hasPadding, maxWidth, type, noHide } = props
 	const dispatch = useDispatch()
 	function hideThisInfoBox() {
 		dispatch(hideInstruction(type, false))
@@ -35,14 +35,20 @@ const Instruction = props => {
 				maxWidth={maxWidth}
 			>
 				{text}
-				<span
-					onClick={() => hideThisInfoBox()}
-					role="button"
-					onKeyDown={null}
-					tabIndex={-1}
-				>
-					Hide this guide
-				</span>
+				{
+					!noHide
+						? (
+							<span
+								onClick={() => hideThisInfoBox()}
+								role="button"
+								onKeyDown={null}
+								tabIndex={-1}
+							>
+								Hide this guide
+							</span>
+						)
+						: null
+				}
 			</InstructionContainer>
 		</div>
 	)
@@ -51,11 +57,13 @@ const Instruction = props => {
 Instruction.defaultProps = {
 	hasPadding: true,
 	maxWidth: 'unset',
+	noHide: false,
 }
 
 Instruction.propTypes = {
 	hasPadding: PropTypes.bool,
 	maxWidth: PropTypes.number,
+	noHide: PropTypes.bool,
 	text: PropTypes.string.isRequired,
 	type: PropTypes.string.isRequired,
 }
