@@ -111,22 +111,16 @@ const ActionSidebar = () => {
 						inheritedValue={`prompter.me/remote/${prompterSlug || ''}`}
 						isDisabled
 					/>
-					{
-						store.getState().misc.instructions[INFOBOX_SIDEBAR]
-							? (
-								<Instruction
-									text={HELPER_SIDEBAR}
-									hasPadding={false}
-									maxWidth={250}
-									type={INFOBOX_SIDEBAR}
-								/>
-							)
-							: (
-								<p className={styles.about}>
-									<a href="/about">About Prompter.me</a>
-								</p>
-							)
-					}
+					<Instruction
+						text={HELPER_SIDEBAR}
+						hasPadding={false}
+						maxWidth={250}
+						type={INFOBOX_SIDEBAR}
+						noHide
+					/>
+					<p className={styles.about}>
+						<a href="/about">About Prompter.me</a>
+					</p>
 					<div className={styles.playButtonContainer}>
 						{
 							!showUpdateBtn

@@ -27,7 +27,7 @@ const Preview = () => {
 				<ActionHeader />
 				<div className={styles.previewContainer}>
 					{
-						store.getState().misc.instructions[INFOBOX_TOP]
+						!store.getState().misc.instructions[INFOBOX_TOP]
 							? (
 								<Instruction
 									text={HELPER_TOP}
