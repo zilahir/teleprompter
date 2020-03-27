@@ -4,7 +4,6 @@ const initialState = {
 	showActiveBtn: false,
 	instructions: {
 		INFOBOX_TOP: true,
-		INFOBOX_SIDEBAR: true,
 	},
 }
 
