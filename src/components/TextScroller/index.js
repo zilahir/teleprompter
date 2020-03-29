@@ -130,16 +130,18 @@ const TextScroller = props => {
 			const newPos = position + 100
 			console.debug('DOWN', position, newPos)
 			setPosition(newPos)
-			setTimeout(() => {
-				scrollerRef.current.scroll({
-					top: position,
-				})
-			}, 100)
+			scrollerRef.current.scroll({
+				top: position + 100,
+			})
 		} else if (key === UP) {
 			const newPos = position - 500
-			setPosition(newPos)
+			if (newPos < 0) {
+				setPosition(0)
+			} else {
+				setPosition(newPos)
+			}
 			scrollerRef.current.scroll({
-				top: position,
+				top: position - 100,
 			})
 		} else if (key === PAGEUP) {
 			topRef.current.scrollIntoView({ behavior: 'smooth' })
