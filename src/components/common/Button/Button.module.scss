@@ -6,7 +6,7 @@
         width: 242px;
         height: 57px;
         border-radius: 32px;
-        background-color: $purple;
+        background-color: rgba($color: $purple, $alpha: 0.9);
         text-transform: uppercase;
         @include paragraph(14px, #fff, 0.85px);
         border: none;
@@ -14,6 +14,8 @@
 
         &:hover {
             cursor: pointer;
+            background-color: rgba($color: $purple, $alpha: 1);
+            transition: all .2s ease;
         }
 
         &:focus {
