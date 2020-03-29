@@ -23,6 +23,7 @@ const useInterval = (callback, delay) => {
 	}, [callback])
 
 	useEffect(() => {
+		console.debug('effect', true)
 		function tick() {
 			savedCallback.current()
 		}
@@ -116,15 +117,9 @@ const TextScroller = props => {
 	}, [])
 
 	function handleKeyPress(key, e) {
-		console.debug('key', key)
 		e.preventDefault()
 		if (key === SPACE) {
 			togglePlaying(!playing)
-			if (playing) {
-				// startScroll()
-			} else {
-				// STOP
-			}
 		} else if (key === F6) {
 			toggleFullScreen()
 		} else if (key === LEFT) {
@@ -132,11 +127,14 @@ const TextScroller = props => {
 		} else if (key === RIGHT) {
 			setScrollSpeedValue(scrollSpeedValue - 5)
 		} else if (key === DOWN) {
-			const newPos = position + 20 + STEP
+			const newPos = position + 100
+			console.debug('DOWN', position, newPos)
 			setPosition(newPos)
-			scrollerRef.current.scroll({
-				top: position,
-			})
+			setTimeout(() => {
+				scrollerRef.current.scroll({
+					top: position,
+				})
+			}, 100)
 		} else if (key === UP) {
 			const newPos = position - 500
 			setPosition(newPos)
@@ -174,7 +172,7 @@ const TextScroller = props => {
 			</Scroller>
 			<KeyboardEventHandler
 				handleKeys={[...keyListeners]}
-				onKeyEvent={(key, e) => handleKeyPress(key, e)}
+				onKeyEvent={(key, e) => handleKeyPress(key, e, position)}
 			/>
 		</>
 	)
