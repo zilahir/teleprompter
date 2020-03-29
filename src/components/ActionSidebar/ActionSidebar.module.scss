@@ -13,8 +13,9 @@
         }
 
         .playButtonContainer {
-            position: absolute;
-            bottom: 60px;
+            .updateBtn {
+                margin-top: 20px;
+            }
         }
 
         .about {
