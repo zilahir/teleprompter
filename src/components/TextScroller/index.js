@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
@@ -23,7 +22,6 @@ const useInterval = (callback, delay) => {
 	}, [callback])
 
 	useEffect(() => {
-		console.debug('effect', true)
 		function tick() {
 			savedCallback.current()
 		}
@@ -87,7 +85,6 @@ const TextScroller = props => {
 		})
 
 		socket.on('jumpUp', ({ prompterId }) => {
-			console.debug('jumpUp')
 			if (prompterId === slug) {
 				setPosition(position - 500)
 				scrollerRef.current.scroll({
@@ -97,7 +94,6 @@ const TextScroller = props => {
 		})
 
 		socket.on('jumpDown', ({ prompterId }) => {
-			console.debug('jumpDown')
 			if (prompterId === slug) {
 				setPosition(position + 500)
 				scrollerRef.current.scroll({
@@ -128,7 +124,6 @@ const TextScroller = props => {
 			setScrollSpeedValue(scrollSpeedValue - 5)
 		} else if (key === DOWN) {
 			const newPos = position + 100
-			console.debug('DOWN', position, newPos)
 			setPosition(newPos)
 			scrollerRef.current.scroll({
 				top: position + 100,
