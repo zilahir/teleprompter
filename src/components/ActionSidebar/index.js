@@ -36,13 +36,13 @@ const ActionSidebar = () => {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
-		const { user } = store.getState().user
+		// const { user } = store.getState().user
 		const slug = store.getState().userPrompters.prompterSlug
 		if (!bool) {
 			const saveObject = {
 				slug,
 				text: newPrompterObject.text,
-				userId: user.userId,
+				// userId: user.userId,
 				projectName: `project_${slug}`,
 				meta: {
 					fontSize: newPrompterObject.fontSize,
