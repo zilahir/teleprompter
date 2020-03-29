@@ -84,6 +84,24 @@ const TextScroller = props => {
 				setScrollSpeedValue(scrollSpeedValue + 1)
 			}
 		})
+
+		socket.on('jumpUp', ({ prompterId }) => {
+			if (prompterId === slug) {
+				setPosition(position - 500)
+				scrollerRef.current.scroll({
+					top: position,
+				})
+			}
+		})
+
+		socket.on('jumpDown', ({ prompterId }) => {
+			if (prompterId === slug) {
+				setPosition(position + 500)
+				scrollerRef.current.scroll({
+					top: position,
+				})
+			}
+		})
 	}
 
 	const scrollHandler = event => {
@@ -112,14 +130,12 @@ const TextScroller = props => {
 		} else if (key === RIGHT) {
 			setScrollSpeedValue(scrollSpeedValue - 1)
 		} else if (key === DOWN) {
-			console.debug('down')
 			const newPos = position + 20 + STEP
 			setPosition(newPos)
 			scrollerRef.current.scroll({
 				top: position,
 			})
 		} else if (key === UP) {
-			console.debug('down')
 			const newPos = position - 500
 			setPosition(newPos)
 			scrollerRef.current.scroll({
