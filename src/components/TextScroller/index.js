@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
@@ -76,12 +75,12 @@ const TextScroller = props => {
 
 		socket.on('incSpeed', ({ prompterId }) => {
 			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue - 1)
+				setScrollSpeedValue(scrollSpeedValue - 5)
 			}
 		})
 		socket.on('decSpeed', ({ prompterId }) => {
 			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue + 1)
+				setScrollSpeedValue(scrollSpeedValue + 5)
 			}
 		})
 
@@ -114,32 +113,30 @@ const TextScroller = props => {
 	}, [])
 
 	function handleKeyPress(key, e) {
-		console.debug('key', key)
 		e.preventDefault()
 		if (key === SPACE) {
 			togglePlaying(!playing)
-			if (playing) {
-				// startScroll()
-			} else {
-				// STOP
-			}
 		} else if (key === F6) {
 			toggleFullScreen()
 		} else if (key === LEFT) {
-			setScrollSpeedValue(scrollSpeedValue + 1)
+			setScrollSpeedValue(scrollSpeedValue + 5)
 		} else if (key === RIGHT) {
-			setScrollSpeedValue(scrollSpeedValue - 1)
+			setScrollSpeedValue(scrollSpeedValue - 5)
 		} else if (key === DOWN) {
-			const newPos = position + 20 + STEP
+			const newPos = position + 100
 			setPosition(newPos)
 			scrollerRef.current.scroll({
-				top: position,
+				top: position + 100,
 			})
 		} else if (key === UP) {
 			const newPos = position - 500
-			setPosition(newPos)
+			if (newPos < 0) {
+				setPosition(0)
+			} else {
+				setPosition(newPos)
+			}
 			scrollerRef.current.scroll({
-				top: position,
+				top: position - 100,
 			})
 		} else if (key === PAGEUP) {
 			topRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -172,7 +169,7 @@ const TextScroller = props => {
 			</Scroller>
 			<KeyboardEventHandler
 				handleKeys={[...keyListeners]}
-				onKeyEvent={(key, e) => handleKeyPress(key, e)}
+				onKeyEvent={(key, e) => handleKeyPress(key, e, position)}
 			/>
 		</>
 	)

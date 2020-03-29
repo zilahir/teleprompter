@@ -12,6 +12,8 @@ Prompter.me is a _free_, _open source_ teleprompter on the web. Using it doesn't
 
 The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server).
 
+The server is currently deployed to [`heroku`](https://heroku.com/). You can crate your own instane if you wish to have a _self-hosted_ version of prompter. Or anywhere else if you wish, you need a `node` environment, and a `MongoDB`.
+
 ## Contributors
 
 - :nail_care: _design_: Mikko Oitinen 🇫🇮
