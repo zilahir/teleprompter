@@ -118,7 +118,7 @@ export const deletePrompter = (idToDel, authToken) => new Promise(resolve => {
 })
 
 export const updatePrompterNoAuth = updatedPrompterObject => new Promise(resolve => {
-	axios.patch(`${apiEndpoints.updatePrompterNoAuth}`, updatedPrompterObject, {
+	axios.patch(`${apiEndpoints.updatePrompterNoAuth}/${updatedPrompterObject.slug}`, updatedPrompterObject, {
 		headers,
 	})
 		.then(res => {
