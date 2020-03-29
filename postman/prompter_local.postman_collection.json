@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "2dc1e68c-bfbd-4ed0-892f-2717157c5e69",
+		"name": "prompter_local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"demo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"demo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newPrompter",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"slug\": \"722b0284-ca09-4cf6-80ba-6037cd546298\",\n\t\"text\": \"lorem ipsum dolor sit amet\",\n\t\"userId\": \"5e63f4ba19a0555a4fbbe5da\",\n\t\"projectName\": \"Demo Project\",\n\t\"meta\": {\n\t\t\"fontSize\": 2,\n\t\t\"lineHeight\": 3,\n\t\t\"letterSpacing\": 0.14,\n\t\t\"scrollWidth\": \"75%\",\n\t\t\"scrollSpeed\": 20\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/prompter",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"prompter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPrompterByUserId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/allprompterbyuserid/5e63f4ba19a0555a4fbbe5da",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"allprompterbyuserid",
+						"5e63f4ba19a0555a4fbbe5da"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePrompterById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/prompter/5e6e8676cf23d93eb83df261",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"prompter",
+						"5e6e8676cf23d93eb83df261"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyPromoter",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"lofasz\",\n\t\"userId\": \"5e63f4ba19a0555a4fbbe5da\",\n\t\"projectName\": \"Demo Project\",\n\t\"meta\": {\n\t\t\"fontSize\": 2,\n\t\t\"lineHeight\": 3,\n\t\t\"letterSpacing\": 0.14,\n\t\t\"scrollWidth\": \"75%\",\n\t\t\"scrollSpeed\": 20\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/prompter/5e6e98ae6a97bf447d94bb26",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"prompter",
+						"5e6e98ae6a97bf447d94bb26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyPrompterNoAuth",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"updated text\",\n\t\"meta\": {\n\t\t\"fontSize\": 2,\n\t\t\"lineHeight\": 3,\n\t\t\"letterSpacing\": 0.14,\n\t\t\"scrollWidth\": \"75%\",\n\t\t\"scrollSpeed\": 20,\n\t\t\"isFlipped\": true\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/prompternoauth/da5221d4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"prompternoauth",
+						"da5221d4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://salesfra.me/sent/mc4d2iZ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://salesfra.me/sent/mc4d2iZ",
+					"protocol": "https",
+					"host": [
+						"salesfra",
+						"me"
+					],
+					"path": [
+						"sent",
+						"mc4d2iZ"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
