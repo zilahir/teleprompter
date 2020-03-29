@@ -9,7 +9,7 @@ import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
 import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
 import Instruction from '../common/Instruction'
-import { copyPrompterObject, createNewPrompterNoAuth } from '../../store/actions/prompter'
+import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 
 /**
@@ -36,13 +36,13 @@ const ActionSidebar = () => {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
-		const { user } = store.getState().user
+		// const { user } = store.getState().user
 		const slug = store.getState().userPrompters.prompterSlug
 		if (!bool) {
 			const saveObject = {
 				slug,
 				text: newPrompterObject.text,
-				userId: user.userId,
+				// userId: user.userId,
 				projectName: `project_${slug}`,
 				meta: {
 					fontSize: newPrompterObject.fontSize,
@@ -62,6 +62,29 @@ const ActionSidebar = () => {
 				}, 10)
 			})
 		}
+	}
+
+	function updatePrompter() {
+		const newPrompterObject = store.getState().text
+		const slug = store.getState().userPrompters.prompterSlug
+		const updateObject = {
+			slug,
+			text: newPrompterObject.text,
+			// userId: user.userId,
+			projectName: `project_${slug}`,
+			meta: {
+				fontSize: newPrompterObject.fontSize,
+				lineHeight: newPrompterObject.lineHeight,
+				letterSpacing: newPrompterObject.letterSpacing,
+				scrollWidth: newPrompterObject.scrollWidth,
+				scrollSpeed: newPrompterObject.scrollSpeed,
+				isFlipped: newPrompterObject.isFlipped,
+			},
+		}
+		Promise.all([
+			dispatch(copyPrompterObject(store.getState().text)),
+			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
+		])
 	}
 
 	useEffect(() => store.subscribe(() => {
@@ -122,20 +145,20 @@ const ActionSidebar = () => {
 						<a href="/about">About Prompter.me</a>
 					</p>
 					<div className={styles.playButtonContainer}>
+						<Button
+							onClick={() => togglePlaying(isPlaying)}
+							labelText="Open"
+						/>
 						{
-							!showUpdateBtn
+							showUpdateBtn
 								? (
 									<Button
-										onClick={() => togglePlaying(isPlaying)}
-										labelText="Open"
-									/>
-								)
-								: (
-									<Button
-										onClick={() => null}
+										onClick={() => updatePrompter()}
 										labelText="Update"
+										buttonClass={styles.updateBtn}
 									/>
 								)
+								: null
 						}
 					</div>
 				</div>
