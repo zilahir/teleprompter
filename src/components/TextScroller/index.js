@@ -128,9 +128,9 @@ const TextScroller = props => {
 		} else if (key === F6) {
 			toggleFullScreen()
 		} else if (key === LEFT) {
-			setScrollSpeedValue(scrollSpeedValue + 1)
+			setScrollSpeedValue(scrollSpeedValue + 5)
 		} else if (key === RIGHT) {
-			setScrollSpeedValue(scrollSpeedValue - 1)
+			setScrollSpeedValue(scrollSpeedValue - 5)
 		} else if (key === DOWN) {
 			const newPos = position + 20 + STEP
 			setPosition(newPos)
