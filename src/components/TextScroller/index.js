@@ -76,16 +76,17 @@ const TextScroller = props => {
 
 		socket.on('incSpeed', ({ prompterId }) => {
 			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue - 1)
+				setScrollSpeedValue(scrollSpeedValue - 5)
 			}
 		})
 		socket.on('decSpeed', ({ prompterId }) => {
 			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue + 1)
+				setScrollSpeedValue(scrollSpeedValue + 5)
 			}
 		})
 
 		socket.on('jumpUp', ({ prompterId }) => {
+			console.debug('jumpUp')
 			if (prompterId === slug) {
 				setPosition(position - 500)
 				scrollerRef.current.scroll({
@@ -95,6 +96,7 @@ const TextScroller = props => {
 		})
 
 		socket.on('jumpDown', ({ prompterId }) => {
+			console.debug('jumpDown')
 			if (prompterId === slug) {
 				setPosition(position + 500)
 				scrollerRef.current.scroll({
