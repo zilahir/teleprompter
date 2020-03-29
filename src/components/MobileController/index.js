@@ -49,6 +49,22 @@ const MobileController = () => {
 		}
 	}
 
+	function jumpUp() {
+		if (socket) {
+			socket.emit('jumpUp', {
+				prompterId: slug,
+			})
+		}
+	}
+
+	function jumpDown() {
+		if (socket) {
+			socket.emit('jumpDown', {
+				prompterId: slug,
+			})
+		}
+	}
+
 	useEffect(() => {
 		if (socket) {
 			socket.emit('isPlaying', {
@@ -65,7 +81,7 @@ const MobileController = () => {
 				role="button"
 				onKeyDown={null}
 				tabIndex={-1}
-				onClick={() => alert('hello')}
+				onClick={() => jumpUp()}
 			>
 				<img src={up} alt="up" />
 			</BTN>
@@ -117,7 +133,13 @@ const MobileController = () => {
 					<img src={forward} alt="backwards" />
 				</BTN>
 			</div>
-			<BTN className={styles.bottom}>
+			<BTN
+				className={styles.bottom}
+				role="button"
+				onKeyDown={null}
+				tabIndex={-1}
+				onClick={() => jumpDown()}
+			>
 				<img src={down} alt="down" />
 			</BTN>
 		</div>

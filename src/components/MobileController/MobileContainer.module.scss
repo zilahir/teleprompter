@@ -22,7 +22,7 @@
             height: 135px;
             background-repeat: no-repeat;
             position: absolute;
-            bottom: -30px;
+            bottom: 0px;
             transform: rotate(180deg);
             display: flex;
             justify-content: flex-end;
@@ -31,10 +31,16 @@
         display: flex;
         flex: 1;
         justify-content: center;
+        width: 150px;
+        height: 200px;
+        top: 40px;
+        z-index: 9;
         img {
             transform: scale(1);
             display: flex;
             align-self: flex-end;
+            position: relative;
+            top: -20px;
         }
     }
     .middle {
@@ -113,6 +119,7 @@
             display: flex;
             justify-content: flex-end;
         }
+        top: -10px;
         position: relative;
         display: flex;
         flex: 1;
