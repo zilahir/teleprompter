@@ -120,9 +120,9 @@
                 .rootIcon {
                     display: flex;
                     align-items: center;
-                    margin-right: 10px;
                     .icon {
                         opacity: 0.6;
+                        margin-left: 15px;
                         &:focus {
                             outline: none;
                         }
@@ -131,7 +131,7 @@
                             opacity: 1;
                             cursor: pointer;
                         }
-                        margin-left: 10px;
+                        margin-left: 15px;
                         &.rotate {
                             transform: rotate(90deg);
                             position: relative;
