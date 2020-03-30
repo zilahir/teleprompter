@@ -17,6 +17,7 @@
         font-family: 'Barlow';
         letter-spacing: 1.2px;
         padding: 20px;
+        border: 2px solid $gray-7;
         &:focus {
             outline: none;
         }
