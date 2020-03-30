@@ -111,6 +111,7 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 10px 10px;
+                padding-left: 20px;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);
