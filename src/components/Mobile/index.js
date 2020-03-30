@@ -22,12 +22,14 @@ const Mobile = () => {
 				<Input
 					labelText="Enter your session id"
 					getBackValue={val => setPrompterSlug(val)}
+					inputClassName={styles.input}
+				/>
+				<Button
+					labelText="GO"
+					onClick={() => history.push(`/remote/${prompterSlug}`)}
+					buttonClass={styles.goBtn}
 				/>
 			</div>
-			<Button
-				labelText="GO"
-				onClick={() => history.push(`/remote/${prompterSlug}`)}
-			/>
 		</div>
 	)
 }
