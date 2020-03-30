@@ -145,7 +145,7 @@ const TextScroller = props => {
 		}
 	}
 	return (
-		<>
+		<div className={styles.rootContainer}>
 			<Scroller
 				className={styles.scrollerContainer}
 				fontSize={prompterObject.fontSize * 30}
@@ -171,7 +171,7 @@ const TextScroller = props => {
 				handleKeys={[...keyListeners]}
 				onKeyEvent={(key, e) => handleKeyPress(key, e, position)}
 			/>
-		</>
+		</div>
 	)
 }
 

@@ -11,6 +11,7 @@ import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
 import Instruction from '../common/Instruction'
 import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
+import { toggleUpdateBtn } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -84,7 +85,9 @@ const ActionSidebar = () => {
 		Promise.all([
 			dispatch(copyPrompterObject(store.getState().text)),
 			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
-		])
+		]).then(() => {
+			toggleUpdateBtn(false)
+		})
 	}
 
 	useEffect(() => store.subscribe(() => {
