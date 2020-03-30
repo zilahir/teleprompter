@@ -104,13 +104,13 @@
             padding: 0;
             width: 260px;
             li {
-                @include paragraph(17px, #ffffff);
-                border-bottom: 1px solid rgba($color: $gray-4, $alpha: 0.5);
+                @include paragraph(15px, #ffffff);
                 padding: 10px 0;
                 transition: all .2s ease;
                 display: flex;
                 justify-content: space-between;
                 padding: 10px 10px;
+                padding-left: 20px;
                 &:hover {
                     cursor: pointer;
                     background-color: rgba($color: $gray-3, $alpha: 1.0);
@@ -119,9 +119,9 @@
                 .rootIcon {
                     display: flex;
                     align-items: center;
-                    margin-right: 10px;
                     .icon {
                         opacity: 0.6;
+                        margin-left: 15px;
                         &:focus {
                             outline: none;
                         }
@@ -130,11 +130,11 @@
                             opacity: 1;
                             cursor: pointer;
                         }
-                        margin-left: 10px;
+                        margin-left: 15px;
                         &.rotate {
                             transform: rotate(90deg);
                             position: relative;
-                            top: 3px;
+                            top: 2px;
                         }
                         color: $purple;
                         svg {
