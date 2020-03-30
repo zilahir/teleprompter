@@ -27,6 +27,7 @@ const Mobile = () => {
 			<Button
 				labelText="GO"
 				onClick={() => history.push(`/remote/${prompterSlug}`)}
+				buttonClass={styles.goBtn}
 			/>
 		</div>
 	)
