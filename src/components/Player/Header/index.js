@@ -1,7 +1,10 @@
 import React from 'react'
 import { useStore } from 'react-redux'
+import Icon from 'react-icons-kit'
+import { refresh } from 'react-icons-kit/fa/refresh'
 
 import styles from '../Player.module.scss'
+import Button from '../../common/Button'
 
 /**
 * @author zilahir
@@ -30,6 +33,15 @@ const Header = () => {
 					<p>
 						Mouse Left click to play/pause, scroll to navigate
 					</p>
+				</div>
+				<div className={styles.updateBtnContainer}>
+					<Button
+						labelText="update"
+						buttonClass={styles.updateBtn}
+						icon={
+							<Icon icon={refresh} />
+						}
+					/>
 				</div>
 				<div>
 					<p>

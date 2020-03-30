@@ -28,6 +28,15 @@
         &:disabled {
             background: rgba($color: $gray-6, $alpha: 1.0);
         }
+
+        &.hasIcon {
+            display: flex;
+            justify-content: center;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
     }
     .linkButton {
         border: none;

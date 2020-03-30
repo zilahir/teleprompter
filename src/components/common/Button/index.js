@@ -12,7 +12,16 @@ import styles from './Button.module.scss'
 * */
 
 const Button = props => {
-	const { labelText, onClick, type, buttonClass, isNegative, disabled, isVisible } = props
+	const {
+		labelText,
+		onClick,
+		type,
+		buttonClass,
+		isNegative,
+		disabled,
+		isVisible,
+		icon,
+	} = props
 	return (
 		<>
 			{
@@ -29,9 +38,18 @@ const Button = props => {
 								onClick={onClick}
 								className={classnames(
 									styles.button,
+									icon ? styles.hasIcon : null,
 									isNegative ? styles.negative : null,
 								)}
 							>
+								{
+									icon
+										? (
+											<div className={styles.icon}>
+												{icon}
+											</div>
+										) : null
+								}
 								{labelText}
 							</button>
 						</div>
@@ -57,6 +75,7 @@ const Button = props => {
 Button.defaultProps = {
 	buttonClass: null,
 	disabled: false,
+	icon: null,
 	isNegative: false,
 	isVisible: true,
 	type: BUTTON,
@@ -65,6 +84,7 @@ Button.defaultProps = {
 Button.propTypes = {
 	buttonClass: PropTypes.string,
 	disabled: PropTypes.bool,
+	icon: PropTypes.node,
 	isNegative: PropTypes.bool,
 	isVisible: PropTypes.bool,
 	labelText: PropTypes.string.isRequired,
