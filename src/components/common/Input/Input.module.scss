@@ -6,9 +6,9 @@
     .label {
         display: flex;
         flex-direction: column;
-        @include paragraph(16px, #fff, 0.39px);
+        @include paragraph(14px, #fff, 0.39px);
         .labelText {
-            margin-bottom: 17px;
+            margin-bottom: 10px;
         }
         .input {
             &:focus {
