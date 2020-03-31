@@ -20,6 +20,7 @@
             .widthLabel {
                 margin-top: 0;
                 @include labelText;
+                font-weight: 400;
             }
         }
     }
