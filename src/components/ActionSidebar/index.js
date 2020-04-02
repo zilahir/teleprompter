@@ -71,7 +71,6 @@ const ActionSidebar = () => {
 		const updateObject = {
 			slug,
 			text: newPrompterObject.text,
-			// userId: user.userId,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -87,6 +86,7 @@ const ActionSidebar = () => {
 			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			toggleUpdateBtn(false)
+			socket.emit('updatePrompter', newPrompterObject)
 		})
 	}
 
