@@ -73,6 +73,7 @@ const TextScroller = props => {
 			if (prompterId === slug) {
 				togglePlaying(isPlaying)
 			}
+			console.debug('isPlaying', isPlaying)
 		})
 
 		socket.on('incSpeed', ({ prompterId }) => {

@@ -33,36 +33,34 @@ const ActionSidebar = () => {
 		socket.connect()
 	}
 
-	function togglePlaying(bool) {
+	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
 		// const { user } = store.getState().user
 		const slug = store.getState().userPrompters.prompterSlug
-		if (!bool) {
-			const saveObject = {
-				slug,
-				text: newPrompterObject.text,
-				// userId: user.userId,
-				projectName: `project_${slug}`,
-				meta: {
-					fontSize: newPrompterObject.fontSize,
-					lineHeight: newPrompterObject.lineHeight,
-					letterSpacing: newPrompterObject.letterSpacing,
-					scrollWidth: newPrompterObject.scrollWidth,
-					scrollSpeed: newPrompterObject.scrollSpeed,
-					isFlipped: newPrompterObject.isFlipped,
-				},
-			}
-			Promise.all([
-				dispatch(copyPrompterObject(store.getState().text)),
-				createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
-			]).then(() => {
-				setTimeout(() => {
-					window.open(`/player/${prompterSlug}`, '_blank')
-				}, 10)
-			})
+		const saveObject = {
+			slug,
+			text: newPrompterObject.text,
+			// userId: user.userId,
+			projectName: `project_${slug}`,
+			meta: {
+				fontSize: newPrompterObject.fontSize,
+				lineHeight: newPrompterObject.lineHeight,
+				letterSpacing: newPrompterObject.letterSpacing,
+				scrollWidth: newPrompterObject.scrollWidth,
+				scrollSpeed: newPrompterObject.scrollSpeed,
+				isFlipped: newPrompterObject.isFlipped,
+			},
 		}
+		Promise.all([
+			dispatch(copyPrompterObject(store.getState().text)),
+			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
+		]).then(() => {
+			setTimeout(() => {
+				window.open(`/player/${prompterSlug}`, '_blank')
+			}, 10)
+		})
 	}
 
 	function updatePrompter() {
@@ -149,7 +147,7 @@ const ActionSidebar = () => {
 					</p>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => togglePlaying(isPlaying)}
+							onClick={() => togglePlaying()}
 							labelText="Open"
 						/>
 						{
