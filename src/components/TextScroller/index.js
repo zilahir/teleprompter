@@ -28,6 +28,7 @@ const Scroller = styled.div`
 
 const useInterval = (callback, delay) => {
 	const savedCallback = useRef()
+
 	useEffect(() => {
 		savedCallback.current = callback
 	}, [callback])
@@ -59,7 +60,6 @@ const TextScroller = props => {
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
-
 	useInterval(() => {
 		setPosition(position + STEP)
 		scrollerRef.current.scroll({
@@ -102,6 +102,7 @@ const TextScroller = props => {
 					scrollerRef.current.scroll({
 						top: position,
 					})
+					console.debug('position', position)
 				}
 			})
 		}
