@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
+import Icon from 'react-icons-kit'
+import { copy } from 'react-icons-kit/feather/copy'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -129,12 +131,20 @@ const ActionSidebar = () => {
 						labelText="Stream address"
 						isDisabled
 						inheritedValue={`prompter.me/${prompterSlug || ''}`}
-					/>
+					>
+						<div className={styles.copyIcon}>
+							<Icon icon={copy} size="1em" />
+						</div>
+					</Input>
 					<Input
 						labelText="Remote control address"
 						inheritedValue={`prompter.me/remote/${prompterSlug || ''}`}
 						isDisabled
-					/>
+					>
+						<div className={styles.copyIcon}>
+							<Icon icon={copy} size="1em" />
+						</div>
+					</Input>
 					<Instruction
 						text={HELPER_SIDEBAR}
 						hasPadding={false}
