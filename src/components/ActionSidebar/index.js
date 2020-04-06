@@ -86,7 +86,7 @@ const ActionSidebar = () => {
 			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			toggleUpdateBtn(false)
-			socket.emit('updatePrompter', newPrompterObject)
+			socket.emit('updatePrompter', updateObject)
 		})
 	}
 

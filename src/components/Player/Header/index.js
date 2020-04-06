@@ -2,6 +2,7 @@ import React from 'react'
 import { useStore } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { refresh } from 'react-icons-kit/fa/refresh'
+import PropTypes from 'prop-types'
 
 import styles from '../Player.module.scss'
 import Button from '../../common/Button'
@@ -11,9 +12,10 @@ import Button from '../../common/Button'
 * @function Header
 * */
 
-const Header = () => {
+const Header = props => {
 	const store = useStore()
 	const { prompterSlug } = store.getState().userPrompters
+	const { isUpdateBtnVisible } = props
 	return (
 		<header className={styles.playerHeader}>
 			<div className={styles.innerContainer}>
@@ -35,13 +37,19 @@ const Header = () => {
 					</p>
 				</div>
 				<div className={styles.updateBtnContainer}>
-					<Button
-						labelText="update"
-						buttonClass={styles.updateBtn}
-						icon={
-							<Icon icon={refresh} />
-						}
-					/>
+					{
+						isUpdateBtnVisible
+							? (
+								<Button
+									labelText="update"
+									buttonClass={styles.updateBtn}
+									icon={
+										<Icon icon={refresh} />
+									}
+								/>
+							)
+							: null
+					}
 				</div>
 				<div>
 					<p>
@@ -56,6 +64,14 @@ const Header = () => {
 			</div>
 		</header>
 	)
+}
+
+Header.defaultProps = {
+	isUpdateBtnVisible: false,
+}
+
+Header.propTypes = {
+	isUpdateBtnVisible: PropTypes.bool,
 }
 
 export default Header
