@@ -102,7 +102,6 @@ const TextScroller = props => {
 					scrollerRef.current.scroll({
 						top: position,
 					})
-					console.debug('DOWN', position)
 				}
 			})
 		}
