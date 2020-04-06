@@ -20,6 +20,7 @@ const Player = () => {
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
 	const [promoterObject, setPrompterObject] = useState({})
+	const [updatedPrompterObject, updatePrompterObject] = useState({})
 	const store = useStore()
 	const { slug } = useParams()
 	useEffect(() => {
@@ -32,15 +33,20 @@ const Player = () => {
 			console.debug('received value', updatedPrompter)
 			if (updatedPrompter.slug === slug) {
 				toggleUpdateBtn(true)
-				setPrompterObject(updatedPrompter)
+				updatePrompterObject(updatedPrompter)
 			}
 		})
+	}
+
+	function handleUpdate() {
+		setPrompterObject(updatedPrompterObject)
 	}
 
 	return (
 		<>
 			<Header
 				isUpdateBtnVisible={isUpdateBtnVisible}
+				updateBtnClick={() => handleUpdate()}
 			/>
 			<div>
 				{

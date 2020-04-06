@@ -15,7 +15,7 @@ import Button from '../../common/Button'
 const Header = props => {
 	const store = useStore()
 	const { prompterSlug } = store.getState().userPrompters
-	const { isUpdateBtnVisible } = props
+	const { isUpdateBtnVisible, updateBtnClick } = props
 	return (
 		<header className={styles.playerHeader}>
 			<div className={styles.innerContainer}>
@@ -46,6 +46,7 @@ const Header = props => {
 									icon={
 										<Icon icon={refresh} />
 									}
+									onClick={updateBtnClick}
 								/>
 							)
 							: null
@@ -72,6 +73,7 @@ Header.defaultProps = {
 
 Header.propTypes = {
 	isUpdateBtnVisible: PropTypes.bool,
+	updateBtnClick: PropTypes.func.isRequired,
 }
 
 export default Header
