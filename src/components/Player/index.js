@@ -19,10 +19,12 @@ const Player = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
+	const [promoterObject, setPrompterObject] = useState({})
 	const store = useStore()
 	const { slug } = useParams()
 	useEffect(() => {
 		setText(store.getState().userPrompters.prompterObject.text)
+		setPrompterObject(store.getState().userPrompters.prompterObject)
 	}, [store])
 
 	if (socket) {
@@ -30,6 +32,7 @@ const Player = () => {
 			console.debug('received value', updatedPrompter)
 			if (updatedPrompter.slug === slug) {
 				toggleUpdateBtn(true)
+				setPrompterObject(updatedPrompter)
 			}
 		})
 	}
@@ -46,7 +49,7 @@ const Player = () => {
 							<TextScroller
 								text={text}
 								slug={slug}
-								prompterObject={store.getState().userPrompters.prompterObject}
+								prompterObject={promoterObject}
 								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 2}
 							/>
 						)
