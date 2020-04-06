@@ -16,6 +16,16 @@ import { toggleFullScreen } from '../../utils/fullScreen'
 * @function TextScroller
 * */
 
+const Scroller = styled.div`
+	max-width: ${props => props.scrollWidth};
+	p {
+		font-size: ${props => props.fontSize}px;
+		letter-spacing: ${props => props.letterSpacing}vw;
+		line-height: ${props => props.lineHeight};
+		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
+	}
+`
+
 const useInterval = (callback, delay) => {
 	const savedCallback = useRef()
 	useEffect(() => {
@@ -35,15 +45,6 @@ const useInterval = (callback, delay) => {
 	}, [delay])
 }
 
-const Scroller = styled.div`
-	max-width: ${props => props.scrollWidth};
-	p {
-		font-size: ${props => props.fontSize}px;
-		letter-spacing: ${props => props.letterSpacing}vw;
-		line-height: ${props => props.lineHeight};
-		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
-	}
-`
 
 const STEP = 5
 
@@ -100,6 +101,7 @@ const TextScroller = props => {
 				scrollerRef.current.scroll({
 					top: position,
 				})
+				console.debug('DOWN PRESSED')
 			}
 		})
 	}
