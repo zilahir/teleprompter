@@ -67,45 +67,46 @@ const TextScroller = props => {
 		})
 	}, playing ? scrollSpeedValue : null)
 
-	if (socket) {
-		// socket.emit('room', slug) // TODO: finnish this
-		socket.on('isPlaying', ({ prompterId, isPlaying }) => {
-			if (prompterId === slug) {
-				togglePlaying(isPlaying)
-			}
-			console.debug('isPlaying', isPlaying)
-		})
+	useEffect(() => {
+		if (socket) {
+			// socket.emit('room', slug) // TODO: finnish this
+			socket.on('isPlaying', ({ prompterId, isPlaying }) => {
+				if (prompterId === slug) {
+					togglePlaying(isPlaying)
+				}
+			})
 
-		socket.on('incSpeed', ({ prompterId }) => {
-			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue - 5)
-			}
-		})
-		socket.on('decSpeed', ({ prompterId }) => {
-			if (prompterId === slug) {
-				setScrollSpeedValue(scrollSpeedValue + 5)
-			}
-		})
+			socket.on('incSpeed', ({ prompterId }) => {
+				if (prompterId === slug) {
+					setScrollSpeedValue(scrollSpeedValue - 5)
+				}
+			})
+			socket.on('decSpeed', ({ prompterId }) => {
+				if (prompterId === slug) {
+					setScrollSpeedValue(scrollSpeedValue + 5)
+				}
+			})
 
-		socket.on('jumpUp', ({ prompterId }) => {
-			if (prompterId === slug) {
-				setPosition(position - 500)
-				scrollerRef.current.scroll({
-					top: position,
-				})
-			}
-		})
+			socket.on('jumpUp', ({ prompterId }) => {
+				if (prompterId === slug) {
+					setPosition(position - 500)
+					scrollerRef.current.scroll({
+						top: position,
+					})
+				}
+			})
 
-		socket.on('jumpDown', ({ prompterId }) => {
-			if (prompterId === slug) {
-				setPosition(position + 500)
-				scrollerRef.current.scroll({
-					top: position,
-				})
-				console.debug('DOWN PRESSED')
-			}
-		})
-	}
+			socket.on('jumpDown', ({ prompterId }) => {
+				if (prompterId === slug) {
+					setPosition(position + 500)
+					scrollerRef.current.scroll({
+						top: position,
+					})
+					console.debug('DOWN', position)
+				}
+			})
+		}
+	}, [socket])
 
 	const scrollHandler = event => {
 		setPosition(event.currentTarget.scrollTop)
