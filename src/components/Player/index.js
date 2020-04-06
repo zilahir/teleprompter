@@ -39,7 +39,9 @@ const Player = () => {
 	}
 
 	function handleUpdate() {
-		setPrompterObject(updatedPrompterObject)
+		setPrompterObject(updatedPrompterObject.meta)
+		toggleUpdateBtn(false)
+		console.debug('updatedPrompterObject', updatedPrompterObject)
 	}
 
 	return (
