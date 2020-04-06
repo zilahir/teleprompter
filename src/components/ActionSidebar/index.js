@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
+import Icon from 'react-icons-kit'
+import { copy } from 'react-icons-kit/feather/copy'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -33,36 +35,34 @@ const ActionSidebar = () => {
 		socket.connect()
 	}
 
-	function togglePlaying(bool) {
+	function togglePlaying() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
 		// const { user } = store.getState().user
 		const slug = store.getState().userPrompters.prompterSlug
-		if (!bool) {
-			const saveObject = {
-				slug,
-				text: newPrompterObject.text,
-				// userId: user.userId,
-				projectName: `project_${slug}`,
-				meta: {
-					fontSize: newPrompterObject.fontSize,
-					lineHeight: newPrompterObject.lineHeight,
-					letterSpacing: newPrompterObject.letterSpacing,
-					scrollWidth: newPrompterObject.scrollWidth,
-					scrollSpeed: newPrompterObject.scrollSpeed,
-					isFlipped: newPrompterObject.isFlipped,
-				},
-			}
-			Promise.all([
-				dispatch(copyPrompterObject(store.getState().text)),
-				createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
-			]).then(() => {
-				setTimeout(() => {
-					window.open(`/player/${prompterSlug}`, '_blank')
-				}, 10)
-			})
+		const saveObject = {
+			slug,
+			text: newPrompterObject.text,
+			// userId: user.userId,
+			projectName: `project_${slug}`,
+			meta: {
+				fontSize: newPrompterObject.fontSize,
+				lineHeight: newPrompterObject.lineHeight,
+				letterSpacing: newPrompterObject.letterSpacing,
+				scrollWidth: newPrompterObject.scrollWidth,
+				scrollSpeed: newPrompterObject.scrollSpeed,
+				isFlipped: newPrompterObject.isFlipped,
+			},
 		}
+		Promise.all([
+			dispatch(copyPrompterObject(store.getState().text)),
+			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
+		]).then(() => {
+			setTimeout(() => {
+				window.open(`/player/${prompterSlug}`, '_blank')
+			}, 10)
+		})
 	}
 
 	function updatePrompter() {
@@ -86,7 +86,7 @@ const ActionSidebar = () => {
 			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			toggleUpdateBtn(false)
-			socket.emit('updatePrompter', newPrompterObject)
+			socket.emit('updatePrompter', updateObject)
 		})
 	}
 
@@ -131,12 +131,20 @@ const ActionSidebar = () => {
 						labelText="Stream address"
 						isDisabled
 						inheritedValue={`prompter.me/${prompterSlug || ''}`}
-					/>
+					>
+						<div className={styles.copyIcon}>
+							<Icon icon={copy} size="1em" />
+						</div>
+					</Input>
 					<Input
 						labelText="Remote control address"
 						inheritedValue={`prompter.me/remote/${prompterSlug || ''}`}
 						isDisabled
-					/>
+					>
+						<div className={styles.copyIcon}>
+							<Icon icon={copy} size="1em" />
+						</div>
+					</Input>
 					<Instruction
 						text={HELPER_SIDEBAR}
 						hasPadding={false}
@@ -149,7 +157,7 @@ const ActionSidebar = () => {
 					</p>
 					<div className={styles.playButtonContainer}>
 						<Button
-							onClick={() => togglePlaying(isPlaying)}
+							onClick={() => togglePlaying()}
 							labelText="Open"
 						/>
 						{

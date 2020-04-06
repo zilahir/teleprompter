@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
@@ -14,6 +15,16 @@ import { toggleFullScreen } from '../../utils/fullScreen'
 * @author zilahir
 * @function TextScroller
 * */
+
+const Scroller = styled.div`
+	max-width: ${props => props.scrollWidth};
+	p {
+		font-size: ${props => props.fontSize}px;
+		letter-spacing: ${props => props.letterSpacing}vw;
+		line-height: ${props => props.lineHeight};
+		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
+	}
+`
 
 const useInterval = (callback, delay) => {
 	const savedCallback = useRef()
@@ -34,15 +45,6 @@ const useInterval = (callback, delay) => {
 	}, [delay])
 }
 
-const Scroller = styled.div`
-	max-width: ${props => props.scrollWidth};
-	p {
-		font-size: ${props => props.fontSize}px;
-		letter-spacing: ${props => props.letterSpacing}vw;
-		line-height: ${props => props.lineHeight};
-		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
-	}
-`
 
 const STEP = 5
 
@@ -71,6 +73,7 @@ const TextScroller = props => {
 			if (prompterId === slug) {
 				togglePlaying(isPlaying)
 			}
+			console.debug('isPlaying', isPlaying)
 		})
 
 		socket.on('incSpeed', ({ prompterId }) => {
@@ -99,6 +102,7 @@ const TextScroller = props => {
 				scrollerRef.current.scroll({
 					top: position,
 				})
+				console.debug('DOWN PRESSED')
 			}
 		})
 	}

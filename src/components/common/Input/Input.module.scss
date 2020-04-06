@@ -3,17 +3,29 @@
 
 .inputContainer {
     margin: 30px 0;
+
     .label {
         display: flex;
         flex-direction: column;
         @include paragraph(14px, #fff, 0.39px);
+
         .labelText {
             margin-bottom: 10px;
+            display: flex;
+        }
+        
+        div {
+            margin-left: 10px;
+            &:hover {
+                cursor: pointer;
+            }
         }
         .input {
+
             &:focus {
                 outline: none;
             }
+
             border: none;
             border-radius: 30px;
             background: $gray-1;

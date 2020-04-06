@@ -19,6 +19,7 @@ const Input = props => {
 		inputType,
 		getBackValue,
 		placeholder,
+		children,
 	} = props
 	const [value, setValue] = useState(null)
 
@@ -37,6 +38,9 @@ const Input = props => {
 			<label className={styles.label}>
 				<span className={styles.labelText}>
 					{labelText}
+					{
+						children && children
+					}
 				</span>
 				<input
 					className={styles.input}
@@ -52,6 +56,7 @@ const Input = props => {
 }
 
 Input.defaultProps = {
+	children: null,
 	getBackValue: null,
 	inheritedValue: '',
 	inputClassName: null,
@@ -62,6 +67,7 @@ Input.defaultProps = {
 }
 
 Input.propTypes = {
+	children: PropTypes.node,
 	getBackValue: PropTypes.func,
 	inheritedValue: PropTypes.string,
 	inputClassName: PropTypes.string,
