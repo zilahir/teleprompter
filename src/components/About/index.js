@@ -43,10 +43,10 @@ const About = () => {
 							<p>
 								Mikko is a Finnish designer and content creator, who knows the pain of using
 								bad prompters all too well. Mikko is a graphic designer by trade, and you
-								canlook at (and buy) some of his work at Club Camomile, an online store for
+								canlook at (and buy) some of his work at <a href="https://clubcamomile.com/">Club Camomile</a>, an online store for
 								sustainable and ethical print streetwear he co-founded. For his occasional videos
 								(which almost always utilize teleprompters), check out his YouTube channel
-								Expert Opinion.
+								<a href="https://www.youtube.com/channel/UChUl9DYGrz2rQ4avj12Dm3Q">Expert Opinion</a>.
 							</p>
 							<p>
 								Richard is a fullstack developer originally from Hungary,
