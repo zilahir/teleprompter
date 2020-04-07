@@ -81,7 +81,7 @@
     "husky": "^3.1.0",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "yarn": "^1.17.3"
   },
   "lint-staged": {
