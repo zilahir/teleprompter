@@ -4,6 +4,7 @@ import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -20,6 +21,7 @@ import { toggleUpdateBtn } from '../../store/actions/misc'
 * @function ActionSidebar
 * */
 
+
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')
@@ -27,6 +29,8 @@ const ActionSidebar = () => {
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const [prompterSlug, setPrompterSlug] = useState(null)
 	const [showUpdateBtn, toggleShowUpdateBtn] = useState(false)
+	const [remoteAddress, setRemoteAddress] = useState(null)
+	const [streamAddress, setStreamAddress] = useState(null)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -96,7 +100,10 @@ const ActionSidebar = () => {
 		const uBtn = store.getState().misc.showActiveBtn
 		toggleShowUpdateBtn(uBtn)
 		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
-			setPrompterSlug(store.getState().userPrompters.prompterSlug)
+			const slug = store.getState().userPrompters.prompterSlug
+			setPrompterSlug(slug)
+			setStreamAddress(`prompter.me/player/${prompterSlug}`)
+			setRemoteAddress(`prompter.me/remote/${prompterSlug}`)
 		}
 		setScrollSpeed(sp)
 		setText(t)
@@ -104,6 +111,26 @@ const ActionSidebar = () => {
 
 	function testAnimation() {
 		toggleAnimation(!isAnimationStarted)
+	}
+
+	function copyValue(whichValue) {
+		switch (whichValue) {
+		case 'stream':
+			setStreamAddress('copied')
+			setTimeout(() => {
+				setStreamAddress(`prompter.me/player/${prompterSlug}`)
+			}, 2000)
+			break
+		case 'remote':
+			setRemoteAddress('copied')
+			setTimeout(() => {
+				setRemoteAddress(`prompter.me/remote/${prompterSlug}`)
+			}, 2000)
+			break
+		default:
+			return true
+		}
+		return true
 	}
 
 	return (
@@ -130,20 +157,36 @@ const ActionSidebar = () => {
 					<Input
 						labelText="Stream address"
 						isDisabled
-						inheritedValue={`prompter.me/${prompterSlug || ''}`}
+						inheritedValue={streamAddress || ''}
 					>
-						<div className={styles.copyIcon}>
-							<Icon icon={copy} size="1em" />
-						</div>
+						<CopyToClipboard
+							onCopy={() => copyValue('stream')}
+							text={`prompter.me/${prompterSlug || ''}`}
+						>
+							<div
+								className={styles.copyIcon}
+								role="button"
+							>
+								<Icon icon={copy} size="1em" />
+							</div>
+						</CopyToClipboard>
 					</Input>
 					<Input
 						labelText="Remote control address"
-						inheritedValue={`prompter.me/remote/${prompterSlug || ''}`}
+						inheritedValue={remoteAddress || ''}
 						isDisabled
 					>
-						<div className={styles.copyIcon}>
-							<Icon icon={copy} size="1em" />
-						</div>
+						<CopyToClipboard
+							onCopy={() => copyValue('remote')}
+							text={`prompter.me/remote/${prompterSlug || ''}`}
+						>
+							<div
+								className={styles.copyIcon}
+								role="button"
+							>
+								<Icon icon={copy} size="1em" />
+							</div>
+						</CopyToClipboard>
 					</Input>
 					<Instruction
 						text={HELPER_SIDEBAR}
