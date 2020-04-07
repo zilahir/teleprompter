@@ -69,7 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^2.13.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "@zilahir/eslint-config": "^1.0.1",
     "@zilahir/stylelint-config": "^1.0.0",
     "eslint-config-airbnb": "^18.0.1",
