@@ -47,7 +47,7 @@ const useInterval = (callback, delay) => {
 }
 
 
-const STEP = 5
+// const STEP = 5
 
 const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
@@ -57,6 +57,7 @@ const TextScroller = props => {
 	const bottomRef = useRef(null)
 	const [playing, setPlaying] = useState(false)
 	const [position, setPosition] = useState(0)
+	const [STEP, setStep] = useState(5)
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
@@ -119,6 +120,16 @@ const TextScroller = props => {
 		scrollerRef.current.addEventListener('scroll', scrollHandler)
 		return () => scrollerRef.current.removeEventListener('scroll', scrollHandler)
 	}, [])
+
+	useEffect(() => {
+		if (prompterObject.isFlipped) {
+			console.debug('flipped', true)
+			setTimeout(() => {
+				setStep(-5)
+				bottomRef.current.scrollIntoView({ behavior: 'auto' })
+			}, 100)
+		}
+	}, [prompterObject])
 
 	function handleKeyPress(key, e) {
 		e.preventDefault()
