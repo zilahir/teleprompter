@@ -55,7 +55,7 @@ const TextScroller = props => {
 	const textRef = useRef(null)
 	const topRef = useRef(null)
 	const bottomRef = useRef(null)
-	const [playing, togglePlaying] = useState(false)
+	const [playing, setPlaying] = useState(false)
 	const [position, setPosition] = useState(0)
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
@@ -67,45 +67,48 @@ const TextScroller = props => {
 		})
 	}, playing ? scrollSpeedValue : null)
 
-	useEffect(() => {
-		if (socket) {
-			// socket.emit('room', slug) // TODO: finnish this
-			socket.on('isPlaying', ({ prompterId, isPlaying }) => {
-				if (prompterId === slug) {
-					togglePlaying(isPlaying)
-				}
-			})
-
-			socket.on('incSpeed', ({ prompterId }) => {
-				if (prompterId === slug) {
-					setScrollSpeedValue(scrollSpeedValue - 5)
-				}
-			})
-			socket.on('decSpeed', ({ prompterId }) => {
-				if (prompterId === slug) {
-					setScrollSpeedValue(scrollSpeedValue + 5)
-				}
-			})
-
-			socket.on('jumpUp', ({ prompterId }) => {
-				if (prompterId === slug) {
-					setPosition(position - 500)
-					scrollerRef.current.scroll({
-						top: position,
-					})
-				}
-			})
-
-			socket.on('jumpDown', ({ prompterId }) => {
-				if (prompterId === slug) {
-					setPosition(position + 500)
-					scrollerRef.current.scroll({
-						top: position,
-					})
-					console.debug('position', position)
-				}
-			})
+	const togglePlaying = ({ prompterId, isPlaying }) => {
+		if (prompterId === slug) {
+			setPlaying(isPlaying)
 		}
+	}
+
+	const incrementSpeed = ({ prompterId }) => {
+		if (prompterId === slug) {
+			setScrollSpeedValue(scrollSpeedValue - 5)
+		}
+	}
+
+	const decrementSpeed = ({ prompterId }) => {
+		if (prompterId === slug) {
+			setScrollSpeedValue(scrollSpeedValue + 5)
+		}
+	}
+
+	const jumpUp = ({ prompterId }) => {
+		if (prompterId === slug) {
+			setPosition(currentPosition => currentPosition - 500)
+		}
+	}
+
+	const jumpDown = ({ prompterId }) => {
+		if (prompterId === slug) {
+			setPosition(currentPosition => currentPosition + 500)
+		}
+	}
+
+	useEffect(() => {
+		scrollerRef.current.scroll({ top: position })
+	}, [position])
+
+	useEffect(() => {
+		if (!socket) return
+		// socket.emit('room', slug) // TODO: finnish this
+		socket.on('isPlaying', togglePlaying)
+		socket.on('incSpeed', incrementSpeed)
+		socket.on('decSpeed', decrementSpeed)
+		socket.on('jumpUp', jumpUp)
+		socket.on('jumpDown', jumpDown)
 	}, [socket])
 
 	const scrollHandler = event => {
@@ -120,7 +123,7 @@ const TextScroller = props => {
 	function handleKeyPress(key, e) {
 		e.preventDefault()
 		if (key === SPACE) {
-			togglePlaying(!playing)
+			setPlaying(!playing)
 		} else if (key === F6) {
 			toggleFullScreen()
 		} else if (key === LEFT) {
