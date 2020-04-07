@@ -61,7 +61,9 @@ const Selector = props => {
 }
 
 Selector.propTypes = {
-	items: PropTypes.arrayOf().isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.any,
+	).isRequired,
 }
 
 export default Selector

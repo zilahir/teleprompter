@@ -86,7 +86,10 @@ Button.propTypes = {
 	disabled: PropTypes.bool,
 	icon: PropTypes.node,
 	isNegative: PropTypes.bool,
-	isVisible: PropTypes.bool,
+	isVisible: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.number,
+	]),
 	labelText: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
 	type: PropTypes.string,

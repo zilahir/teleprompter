@@ -76,7 +76,6 @@ const EditorSidebar = () => {
 						</p>
 						<Toggle
 							onChange={bool => handleFlip(bool)}
-							defaultChecked={false}
 							checked={isFlipped}
 							icons={null}
 						/>
