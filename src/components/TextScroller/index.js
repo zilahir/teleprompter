@@ -167,7 +167,7 @@ const TextScroller = props => {
 		<div className={styles.rootContainer}>
 			<Scroller
 				className={styles.scrollerContainer}
-				fontSize={String(prompterObject.fontSize * 30)}
+				fontSize={String(prompterObject.fontSize * 50)}
 				lineHeight={prompterObject.lineHeight}
 				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
