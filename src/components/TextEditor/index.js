@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useStore, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 
 import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
+import { toggleUpdateBtn } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -20,6 +21,14 @@ const TextEditor = () => {
 	const store = useStore()
 	function handleTextChange(e) {
 		dispatch(setText(e.target.value))
+		if (store.getState().userPrompters.prompterObject) {
+			const result = shallowEqual(
+				e.target.value, store.getState().userPrompters.prompterObject.text,
+			)
+			if (!result) {
+				dispatch(toggleUpdateBtn(true))
+			}
+		}
 	}
 	useEffect(() => store.subscribe(() => {
 		const currText = store.getState().text.text
