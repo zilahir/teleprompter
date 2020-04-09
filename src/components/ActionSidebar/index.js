@@ -199,10 +199,6 @@ const ActionSidebar = () => {
 						<a href="/about">About Prompter.me</a>
 					</p>
 					<div className={styles.playButtonContainer}>
-						<Button
-							onClick={() => togglePlaying()}
-							labelText="Open"
-						/>
 						{
 							showUpdateBtn
 								? (
@@ -210,10 +206,16 @@ const ActionSidebar = () => {
 										onClick={() => updatePrompter()}
 										labelText="Update"
 										buttonClass={styles.updateBtn}
+										isNegative
 									/>
 								)
 								: null
 						}
+						<Button
+							onClick={() => togglePlaying()}
+							labelText="Open"
+							className={styles.playBtn}
+						/>
 					</div>
 				</div>
 			</Col>
