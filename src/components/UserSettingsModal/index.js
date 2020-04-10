@@ -99,10 +99,15 @@ const UserSettingsModal = props => {
 							getBackValue={v => setPwForAccountDeletion(v)}
 							inputClassName={styles.settingsInput}
 						/>
-						<Checkbox
-							checked={isConfirmed}
-							onChange={() => confirmCheckbox()}
-						/>
+						<div className={styles.checkBoxContainer}>
+							<Checkbox
+								checked={isConfirmed}
+								onChange={() => confirmCheckbox()}
+							/>
+							<p>
+								I am sure I want to delete my account
+							</p>
+						</div>
 					</div>
 				</div>
 				<div className={styles.footerBtnContainer}>

@@ -3,7 +3,7 @@
 @import "../../styles/mixins/heading";
 
 .userSettingsModal {
-  width: 500px;
+  width: 520px;
 
   .topContainer {
     display: flex;
@@ -57,10 +57,21 @@
     }
 
     .deleteInner {
+      .checkBoxContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 5px;
+      }
+
       display: flex;
       justify-content: space-between;
       align-items: center;
 
+      p {
+        margin-left: 10px;
+      }
       .settingsInput {
         margin: 10px 0;
       }
