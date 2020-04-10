@@ -66,15 +66,20 @@ const UserSettingsModal = props => {
 						<Input
 							placeholder="Current password"
 							getBackValue={v => setCurrentPassword(v)}
+							inputClassName={styles.settingsInput}
 						/>
-						<Input
-							placeholder="New Password"
-							getBackValue={v => setNewPassword(v)}
-						/>
-						<Input
-							placeholder="Confirm new password"
-							getBackValue={v => setNewPassowrdConfirm(v)}
-						/>
+						<div className={styles.newPasswordContainer}>
+							<Input
+								placeholder="New Password"
+								getBackValue={v => setNewPassword(v)}
+								inputClassName={styles.settingsInput}
+							/>
+							<Input
+								placeholder="Confirm new password"
+								getBackValue={v => setNewPassowrdConfirm(v)}
+								inputClassName={styles.settingsInput}
+							/>
+						</div>
 
 					</div>
 				</div>

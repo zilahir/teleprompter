@@ -26,6 +26,7 @@
   .footerBtnContainer {
     display: flex;
     justify-content: space-between;
+    margin-top: 40px;
     .btnClass {
       button {
         height: 45px;
@@ -34,8 +35,17 @@
   }
   
   .inputContainer {
+    .newPasswordContainer {
+      display: flex;
+      justify-content: space-between;
+    }
+
     p {
       @include paragraph(14px, #fff, 0.39px);
+      margin: 0;
+    }
+
+    .settingsInput {
       margin: 0;
     }
   }
