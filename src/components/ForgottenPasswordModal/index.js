@@ -9,11 +9,12 @@ import Modal from '../common/Modal'
 * */
 
 const ForgottenPasswordModal = props => {
-	const { showPasswordModal } = props
+	const { showPasswordModal, requestClose } = props
 	return (
 		<>
 			<Modal
 				isShowing={showPasswordModal}
+				hide={requestClose}
 			>
 				<p>
 					Enter your email address, and we will send you a password.
@@ -24,6 +25,7 @@ const ForgottenPasswordModal = props => {
 }
 
 ForgottenPasswordModal.propTypes = {
+	requestClose: PropTypes.func.isRequired,
 	showPasswordModal: PropTypes.bool.isRequired,
 }
 

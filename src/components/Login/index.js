@@ -200,6 +200,17 @@ const Login = props => {
 								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
+							<div
+								className={styles.forgottenContainer}
+								role="button"
+								onKeyDown={null}
+								tabIndex={-1}
+								onClick={() => toggleForgottenPasswordModal(true)}
+							>
+								<p>
+									I forgot my password!
+								</p>
+							</div>
 							<div className={classnames(
 								styles.errorContainer,
 								!isLoginError ? styles.hidden : null,
@@ -394,6 +405,7 @@ const Login = props => {
 			</Modal>
 			<ForgottenPasswordModal
 				showPasswordModal={showPasswordModal}
+				requestClose={() => toggleForgottenPasswordModal(false)}
 			/>
 		</>
 	)
