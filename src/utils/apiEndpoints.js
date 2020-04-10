@@ -10,6 +10,7 @@ export const apiEndpoints = {
 	newPrompterWithoutAuth: `${apiRoot}/prompternoauth`,
 	updatePrompterNoAuth: `${apiRoot}/prompternoauth`,
 	modifyPassword: `${apiRoot}/users`,
+	getPasswordRecovery: `${apiRoot}/passwordrecovery`,
 	requestPasswordRecovery: `${apiRoot}/passwordrecovery`,
 	setPasswordRecoveryToUsed: `${apiRoot}/resetpassword`,
 }
