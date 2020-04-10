@@ -22,6 +22,7 @@ import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import { apiEndpoints } from '../../utils/apiEndpoints'
+import ForgottenPasswordModal from '../ForgottenPasswordModal'
 
 /**
 * @author zilahir
@@ -46,6 +47,7 @@ const Login = props => {
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
+	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
@@ -390,6 +392,9 @@ const Login = props => {
 					/>
 				</div>
 			</Modal>
+			<ForgottenPasswordModal
+				showPasswordModal={showPasswordModal}
+			/>
 		</>
 	)
 }
