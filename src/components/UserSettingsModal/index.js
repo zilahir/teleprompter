@@ -72,8 +72,11 @@ const UserSettingsModal = props => {
 					})
 				}
 			})
-		} else {
-			console.debug('else', true)
+		} else if (newPassword && newPassword !== newPasswordConfirm) {
+			setAlertMessage({
+				text: 'The passwords does not match!',
+				state: 'warning',
+			})
 		}
 	}
 
