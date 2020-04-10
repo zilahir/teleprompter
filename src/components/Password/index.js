@@ -2,12 +2,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { Row, Container, Col } from 'react-grid-system'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import styles from './Password.module.scss'
 import Button from '../common/Button'
 import Input from '../common/Input'
 import Logo from '../common/Logo'
+import { getPasswordResetObject } from '../../store/actions/user'
 
 /**
 * @author zilahir
@@ -18,6 +19,7 @@ const Password = () => {
 	const history = useHistory()
 	const [newPassword, setNewPassword] = useState(null)
 	const [confirmNewPassword, setConfirmNewpassword] = useState(null)
+	const { slug } = useParams()
 
 	function updatePassword() {
 		const updatePasswordObject = {
@@ -27,8 +29,11 @@ const Password = () => {
 	}
 
 	useEffect(() => {
-		console.debug('render', true)
-		// TODO: get password recovery object here
+		console.debug('render', slug)
+		const passwordRecoveryRequest = getPasswordResetObject(slug)
+		passwordRecoveryRequest.then(res => {
+			console.debug('res', res)
+		})
 	}, [])
 	return (
 		<div className={styles.passwordRecoveryWrapper}>
