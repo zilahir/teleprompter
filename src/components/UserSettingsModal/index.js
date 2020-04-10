@@ -9,6 +9,7 @@ import Input from '../common/Input'
 import Button from '../common/Button'
 import { clearUserPrompters } from '../../store/actions/prompter'
 import { logOutUser } from '../../store/actions/authUser'
+import Checkbox from '../common/Checkbox'
 
 /**
 * @author zilahir
@@ -87,11 +88,16 @@ const UserSettingsModal = props => {
 					<p>
 						Delete account (please enter your current password to confirm deletion)
 					</p>
-					<Input
-						placeholder="Current password"
-						getBackValue={v => setPwForAccountDeletion(v)}
-						inputClassName={styles.settingsInput}
-					/>
+					<div className={styles.deleteInner}>
+						<Input
+							placeholder="Current password"
+							getBackValue={v => setPwForAccountDeletion(v)}
+							inputClassName={styles.settingsInput}
+						/>
+						<Checkbox
+							checked
+						/>
+					</div>
 				</div>
 				<div className={styles.footerBtnContainer}>
 					<Button

@@ -51,13 +51,19 @@
   }
 
   .deleteContainer {
-    margin-top: 40px;
+    margin: 20px 0;
     p {
       @include paragraph(14px, #fff, 0.39px);
     }
 
-    .settingsInput {
-      margin: 10px 0;
+    .deleteInner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .settingsInput {
+        margin: 10px 0;
+      }
     }
   }
 }
