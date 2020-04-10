@@ -43,6 +43,14 @@ const UserSettingsModal = props => {
 		])
 	}
 
+	function modifyUser() {
+		if (isConfirmed) {
+			// TODO delete account here
+		} else {
+			// TODO: modify user here
+		}
+	}
+
 	return (
 		<>
 			<Modal
@@ -119,7 +127,7 @@ const UserSettingsModal = props => {
 					/>
 					<Button
 						labelText="Save"
-						onClick={null}
+						onClick={() => modifyUser()}
 						disabled={() => validateForm()}
 						buttonClass={styles.btnClass}
 					/>
