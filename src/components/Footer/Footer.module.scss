@@ -1,5 +1,31 @@
 @import "../../styles/variables";
+@import "../../styles/mixins/paragraph.scss";
 
 .footerContainer {
   background-color: rgba($color: $gray-1, $alpha: 1.0);
+  padding: 10px 20px;
+
+  .innerContainer {
+    display: flex;
+    align-items: center;
+    p {
+      @include paragraph(14px, #ffffff, 0.42px);
+  
+      &.purple {
+        a {
+          @include paragraph(14px, $purple, 0.42px);
+          text-decoration: none;
+        }
+        margin-left: 20px;
+      }
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
