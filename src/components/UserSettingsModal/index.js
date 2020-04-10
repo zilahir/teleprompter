@@ -40,7 +40,9 @@ const UserSettingsModal = props => {
 		Promise.all([
 			dispatch(clearUserPrompters()),
 			dispatch(logOutUser()),
-		])
+		]).then(() => {
+			requestClose()
+		})
 	}
 
 	function modifyUser() {
@@ -63,9 +65,16 @@ const UserSettingsModal = props => {
 					<h1>
 						Username
 					</h1>
-					<p>
-						Log Out
-					</p>
+					<div
+						onClick={() => logOut()}
+						onKeyDown={null}
+						tabIndex={-1}
+						role="button"
+					>
+						<p>
+							Log Out
+						</p>
+					</div>
 				</div>
 				<div className={styles.inputContainer}>
 					<Input
