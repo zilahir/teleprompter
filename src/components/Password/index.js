@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import styles from './Password.module.scss'
 import Button from '../common/Button'
 import Input from '../common/Input'
+import Logo from '../common/Logo'
 
 /**
 * @author zilahir
@@ -32,6 +33,12 @@ const Password = () => {
 					<Col className={styles.dark} lg={3} />
 					<Col className={styles.middle} lg={6}>
 						<div>
+							<div className={styles.titleContainer}>
+								<Logo className={styles.logo} />
+								<h1>
+									Password reset
+								</h1>
+							</div>
 							<div className={styles.inputContainer}>
 								<Input
 									placeholder="New password"
