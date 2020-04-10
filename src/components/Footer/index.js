@@ -41,8 +41,12 @@ const Footer = () => (
 				<Col lg={6}>
 					<ul>
 						<li>
-							<IconContainer color={Colors.purple}>
-								<Icon size="1.5em" icon={github} />
+							<IconContainer
+								color={Colors.purple}
+							>
+								<a href="https://github.com/zilahir/teleprompter">
+									<Icon size="1.5em" icon={github} />
+								</a>
 							</IconContainer>
 						</li>
 					</ul>

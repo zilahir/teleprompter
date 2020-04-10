@@ -27,5 +27,10 @@
     list-style-type: none;
     display: flex;
     justify-content: flex-end;
+    li {
+      a {
+        color: unset;
+      }
+    }
   }
 }
