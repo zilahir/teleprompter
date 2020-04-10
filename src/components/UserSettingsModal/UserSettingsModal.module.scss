@@ -5,6 +5,9 @@
 .userSettingsModal {
   width: 520px;
 
+  .innerContainer {
+    // padding: 30px;
+  }
   .topContainer {
     display: flex;
     justify-content: center;
@@ -24,6 +27,33 @@
       &:hover {
         color: $purple;
         cursor: pointer;
+      }
+    }
+
+    .info {
+      &.hidden {
+        display: none;
+      }
+
+      &.sucess {
+
+      }
+
+      &.warning {
+        background: rgba($color: $warning, $alpha: 0.9);
+      }
+
+      &.success {
+
+      }
+
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: $border-radius;
+      p {
+        @include paragraph(14px, #ffffff, 0.42px);
+        margin-left: 10px;
       }
     }
   }

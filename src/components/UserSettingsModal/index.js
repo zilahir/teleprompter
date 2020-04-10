@@ -1,7 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStore, useDispatch } from 'react-redux'
+import Icon from 'react-icons-kit'
+import { alertTriangle } from 'react-icons-kit/feather/alertTriangle'
+import classnames from 'classnames'
 
 import Modal from '../common/Modal'
 import styles from './UserSettingsModal.module.scss'
@@ -10,6 +14,8 @@ import Button from '../common/Button'
 import { clearUserPrompters } from '../../store/actions/prompter'
 import { logOutUser } from '../../store/actions/authUser'
 import Checkbox from '../common/Checkbox'
+import { modifyPassword } from '../../store/actions/user'
+import { PASSWORD } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -23,6 +29,7 @@ const UserSettingsModal = props => {
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
+	const [alertMessage, setAlertMessage] = useState(null)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -48,8 +55,19 @@ const UserSettingsModal = props => {
 	function modifyUser() {
 		if (isConfirmed) {
 			// TODO delete account here
+		} else if (newPassword && newPassword === newPasswordConfirm) {
+			const { accessToken } = store.getState().user.user
+			const { userId } = store.getState().user.user
+
+			modifyPassword(accessToken, userId, newPassword).then(res => {
+				if (res.data.success) {
+					setAlertMessage('Your password had been modified')
+				} else {
+					setAlertMessage('There was an error. Try again!')
+				}
+			})
 		} else {
-			// TODO: modify user here
+			console.debug('else', true)
 		}
 	}
 
@@ -62,6 +80,16 @@ const UserSettingsModal = props => {
 				hasCloseIcon={false}
 			>
 				<div className={styles.topContainer}>
+					<div className={classnames(
+						styles.info,
+						!alertMessage ? styles.hidden : null,
+					)}
+					>
+						<Icon size="1.5em" icon={alertTriangle} />
+						<p>
+							{alertMessage}
+						</p>
+					</div>
 					<h1>
 						Username
 					</h1>
@@ -76,70 +104,76 @@ const UserSettingsModal = props => {
 						</p>
 					</div>
 				</div>
-				<div className={styles.inputContainer}>
-					<Input
-						labelText="Change username"
-						inheritedValue="Username"
-					/>
-				</div>
-				<div className={styles.inputContainer}>
-					<p>
-						Change password
-					</p>
-					<div>
+				<div className={styles.innerContainer}>
+					<div className={styles.inputContainer}>
 						<Input
-							placeholder="Current password"
-							getBackValue={v => setCurrentPassword(v)}
-							inputClassName={styles.settingsInput}
+							labelText="Change username"
+							inheritedValue="Username"
 						/>
-						<div className={styles.newPasswordContainer}>
+					</div>
+					<div className={styles.inputContainer}>
+						<p>
+							Change password
+						</p>
+						<div>
 							<Input
-								placeholder="New Password"
-								getBackValue={v => setNewPassword(v)}
+								placeholder="Current password"
+								getBackValue={v => setCurrentPassword(v)}
 								inputClassName={styles.settingsInput}
+								inputType={PASSWORD}
 							/>
-							<Input
-								placeholder="Confirm new password"
-								getBackValue={v => setNewPassowrdConfirm(v)}
-								inputClassName={styles.settingsInput}
-							/>
+							<div className={styles.newPasswordContainer}>
+								<Input
+									placeholder="New Password"
+									getBackValue={v => setNewPassword(v)}
+									inputClassName={styles.settingsInput}
+									inputType={PASSWORD}
+								/>
+								<Input
+									placeholder="Confirm new password"
+									getBackValue={v => setNewPassowrdConfirm(v)}
+									inputClassName={styles.settingsInput}
+									inputType={PASSWORD}
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={styles.deleteContainer}>
-					<p>
-						Delete account (please enter your current password to confirm deletion)
-					</p>
-					<div className={styles.deleteInner}>
-						<Input
-							placeholder="Current password"
-							getBackValue={v => setPwForAccountDeletion(v)}
-							inputClassName={styles.settingsInput}
-						/>
-						<div className={styles.checkBoxContainer}>
-							<Checkbox
-								checked={isConfirmed}
-								onChange={() => confirmCheckbox()}
+					<div className={styles.deleteContainer}>
+						<p>
+							Delete account (please enter your current password to confirm deletion)
+						</p>
+						<div className={styles.deleteInner}>
+							<Input
+								placeholder="Current password"
+								getBackValue={v => setPwForAccountDeletion(v)}
+								inputClassName={styles.settingsInput}
 							/>
-							<p>
-								I am sure I want to delete my account
-							</p>
+							<div className={styles.checkBoxContainer}>
+								<Checkbox
+									checked={isConfirmed}
+									onChange={() => confirmCheckbox()}
+								/>
+								<p>
+									I am sure I want to delete my account
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={styles.footerBtnContainer}>
-					<Button
-						labelText="Cancel"
-						isNegative
-						onClick={requestClose}
-						buttonClass={styles.btnClass}
-					/>
-					<Button
-						labelText="Save"
-						onClick={() => modifyUser()}
-						disabled={() => validateForm()}
-						buttonClass={styles.btnClass}
-					/>
+					<div className={styles.footerBtnContainer}>
+						<Button
+							labelText="Cancel"
+							isNegative
+							onClick={requestClose}
+							buttonClass={styles.btnClass}
+						/>
+						<Button
+							labelText="Save"
+							onClick={() => modifyUser()}
+							// disabled={() => validateForm()}
+							űdisabled={false}
+							buttonClass={styles.btnClass}
+						/>
+					</div>
 				</div>
 			</Modal>
 		</>
