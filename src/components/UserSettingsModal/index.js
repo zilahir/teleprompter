@@ -29,7 +29,7 @@ const UserSettingsModal = props => {
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
-	const [alertMessage, setAlertMessage] = useState(null)
+	const [alertMessage, setAlertMessage] = useState({})
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -61,9 +61,15 @@ const UserSettingsModal = props => {
 
 			modifyPassword(accessToken, userId, newPassword).then(res => {
 				if (res.data.success) {
-					setAlertMessage('Your password had been modified')
+					setAlertMessage({
+						text: 'Your password had been modified',
+						state: 'success',
+					})
 				} else {
-					setAlertMessage('There was an error. Try again!')
+					setAlertMessage({
+						text: 'There was an error. Try again!',
+						state: 'error',
+					})
 				}
 			})
 		} else {
@@ -82,12 +88,12 @@ const UserSettingsModal = props => {
 				<div className={styles.topContainer}>
 					<div className={classnames(
 						styles.info,
-						!alertMessage ? styles.hidden : null,
+						!alertMessage.text ? styles.hidden : styles[alertMessage.state],
 					)}
 					>
 						<Icon size="1.5em" icon={alertTriangle} />
 						<p>
-							{alertMessage}
+							{alertMessage.text}
 						</p>
 					</div>
 					<h1>

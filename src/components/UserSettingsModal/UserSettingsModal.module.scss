@@ -35,16 +35,16 @@
         display: none;
       }
 
-      &.sucess {
-
+      &.success {
+        background: rgba($color: $success, $alpha: 0.9);
       }
 
       &.warning {
         background: rgba($color: $warning, $alpha: 0.9);
       }
 
-      &.success {
-
+      &.error {
+        background: rgba($color: $error, $alpha: 0.9);
       }
 
       display: flex;
