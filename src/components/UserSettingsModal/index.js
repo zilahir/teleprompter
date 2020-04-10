@@ -20,6 +20,7 @@ const UserSettingsModal = props => {
 	const [currentPassword, setCurrentPassword] = useState(null)
 	const [newPassword, setNewPassword] = useState(null)
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
+	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -80,8 +81,17 @@ const UserSettingsModal = props => {
 								inputClassName={styles.settingsInput}
 							/>
 						</div>
-
 					</div>
+				</div>
+				<div className={styles.deleteContainer}>
+					<p>
+						Delete account (please enter your current password to confirm deletion)
+					</p>
+					<Input
+						placeholder="Current password"
+						getBackValue={v => setPwForAccountDeletion(v)}
+						inputClassName={styles.settingsInput}
+					/>
 				</div>
 				<div className={styles.footerBtnContainer}>
 					<Button
