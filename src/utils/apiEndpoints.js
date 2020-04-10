@@ -9,4 +9,5 @@ export const apiEndpoints = {
 	modifyPrompter: `${apiRoot}/prompter`,
 	newPrompterWithoutAuth: `${apiRoot}/prompternoauth`,
 	updatePrompterNoAuth: `${apiRoot}/prompternoauth`,
+	modifyPassword: `${apiRoot}/users`,
 }

@@ -55,3 +55,16 @@ export const logOutUser = () => dispatch => new Promise(resolve => {
 	dispatch(removeUser())
 	resolve(true)
 })
+
+export const modifyPassword = (authToken, userId, newPassword) => new Promise(resolve => {
+	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	axios.patch(`${apiEndpoints.modifyPassword}/${userId}`, { password: newPassword }, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
