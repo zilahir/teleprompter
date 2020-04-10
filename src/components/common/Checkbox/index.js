@@ -47,9 +47,9 @@ const StyledCheckbox = styled.div`
 * @function Checkbox
 * */
 
-const Checkbox = ({ className, checked }) => (
+const Checkbox = ({ className, checked, onChange }) => (
 	<CheckboxContainer className={className}>
-		<HiddenCheckbox checked={checked} />
+		<HiddenCheckbox checked={checked} onChange={onChange} />
 		<StyledCheckbox checked={checked}>
 			<Icon viewBox="0 0 24 24">
 				<polyline points="20 6 9 17 4 12" />
@@ -61,6 +61,7 @@ const Checkbox = ({ className, checked }) => (
 Checkbox.propTypes = {
 	checked: PropTypes.bool.isRequired,
 	className: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
 }
 
 export default Checkbox
