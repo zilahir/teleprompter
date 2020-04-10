@@ -8,10 +8,10 @@ import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '.
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
-import { logOutUser } from '../../store/actions/authUser'
-import { clearUserPrompters, setPrompterSlug } from '../../store/actions/prompter'
+import { setPrompterSlug } from '../../store/actions/prompter'
 import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
+import UserSettingsModal from '../UserSettingsModal'
 
 /**
 * @author zilahir
@@ -26,6 +26,7 @@ const ActionHeader = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [showNewModal, toggleNewModal] = useState(false)
 	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
+	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -76,11 +77,8 @@ const ActionHeader = () => {
 		toggleNewModal(false)
 	}
 
-	function logOut() {
-		Promise.all([
-			dispatch(clearUserPrompters()),
-			dispatch(logOutUser()),
-		])
+	function openUserSettingModal() {
+		toggleUserSettingsModal(true)
 	}
 
 	useEffect(() => store.subscribe(() => {
@@ -160,8 +158,8 @@ const ActionHeader = () => {
 						<ul className={styles.actionList}>
 							<li>
 								<Button
-									labelText="Log Out"
-									onClick={() => logOut()}
+									labelText="Username"
+									onClick={() => openUserSettingModal()}
 									type={LINK}
 								/>
 							</li>
@@ -213,6 +211,10 @@ const ActionHeader = () => {
 					/>
 				</div>
 			</Modal>
+			<UserSettingsModal
+				showUserSettingsModal={userSettingsModalOpen}
+				requestClose={() => toggleUserSettingsModal(false)}
+			/>
 		</div>
 	)
 }

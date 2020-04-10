@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useStore } from 'react-redux'
+import { useStore, useDispatch } from 'react-redux'
 
 import Modal from '../common/Modal'
 import styles from './UserSettingsModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
+import { clearUserPrompters } from '../../store/actions/prompter'
+import { logOutUser } from '../../store/actions/authUser'
 
 /**
 * @author zilahir
@@ -19,12 +21,21 @@ const UserSettingsModal = props => {
 	const [newPassword, setNewPassword] = useState(null)
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 
+	const store = useStore()
+	const dispatch = useDispatch()
+
 	function validateForm() {
 		const result = false
 		return result
 	}
 
-	const store = useStore()
+	function logOut() {
+		Promise.all([
+			dispatch(clearUserPrompters()),
+			dispatch(logOutUser()),
+		])
+	}
+
 	return (
 		<>
 			<Modal
