@@ -4,12 +4,39 @@
 
 .userSettingsModal {
   width: 500px;
-  h1 {
-    @include heading();
-    font-size: 25px;
-    letter-spacing: 0.75px;
+
+  .topContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h1 {
+      @include heading();
+      font-size: 25px;
+      letter-spacing: 0.75px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    p {
+      @include paragraph(14px, #ffffff, 0.42px);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
   }
-  p {
-    @include paragraph(14px, #ffffff, 0.42px);
+  .footerBtnContainer {
+    display: flex;
+    justify-content: space-between;
+    .btnClass {
+      button {
+        height: 45px;
+      }
+    }
+  }
+  
+  .inputContainer {
+    p {
+      @include paragraph(14px, #fff, 0.39px);
+      margin: 0;
+    }
   }
 }

@@ -83,11 +83,13 @@ const UserSettingsModal = props => {
 						labelText="Cancel"
 						isNegative
 						onClick={requestClose}
+						buttonClass={styles.btnClass}
 					/>
 					<Button
 						labelText="Save"
 						onClick={null}
 						disabled={() => validateForm()}
+						buttonClass={styles.btnClass}
 					/>
 				</div>
 			</Modal>
