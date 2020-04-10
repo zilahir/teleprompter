@@ -41,6 +41,8 @@ const UserSettingsModal = props => {
 			<Modal
 				isShowing={showUserSettingsModal}
 				hide={requestClose}
+				modalClassName={styles.userSettingsModal}
+				hasCloseIcon={false}
 			>
 				<div className={styles.topContainer}>
 					<h1>

@@ -1,6 +1,15 @@
 @import "../../styles/variables";
 @import "../../styles/mixins/paragraph";
+@import "../../styles/mixins/heading";
 
 .userSettingsModal {
-
+  width: 500px;
+  h1 {
+    @include heading();
+    font-size: 25px;
+    letter-spacing: 0.75px;
+  }
+  p {
+    @include paragraph(14px, #ffffff, 0.42px);
+  }
 }
