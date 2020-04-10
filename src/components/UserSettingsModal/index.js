@@ -22,6 +22,7 @@ const UserSettingsModal = props => {
 	const [newPassword, setNewPassword] = useState(null)
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
+	const [isConfirmed, toggleConfirmed] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -29,6 +30,10 @@ const UserSettingsModal = props => {
 	function validateForm() {
 		const result = false
 		return result
+	}
+
+	function confirmCheckbox(checked) {
+		toggleConfirmed(checked)
 	}
 
 	function logOut() {
@@ -95,7 +100,8 @@ const UserSettingsModal = props => {
 							inputClassName={styles.settingsInput}
 						/>
 						<Checkbox
-							checked
+							checked={isConfirmed}
+							onChange={e => confirmCheckbox(e.target.checked)}
 						/>
 					</div>
 				</div>
