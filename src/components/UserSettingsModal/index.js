@@ -32,8 +32,8 @@ const UserSettingsModal = props => {
 		return result
 	}
 
-	function confirmCheckbox(checked) {
-		toggleConfirmed(checked)
+	function confirmCheckbox() {
+		toggleConfirmed(!isConfirmed)
 	}
 
 	function logOut() {
@@ -101,7 +101,7 @@ const UserSettingsModal = props => {
 						/>
 						<Checkbox
 							checked={isConfirmed}
-							onChange={e => confirmCheckbox(e.target.checked)}
+							onChange={() => confirmCheckbox()}
 						/>
 					</div>
 				</div>
