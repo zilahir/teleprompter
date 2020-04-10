@@ -14,6 +14,11 @@ import Button from '../common/Button'
 const ForgottenPasswordModal = props => {
 	const { showPasswordModal, requestClose } = props
 	const [email, setEmail] = useState(null)
+
+	function sendForgottenPasswordEmail() {
+		// eslint-disable-next-line no-console
+		console.debug('email', email)
+	}
 	return (
 		<>
 			<Modal
@@ -41,6 +46,7 @@ const ForgottenPasswordModal = props => {
 					<Button
 						labelText="Send"
 						disabled={!email || false}
+						onClick={() => sendForgottenPasswordEmail()}
 					/>
 				</div>
 			</Modal>
