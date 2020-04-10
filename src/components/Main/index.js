@@ -10,6 +10,7 @@ import styles from './Main.module.scss'
 import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
 import { clearText } from '../../store/actions/text'
 import { toggleUpdateBtn } from '../../store/actions/misc'
+import Footer from '../Footer'
 
 /**
 * @author zilahir
@@ -42,6 +43,7 @@ const Main = () => {
 					<ActionSidebar />
 				</Row>
 			</Container>
+			<Footer />
 		</div>
 	)
 }
