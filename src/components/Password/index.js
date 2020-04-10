@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Container, Col } from 'react-grid-system'
 import { useHistory } from 'react-router-dom'
 
@@ -24,6 +25,11 @@ const Password = () => {
 			confirmNewPassword,
 		}
 	}
+
+	useEffect(() => {
+		console.debug('render', true)
+		// TODO: get password recovery object here
+	}, [])
 	return (
 		<div className={styles.passwordRecoveryWrapper}>
 			<Container
