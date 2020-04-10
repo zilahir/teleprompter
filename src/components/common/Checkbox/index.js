@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { Colors } from '../../../utils/consts'
+
 const CheckboxContainer = styled.div`
 	display: inline-block;
 	vertical-align: middle;
@@ -29,7 +31,8 @@ const StyledCheckbox = styled.div`
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background: ${props => (props.checked ? 'salmon' : 'papayawhip')};
+	background: #2D2D2D;
+	border: 2px solid #ffffff;
 	border-radius: 3px;
 	transition: all 150ms;
 
@@ -38,7 +41,9 @@ const StyledCheckbox = styled.div`
 	}
 
 	${Icon} {
-		visibility: ${props => (props.checked ? 'visible' : 'hidden')}
+		visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+		stroke: ${Colors.purple};
+		stroke-width: 4px;
 	}
 `
 
