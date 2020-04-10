@@ -103,6 +103,9 @@ const Password = () => {
 												labelText="update"
 												onClick={() => updatePassword()}
 												buttonClass={styles.buttonContainer}
+												disabled={
+													!newPassword || (newPassword !== confirmNewPassword)
+												}
 											/>
 										</>
 									) : null
