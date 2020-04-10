@@ -55,7 +55,7 @@ const UserSettingsModal = props => {
 	function modifyUser() {
 		if (isConfirmed) {
 			// TODO delete account here
-		} else if (newPassword && newPassword === newPasswordConfirm) {
+		} else if (newPassword && newPassword === newPasswordConfirm && newPassword.length > 7) {
 			const { accessToken } = store.getState().user.user
 			const { userId } = store.getState().user.user
 
@@ -77,7 +77,16 @@ const UserSettingsModal = props => {
 				text: 'The passwords does not match!',
 				state: 'warning',
 			})
+		} else if (newPassword && newPassword.length < 8) {
+			setAlertMessage({
+				text: 'The password must be at least 8 character long',
+				state: 'warning',
+			})
 		}
+
+		setTimeout(() => {
+			setAlertMessage({})
+		}, 3000)
 	}
 
 	return (

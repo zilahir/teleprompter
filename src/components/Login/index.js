@@ -245,7 +245,7 @@ const Login = props => {
 													getBackValue={v => setChosenEmail(v)}
 												/>
 												<Input
-													placeholder="Password  (requited min 8 chars)"
+													placeholder="Password  (required min 8 chars)"
 													inputClassName={styles.loginInput}
 													inputType={PASSWORD}
 													getBackValue={v => setChosenPassword(v)}
