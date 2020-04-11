@@ -11,7 +11,7 @@ import styles from './Password.module.scss'
 import Button from '../common/Button'
 import Input from '../common/Input'
 import Logo from '../common/Logo'
-import { getPasswordResetObject, resetPassword } from '../../store/actions/user'
+import { getPasswordResetObject, resetPassword, setPasswordRecoveryToUsed } from '../../store/actions/user'
 
 
 /**
@@ -36,7 +36,16 @@ const Password = () => {
 		}
 		const passwordReset = resetPassword(newPassword, token, userId)
 		passwordReset.then(() => {
-
+			setPasswordRecoveryToUsed(slug).then(res => {
+				console.debug('res', res)
+				if (res.success) {
+					toggleHidden(true)
+					setAlertMessage({
+						text: 'Your passwsord has been changed!',
+						state: 'success',
+					})
+				}
+			})
 		})
 	}
 
