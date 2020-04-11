@@ -74,3 +74,13 @@ export const checkPassword = userObject => new Promise(resolve => {
 			resolve(resp.data)
 		})
 })
+
+export const deleteAccount = (userId, authToken) => new Promise(resolve => {
+	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	axios.delete(`${apiEndpoints.deleteUser}/${userId}`, {
+		headers,
+	})
+		.then(res => {
+			resolve(res.data)
+		})
+})

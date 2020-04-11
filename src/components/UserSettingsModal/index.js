@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStore, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Icon from 'react-icons-kit'
 import { alertTriangle } from 'react-icons-kit/feather/alertTriangle'
 import classnames from 'classnames'
@@ -12,7 +13,7 @@ import styles from './UserSettingsModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { clearUserPrompters } from '../../store/actions/prompter'
-import { logOutUser, checkPassword } from '../../store/actions/authUser'
+import { logOutUser, checkPassword, deleteAccount, removeUser } from '../../store/actions/authUser'
 import Checkbox from '../common/Checkbox'
 import { modifyPassword } from '../../store/actions/user'
 import { PASSWORD } from '../../utils/consts'
@@ -30,7 +31,7 @@ const UserSettingsModal = props => {
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
 	const [alertMessage, setAlertMessage] = useState({})
-
+	const history = useHistory()
 	const store = useStore()
 	const dispatch = useDispatch()
 
@@ -54,7 +55,18 @@ const UserSettingsModal = props => {
 
 	function modifyUser() {
 		if (isConfirmed) {
-			// TODO delete account here
+			checkPassword({
+				email: store.getState().user.user.email,
+				password: passwordForAccountDeletion,
+			}).then(res => {
+				if (res.isSuccess) {
+					deleteAccount(store.getState().user.user.userId, store.getState().user.user.accessToken)
+						.then(() => {
+							dispatch(removeUser())
+							history.go()
+						})
+				}
+			})
 		} else if (newPassword && newPassword === newPasswordConfirm && newPassword.length > 7) {
 			const { accessToken } = store.getState().user.user
 			const { userId } = store.getState().user.user
