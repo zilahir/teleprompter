@@ -26,8 +26,9 @@ const Password = () => {
 	const [alertMessage, setAlertMessage] = useState({})
 	const [isHidden, toggleHidden] = useState(true)
 	const { slug } = useParams()
+	const { token } = useParams()
 
-	function updatePassword() {
+	function handlePasswordUpdate() {
 		const updatePasswordObject = {
 			newPassword,
 			confirmNewPassword,
@@ -35,10 +36,10 @@ const Password = () => {
 	}
 
 	useEffect(() => {
-		console.debug('render', slug)
+		console.debug('render', slug, token)
 		const passwordRecoveryRequest = getPasswordResetObject(slug)
 		passwordRecoveryRequest.then(res => {
-			if (res.isUsed) {
+			if (res.isUsed || res.expiresAt > new Date().getMinutes()) {
 				setAlertMessage({
 					text: 'This password reset had expired',
 					state: 'error',
@@ -101,7 +102,7 @@ const Password = () => {
 											</div>
 											<Button
 												labelText="update"
-												onClick={() => updatePassword()}
+												onClick={() => handlePasswordUpdate()}
 												buttonClass={styles.buttonContainer}
 												disabled={
 													!newPassword || (newPassword !== confirmNewPassword)

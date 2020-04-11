@@ -23,7 +23,7 @@ const App = () => (
 			<Route path="/remote/:slug" exact component={MobileController} />
 			<Route path="/policy" exact component={Policy} />
 			<Route path="/about" exact component={About} />
-			<Route path="/password/:slug" exact component={Password} />
+			<Route path="/password/:slug/:token" exact component={Password} />
 		</Router>
 	</div>
 )
