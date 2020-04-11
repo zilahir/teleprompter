@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
@@ -21,7 +21,6 @@ import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deleteProm
 import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
 import Modal from '../common/Modal'
-import { apiEndpoints } from '../../utils/apiEndpoints'
 import ForgottenPasswordModal from '../ForgottenPasswordModal'
 
 /**
@@ -37,7 +36,6 @@ const Login = props => {
 	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
 	const [chosenPassword, setChosenPassword] = useState(null)
-	const [confirmedPassowrd, setConfirmedPassword] = useState(null)
 	const [passwordMismatch, togglePasswordMismatch] = useState(null)
 	const [email, setEmail] = useState(null)
 	const [password, setPassword] = useState(null)
@@ -48,6 +46,7 @@ const Login = props => {
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
 	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
+	const [username, setUsername] = useState(null)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
@@ -133,7 +132,6 @@ const Login = props => {
 	}
 
 	function handlePasswordConfirmation(pw) {
-		setConfirmedPassword(pw)
 		if (pw !== chosenPassword) {
 			togglePasswordMismatch(true)
 		} else {
@@ -146,6 +144,7 @@ const Login = props => {
 		const newUserObject = {
 			email: chosenEmail,
 			password: chosenPassword,
+			username,
 		}
 		Promise.all([
 			createNewUser(newUserObject),
@@ -258,7 +257,11 @@ const Login = props => {
 													inputType={PASSWORD}
 													getBackValue={v => handlePasswordConfirmation(v)}
 												/>
-
+												<Input
+													placeholder="Username (optional)"
+													inputClassName={styles.loginInput}
+													getBackValue={v => setUsername(v)}
+												/>
 												<div className={classnames(
 													styles.errorContainer,
 													!passwordMismatch ? styles.hidden : null,
