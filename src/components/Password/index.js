@@ -11,7 +11,7 @@ import styles from './Password.module.scss'
 import Button from '../common/Button'
 import Input from '../common/Input'
 import Logo from '../common/Logo'
-import { getPasswordResetObject } from '../../store/actions/user'
+import { getPasswordResetObject, resetPassword } from '../../store/actions/user'
 
 
 /**
@@ -25,6 +25,7 @@ const Password = () => {
 	const [confirmNewPassword, setConfirmNewpassword] = useState(null)
 	const [alertMessage, setAlertMessage] = useState({})
 	const [isHidden, toggleHidden] = useState(true)
+	const [userId, setUserId] = useState(null)
 	const { slug } = useParams()
 	const { token } = useParams()
 
@@ -33,6 +34,7 @@ const Password = () => {
 			newPassword,
 			confirmNewPassword,
 		}
+		const passwordReset = resetPassword(newPassword, token, userId)
 	}
 
 	useEffect(() => {
@@ -45,6 +47,7 @@ const Password = () => {
 					state: 'error',
 				})
 			} else {
+				setUserId(res.userId)
 				toggleHidden(false)
 			}
 		})

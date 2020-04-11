@@ -80,3 +80,15 @@ export const getPasswordResetObject = slug => new Promise(resolve => {
 			})
 		})
 })
+
+export const resetPassword = (newPassword, authToken, userId) => new Promise(resolve => {
+	axios.get(`${apiEndpoints.setPasswordRecoveryToUsed}/${userId}`, { password: newPassword }, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
