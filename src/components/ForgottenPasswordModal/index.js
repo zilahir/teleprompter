@@ -1,10 +1,13 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { v4 as uuidv4 } from 'uuid'
 
 import Modal from '../common/Modal'
 import styles from './ForgottenPasswordModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
+import { requestPasswordRecovery } from '../../store/actions/user'
 
 /**
 * @author zilahir
@@ -16,9 +19,13 @@ const ForgottenPasswordModal = props => {
 	const [email, setEmail] = useState(null)
 
 	function sendForgottenPasswordEmail() {
-		// eslint-disable-next-line no-console
-		console.debug('email', email)
+		const slug = uuidv4().split('-')[0]
+		const requestPassword = requestPasswordRecovery(slug, email)
+		requestPassword.then(res => {
+			console.debug('res', res)
+		})
 	}
+
 	return (
 		<>
 			<Modal
