@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStore, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Icon from 'react-icons-kit'
 import { alertTriangle } from 'react-icons-kit/feather/alertTriangle'
 import classnames from 'classnames'
@@ -12,7 +13,7 @@ import styles from './UserSettingsModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { clearUserPrompters } from '../../store/actions/prompter'
-import { logOutUser } from '../../store/actions/authUser'
+import { logOutUser, checkPassword, deleteAccount, removeUser } from '../../store/actions/authUser'
 import Checkbox from '../common/Checkbox'
 import { modifyPassword } from '../../store/actions/user'
 import { PASSWORD } from '../../utils/consts'
@@ -24,13 +25,13 @@ import { PASSWORD } from '../../utils/consts'
 
 const UserSettingsModal = props => {
 	const { showUserSettingsModal, requestClose } = props
-	const [currentPassword, setCurrentPassword] = useState(null)
+	const [currentPassword, setCurrentPassword] = useState('')
 	const [newPassword, setNewPassword] = useState(null)
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
 	const [alertMessage, setAlertMessage] = useState({})
-
+	const history = useHistory()
 	const store = useStore()
 	const dispatch = useDispatch()
 
@@ -54,20 +55,46 @@ const UserSettingsModal = props => {
 
 	function modifyUser() {
 		if (isConfirmed) {
-			// TODO delete account here
+			checkPassword({
+				email: store.getState().user.user.email,
+				password: passwordForAccountDeletion,
+			}).then(res => {
+				if (res.isSuccess) {
+					deleteAccount(store.getState().user.user.userId, store.getState().user.user.accessToken)
+						.then(() => {
+							dispatch(removeUser())
+							history.go()
+						})
+				}
+			})
 		} else if (newPassword && newPassword === newPasswordConfirm && newPassword.length > 7) {
 			const { accessToken } = store.getState().user.user
 			const { userId } = store.getState().user.user
 
-			modifyPassword(accessToken, userId, newPassword).then(res => {
-				if (res.data.success) {
-					setAlertMessage({
-						text: 'Your password had been modified',
-						state: 'success',
+			checkPassword({
+				email: store.getState().user.user.email,
+				password: currentPassword,
+			}).then(res => {
+				if (res.isSuccess) {
+					modifyPassword(accessToken, userId, newPassword).then(modRes => {
+						if (modRes.data.success) {
+							setAlertMessage({
+								text: 'Your password had been modified',
+								state: 'success',
+							})
+							setCurrentPassword(null)
+							setNewPassword(null)
+							setNewPassowrdConfirm(null)
+						} else {
+							setAlertMessage({
+								text: 'There was an error. Try again!',
+								state: 'error',
+							})
+						}
 					})
 				} else {
 					setAlertMessage({
-						text: 'There was an error. Try again!',
+						text: 'Password is not correct',
 						state: 'error',
 					})
 				}
@@ -86,7 +113,7 @@ const UserSettingsModal = props => {
 
 		setTimeout(() => {
 			setAlertMessage({})
-		}, 3000)
+		}, 6000)
 	}
 
 	return (
@@ -109,7 +136,10 @@ const UserSettingsModal = props => {
 						</p>
 					</div>
 					<h1>
-						Username
+						{
+							store.getState().user.loggedIn
+								? store.getState().user.user.username : ''
+						}
 					</h1>
 					<div
 						onClick={() => logOut()}
