@@ -1,6 +1,10 @@
 @import "../../styles/variables";
 
 .mobileContainer {
+	.mobileLogo {
+		padding-bottom: 60px;
+	}
+
 	display: flex;
 	justify-content: center;
 	height: 100vh;
