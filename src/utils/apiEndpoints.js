@@ -16,4 +16,5 @@ export const apiEndpoints = {
 	resetpassword: `${apiRoot}/resetpassword`,
 	getToken: `${apiRoot}/auth/token`,
 	sendPasswordRecoveryEmail: `${apiRoot}/email/password`,
+	checkPassword: `${apiRoot}/auth/checkpassword`,
 }
