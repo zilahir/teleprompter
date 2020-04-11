@@ -148,3 +148,16 @@ export const setPasswordRecoveryToUsed = slug => new Promise(resolve => {
 			})
 		})
 })
+
+export const modifyUsername = (authToken, userId, newUsername) => new Promise(resolve => {
+	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	axios.patch(`${apiEndpoints.modifyUserName}/${userId}`, { username: newUsername }, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
