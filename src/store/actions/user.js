@@ -121,3 +121,16 @@ export const sendPasswordRecoveryEmail = (username, slug, token) => new Promise(
 			})
 		})
 })
+
+export const getToken = username => new Promise(resolve => {
+	axios.post(apiEndpoints.getToken, JSON.stringify({
+		username,
+	}), {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				...res.data,
+			})
+		})
+})
