@@ -136,7 +136,10 @@ const UserSettingsModal = props => {
 						</p>
 					</div>
 					<h1>
-						Username
+						{
+							store.getState().user.loggedIn
+								? store.getState().user.user.username : ''
+						}
 					</h1>
 					<div
 						onClick={() => logOut()}
