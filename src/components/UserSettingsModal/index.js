@@ -98,7 +98,7 @@ const UserSettingsModal = props => {
 
 		setTimeout(() => {
 			setAlertMessage({})
-		}, 3000)
+		}, 6000)
 	}
 
 	return (
