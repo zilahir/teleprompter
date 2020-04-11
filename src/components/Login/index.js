@@ -22,6 +22,7 @@ import Loader from '../Loader'
 import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import { apiEndpoints } from '../../utils/apiEndpoints'
+import ForgottenPasswordModal from '../ForgottenPasswordModal'
 
 /**
 * @author zilahir
@@ -46,6 +47,7 @@ const Login = props => {
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
+	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
@@ -198,6 +200,17 @@ const Login = props => {
 								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
+							<div
+								className={styles.forgottenContainer}
+								role="button"
+								onKeyDown={null}
+								tabIndex={-1}
+								onClick={() => toggleForgottenPasswordModal(true)}
+							>
+								<p>
+									I forgot my password!
+								</p>
+							</div>
 							<div className={classnames(
 								styles.errorContainer,
 								!isLoginError ? styles.hidden : null,
@@ -232,7 +245,7 @@ const Login = props => {
 													getBackValue={v => setChosenEmail(v)}
 												/>
 												<Input
-													placeholder="Password  (requited min 8 chars)"
+													placeholder="Password  (required min 8 chars)"
 													inputClassName={styles.loginInput}
 													inputType={PASSWORD}
 													getBackValue={v => setChosenPassword(v)}
@@ -390,6 +403,10 @@ const Login = props => {
 					/>
 				</div>
 			</Modal>
+			<ForgottenPasswordModal
+				showPasswordModal={showPasswordModal}
+				requestClose={() => toggleForgottenPasswordModal(false)}
+			/>
 		</>
 	)
 }

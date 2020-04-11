@@ -158,6 +158,20 @@
             @include paragraph(14px, $orange, 0);
         }
     }
+
+    .forgottenContainer {
+        p {
+            @include paragraph(14px, $purple, 0);
+            margin-top: 20px;
+            opacity: .8;
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+                transition: all 0.2s ease;
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 .modal {

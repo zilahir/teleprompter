@@ -1,0 +1,114 @@
+@import "../../styles/variables";
+@import "../../styles/mixins/paragraph";
+@import "../../styles/mixins/heading";
+
+.userSettingsModal {
+  width: 520px;
+
+  .innerContainer {
+    // padding: 30px;
+  }
+  .topContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h1 {
+      @include heading();
+      font-size: 25px;
+      letter-spacing: 0.75px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    p {
+      @include paragraph(14px, #ffffff, 0.42px);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      &:hover {
+        color: $purple;
+        cursor: pointer;
+      }
+    }
+
+    .info {
+      &.hidden {
+        display: none;
+      }
+
+      &.success {
+        background: rgba($color: $success, $alpha: 0.9);
+      }
+
+      &.warning {
+        background: rgba($color: $warning, $alpha: 0.9);
+      }
+
+      &.error {
+        background: rgba($color: $error, $alpha: 0.9);
+      }
+
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: $border-radius;
+      p {
+        @include paragraph(14px, #ffffff, 0.42px);
+        margin-left: 10px;
+      }
+    }
+  }
+  .footerBtnContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    .btnClass {
+      button {
+        height: 45px;
+      }
+    }
+  }
+  
+  .inputContainer {
+    .newPasswordContainer {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    p {
+      @include paragraph(14px, #fff, 0.39px);
+      margin: 0;
+    }
+
+    .settingsInput {
+      margin: 0;
+    }
+  }
+
+  .deleteContainer {
+    margin: 20px 0;
+    p {
+      @include paragraph(14px, #fff, 0.39px);
+    }
+
+    .deleteInner {
+      .checkBoxContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 5px;
+      }
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        margin-left: 10px;
+      }
+      .settingsInput {
+        margin: 10px 0;
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ import Mobile from '../components/Mobile'
 import MobileController from '../components/MobileController'
 import Policy from '../components/Policy'
 import About from '../components/About'
+import Password from '../components/Password'
 
 /**
 * @author
@@ -22,6 +23,7 @@ const App = () => (
 			<Route path="/remote/:slug" exact component={MobileController} />
 			<Route path="/policy" exact component={Policy} />
 			<Route path="/about" exact component={About} />
+			<Route path="/password/:slug/:token" exact component={Password} />
 		</Router>
 	</div>
 )

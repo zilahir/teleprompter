@@ -102,8 +102,8 @@ const ActionSidebar = () => {
 		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
 			const slug = store.getState().userPrompters.prompterSlug
 			setPrompterSlug(slug)
-			setStreamAddress(`prompter.me/player/${prompterSlug}`)
-			setRemoteAddress(`prompter.me/remote/${prompterSlug}`)
+			setStreamAddress(`prompter.me/player/${slug}`)
+			setRemoteAddress(`prompter.me/remote/${slug}`)
 		}
 		setScrollSpeed(sp)
 		setText(t)
