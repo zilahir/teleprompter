@@ -24,6 +24,7 @@ import { PASSWORD } from '../../utils/consts'
 * */
 
 const UserSettingsModal = props => {
+	const store = useStore()
 	const { showUserSettingsModal, requestClose } = props
 	const [currentPassword, setCurrentPassword] = useState('')
 	const [newPassword, setNewPassword] = useState(null)
@@ -31,8 +32,8 @@ const UserSettingsModal = props => {
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
 	const [alertMessage, setAlertMessage] = useState({})
+	const [newUsername, setNewUsername] = useState(store.getState().user.user.username)
 	const history = useHistory()
-	const store = useStore()
 	const dispatch = useDispatch()
 
 	function validateForm() {
@@ -156,7 +157,11 @@ const UserSettingsModal = props => {
 					<div className={styles.inputContainer}>
 						<Input
 							labelText="Change username"
-							inheritedValue="Username"
+							getBackValue={v => setNewUsername(v)}
+							inheritedValue={newUsername}
+							inputClassName={
+								newUsername !== store.getState().user.user.username ? styles.newUsername : null
+							}
 						/>
 					</div>
 					<div className={styles.inputContainer}>
