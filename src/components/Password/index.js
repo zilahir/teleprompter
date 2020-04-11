@@ -41,13 +41,13 @@ const Password = () => {
 		console.debug('render', slug, token)
 		const passwordRecoveryRequest = getPasswordResetObject(slug)
 		passwordRecoveryRequest.then(res => {
-			if (res.isUsed || res.expiresAt > new Date().getMinutes()) {
+			if (res.isUsed || res.expiresAt < new Date().getMinutes()) {
 				setAlertMessage({
 					text: 'This password reset had expired',
 					state: 'error',
 				})
 			} else {
-				setUserId(res.userId)
+				// setUserId(res.userId)
 				toggleHidden(false)
 			}
 		})
