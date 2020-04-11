@@ -69,6 +69,12 @@
   }
   
   .inputContainer {
+    .newUsername {
+      margin: 0 10px;
+      input {
+          border: 2px solid $orange !important;
+      }
+  }
     .newPasswordContainer {
       display: flex;
       justify-content: space-between;
