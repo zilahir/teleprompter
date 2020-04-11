@@ -14,4 +14,5 @@ export const apiEndpoints = {
 	requestPasswordRecovery: `${apiRoot}/passwordrecovery`,
 	setPasswordRecoveryToUsed: `${apiRoot}/resetpassword`,
 	getToken: `${apiRoot}/auth/token`,
+	sendPasswordRecoveryEmail: `${apiRoot}/email/password`,
 }
