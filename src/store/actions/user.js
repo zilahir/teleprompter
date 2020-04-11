@@ -137,3 +137,14 @@ export const getToken = username => new Promise(resolve => {
 			})
 		})
 })
+
+export const setPasswordRecoveryToUsed = slug => new Promise(resolve => {
+	axios.patch(`${apiEndpoints.setPasswordRecoveryToUsed}/${slug}`, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				...res.data,
+			})
+		})
+})
