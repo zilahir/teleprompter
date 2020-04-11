@@ -138,7 +138,7 @@ const UserSettingsModal = props => {
 					<h1>
 						{
 							store.getState().user.loggedIn
-								? store.getState().user.user.username : ''
+								? store.getState().user.user.username || store.getState().user.user.email : ''
 						}
 					</h1>
 					<div
