@@ -12,7 +12,7 @@ import styles from './UserSettingsModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { clearUserPrompters } from '../../store/actions/prompter'
-import { logOutUser } from '../../store/actions/authUser'
+import { logOutUser, checkPassword } from '../../store/actions/authUser'
 import Checkbox from '../common/Checkbox'
 import { modifyPassword } from '../../store/actions/user'
 import { PASSWORD } from '../../utils/consts'
@@ -24,7 +24,7 @@ import { PASSWORD } from '../../utils/consts'
 
 const UserSettingsModal = props => {
 	const { showUserSettingsModal, requestClose } = props
-	const [currentPassword, setCurrentPassword] = useState(null)
+	const [currentPassword, setCurrentPassword] = useState('')
 	const [newPassword, setNewPassword] = useState(null)
 	const [newPasswordConfirm, setNewPassowrdConfirm] = useState(null)
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
@@ -59,15 +59,27 @@ const UserSettingsModal = props => {
 			const { accessToken } = store.getState().user.user
 			const { userId } = store.getState().user.user
 
-			modifyPassword(accessToken, userId, newPassword).then(res => {
-				if (res.data.success) {
-					setAlertMessage({
-						text: 'Your password had been modified',
-						state: 'success',
+			checkPassword({
+				email: store.getState().user.user.email,
+				password: currentPassword,
+			}).then(res => {
+				if (res.isSuccess) {
+					modifyPassword(accessToken, userId, newPassword).then(modRes => {
+						if (modRes.data.success) {
+							setAlertMessage({
+								text: 'Your password had been modified',
+								state: 'success',
+							})
+						} else {
+							setAlertMessage({
+								text: 'There was an error. Try again!',
+								state: 'error',
+							})
+						}
 					})
 				} else {
 					setAlertMessage({
-						text: 'There was an error. Try again!',
+						text: 'Password is not correct',
 						state: 'error',
 					})
 				}
