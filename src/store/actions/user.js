@@ -83,7 +83,7 @@ export const getPasswordResetObject = slug => new Promise(resolve => {
 
 export const resetPassword = (newPassword, authToken, userId) => new Promise(resolve => {
 	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
-	axios.patch(`${apiEndpoints.setPasswordRecoveryToUsed}/${userId}`, JSON.stringify({
+	axios.patch(`${apiEndpoints.resetpassword}/${userId}`, JSON.stringify({
 		password: newPassword,
 	}), {
 		headers,

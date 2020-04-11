@@ -35,6 +35,9 @@ const Password = () => {
 			confirmNewPassword,
 		}
 		const passwordReset = resetPassword(newPassword, token, userId)
+		passwordReset.then(() => {
+
+		})
 	}
 
 	useEffect(() => {
