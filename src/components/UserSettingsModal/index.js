@@ -70,6 +70,9 @@ const UserSettingsModal = props => {
 								text: 'Your password had been modified',
 								state: 'success',
 							})
+							setCurrentPassword(null)
+							setNewPassword(null)
+							setNewPassowrdConfirm(null)
 						} else {
 							setAlertMessage({
 								text: 'There was an error. Try again!',
