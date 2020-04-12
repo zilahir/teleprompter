@@ -37,7 +37,9 @@ const Main = () => {
 			<Container
 				fluid
 			>
-				<Row>
+				<Row
+					className={styles.heightFixer}
+				>
 					<EditorSidebar />
 					<Preview />
 					<ActionSidebar />
