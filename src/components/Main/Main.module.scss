@@ -1,3 +1,5 @@
 .mainContainer {
-    // height: 100vh;
+    .heightFixer {
+        height: calc(100vh - 44px);
+    }
 }

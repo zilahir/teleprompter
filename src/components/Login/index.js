@@ -106,7 +106,7 @@ const Login = props => {
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
-			dispatch(setPrompterSlug(selectedPrompter.id)),
+			dispatch(setPrompterSlug(selectedPrompter.slug)),
 			dispatch(toggleMirror(selectedPrompter.meta.isFlipped)),
 		]).then(() => {
 			requestClose()

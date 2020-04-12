@@ -33,18 +33,22 @@ const Main = () => {
 		})
 	}, [])
 	return (
-		<div className={styles.mainContainer}>
-			<Container
-				fluid
-			>
-				<Row>
-					<EditorSidebar />
-					<Preview />
-					<ActionSidebar />
-				</Row>
-			</Container>
+		<>
+			<div className={styles.mainContainer}>
+				<Container
+					fluid
+				>
+					<Row
+						className={styles.heightFixer}
+					>
+						<EditorSidebar />
+						<Preview />
+						<ActionSidebar />
+					</Row>
+				</Container>
+			</div>
 			<Footer />
-		</div>
+		</>
 	)
 }
 

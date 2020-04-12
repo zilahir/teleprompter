@@ -2,13 +2,15 @@
 @import '../../styles/mixins/paragraph';
 
 .textEditorContainer {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     margin: 0 50px;
     padding: 20px;
 
     .textArea {
         width: 100%;
-        height: 80vh;
+        height: 100%;
         resize: none;
         border: none;
         background-color: $gray-2;
