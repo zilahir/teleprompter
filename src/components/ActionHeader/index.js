@@ -8,7 +8,7 @@ import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '.
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
-import { setPrompterSlug, isProverSaved } from '../../store/actions/prompter'
+import { setPrompterSlug, isProverSaved, updatePrompter } from '../../store/actions/prompter'
 import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
@@ -64,7 +64,25 @@ const ActionHeader = () => {
 			if (!isSavedResult.isSuccess) {
 				toggleSave(!showSave)
 			} else {
-				// TODO: patch here
+				const slug = store.getState().userPrompters.prompterSlug
+				const updatePrompterObject = store.getState().text
+				const { user } = store.getState().user
+				const saveObject = {
+					slug,
+					text: updatePrompterObject.text,
+					userId: user.userId,
+					meta: {
+						fontSize: updatePrompterObject.fontSize,
+						lineHeight: updatePrompterObject.lineHeight,
+						letterSpacing: updatePrompterObject.letterSpacing,
+						scrollWidth: updatePrompterObject.scrollWidth,
+						scrollSpeed: updatePrompterObject.scrollSpeed,
+						isFlipped: updatePrompterObject.isFlipped,
+					},
+				}
+				updatePrompter(saveObject).then(() => {
+					// TODO: show success message here
+				})
 			}
 		})
 	}
