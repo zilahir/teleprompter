@@ -139,3 +139,15 @@ export const isProverSaved = slug => new Promise(resolve => {
 			})
 		})
 })
+
+export const updatePrompter = updatedPrompterObject => new Promise(resolve => {
+	axios.patch(`${apiEndpoints.modifyPrompter}/${updatedPrompterObject.slug}`, updatedPrompterObject, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
