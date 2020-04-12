@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"demo\"\n}",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"lofasz\",\n\t\"username\": \"zilahir\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"demo\"\n}",
+					"raw": "{\n\t\"email\": \"\",\n\t\"password\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,14 +62,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/auth",
+					"raw": "http://localhost:5000/auth/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"auth"
+						"auth",
+						""
 					]
 				}
 			},
@@ -242,6 +243,283 @@
 					"path": [
 						"sent",
 						"mc4d2iZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changePassword",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYzZjRiYTE5YTA1NTVhNGZiYmU1ZGEiLCJlbWFpbCI6InppbGFoaUBnbWFpbC5jb20iLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6InVuZGVmaW5lZCB1bmRlZmluZWQiLCJyZWZyZXNoS2V5Ijoic1FCUUJwMEc4Umd3SUtmUUJDU09kdz09IiwiaWF0IjoxNTg2NTM0MTE3fQ.aCYnC4BTUqH5boMd2aOQZ1eA2Uln15AXjY8CUMsjCik",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"lol\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users/5e63f4ba19a0555a4fbbe5da",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"5e63f4ba19a0555a4fbbe5da"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testEmail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"slug\": \"demo5\",\n\t\"username\": \"zilahi@gmail.com\",\n\t\"token\": \"demoToken\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/email/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"email",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPasswordRecovery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"slug\": \"demo4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/passwordrecovery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"passwordrecovery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resetPassword",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InppbGFoaUBnbWFpbC5jb20iLCJpYXQiOjE1ODY2MDUxNjR9.on52zyafdSakw0wXXYZPRdeEO-kwrosWufbgcWu1mZo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"dede\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/resetpassword/zilahi@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resetpassword",
+						"zilahi@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPasswordRecovery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/passwordrecovery/demo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"passwordrecovery",
+						"demo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setPasswordRecoveryToUsed",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InppbGFoaUBnbWFpbC5jb20iLCJpYXQiOjE1ODY2MjAyODN9.bNvKwImhwvxoVuUEp0lN22uYdwjbWEINr8egJUEH-RU",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/passwordrecovery/bb3bcc38",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"passwordrecovery",
+						"bb3bcc38"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkPassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"zilahi@gmail.com\",\n\t\"password\": \"lofasz\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/checkpassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"checkpassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYzZjRiYTE5YTA1NTVhNGZiYmU1ZGEiLCJlbWFpbCI6InppbGFoaUBnbWFpbC5jb20iLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6InVuZGVmaW5lZCB1bmRlZmluZWQiLCJyZWZyZXNoS2V5IjoiU3FxRW5SRXJrM05uN2RhQTNRYlZxZz09IiwiaWF0IjoxNTg2NjM2NDQ0fQ.R0o2lUOEpFB77mCoAEz-juFobopA6MtS52--e_N912s",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/users/5e76a239cbb710f75db707b8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"5e76a239cbb710f75db707b8"
 					]
 				}
 			},
