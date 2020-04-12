@@ -8,7 +8,7 @@ import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '.
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
-import { setPrompterSlug } from '../../store/actions/prompter'
+import { setPrompterSlug, isProverSaved } from '../../store/actions/prompter'
 import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
@@ -59,8 +59,14 @@ const ActionHeader = () => {
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleLoad(false)
-		toggleSave(!showSave)
 		toggleNewModal(false)
+		isProverSaved(store.getState().userPrompters.prompterSlug).then(isSavedResult => {
+			if (!isSavedResult.isSuccess) {
+				toggleSave(!showSave)
+			} else {
+				// TODO: patch here
+			}
+		})
 	}
 
 	function toggleConfirmNew() {
