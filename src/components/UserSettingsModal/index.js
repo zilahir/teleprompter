@@ -32,7 +32,10 @@ const UserSettingsModal = props => {
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
 	const [alertMessage, setAlertMessage] = useState({})
-	const [newUsername, setNewUsername] = useState(store.getState().user.user.username)
+	const [newUsername, setNewUsername] = useState(
+		store.getState().user.loggedIn
+			? store.getState().user.user.username : '',
+	)
 	const history = useHistory()
 	const dispatch = useDispatch()
 
@@ -160,7 +163,8 @@ const UserSettingsModal = props => {
 							getBackValue={v => setNewUsername(v)}
 							inheritedValue={newUsername}
 							inputClassName={
-								newUsername !== store.getState().user.user.username ? styles.newUsername : null
+								store.getState().user.loggedIn
+									&& newUsername !== store.getState().user.user.username ? styles.newUsername : null
 							}
 						/>
 					</div>
