@@ -23,79 +23,84 @@ const Preview = () => {
 	const store = useStore()
 	return (
 		<>
-			<Col lg={6}>
+			<Col
+				lg={6}
+				className={styles.previewRoot}
+			>
 				<ActionHeader />
-				<div className={styles.previewContainer}>
-					{
-						store.getState().misc.instructions[INFOBOX_TOP]
-							? (
-								<Instruction
-									text={HELPER_TOP}
-									type={INFOBOX_TOP}
-								/>
-							)
-							: null
-					}
-					<div className={styles.tabContainer}>
-						<button
-							className={classnames(
-								styles.tabButton,
-								activeButton === 1 ? styles.tabButtonActive : null,
-							)}
-							type="button"
-							onClick={() => setActiveButton(1)}
-						>
-							Text
-						</button>
-						<button
-							className={classnames(
-								styles.tabButton,
-								activeButton === 2 ? styles.tabButtonActive : null,
-							)}
-							type="button"
-							onClick={() => setActiveButton(2)}
-						>
-							Segments
-						</button>
-					</div>
-					{
-						activeButton === 2
-							? (
-								<div className={styles.innerContainer}>
-									<div className={styles.segmentsHeader}>
-										<button
-											type="button"
-											onClick={() => null}
-											className={styles.button}
-										>
-											<div className={styles.addIconContainer}>
-												<PropterIcon
-													color={Colors.gray4}
-													icon={
-														<Icon siz="1em" icon={plus} />
-													}
-												/>
-											</div>
-											<p>
-												Add segment
-											</p>
-										</button>
-										<button
-											type="button"
-											className={styles.button}
-											onClick={() => null}
-										>
-											Clear all
-										</button>
-									</div>
-								</div>
-							)
-							: activeButton === 1
+				<div className={styles.innerContainer}>
+					<div className={styles.previewContainer}>
+						{
+							store.getState().misc.instructions[INFOBOX_TOP]
 								? (
-									<TextEditor />
+									<Instruction
+										text={HELPER_TOP}
+										type={INFOBOX_TOP}
+									/>
 								)
 								: null
-					}
+						}
+						<div className={styles.tabContainer}>
+							<button
+								className={classnames(
+									styles.tabButton,
+									activeButton === 1 ? styles.tabButtonActive : null,
+								)}
+								type="button"
+								onClick={() => setActiveButton(1)}
+							>
+								Text
+							</button>
+							<button
+								className={classnames(
+									styles.tabButton,
+									activeButton === 2 ? styles.tabButtonActive : null,
+								)}
+								type="button"
+								onClick={() => setActiveButton(2)}
+							>
+								Segments
+							</button>
+						</div>
+						{
+							activeButton === 2
+								? (
+									<div className={styles.innerContainer}>
+										<div className={styles.segmentsHeader}>
+											<button
+												type="button"
+												onClick={() => null}
+												className={styles.button}
+											>
+												<div className={styles.addIconContainer}>
+													<PropterIcon
+														color={Colors.gray4}
+														icon={
+															<Icon siz="1em" icon={plus} />
+														}
+													/>
+												</div>
+												<p>
+													Add segment
+												</p>
+											</button>
+											<button
+												type="button"
+												className={styles.button}
+												onClick={() => null}
+											>
+												Clear all
+											</button>
+										</div>
+									</div>
+								)
+								: activeButton === 1
+									? (
+										<TextEditor />
+									)
+									: null
+						}
+					</div>
 				</div>
 			</Col>
 		</>
