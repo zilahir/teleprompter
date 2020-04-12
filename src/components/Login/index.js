@@ -63,10 +63,10 @@ const Login = props => {
 	}
 
 	function handleSave() {
+		const slug = store.getState().userPrompters.prompterSlug
 		toggleSavingLoader(true)
 		const newPrompterObject = store.getState().text
 		const { user } = store.getState().user
-		const slug = store.getState().userPrompters.prompterSlug
 		const saveObject = {
 			slug,
 			text: newPrompterObject.text,

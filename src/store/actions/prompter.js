@@ -128,3 +128,14 @@ export const updatePrompterNoAuth = updatedPrompterObject => new Promise(resolve
 			})
 		})
 })
+
+export const isProverSaved = slug => new Promise(resolve => {
+	axios.get(`${apiEndpoints.getPrompterBySlug}/${slug}`, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				...res.data,
+			})
+		})
+})
