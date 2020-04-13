@@ -182,7 +182,9 @@ const ActionHeader = () => {
 						<ul className={styles.actionList}>
 							<li>
 								<Button
-									labelText="Username"
+									labelText={
+										store.getState().user.user.username || 'Username'
+									}
 									onClick={() => openUserSettingModal()}
 									type={LINK}
 								/>
