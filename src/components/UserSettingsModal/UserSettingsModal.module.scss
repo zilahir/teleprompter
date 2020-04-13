@@ -13,12 +13,25 @@
     justify-content: center;
     flex-direction: column;
     h1 {
+
       @include heading();
       font-size: 25px;
       letter-spacing: 0.75px;
       text-align: center;
       margin: 10px 0;
+      margin-bottom: 0;
     }
+
+    h2 {
+      @include heading();
+      font-size: 15px;
+      letter-spacing: 0.75px;
+      text-align: center;
+      margin: 10px 0;
+      margin-top: 0;
+      font-weight: 400;
+    }
+
     p {
       @include paragraph(14px, #ffffff, 0.42px);
       text-align: center;

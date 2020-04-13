@@ -20,6 +20,8 @@ const Input = props => {
 		getBackValue,
 		placeholder,
 		children,
+		hasKeyDownEvent,
+		keyDownEvent,
 	} = props
 	const [value, setValue] = useState(null)
 
@@ -49,6 +51,7 @@ const Input = props => {
 					value={value || inheritedValue}
 					disabled={isDisabled}
 					placeholder={placeholder}
+					onKeyDown={e => (hasKeyDownEvent ? keyDownEvent(e.key) : null)}
 				/>
 			</label>
 		</div>
@@ -58,10 +61,12 @@ const Input = props => {
 Input.defaultProps = {
 	children: null,
 	getBackValue: null,
+	hasKeyDownEvent: false,
 	inheritedValue: '',
 	inputClassName: null,
 	inputType: 'text',
 	isDisabled: false,
+	keyDownEvent: null,
 	labelText: '',
 	placeholder: '',
 }
@@ -69,10 +74,12 @@ Input.defaultProps = {
 Input.propTypes = {
 	children: PropTypes.node,
 	getBackValue: PropTypes.func,
+	hasKeyDownEvent: PropTypes.bool,
 	inheritedValue: PropTypes.string,
 	inputClassName: PropTypes.string,
 	inputType: PropTypes.string,
 	isDisabled: PropTypes.bool,
+	keyDownEvent: PropTypes.func,
 	labelText: PropTypes.string,
 	placeholder: PropTypes.string,
 }

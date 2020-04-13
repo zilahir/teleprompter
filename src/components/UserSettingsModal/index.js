@@ -142,9 +142,16 @@ const UserSettingsModal = props => {
 					<h1>
 						{
 							store.getState().user.loggedIn
-								? store.getState().user.user.username || store.getState().user.user.email : ''
+								? store.getState().user.user.username : ''
 						}
 					</h1>
+					<h2>
+						{
+							store.getState().user.loggedIn
+								? store.getState().user.user.email
+								: ''
+						}
+					</h2>
 					<div
 						onClick={() => logOut()}
 						onKeyDown={null}
