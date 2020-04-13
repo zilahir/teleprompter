@@ -55,13 +55,13 @@ const ActionHeader = () => {
 		toggleNewModal(false)
 	}
 
-	function openSave() {
+	function openSave(target) {
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleNewModal(false)
 		isProverSaved(store.getState().userPrompters.prompterSlug).then(isSavedResult => {
-			if (!isSavedResult.isSuccess) {
+			if (!isSavedResult.isSuccess || target === SAVE_AS_COPY) {
 				toggleSave(!showSave)
 			} else {
 				const slug = store.getState().userPrompters.prompterSlug
@@ -135,14 +135,14 @@ const ActionHeader = () => {
 							<li>
 								<Button
 									labelText="Save"
-									onClick={() => openSave()}
+									onClick={() => openSave(SAVE)}
 									type={LINK}
 								/>
 							</li>
 							<li>
 								<Button
 									labelText="Save As Copy"
-									onClick={() => null}
+									onClick={() => openSave(SAVE_AS_COPY)}
 									type={LINK}
 								/>
 							</li>

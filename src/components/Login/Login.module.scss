@@ -62,7 +62,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba($color: #00993C, $alpha: 0.8);
+            background-color: rgba($color: $success, $alpha: 0.8);
             p {
                 text-transform: uppercase;
             }
