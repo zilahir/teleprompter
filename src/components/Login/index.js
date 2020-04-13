@@ -12,7 +12,7 @@ import { triangle } from 'react-icons-kit/feather/triangle'
 import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
 
-import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
@@ -192,6 +192,8 @@ const Login = props => {
 								placeholder="Password"
 								inputClassName={styles.loginInput}
 								getBackValue={v => setPassword(v)}
+								hasKeyDownEvent
+								keyDownEvent={e => (e.toLowerCase() === ENTER ? handleLogin() : null)}
 								inputType={PASSWORD}
 							/>
 							<Button
