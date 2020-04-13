@@ -214,7 +214,7 @@ const ActionSidebar = () => {
 						<Button
 							onClick={() => togglePlaying()}
 							labelText="Open"
-							className={styles.playBtn}
+							buttonClass={styles.playBtn}
 						/>
 					</div>
 				</div>

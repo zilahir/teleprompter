@@ -12,6 +12,7 @@ import { setPrompterSlug, isProverSaved, updatePrompter } from '../../store/acti
 import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
+import { toggleUpdateBtn } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -98,6 +99,7 @@ const ActionHeader = () => {
 	function clearCurrentPrompter() {
 		dispatch(setPrompterSlug(uuidv4().split('-')[0]))
 		dispatch(resetPrompter())
+		dispatch(toggleUpdateBtn(false))
 		toggleNewModal(false)
 	}
 
