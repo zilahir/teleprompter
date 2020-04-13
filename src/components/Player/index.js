@@ -61,7 +61,7 @@ const Player = () => {
 								text={text}
 								slug={slug}
 								prompterObject={promoterObject}
-								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 2}
+								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 10}
 							/>
 						)
 						: <Loader isLoading={isLoading} />
