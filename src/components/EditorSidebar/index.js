@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useStore, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
@@ -19,13 +19,17 @@ import { toggleMirror } from '../../store/actions/text'
 * */
 
 const EditorSidebar = () => {
-	const [isFlipped, setFlipped] = useState(false)
-	const store = useStore()
 	const dispatch = useDispatch()
 	function handleFlip(boolean) {
 		dispatch(toggleMirror(boolean.target.checked))
-		setFlipped(boolean.target.checked)
 	}
+
+	const fontSize = useSelector(state => state.text.fontSize)
+	const letterSpacing = useSelector(state => state.text.letterSpacing)
+	const lineHeight = useSelector(state => state.text.lineHeight)
+	const scrollSpeed = useSelector(state => state.text.scrollSpeed)
+	const flipped = useSelector(state => state.text.isFlipped)
+
 	return (
 		<>
 			<Col
@@ -37,14 +41,14 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
-						initialValue={store.getState().text.fontSize}
+						initialValue={fontSize}
 						maxValue={10}
 						step={1}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"
 						sliderName={SET_LETTER_SPACING}
-						initialValue={store.getState().text.letterSpacing}
+						initialValue={letterSpacing}
 						minValue={0}
 						maxValue={2}
 						step={0.01}
@@ -52,7 +56,7 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Line height"
 						sliderName={SET_LINE_HEIGHT}
-						initialValue={store.getState().text.lineHeight}
+						initialValue={lineHeight}
 						step={0.1}
 						maxValue={3}
 						minValue={1}
@@ -66,7 +70,7 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Scroll speed"
 						sliderName={SET_SCROLL_SPEED}
-						initialValue={store.getState().text.scrollSpeed}
+						initialValue={scrollSpeed}
 						maxValue={10}
 						step={1}
 					/>
@@ -76,7 +80,7 @@ const EditorSidebar = () => {
 						</p>
 						<Toggle
 							onChange={bool => handleFlip(bool)}
-							checked={isFlipped}
+							checked={flipped}
 							icons={null}
 						/>
 					</div>

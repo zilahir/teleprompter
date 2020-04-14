@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useStore, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import { setScrollWidth } from '../../../store/actions/text'
@@ -26,17 +26,17 @@ const Selector = props => {
 	const { items } = props
 	const store = useStore()
 	const dispatch = useDispatch()
+	const scrollWidth = useSelector(state => state.text.scrollWidth)
 	const getActiveWidth = items.find(curr => (
-		curr.label === store.getState().text.scrollWidth
+		curr.label === scrollWidth
 	))
 
-	const [isActive, setActive] = useState(getActiveWidth.id)
+
 	function handleChange(index) {
 		const chosenValue = items.find(item => (
 			item.id === index
 		))
 		dispatch(setScrollWidth(chosenValue.label))
-		setActive(index)
 	}
 	return (
 		<div className={styles.selectorContainer}>
@@ -46,7 +46,7 @@ const Selector = props => {
 						key={item.id}
 						isFirst={index === 0}
 						isLast={index === items.length - 1}
-						isActive={isActive === index}
+						isActive={getActiveWidth.id === index}
 						onClick={() => handleChange(index)}
 						className={styles.selectorItem}
 					>
