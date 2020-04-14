@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
-import { useStore, useDispatch } from 'react-redux'
+import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 // eslint-disable-next-line no-unused-vars
-import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
@@ -12,7 +12,7 @@ import { setPrompterSlug, isProverSaved, updatePrompter } from '../../store/acti
 import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
-import { toggleUpdateBtn } from '../../store/actions/misc'
+import { toggleUpdateBtn, hideInstruction } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -31,6 +31,7 @@ const ActionHeader = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
+	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 
 	function openLoginBox() {
 		toggleRegister(false)
@@ -118,132 +119,145 @@ const ActionHeader = () => {
 	}), [isLoggedIn])
 
 	return (
-		<div className={classnames(
-			styles.actionHeaderContainer,
-			!isLoggedIn ? styles.alignEnd : null,
-		)}
-		>
-			{
-				isLoggedIn
-					? (
-						<ul className={styles.loggedInActionList}>
-							<li>
-								<Button
-									labelText="New"
-									onClick={() => toggleConfirmNew()}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Save"
-									onClick={() => openSave(SAVE)}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Save As Copy"
-									onClick={() => openSave(SAVE_AS_COPY)}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Load"
-									onClick={() => openLoad()}
-									type={LINK}
-									isVisible={isLoadBtnVisible}
-								/>
-							</li>
-						</ul>
-					)
-					: null
-			}
-			{
-				!isLoggedIn
-					? (
-						<ul className={styles.actionList}>
-							<li>
-								<Button
-									labelText="Sign Up"
-									onClick={() => openRegisterBox()}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Login"
-									onClick={() => openLoginBox()}
-									type={LINK}
-								/>
-							</li>
-						</ul>
-					)
-					: (
-						<ul className={styles.actionList}>
-							<li>
-								<Button
-									labelText={
-										store.getState().user.user.username || 'Username'
-									}
-									onClick={() => openUserSettingModal()}
-									type={LINK}
-								/>
-							</li>
-						</ul>
-					)
-			}
-			<Login
-				isVisible={showNewModal}
-				type={NEW_PROMPTER}
-				requestClose={() => toggleNewModal(false)}
-			/>
-			<Login
-				isVisible={showLogin}
-				type={LOGIN}
-				requestClose={() => toggleLogin(false)}
-			/>
-			<Login
-				isVisible={showRegister}
-				type={REGISTER}
-				requestClose={() => toggleRegister(false)}
-			/>
-			<Login
-				isVisible={showLoad}
-				type={LOAD}
-				requestClose={() => toggleLoad(false)}
-				noPadding
-			/>
-			<Login
-				isVisible={showSave}
-				type={SAVE}
-				requestClose={() => toggleSave(false)}
-			/>
-			<Modal
-				isShowing={showNewModal}
-				hide={() => toggleNewModal(false)}
-				hasCloseIcon={false}
-				modalTitle="You have unsaved content in your open project. Are you sure you want to clear everything and start a new one?"
-				modalClassName={styles.modal}
+		<>
+			<div className={classnames(
+				styles.actionHeaderContainer,
+				!isLoggedIn ? styles.alignEnd : null,
+			)}
 			>
-				<div className={styles.buttonContainer}>
-					<Button
-						labelText="Cancel"
-						onClick={() => toggleNewModal(false)}
-						isNegative
-					/>
-					<Button
-						labelText="Clear"
-						onClick={() => clearCurrentPrompter()}
-					/>
-				</div>
-			</Modal>
-			<UserSettingsModal
-				showUserSettingsModal={userSettingsModalOpen}
-				requestClose={() => toggleUserSettingsModal(false)}
-			/>
-		</div>
+				{
+					isLoggedIn
+						? (
+							<ul className={styles.loggedInActionList}>
+								<li>
+									<Button
+										labelText="New"
+										onClick={() => toggleConfirmNew()}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Save"
+										onClick={() => openSave(SAVE)}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Save As Copy"
+										onClick={() => openSave(SAVE_AS_COPY)}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Load"
+										onClick={() => openLoad()}
+										type={LINK}
+										isVisible={isLoadBtnVisible}
+									/>
+								</li>
+							</ul>
+						)
+						: null
+				}
+				{
+					!isLoggedIn
+						? (
+							<ul className={styles.actionList}>
+								<li>
+									<Button
+										labelText="Sign Up"
+										onClick={() => openRegisterBox()}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Login"
+										onClick={() => openLoginBox()}
+										type={LINK}
+									/>
+								</li>
+							</ul>
+						)
+						: (
+							<ul className={styles.actionList}>
+								<li>
+									<Button
+										labelText={
+											store.getState().user.user.username || 'Username'
+										}
+										onClick={() => openUserSettingModal()}
+										type={LINK}
+									/>
+								</li>
+							</ul>
+						)
+				}
+				<Login
+					isVisible={showNewModal}
+					type={NEW_PROMPTER}
+					requestClose={() => toggleNewModal(false)}
+				/>
+				<Login
+					isVisible={showLogin}
+					type={LOGIN}
+					requestClose={() => toggleLogin(false)}
+				/>
+				<Login
+					isVisible={showRegister}
+					type={REGISTER}
+					requestClose={() => toggleRegister(false)}
+				/>
+				<Login
+					isVisible={showLoad}
+					type={LOAD}
+					requestClose={() => toggleLoad(false)}
+					noPadding
+				/>
+				<Login
+					isVisible={showSave}
+					type={SAVE}
+					requestClose={() => toggleSave(false)}
+				/>
+				<Modal
+					isShowing={showNewModal}
+					hide={() => toggleNewModal(false)}
+					hasCloseIcon={false}
+					modalTitle="You have unsaved content in your open project. Are you sure you want to clear everything and start a new one?"
+					modalClassName={styles.modal}
+				>
+					<div className={styles.buttonContainer}>
+						<Button
+							labelText="Cancel"
+							onClick={() => toggleNewModal(false)}
+							isNegative
+						/>
+						<Button
+							labelText="Clear"
+							onCick={() => clearCurrentPrompter()}
+						/>
+					</div>
+				</Modal>
+				<UserSettingsModal
+					showUserSettingsModal={userSettingsModalOpen}
+					requestClose={() => toggleUserSettingsModal(false)}
+				/>
+			</div>
+			<div className={styles.metaContainer}>
+				<ul>
+					<li>
+						<Button
+							type={LINK}
+							onClick={() => dispatch(hideInstruction(INFOBOX_TOP, !isGuideVisible))}
+							labelText="Show guide"
+						/>
+					</li>
+				</ul>
+			</div>
+		</>
 	)
 }
 
