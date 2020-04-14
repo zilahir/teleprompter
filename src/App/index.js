@@ -10,7 +10,7 @@ import MobileController from '../components/MobileController'
 import Policy from '../components/Policy'
 import About from '../components/About'
 import Password from '../components/Password'
-import { PLAYER, REMOTE, POLICY, ABOUT, FORGOTTEN_PW } from '../utils/consts'
+import { PLAYER, REMOTE, POLICY, ABOUT, FORGOTTEN_PW, HOME } from '../utils/consts'
 
 /**
 * @author
@@ -19,15 +19,16 @@ import { PLAYER, REMOTE, POLICY, ABOUT, FORGOTTEN_PW } from '../utils/consts'
 
 const App = () => {
 	ReactGA.initialize('UA-163692111-1')
+	ReactGA.pageview(`/${HOME}`)
 	return (
 		<div>
 			<Router>
 				<Route path="/" exact component={!isMobile ? Main : Mobile} />
-				<Route path={`/${PLAYER.toLowerCase()}/:slug`} exact component={Player} />
-				<Route path={`/${REMOTE.toLowerCase()}/:slug`} exact component={MobileController} />
-				<Route path={`/${POLICY.toLowerCase()}`} exact component={Policy} />
-				<Route path={`/${ABOUT.toLowerCase()}`} exact component={About} />
-				<Route path={`/${FORGOTTEN_PW.toLowerCase()}/:slug/:token`} exact component={Password} />
+				<Route path={`/${PLAYER}/:slug`} exact component={Player} />
+				<Route path={`/${REMOTE}/:slug`} exact component={MobileController} />
+				<Route path={`/${POLICY}`} exact component={Policy} />
+				<Route path={`/${ABOUT}`} exact component={About} />
+				<Route path={`/${FORGOTTEN_PW}/:slug/:token`} exact component={Password} />
 			</Router>
 		</div>
 	)
