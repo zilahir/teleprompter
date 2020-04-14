@@ -161,7 +161,7 @@ const ActionSidebar = () => {
 					>
 						<CopyToClipboard
 							onCopy={() => copyValue('stream')}
-							text={`prompter.me/${prompterSlug || ''}`}
+							text={`prompter.me/player/${prompterSlug || ''}`}
 						>
 							<div
 								className={styles.copyIcon}
@@ -172,7 +172,7 @@ const ActionSidebar = () => {
 						</CopyToClipboard>
 					</Input>
 					<Input
-						labelText="Remote control address"
+						labelText="Remote phone address"
 						inheritedValue={remoteAddress || ''}
 						isDisabled
 					>
