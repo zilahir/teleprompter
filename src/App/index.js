@@ -28,6 +28,7 @@ const App = () => {
 			<Router>
 				<Helmet>
 					<meta name="apple-mobile-web-app-title" content="Prompter.me" />
+					<link rel="apple-touch-icon" href={`${process.env.PUBLIC_URL}/favicons/favicon-180.png`} />
 				</Helmet>
 				<Route path="/" exact component={!isMobile ? Main : Mobile} />
 				<Route path={`/${PLAYER}/:slug`} exact component={Player} />
