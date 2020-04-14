@@ -252,7 +252,9 @@ const ActionHeader = () => {
 						<Button
 							type={LINK}
 							onClick={() => dispatch(hideInstruction(INFOBOX_TOP, !isGuideVisible))}
-							labelText="Show guide"
+							labelText={
+								isGuideVisible ? 'Hide guide' : 'Show guide'
+							}
 						/>
 					</li>
 				</ul>
