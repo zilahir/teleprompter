@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { useStore } from 'react-redux'
 import styled from 'styled-components'
@@ -59,10 +59,11 @@ const TextPreview = props => {
 	const [letterSpacing, setLetterSpacing] = useState(null)
 	const [scrollWidth, setScrollWidth] = useState(null)
 	const [position, setPosition] = useState(0)
+	const [scrollerRefs, setScrollerRefs] = useState([])
 	const scrollSpeedValue = scrollSpeed * 10
 
 	const STEP = 5
-	const scrollerRef = useRef(null)
+	// const scrollerRef = useRef(null)
 
 	useEffect(() => store.subscribe(() => {
 		const fs = store.getState().text.fontSize
@@ -77,9 +78,9 @@ const TextPreview = props => {
 
 	useInterval(() => {
 		setPosition(position + STEP)
-		scrollerRef.current.scroll({
+		scrollerRefs.forEach(currRef => currRef.current.scroll({
 			top: position,
-		})
+		}))
 	}, isAnimationRunning ? scrollSpeedValue : null)
 
 	const scrollHandler = event => {
@@ -87,12 +88,15 @@ const TextPreview = props => {
 	}
 
 	useEffect(() => {
-		scrollerRef.current.scroll({ top: position })
+		scrollerRefs.forEach(currRef => currRef.current.scroll({ top: position }))
 	}, [position])
 
 	useEffect(() => {
-		scrollerRef.current.addEventListener('scroll', scrollHandler)
-		return () => scrollerRef.current.removeEventListener('scroll', scrollHandler)
+		scrollerRefs.forEach(currRef => currRef.current.addEventListener('scroll', scrollHandler))
+		setScrollerRefs(ref => (
+			Array(2).fill().map((_, index) => ref[index] || createRef())
+		))
+		return () => scrollerRefs.forEach(currRef => currRef.current.removeEventListener('scroll', scrollHandler))
 	}, [])
 
 
@@ -100,7 +104,7 @@ const TextPreview = props => {
 		<div className={styles.textpreviewContainer}>
 			<div
 				className={styles.mirroredContainer}
-				ref={scrollerRef}
+				ref={scrollerRefs[0]}
 			>
 				<TextMirrored
 					className={styles.mirrored}
@@ -120,7 +124,7 @@ const TextPreview = props => {
 			</div>
 			<div
 				className={styles.textContainer}
-				ref={scrollerRef}
+				ref={scrollerRefs[1]}
 			>
 				<Text
 					className={styles.text}
