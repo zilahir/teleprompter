@@ -46,9 +46,6 @@ const useInterval = (callback, delay) => {
 	}, [delay])
 }
 
-
-// const STEP = 5
-
 const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
 	const { text, scrollSpeed, prompterObject } = props
@@ -163,6 +160,7 @@ const TextScroller = props => {
 			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
 	}
+	console.debug('scrollSpeed', scrollSpeed)
 	return (
 		<div className={styles.rootContainer}>
 			<Scroller

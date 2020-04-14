@@ -143,7 +143,7 @@ const ActionSidebar = () => {
 					<TextPreview
 						text={text}
 						isAnimationRunning={isAnimationStarted}
-						scrollSpeed={15 - scrollSpeed}
+						scrollSpeed={10 - scrollSpeed}
 					/>
 					<div className={styles.testAnimation}>
 						<Button
