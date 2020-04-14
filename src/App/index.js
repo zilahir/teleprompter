@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { isMobile } from 'react-device-detect'
+import { Helmet } from 'react-helmet'
 import ReactGA from 'react-ga'
 
 import Player from '../components/Player'
@@ -25,6 +26,9 @@ const App = () => {
 	return (
 		<div>
 			<Router>
+				<Helmet>
+					<meta name="apple-mobile-web-app-title" content="Prompter.me" />
+				</Helmet>
 				<Route path="/" exact component={!isMobile ? Main : Mobile} />
 				<Route path={`/${PLAYER}/:slug`} exact component={Player} />
 				<Route path={`/${REMOTE}/:slug`} exact component={MobileController} />
