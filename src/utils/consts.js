@@ -63,3 +63,10 @@ export const keyListeners = [
 
 export const INC_SPEED = 'INC_SPEED'
 export const DEC_SPEED = 'DEC_SPEED'
+
+export const HOME = 'home'
+export const PLAYER = 'player'
+export const REMOTE = 'remote'
+export const POLICY = 'policy'
+export const ABOUT = 'about'
+export const FORGOTTEN_PW = 'password'
