@@ -4,7 +4,6 @@ import { useStore, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { useFullScreen } from 'react-hooks-full-screen'
 
-// eslint-disable-next-line no-unused-vars
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
