@@ -246,15 +246,17 @@ const ActionHeader = () => {
 					requestClose={() => toggleUserSettingsModal(false)}
 				/>
 			</div>
-			<div className={styles.metaContainer}>
+			<div className={classnames(
+				styles.metaContainer,
+				isGuideVisible ? styles.hidden : null,
+			)}
+			>
 				<ul>
 					<li>
 						<Button
 							type={LINK}
 							onClick={() => dispatch(hideInstruction(INFOBOX_TOP, !isGuideVisible))}
-							labelText={
-								isGuideVisible ? 'Hide guide' : 'Show guide'
-							}
+							labelText="Show guide"
 						/>
 					</li>
 				</ul>
