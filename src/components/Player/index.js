@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import ReactGA from 'react-ga'
 import { useStore } from 'react-redux'
 import { useSocket } from '@zilahir/use-socket.io-client'
 
 import TextScroller from '../TextScroller'
 import Loader from '../Loader'
 import Header from './Header'
+import { PLAYER } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -14,6 +16,7 @@ import Header from './Header'
 * */
 
 const Player = () => {
+	ReactGA.pageview(`/${PLAYER}`)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
 	const [text, setText] = useState('')
 	// eslint-disable-next-line no-unused-vars

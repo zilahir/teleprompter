@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
+import ReactGA from 'react-ga'
 import { Row, Container, Col } from 'react-grid-system'
 import { useHistory, useParams } from 'react-router-dom'
 import classnames from 'classnames'
@@ -12,6 +12,7 @@ import Button from '../common/Button'
 import Input from '../common/Input'
 import Logo from '../common/Logo'
 import { getPasswordResetObject, resetPassword, setPasswordRecoveryToUsed } from '../../store/actions/user'
+import { FORGOTTEN_PW } from '../../utils/consts'
 
 
 /**
@@ -29,6 +30,7 @@ const Password = () => {
 	const { slug } = useParams()
 	const { token } = useParams()
 
+	ReactGA.pageview(`${FORGOTTEN_PW}`)
 	function handlePasswordUpdate() {
 		const updatePasswordObject = {
 			newPassword,
@@ -37,7 +39,6 @@ const Password = () => {
 		const passwordReset = resetPassword(newPassword, token, userId)
 		passwordReset.then(() => {
 			setPasswordRecoveryToUsed(slug).then(res => {
-				console.debug('res', res)
 				if (res.success) {
 					toggleHidden(true)
 					setAlertMessage({
@@ -50,10 +51,8 @@ const Password = () => {
 	}
 
 	useEffect(() => {
-		console.debug('render', slug, token)
 		const passwordRecoveryRequest = getPasswordResetObject(slug)
 		passwordRecoveryRequest.then(res => {
-			console.debug('res', res)
 			if (res.isUsed || res.expiresAt < new Date().getMinutes()) {
 				setAlertMessage({
 					text: 'This password reset had expired',
