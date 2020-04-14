@@ -18,7 +18,9 @@ import { PLAYER, REMOTE, POLICY, ABOUT, FORGOTTEN_PW, HOME } from '../utils/cons
 * */
 
 const App = () => {
-	ReactGA.initialize('UA-163692111-1')
+	ReactGA.initialize('UA-163692111-1', {
+		debug: true,
+	})
 	ReactGA.pageview(`/${HOME}`)
 	return (
 		<div>

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Row, Container, Col } from 'react-grid-system'
+import ReactGA from 'react-ga'
 import { useHistory } from 'react-router-dom'
 
 import styles from './Policy.module.scss'
 import Button from '../common/Button'
+import { POLICY } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -11,6 +13,7 @@ import Button from '../common/Button'
 * */
 
 const Policy = () => {
+	ReactGA.pageview(`${POLICY}`)
 	const history = useHistory()
 	return (
 		<div className={styles.aboutWrapper}>

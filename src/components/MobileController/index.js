@@ -1,5 +1,5 @@
-/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react'
+import ReactGA from 'react-ga'
 import { useParams } from 'react-router-dom'
 import { useSocket } from '@zilahir/use-socket.io-client'
 import classnames from 'classnames'
@@ -12,6 +12,7 @@ import styles from './MobileContainer.module.scss'
 import down from '../../assets/controls/angle-up.svg'
 import up from '../../assets/controls/angle-up-1.svg'
 import arrowBg from '../../assets/controls/bg.svg'
+import { REMOTE } from '../../utils/consts'
 
 /**
  * @author zilahir
@@ -26,6 +27,7 @@ const BTN = styled.div`
 `
 
 const MobileController = () => {
+	ReactGA.pageview(`${REMOTE}`)
 	const { slug } = useParams()
 	const [isPlaying, togglePlaying] = useState(false)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)

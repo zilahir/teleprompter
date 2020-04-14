@@ -1,9 +1,11 @@
 import React from 'react'
+import ReactGA from 'react-ga'
 import { Row, Container, Col } from 'react-grid-system'
 import { useHistory } from 'react-router-dom'
 
 import styles from '../Policy/Policy.module.scss'
 import Button from '../common/Button'
+import { ABOUT } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -12,6 +14,7 @@ import Button from '../common/Button'
 
 const About = () => {
 	const history = useHistory()
+	ReactGA.pageview(`${ABOUT}`)
 	return (
 		<div className={styles.aboutWrapper}>
 			<Container
