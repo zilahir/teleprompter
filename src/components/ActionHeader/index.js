@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
+import { useFullScreen } from 'react-hooks-full-screen'
 
 // eslint-disable-next-line no-unused-vars
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER } from '../../utils/consts'
@@ -28,9 +29,11 @@ const ActionHeader = () => {
 	const [showNewModal, toggleNewModal] = useState(false)
 	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
 	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
+	const [showFullScreen, setShowFullScreen] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
+	useFullScreen('root', showFullScreen)
 
 	function openLoginBox() {
 		toggleRegister(false)
@@ -126,59 +129,81 @@ const ActionHeader = () => {
 			{
 				isLoggedIn
 					? (
-						<ul className={styles.loggedInActionList}>
-							<li>
-								<Button
-									labelText="New"
-									onClick={() => toggleConfirmNew()}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Save"
-									onClick={() => openSave(SAVE)}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Save As Copy"
-									onClick={() => openSave(SAVE_AS_COPY)}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Load"
-									onClick={() => openLoad()}
-									type={LINK}
-									isVisible={isLoadBtnVisible}
-								/>
-							</li>
-						</ul>
+						<>
+							<ul>
+								<li>
+									<Button
+										type={LINK}
+										labelText="Fullscreen"
+										onClick={() => setShowFullScreen(!showFullScreen)}
+									/>
+								</li>
+							</ul>
+							<ul className={styles.loggedInActionList}>
+								<li>
+									<Button
+										labelText="New"
+										onClick={() => toggleConfirmNew()}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Save"
+										onClick={() => openSave(SAVE)}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Save As Copy"
+										onClick={() => openSave(SAVE_AS_COPY)}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Load"
+										onClick={() => openLoad()}
+										type={LINK}
+										isVisible={isLoadBtnVisible}
+									/>
+								</li>
+							</ul>
+						</>
 					)
 					: null
 			}
 			{
 				!isLoggedIn
 					? (
-						<ul className={styles.actionList}>
-							<li>
-								<Button
-									labelText="Sign Up"
-									onClick={() => openRegisterBox()}
-									type={LINK}
-								/>
-							</li>
-							<li>
-								<Button
-									labelText="Login"
-									onClick={() => openLoginBox()}
-									type={LINK}
-								/>
-							</li>
-						</ul>
+						<>
+							<ul>
+								<li>
+									<Button
+										type={LINK}
+										labelText="Fullscreen"
+										onClick={() => setShowFullScreen(!showFullScreen)}
+									/>
+								</li>
+							</ul>
+							<ul className={styles.actionList}>
+								<li>
+									<Button
+										labelText="Sign Up"
+										onClick={() => openRegisterBox()}
+										type={LINK}
+									/>
+								</li>
+								<li>
+									<Button
+										labelText="Login"
+										onClick={() => openLoginBox()}
+										type={LINK}
+									/>
+								</li>
+							</ul>
+						</>
 					)
 					: (
 						<ul className={styles.actionList}>

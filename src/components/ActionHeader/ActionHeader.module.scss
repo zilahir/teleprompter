@@ -8,13 +8,17 @@
     padding-top: 40px;
 
     &.alignEnd {
-        justify-content: flex-end;
+        justify-content: space-between;
     }
-    .actionList {
+    ul {
         list-style-type: none;
         display: inline-flex;
-        li {
-            margin-right: 10px;
+        &.actionList {
+            list-style-type: none;
+            display: inline-flex;
+            li {
+                margin-right: 10px;
+            }
         }
     }
     .loggedInActionList {
