@@ -8,7 +8,7 @@ import ActionSidebar from '../ActionSidebar'
 import Preview from '../Preview'
 import styles from './Main.module.scss'
 import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
-import { clearText } from '../../store/actions/text'
+import { clearText, toggleMirror } from '../../store/actions/text'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import Footer from '../Footer'
 
@@ -23,6 +23,7 @@ const Main = () => {
 	useEffect(() => {
 		Promise.all([
 			dispatch(clearText()),
+			dispatch(toggleMirror(false)),
 			dispatch(clearPrompterObject()),
 			dispatch(toggleUpdateBtn(false)),
 			dispatch(setPrompterSlug(uuidv4().split('-')[0])),

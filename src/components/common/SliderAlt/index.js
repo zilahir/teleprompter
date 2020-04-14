@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Slider from 'rc-slider'
@@ -22,7 +22,7 @@ const SliderContanier = styled.div`
 
 const SliderAlt = props => {
 	const { labelText, sliderName, initialValue, step, maxValue, minValue } = props
-	const [value, setValue] = useState(initialValue)
+
 	const dispatch = useDispatch()
 	const store = useStore()
 	function handleValeChange(v) {
@@ -35,7 +35,6 @@ const SliderAlt = props => {
 		} else if (sliderName === SET_SCROLL_SPEED) {
 			dispatch(setScrollSpeed(v))
 		}
-		setValue(v)
 		if (store.getState().userPrompters.prompterObject) {
 			const result = shallowEqual(
 				store.getState().text, store.getState().userPrompters.prompterObject,
@@ -45,6 +44,7 @@ const SliderAlt = props => {
 			}
 		}
 	}
+
 	return (
 		<SliderContanier>
 			<div className="top">
@@ -52,13 +52,13 @@ const SliderAlt = props => {
 					{labelText}
 				</p>
 				<p className="sliderValue">
-					{value}
+					{initialValue}
 				</p>
 			</div>
 			<div className="sliderInner">
 				<Slider
 					className="slider"
-					value={value}
+					value={initialValue}
 					onChange={val => handleValeChange(val)}
 					name={sliderName}
 					step={step}

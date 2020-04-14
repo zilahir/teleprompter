@@ -50,3 +50,19 @@
         }
     }
 }
+
+.metaContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-right: 10px; 
+    }
+
+    &.hidden {
+        display: none;
+    }
+}

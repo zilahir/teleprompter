@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Icon from 'react-icons-kit'
 import { plus } from 'react-icons-kit/feather/plus'
@@ -20,7 +20,7 @@ import Instruction from '../common/Instruction'
 
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
-	const store = useStore()
+	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 	return (
 		<>
 			<Col
@@ -31,7 +31,7 @@ const Preview = () => {
 				<div className={styles.innerContainer}>
 					<div className={styles.previewContainer}>
 						{
-							store.getState().misc.instructions[INFOBOX_TOP]
+							isGuideVisible
 								? (
 									<Instruction
 										text={HELPER_TOP}

@@ -101,9 +101,9 @@ const Login = props => {
 		Promise.all([
 			dispatch(setText(selectedPrompter.text)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
-			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
+			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
-			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
+			dispatch(setLetterSpacing(selectedPrompter.meta.letterSpacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
 			dispatch(setPrompterSlug(selectedPrompter.slug)),
