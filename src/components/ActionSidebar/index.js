@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
+import classnames from 'classnames'
 import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
@@ -10,7 +11,7 @@ import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR } from '../../utils/consts'
+import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR, CREATE, OPEN } from '../../utils/consts'
 import Instruction from '../common/Instruction'
 import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
@@ -31,6 +32,7 @@ const ActionSidebar = () => {
 	const [showUpdateBtn, toggleShowUpdateBtn] = useState(false)
 	const [remoteAddress, setRemoteAddress] = useState(null)
 	const [streamAddress, setStreamAddress] = useState(null)
+	const [createLabelText, setCreateBtnLabelText] = useState(CREATE)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -39,16 +41,22 @@ const ActionSidebar = () => {
 		socket.connect()
 	}
 
-	function togglePlaying() {
+	function togglePlay() {
+		window.open(`/player/${prompterSlug}`, '_blank')
+	}
+
+	function createPrompter(state) {
+		if (state === OPEN) {
+			togglePlay()
+			return
+		}
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
-		// const { user } = store.getState().user
 		const slug = store.getState().userPrompters.prompterSlug
 		const saveObject = {
 			slug,
 			text: newPrompterObject.text,
-			// userId: user.userId,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -64,8 +72,8 @@ const ActionSidebar = () => {
 			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			setTimeout(() => {
-				window.open(`/player/${prompterSlug}`, '_blank')
-			}, 10)
+				setCreateBtnLabelText(OPEN)
+			}, 100)
 		})
 	}
 
@@ -158,6 +166,9 @@ const ActionSidebar = () => {
 						labelText="Stream address"
 						isDisabled
 						inheritedValue={streamAddress || ''}
+						inputClassName={classnames(
+							createLabelText !== OPEN ? styles.addressInput : null,
+						)}
 					>
 						<CopyToClipboard
 							onCopy={() => copyValue('stream')}
@@ -175,6 +186,9 @@ const ActionSidebar = () => {
 						labelText="Remote phone address"
 						inheritedValue={remoteAddress || ''}
 						isDisabled
+						inputClassName={classnames(
+							createLabelText !== OPEN ? styles.addressInput : null,
+						)}
 					>
 						<CopyToClipboard
 							onCopy={() => copyValue('remote')}
@@ -212,8 +226,8 @@ const ActionSidebar = () => {
 								: null
 						}
 						<Button
-							onClick={() => togglePlaying()}
-							labelText="Open"
+							onClick={() => createPrompter(createLabelText)}
+							labelText={createLabelText}
 							buttonClass={styles.playBtn}
 						/>
 					</div>
