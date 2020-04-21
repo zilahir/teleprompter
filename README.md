@@ -1,7 +1,16 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot)
 
 
-<img src="./images/prompterme-logo-dark.svg" width="50%">
+<p align="center">
+  <a href="https://storybook.js.org/">
+    <img
+      src="./images/prompterme-logo-dark.svg" alt="Prompter.me" width="50%"
+    />
+  </a>
+</p>
+<p align="center">
+An opensource teleprompter application for the browser.
+</p>
 
 # Teleprompter 
 
