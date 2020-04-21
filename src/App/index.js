@@ -30,8 +30,11 @@ const App = () => {
 					<meta property="og:title" content="Prompter.me" />
 					<meta property="og:type" content="website" />
 					<meta name="apple-mobile-web-app-title" content="Prompter.me" />
-					<meta property="og:image" content={`${process.env.PUBLIC_URL}/misc/prompterme-sharing.png`} />
+					<meta property="og:image" content={`${process.env.PUBLIC_URL}/misc/prompterme-sharing.jpeg`} />
 					<meta property="og:image:type" content="image/jpeg" />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+					<meta property="og:image:alt" content="Prompter.me is a free, open source teleprompter on the web." />
 					<link rel="apple-touch-icon" href={`${process.env.PUBLIC_URL}/favicons/favicon-180.png`} />
 				</Helmet>
 				<Route path="/" exact component={!isMobile ? Main : Mobile} />
