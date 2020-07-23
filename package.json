@@ -14,7 +14,7 @@
     "@zilahir/use-socket.io-client": "^1.2.0",
     "axios": "^0.19.1",
     "classnames": "^2.2.6",
-    "framer-motion": "^1.10.0",
+    "framer-motion": "^2.1.2",
     "hex-to-rgba": "^2.0.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
