@@ -129,7 +129,11 @@ const ActionHeader = () => {
 					<Logo />
 				</div>
 				<div className={styles.middleContainer}>
-					<ul className={styles.btnList}>
+					<ul className={classnames(
+						styles.btnList,
+						styles.flexStart,
+					)}
+					>
 						<li>
 							<Button
 								labelText="New"
@@ -155,7 +159,11 @@ const ActionHeader = () => {
 							/>
 						</li>
 					</ul>
-					<ul className={styles.btnList}>
+					<ul className={classnames(
+						styles.btnList,
+						styles.flexEnd,
+					)}
+					>
 						<li>
 							<Button
 								labelText="Sign Up"

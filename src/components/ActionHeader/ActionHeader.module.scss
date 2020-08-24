@@ -6,6 +6,18 @@
 	li {
 		margin-right: 20px;
 	}
+
+	&.flexStart {
+		padding-left: 0;
+	}
+
+	&.flexEnd {
+		li {
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+	}
 }
 
 .innerContainer {
