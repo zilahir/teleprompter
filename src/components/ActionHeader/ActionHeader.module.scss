@@ -1,68 +1,38 @@
-@import '../../styles/mixins/paragraph.scss';
+@import '../../styles/variables';
 
-.actionHeaderContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 30px;
-    padding-top: 40px;
-
-    &.alignEnd {
-        justify-content: flex-end;
-    }
-    .actionList {
-        list-style-type: none;
-        display: inline-flex;
-        li {
-            margin-right: 10px;
-        }
-    }
-    .loggedInActionList {
-        list-style-type: none;
-        display: inline-flex;
-        li {
-            margin-right: 20px;
-        }
-    }
+.btnList {
+	display: flex;
+	list-style-type: none;
+	li {
+		margin-right: 20px;
+	}
 }
 
-.modal {
-    padding: 30px;
-
-    h3 {
-        @include paragraph(14px, #ffffff);
-        font-weight: 300;
-        margin: 0;
-        margin-bottom: 20px;
-        max-width: 500px;
-    }
-
-    p {
-        @include paragraph(14px, #ffffff);
-    }
-
-    .buttonContainer {
-        display: flex;
-        padding-top: 30px;
-        button {
-            margin: 0 10px;
-            font-weight: 300;
-        }
-    }
+.innerContainer {
+	display: flex;
+	align-items: center;
 }
 
-.metaContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 30px;
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        margin-right: 10px; 
-    }
+.topHeaderRoot {
+	padding-left: 0;
+	padding-right: 0;
+	background: rgba($color: $gray-1, $alpha: 1.0);
 
-    &.hidden {
-        display: none;
-    }
+	.logoContainer {
+		width: 25%;
+		justify-content: center;
+		display: flex;
+		position: relative;
+		left: 20px;
+	}
+
+	.middleContainer {
+		flex: 1;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.rightContainer {
+		width: 25%;
+	}
 }

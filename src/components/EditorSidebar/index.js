@@ -6,7 +6,6 @@ import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import Logo from '../common/Logo'
 import { scrollWidthSettngs } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
@@ -37,7 +36,6 @@ const EditorSidebar = () => {
 				className={styles.editorSidebarContainer}
 			>
 				<div className={styles.innerContainer}>
-					<Logo />
 					<SliderAlt
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}

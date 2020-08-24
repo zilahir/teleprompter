@@ -7,7 +7,6 @@ import { plus } from 'react-icons-kit/feather/plus'
 import classnames from 'classnames'
 
 import { Colors, HELPER_TOP, INFOBOX_TOP } from '../../utils/consts'
-import ActionHeader from '../ActionHeader'
 import TextEditor from '../TextEditor'
 import PropterIcon from '../common/Icon'
 import styles from './Preview.module.scss'
@@ -27,7 +26,6 @@ const Preview = () => {
 				lg={6}
 				className={styles.previewRoot}
 			>
-				<ActionHeader />
 				<div className={styles.innerContainer}>
 					<div className={styles.previewContainer}>
 						{

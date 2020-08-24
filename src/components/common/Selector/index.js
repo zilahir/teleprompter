@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { useDispatch, useStore, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
+import { theme } from '../../../utils/theme'
 import { setScrollWidth } from '../../../store/actions/text'
 import { Colors as teleprompterColors } from '../../../utils/consts'
 import styles from './Selector.module.scss'
@@ -15,10 +16,10 @@ import styles from './Selector.module.scss'
 
 const Item = styled.div`
 	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)};
-	border-top-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
-	border-bottom-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
-	border-top-right-radius: ${props => (props.isLast ? '10px' : '0px')};
-	border-bottom-right-radius: ${props => (props.isLast ? '10px' : '0px')};
+	border-top-left-radius: ${props => (props.isFirst ? `${theme.misc.borderRadius}px` : 0)};
+	border-bottom-left-radius: ${props => (props.isFirst ? `${theme.misc.borderRadius}px` : 0)};
+	border-top-right-radius: ${props => (props.isLast ? `${theme.misc.borderRadius}px` : 0)};
+	border-bottom-right-radius: ${props => (props.isLast ? `${theme.misc.borderRadius}px` : 0)};
 	
 `
 
