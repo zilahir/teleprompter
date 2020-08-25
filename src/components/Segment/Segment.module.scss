@@ -17,6 +17,7 @@
             height: 30px;
             display: flex;
             flex: 1;
+            margin-right: 10px;
 
             label {
                 height: 100%;
@@ -29,6 +30,7 @@
 
         display: flex;
         justify-content: space-between;
+
         ul {
             list-style-type: none;
             margin: 0;
@@ -39,11 +41,28 @@
             align-items: center;
             
             li {
+                display: flex;
+                align-items: center;
+
                 .segmentColorIndicator {
                     width: 16px;
                     height: 16px;
                     display: block;
                     border-radius: 100%;
+                    margin: 0 10px;
+                }
+                
+                .deleteBtn {
+                    color: #ffffff;
+                    background: none;
+                    box-shadow: none;
+                    border: none;
+                    margin: 0;
+                    padding: 0;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }

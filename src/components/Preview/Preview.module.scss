@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    justify-content: space-between;
+    justify-content: flex-start;
     .button {
         background: transparent;
         border: none;
@@ -13,16 +13,21 @@
         width: fit-content;
         display: flex;
         align-items: center;
+
         &:last-of-type {
             @include paragraph(14px, #fff);
             font-weight: 400;
+            margin-left: 30px;
+
             &:hover {
                 text-decoration: underline;
             }
         }
+
         &:focus {
             outline: none;
         }
+
         &:hover {
             cursor: pointer;
             p {
@@ -31,20 +36,13 @@
             }
         }
     }
-    .addIconContainer {
-        div {
-            position: relative;
-            top: -2px;
-        }
-        width: 16px;
-        height: 16px;
-        background-color: $purple;
-        padding: 3px;
-        border-radius: 100%;
+
+    .addPrompterIcon {
+        color: #ffffff;
     }
+
     p {
-        @include paragraph(15px, #fff);
-        font-weight: 600;
+        @include paragraph(15px, #fff, 0);
         margin-left: 10px;
     }
 }

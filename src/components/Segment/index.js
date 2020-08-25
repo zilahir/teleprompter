@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from 'react-icons-kit'
+import { times } from 'react-icons-kit/fa'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
@@ -39,6 +41,11 @@ const Segment = ({
 						segmentColor={segmentColor}
 						className={styles.segmentColorIndicator}
 					/>
+				</li>
+				<li>
+					<button type="button" className={styles.deleteBtn}>
+						<Icon icon={times} />
+					</button>
 				</li>
 			</ul>
 		</div>
