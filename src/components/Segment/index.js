@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import styles from './Segment.module.scss'
+import Input from '../common/Input'
 
 /**
  * @author zilahir
@@ -27,21 +28,24 @@ const Segment = ({
 		borderColor={segmentColor}
 	>
 		<div className={styles.segmentHeader}>
-			<div className={styles.segmentHeaderInner}>
-				<p>
-					{segmentTitle}
-				</p>
-				<ul>
-					<li>
-						<SegmentIndicator segmentColor={segmentColor} />
-					</li>
-				</ul>
-			</div>
-			<div className={styles.segmentBody}>
-				<p>
-					{segmentText}
-				</p>
-			</div>
+			<Input
+				labelText={null}
+				inputClassName={styles.segmentName}
+				inheritedValue={segmentTitle}
+			/>
+			<ul>
+				<li>
+					<SegmentIndicator
+						segmentColor={segmentColor}
+						className={styles.segmentColorIndicator}
+					/>
+				</li>
+			</ul>
+		</div>
+		<div className={styles.segmentBody}>
+			<p>
+				{segmentText}
+			</p>
 		</div>
 	</OnseSegment>
 )

@@ -38,12 +38,16 @@ const Input = props => {
 		)}
 		>
 			<label className={styles.label}>
-				<span className={styles.labelText}>
-					{labelText}
-					{
-						children && children
-					}
-				</span>
+				{
+					labelText && (
+						<span className={styles.labelText}>
+							{labelText}
+							{
+								children && children
+							}
+						</span>
+					)
+				}
 				<input
 					className={styles.input}
 					type={inputType.toLowerCase()}

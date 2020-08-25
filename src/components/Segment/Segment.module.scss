@@ -5,5 +5,47 @@
 	display: flex;
 	padding: 15px;
 	border-radius: 10px;
-	border-width: 2px;
+    border-width: 2px;
+    border-style: solid;
+    margin: 20px 0;
+    flex-direction: column;
+
+    .segmentHeader {
+        .segmentName {
+            border-radius: $border-radius;
+            margin: 0;
+            height: 30px;
+            display: flex;
+            flex: 1;
+
+            label {
+                height: 100%;
+                width: 100%;
+                input {
+                    width: 100%;
+                }
+            }
+        }
+
+        display: flex;
+        justify-content: space-between;
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 70px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            
+            li {
+                .segmentColorIndicator {
+                    width: 16px;
+                    height: 16px;
+                    display: block;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
 }
