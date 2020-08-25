@@ -75,8 +75,17 @@ export const CREATED = 'CREATED'
 export const OPEN = 'OPEN'
 export const DARK_THEME = 'DARK'
 export const LIGHT_THEME = 'LIGHT'
+export const SANS = 'SANS'
+export const SERIF = 'SERIF'
+export const MONO = 'MONO'
 
 export const colorSchemeSettings = [
 	{ id: 0, label: `${DARK_THEME.toLowerCase()}` },
 	{ id: 1, label: `${LIGHT_THEME.toLowerCase()}` },
+]
+
+export const fontOptions = [
+	{ id: 0, label: `${SANS.toLowerCase()}` },
+	{ id: 1, label: `${SERIF.toLowerCase()}` },
+	{ id: 2, label: `${MONO.toLowerCase()}` },
 ]

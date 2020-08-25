@@ -6,11 +6,11 @@ import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import { scrollWidthSettngs, colorSchemeSettings } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings, fontOptions } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
-import { toggleMirror, setScrollWidth } from '../../store/actions/text'
+import { toggleMirror, setScrollWidth, setFont } from '../../store/actions/text'
 import { setColorScheme } from '../../store/actions/misc'
 
 /**
@@ -40,6 +40,11 @@ const EditorSidebar = () => {
 		currColorScheme.label === colorScheme.toLowerCase()
 	))
 
+	const selectedFont = useSelector(state => state.text.chosenFont)
+	const activeFont = fontOptions.find(currentFont => (
+		currentFont.label === selectedFont.toLowerCase()
+	))
+
 	function handleScrollWidthChange(chosenScrollWidthId) {
 		const chosenValue = scrollWidthSettngs.find(item => (
 			item.id === chosenScrollWidthId
@@ -53,6 +58,13 @@ const EditorSidebar = () => {
 			currentColorScheme => currentColorScheme.id === chosenColorSchemeId,
 		)
 		dispatch(setColorScheme(thisColorScheme.label))
+	}
+
+	function handleFontChange(chosenFontId) {
+		const thisChosenFont = fontOptions.find(
+			currentFont => currentFont.id === chosenFontId,
+		)
+		dispatch(setFont(thisChosenFont.label))
 	}
 
 	return (
@@ -110,6 +122,16 @@ const EditorSidebar = () => {
 							items={colorSchemeSettings}
 							activeId={activeColorScheme.id}
 							onClick={id => handleColorSchemeChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+								Font
+						</p>
+						<Selector
+							items={fontOptions}
+							activeId={activeFont.id}
+							onClick={id => handleFontChange(id)}
 						/>
 					</div>
 					<div className="toggleWrapper">

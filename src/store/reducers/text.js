@@ -1,4 +1,5 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER, TOGGLE_FLIPPED } from '../actions/actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER, TOGGLE_FLIPPED, SET_FONT } from '../actions/actionTypes'
+import { SANS } from '../../utils/consts'
 
 const initialState = {
 	fontSize: 2,
@@ -8,6 +9,7 @@ const initialState = {
 	scrollWidth: '100%',
 	scrollSpeed: 1,
 	isFlipped: false,
+	chosenFont: SANS,
 }
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +61,11 @@ const reducer = (state = initialState, action) => {
 	case RESET_PROMPTER:
 		return {
 			...initialState,
+		}
+	case SET_FONT:
+		return {
+			...initialState,
+			chosenFont: action.payload.chosenFont,
 		}
 	default:
 		return state
