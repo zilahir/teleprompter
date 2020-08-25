@@ -23,7 +23,10 @@
                 height: 100%;
                 width: 100%;
                 input {
+                    @include paragraph(14px, #ffffff, 0.42px);
                     width: 100%;
+                    background: rgba($color: $gray-2, $alpha: 1);
+                    padding: 10px;
                 }
             }
         }
@@ -65,6 +68,21 @@
                     }
                 }
             }
+        }
+    }
+
+    .segmentBody {
+        margin-top: 15px;
+
+        textarea {
+            @include paragraph(14px, #ffffff, 0.42px)
+            resize: none;
+            border: 0;
+            background: rgba($color: $gray-2, $alpha: 1);
+            width: calc(100% - 20px);
+            padding: 10px;
+            min-height: fit-content;
+            border-radius: $border-radius;
         }
     }
 }
