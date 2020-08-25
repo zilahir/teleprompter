@@ -10,7 +10,8 @@ import { scrollWidthSettngs, colorSchemeSettings } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
-import { toggleMirror } from '../../store/actions/text'
+import { toggleMirror, setScrollWidth } from '../../store/actions/text'
+import { setColorScheme } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -38,6 +39,21 @@ const EditorSidebar = () => {
 	const activeColorScheme = colorSchemeSettings.find(currColorScheme => (
 		currColorScheme.label === colorScheme.toLowerCase()
 	))
+
+	function handleScrollWidthChange(chosenScrollWidthId) {
+		const chosenValue = scrollWidthSettngs.find(item => (
+			item.id === chosenScrollWidthId
+		))
+
+		dispatch(setScrollWidth(chosenValue.label))
+	}
+
+	function handleColorSchemeChange(chosenColorSchemeId) {
+		const thisColorScheme = colorSchemeSettings.find(
+			currentColorScheme => currentColorScheme.id === chosenColorSchemeId,
+		)
+		dispatch(setColorScheme(thisColorScheme.label))
+	}
 
 	return (
 		<>
@@ -76,6 +92,7 @@ const EditorSidebar = () => {
 						<Selector
 							items={scrollWidthSettngs}
 							activeId={activeScrollId.id}
+							onClick={id => handleScrollWidthChange(id)}
 						/>
 					</div>
 					<SliderAlt
@@ -92,6 +109,7 @@ const EditorSidebar = () => {
 						<Selector
 							items={colorSchemeSettings}
 							activeId={activeColorScheme.id}
+							onClick={id => handleColorSchemeChange(id)}
 						/>
 					</div>
 					<div className="toggleWrapper">

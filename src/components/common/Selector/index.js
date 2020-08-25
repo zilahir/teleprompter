@@ -24,15 +24,12 @@ const Item = styled.div`
 `
 
 const Selector = props => {
-	const { items, activeId } = props
+	const { items, activeId, onClick } = props
 	const store = useStore()
 	const dispatch = useDispatch()
 
-	function handleChange(index) {
-		const chosenValue = items.find(item => (
-			item.id === index
-		))
-		dispatch(setScrollWidth(chosenValue.label))
+	function handleChange(chosenId) {
+		onClick(chosenId)
 	}
 	return (
 		<div className={styles.selectorContainer}>
@@ -43,7 +40,7 @@ const Selector = props => {
 						isFirst={index === 0}
 						isLast={index === items.length - 1}
 						isActive={activeId === index}
-						onClick={() => handleChange(index)}
+						onClick={() => handleChange(item.id)}
 						className={styles.selectorItem}
 					>
 						<p className={styles.label}>
@@ -61,6 +58,7 @@ Selector.propTypes = {
 	items: PropTypes.arrayOf(
 		PropTypes.any,
 	).isRequired,
+	onClick: PropTypes.func.isRequired,
 }
 
 export default Selector
