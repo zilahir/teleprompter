@@ -73,3 +73,10 @@ export const FORGOTTEN_PW = 'password'
 export const CREATE = 'CREATE'
 export const CREATED = 'CREATED'
 export const OPEN = 'OPEN'
+export const DARK_THEME = 'DARK'
+export const LIGHT_THEME = 'LIGHT'
+
+export const colorSchemeSettings = [
+	{ id: 0, label: `${DARK_THEME.toLowerCase()}` },
+	{ id: 1, label: `${LIGHT_THEME.toLowerCase()}` },
+]

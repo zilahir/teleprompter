@@ -6,7 +6,7 @@ import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import { scrollWidthSettngs } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
@@ -28,6 +28,16 @@ const EditorSidebar = () => {
 	const lineHeight = useSelector(state => state.text.lineHeight)
 	const scrollSpeed = useSelector(state => state.text.scrollSpeed)
 	const flipped = useSelector(state => state.text.isFlipped)
+
+	const scrollWidth = useSelector(state => state.text.scrollWidth)
+	const activeScrollId = scrollWidthSettngs.find(curr => (
+		curr.label === scrollWidth
+	))
+
+	const colorScheme = useSelector(state => state.misc.chosenColorScheme)
+	const activeColorScheme = colorSchemeSettings.find(currColorScheme => (
+		currColorScheme.label === colorScheme.toLowerCase()
+	))
 
 	return (
 		<>
@@ -63,7 +73,10 @@ const EditorSidebar = () => {
 						<p className={styles.widthLabel}>
 								Scroll width
 						</p>
-						<Selector items={scrollWidthSettngs} />
+						<Selector
+							items={scrollWidthSettngs}
+							activeId={activeScrollId.id}
+						/>
 					</div>
 					<SliderAlt
 						labelText="Scroll speed"
@@ -72,6 +85,15 @@ const EditorSidebar = () => {
 						maxValue={10}
 						step={1}
 					/>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+								Color Scheme
+						</p>
+						<Selector
+							items={colorSchemeSettings}
+							activeId={activeColorScheme.id}
+						/>
+					</div>
 					<div className="toggleWrapper">
 						<p>
 							Flip for reflection

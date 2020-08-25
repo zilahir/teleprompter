@@ -24,14 +24,9 @@ const Item = styled.div`
 `
 
 const Selector = props => {
-	const { items } = props
+	const { items, activeId } = props
 	const store = useStore()
 	const dispatch = useDispatch()
-	const scrollWidth = useSelector(state => state.text.scrollWidth)
-	const getActiveWidth = items.find(curr => (
-		curr.label === scrollWidth
-	))
-
 
 	function handleChange(index) {
 		const chosenValue = items.find(item => (
@@ -47,7 +42,7 @@ const Selector = props => {
 						key={item.id}
 						isFirst={index === 0}
 						isLast={index === items.length - 1}
-						isActive={getActiveWidth.id === index}
+						isActive={activeId === index}
 						onClick={() => handleChange(index)}
 						className={styles.selectorItem}
 					>
@@ -62,6 +57,7 @@ const Selector = props => {
 }
 
 Selector.propTypes = {
+	activeId: PropTypes.number.isRequired,
 	items: PropTypes.arrayOf(
 		PropTypes.any,
 	).isRequired,
