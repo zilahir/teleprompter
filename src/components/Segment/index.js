@@ -1,69 +1,56 @@
-/* eslint-disable no-undef */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStore, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import Icon from 'react-icons-kit'
-import { times } from 'react-icons-kit/fa/times'
 
-import PrompterIcon from '../common/Icon'
-import { Colors } from '../../utils/consts'
-// import { setSegments } from '.././../store/actions/segments'
 import styles from './Segment.module.scss'
 
 /**
-* @author zilahir
-* @function Segment
-* */
+ * @author zilahir
+ * @function Segemnt
+ * */
 
-const SegmentContainer = styled.div`
-	border-color: ${props => props.segmentColor};
+const OnseSegment = styled.div`
+	border-color: ${props => props.borderColor};
 `
 
-const Segment = props => {
-	const { segmentText, segmentName, segmentColor, segmentId } = props
-	const store = useStore()
-	const dispatch = useDispatch()
-	function handleSegmentDelete() {
-		const allSegments = store.getState().segments.segments
-		const filtered = allSegments.filter(segment => (
-			segment.id !== segmentId
-		))
-		Promise.all([
-			dispatch(setSegments(filtered)),
-		])
-	}
-	return (
-		<SegmentContainer
-			className={styles.segmentContainer}
-			segmentColor={segmentColor}
-		>
-			<div className={styles.segmentHeader}>
-				<h1>
-					{segmentName} {segmentId}
-				</h1>
-				<div className={styles.deleteIconContainer}>
-					<PrompterIcon
-						color={Colors.gray4}
-						onClick={() => handleSegmentDelete()}
-						icon={
-							<Icon icon={times} size="1em" />
-						}
-					/>
-				</div>
+const SegmentIndicator = styled.span`
+	background-color: ${props => props.segmentColor};
+`
+
+const Segment = ({
+	segmentTitle,
+	segmentColor,
+	segmentText,
+}) => (
+	<OnseSegment
+		className={styles.oneSegment}
+		borderColor={segmentColor}
+	>
+		<div className={styles.segmentHeader}>
+			<div className={styles.segmentHeaderInner}>
+				<p>
+					{segmentTitle}
+				</p>
+				<ul>
+					<li>
+						<SegmentIndicator segmentColor={segmentColor} />
+					</li>
+				</ul>
 			</div>
-			<p>
-				{segmentText}
-			</p>
-		</SegmentContainer>
-	)
-}
+			<div className={styles.segmentBody}>
+				<p>
+					{segmentText}
+				</p>
+			</div>
+		</div>
+	</OnseSegment>
+)
+
 
 Segment.propTypes = {
 	segmentColor: PropTypes.string.isRequired,
-	segmentId: PropTypes.number.isRequired,
-	segmentName: PropTypes.string.isRequired,
 	segmentText: PropTypes.string.isRequired,
+	segmentTitle: PropTypes.string.isRequired,
 }
 
 export default Segment

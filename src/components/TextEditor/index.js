@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useStore, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
@@ -5,6 +6,7 @@ import styled from 'styled-components'
 import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
 import { toggleUpdateBtn } from '../../store/actions/misc'
+import Segment from '../Segment'
 
 /**
 * @author zilahir
@@ -36,11 +38,16 @@ const TextEditor = () => {
 	}), [text])
 	return (
 		<div className={styles.textEditorContainer}>
-			<TextArea
-				className={styles.textArea}
-				onChange={e => handleTextChange(e)}
-				value={text}
-			/>
+			{
+				new Array(10).fill().map((_, index) => (
+					<Segment
+						key={`key-${index.toString()}`}
+						segmentColor="#ff0000"
+						segmentText="Velit irure incididunt occaecat consequat id pariatur enim cupidatat aliqua id nulla eiusmod. Esse adipisicing irure sunt id exercitation deserunt. Fugiat proident aliquip sunt labore est laboris ullamco consequat excepteur enim enim cupidatat. Reprehenderit incididunt qui nulla id aliqua. Mollit amet sunt adipisicing mollit irure dolor duis culpa exercitation laboris veniam."
+						segmentTitle="Qui magna occaecat nostrud magna esse consequat deserunt"
+					/>
+				))
+			}
 		</div>
 	)
 }
