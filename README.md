@@ -69,7 +69,7 @@ This project is deployed via [netlify](https://netlify.com).
 
 Special thanks to [@munkacsimark](https://github.com/munkacsimark/) for helping me out with the scrolling function. :wave:
 
-[This](https://open.spotify.com/track/6ULAF7fV7JPQPPHz1aP3vc?si=M8ieNoCJR6Ob8JatZ8JEAA)  most liszened song during the development of [promoter.me](https://http://prompter.me/).
+[This](https://open.spotify.com/track/6ULAF7fV7JPQPPHz1aP3vc?si=M8ieNoCJR6Ob8JatZ8JEAA) is most listened song during the development of [promoter.me](https://http://prompter.me/).
 
 ## Licence
 
