@@ -1,6 +1,11 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins/label';
 
+.sliderContainer {
+    width: 185px;
+    margin-bottom: 10px;
+}
+
 .slider {
     display: block;
     .rc-slider-step {
