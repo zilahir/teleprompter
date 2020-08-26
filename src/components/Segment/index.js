@@ -2,16 +2,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import random from 'random'
 import styled from 'styled-components'
-import { CirclePicker } from 'react-color'
 import Icon from 'react-icons-kit'
 import { times } from 'react-icons-kit/fa'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
 import { colors } from '../../utils/consts'
+import ColorPicker from '../ColorPicker'
 
 /**
  * @author zilahir
@@ -33,6 +32,7 @@ const SegmentText = styled.textarea`
 const Segment = ({
 	segmentTitle,
 	segmentText,
+	segmentKey,
 }) => {
 	const thisSegmentRef = useRef(null)
 	const [scrollHeight, setScrollHeight] = useState()
@@ -80,20 +80,18 @@ const Segment = ({
 					/>
 				</div>
 			</OnseSegment>
-			<div className={classnames(
-				styles.colorPickerContainer,
-				isColorPickerOpen ? styles.visible : styles.hidden,
-			)}
-			>
-				<CirclePicker
-					onChange={color => setSegmentColor(color.hex)}
-				/>
-			</div>
+			<ColorPicker
+				isVisible={isColorPickerOpen}
+				onClose={() => toggleColorPickerOpen(false)}
+				segmentIndex={segmentKey}
+				onChangeColor={color => setSegmentColor(color)}
+			/>
 		</>
 	)
 }
 
 Segment.propTypes = {
+	segmentKey: PropTypes.number.isRequired,
 	segmentText: PropTypes.string.isRequired,
 	segmentTitle: PropTypes.string.isRequired,
 }
