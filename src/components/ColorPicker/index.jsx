@@ -50,5 +50,4 @@ ColorPicker.propTypes = {
 	// segmentIndex: PropTypes.number.isRequired,
 }
 
-
 export default ColorPicker

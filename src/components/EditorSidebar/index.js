@@ -99,7 +99,7 @@ const EditorSidebar = () => {
 					/>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>
-								Scroll width
+							Scroll width
 						</p>
 						<Selector
 							items={scrollWidthSettngs}
@@ -116,7 +116,7 @@ const EditorSidebar = () => {
 					/>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>
-								Color Scheme
+							Color Scheme
 						</p>
 						<Selector
 							items={colorSchemeSettings}
@@ -126,7 +126,7 @@ const EditorSidebar = () => {
 					</div>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>
-								Font
+							Font
 						</p>
 						<Selector
 							items={fontOptions}

@@ -50,7 +50,6 @@ const useInterval = (callback, delay) => {
 	}, [delay])
 }
 
-
 const TextPreview = props => {
 	const { text, isAnimationRunning, scrollSpeed } = props
 	const store = useStore()
@@ -98,7 +97,6 @@ const TextPreview = props => {
 		))
 		return () => scrollerRefs.forEach(currRef => currRef.current.removeEventListener('scroll', scrollHandler))
 	}, [])
-
 
 	return (
 		<div className={styles.textpreviewContainer}>

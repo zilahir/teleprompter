@@ -18,9 +18,12 @@ import segmentsApi from '../../utils/fakeApi/segments'
 
 const TextEditor = () => {
 	const [text, setVal] = useState()
-	const [segments, setSegments] = useState(segmentsApi.getAllSegments())
+	const demoSegments = segmentsApi.getAllSegments()
+	const [segments, setSegments] = useState(demoSegments)
 	const positions = useRef([]).current
-	const setPosition = (i, offset) => (positions[i] = offset)
+	const setPosition = (i, offset) => {
+		positions[i] = offset
+	}
 
 	const dispatch = useDispatch()
 	const store = useStore()
@@ -42,7 +45,6 @@ const TextEditor = () => {
 		const currText = store.getState().text.text
 		setVal(currText)
 	}), [text])
-
 
 	const moveItem = (i, dragOffset) => {
 		const targetIndex = findIndex(i, dragOffset, positions)

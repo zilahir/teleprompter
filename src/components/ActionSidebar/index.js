@@ -22,7 +22,6 @@ import { toggleUpdateBtn } from '../../store/actions/misc'
 * @function ActionSidebar
 * */
 
-
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [text, setText] = useState('')

@@ -11,6 +11,10 @@
     flex-direction: column;
     position: relative;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     .segmentHeader {
         .segmentName {
             border-radius: $border-radius;

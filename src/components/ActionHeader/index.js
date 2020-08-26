@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
-
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP } from '../../utils/consts'
 import Logo from '../common/Logo'
 import Button from '../common/Button'
