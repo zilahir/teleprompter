@@ -1,26 +1,31 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useStore, shallowEqual } from 'react-redux'
-import styled from 'styled-components'
+/* eslint-disable no-return-assign */
 
+import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useStore, shallowEqual } from 'react-redux'
+import move from 'array-move'
+
+import { findIndex } from '../../utils/findIndex'
 import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import Segment from '../Segment'
+import segmentsApi from '../../utils/fakeApi/segments'
 
 /**
 * @author zilahir
 * @function TextEditor
 * */
 
-const TextArea = styled.textarea`
-	font-size: 16px;
-`
-
 const TextEditor = () => {
 	const [text, setVal] = useState()
+	const [segments, setSegments] = useState(segmentsApi.getAllSegments())
+	const positions = useRef([]).current
+	const setPosition = (i, offset) => (positions[i] = offset)
+
 	const dispatch = useDispatch()
 	const store = useStore()
+
+	// eslint-disable-next-line no-unused-vars
 	function handleTextChange(e) {
 		dispatch(setText(e.target.value))
 		if (store.getState().userPrompters.prompterObject) {
@@ -32,19 +37,29 @@ const TextEditor = () => {
 			}
 		}
 	}
+
 	useEffect(() => store.subscribe(() => {
 		const currText = store.getState().text.text
 		setVal(currText)
 	}), [text])
+
+
+	const moveItem = (i, dragOffset) => {
+		const targetIndex = findIndex(i, dragOffset, positions)
+		if (targetIndex !== i) setSegments(move(segments, i, targetIndex))
+	}
+
 	return (
 		<div className={styles.textEditorContainer}>
 			{
-				new Array(10).fill().map((_, index) => (
+				segments.map((currSegment, index) => (
 					<Segment
 						key={`key-${index.toString()}`}
-						segmentColor="#ff0000"
-						segmentText="Velit irure incididunt occaecat consequat id pariatur enim cupidatat aliqua id nulla eiusmod. Esse adipisicing irure sunt id exercitation deserunt. Fugiat proident aliquip sunt labore est laboris ullamco consequat excepteur enim enim cupidatat. Reprehenderit incididunt qui nulla id aliqua. Mollit amet sunt adipisicing mollit irure dolor duis culpa exercitation laboris veniam."
-						segmentTitle="Qui magna occaecat nostrud magna esse consequat deserunt"
+						segmentText={currSegment.segmentText}
+						segmentTitle={currSegment.segmentTitle}
+						moveItem={moveItem}
+						setPosition={setPosition}
+						index={index}
 					/>
 				))
 			}
