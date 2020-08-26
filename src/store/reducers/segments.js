@@ -1,4 +1,4 @@
-import { GET_ALL_SEGMENTS } from '../actions/actionTypes'
+import { GET_ALL_SEGMENTS, ADD_SEGGMENT } from '../actions/actionTypes'
 
 const initialState = {
 	segments: [],
@@ -10,6 +10,11 @@ const reducer = (state = initialState, action) => {
 		return {
 			...state,
 			segments: action.payload.segments,
+		}
+	case ADD_SEGGMENT:
+		return {
+			...state,
+			segments: state.segments.concat(action.payload.segment),
 		}
 	default:
 		return state

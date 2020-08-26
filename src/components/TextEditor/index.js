@@ -1,7 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { useStore } from 'react-redux'
 
 import segmentsApi from '../../utils/fakeApi/segments'
 import Segment from '../Segment'
@@ -15,7 +16,8 @@ const TextEditor = () => {
 		return result
 	}
 
-	const [items, setItems] = useState(segmentsApi.getAllSegments())
+	const [segments, setSegments] = useState(segmentsApi.getAllSegments())
+	const store = useStore()
 
 	function onDragEnd(result) {
 		if (!result.destination) {
@@ -23,12 +25,12 @@ const TextEditor = () => {
 		}
 
 		const newItems = reorder(
-			items,
+			segments,
 			result.source.index,
 			result.destination.index,
 		)
 
-		setItems(newItems)
+		setSegments(newItems)
 	}
 
 	const grid = 8
@@ -46,6 +48,11 @@ const TextEditor = () => {
 		...draggableStyle,
 	})
 
+	useEffect(() => store.subscribe(() => {
+		const currentSegmentList = store.getState().segments.segments
+		setSegments(currentSegmentList)
+	}), [store])
+
 	return (
 		<DragDropContext onDragEnd={result => onDragEnd(result)}>
 			<Droppable droppableId="droppable">
@@ -54,7 +61,7 @@ const TextEditor = () => {
 						{...provided.droppableProps}
 						ref={provided.innerRef}
 					>
-						{items.map((currSegment, index) => (
+						{segments.map((currSegment, index) => (
 							<Draggable key={currSegment.id} draggableId={`segment-${currSegment.id.toString()}`} index={index}>
 								{(provided, snapshot) => (
 									<div

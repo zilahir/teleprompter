@@ -1,4 +1,4 @@
-import { GET_ALL_SEGMENTS, REMOVE_SEGMENT } from './actionTypes'
+import { GET_ALL_SEGMENTS, REMOVE_SEGMENT, ADD_SEGGMENT } from './actionTypes'
 
 export const setSegments = segments => dispatch => new Promise(resolve => {
 	dispatch({
@@ -19,3 +19,12 @@ export const clearSegments = segments => dispatch => new Promise(resolve => {
 	})
 	resolve(segments)
 })
+
+export const addSegment = segmentObject => dispatch => {
+	dispatch({
+		type: ADD_SEGGMENT,
+		payload: {
+			segment: segmentObject,
+		},
+	})
+}
