@@ -1,71 +1,76 @@
-/* eslint-disable no-return-assign */
+/* eslint-disable no-shadow */
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState } from 'react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useStore, shallowEqual } from 'react-redux'
-import move from 'array-move'
-
-import { findIndex } from '../../utils/findIndex'
-import { setText } from '../../store/actions/text'
-import styles from './TextEditor.module.scss'
-import { toggleUpdateBtn } from '../../store/actions/misc'
-import Segment from '../Segment'
 import segmentsApi from '../../utils/fakeApi/segments'
-
-/**
-* @author zilahir
-* @function TextEditor
-* */
+import Segment from '../Segment'
 
 const TextEditor = () => {
-	const [text, setVal] = useState()
-	const demoSegments = segmentsApi.getAllSegments()
-	const [segments, setSegments] = useState(demoSegments)
-	const positions = useRef([]).current
-	const setPosition = (i, offset) => {
-		positions[i] = offset
+	const reorder = (list, startIndex, endIndex) => {
+		const result = Array.from(list)
+		const [removed] = result.splice(startIndex, 1)
+		result.splice(endIndex, 0, removed)
+
+		return result
 	}
 
-	const dispatch = useDispatch()
-	const store = useStore()
+	const getItemStyle = (isDragging, draggableStyle) => ({
+		userSelect: 'none',
+		...draggableStyle,
+	})
 
-	// eslint-disable-next-line no-unused-vars
-	function handleTextChange(e) {
-		dispatch(setText(e.target.value))
-		if (store.getState().userPrompters.prompterObject) {
-			const result = shallowEqual(
-				e.target.value, store.getState().userPrompters.prompterObject.text,
-			)
-			if (!result) {
-				dispatch(toggleUpdateBtn(true))
-			}
+	const [items, setItems] = useState(segmentsApi.getAllSegments())
+
+	function onDragEnd(result) {
+		if (!result.destination) {
+			return
 		}
-	}
 
-	useEffect(() => store.subscribe(() => {
-		const currText = store.getState().text.text
-		setVal(currText)
-	}), [text])
+		const newItems = reorder(
+			items,
+			result.source.index,
+			result.destination.index,
+		)
 
-	const moveItem = (i, dragOffset) => {
-		const targetIndex = findIndex(i, dragOffset, positions)
-		if (targetIndex !== i) setSegments(move(segments, i, targetIndex))
+		setItems(newItems)
 	}
 
 	return (
-		<div className={styles.textEditorContainer}>
-			{
-				segments.map((currSegment, index) => (
-					<Segment
-						key={`key-${index.toString()}`}
-						segmentText={currSegment.segmentText}
-						segmentTitle={currSegment.segmentTitle}
-						moveItem={moveItem}
-						setPosition={setPosition}
-						index={index}
-					/>
-				))
-			}
-		</div>
+		<DragDropContext onDragEnd={result => onDragEnd(result)}>
+			<Droppable droppableId="droppable">
+				{provided => (
+					<div
+						{...provided.droppableProps}
+						ref={provided.innerRef}
+					>
+						{items.map((currSegment, index) => (
+							<Draggable key={currSegment.id} draggableId={`segment-${currSegment.id.toString()}`} index={index}>
+								{(provided, snapshot) => (
+									<div
+										ref={provided.innerRef}
+										{...provided.draggableProps}
+										{...provided.dragHandleProps}
+										style={getItemStyle(
+											snapshot.isDragging,
+											provided.draggableProps.style,
+										)}
+									>
+										<Segment
+											key={`key-${index.toString()}`}
+											segmentText={currSegment.segmentText}
+											segmentTitle={currSegment.segmentTitle}
+											index={index}
+										/>
+									</div>
+								)}
+							</Draggable>
+						))}
+						{provided.placeholder}
+					</div>
+				)}
+			</Droppable>
+		</DragDropContext>
 	)
 }
 
