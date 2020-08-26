@@ -1,10 +1,9 @@
 /* eslint-disable no-return-assign */
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useStore, shallowEqual } from 'react-redux'
-import move from 'array-move'
+import update from 'immutability-helper'
 
-import { findIndex } from '../../utils/findIndex'
 import { setText } from '../../store/actions/text'
 import styles from './TextEditor.module.scss'
 import { toggleUpdateBtn } from '../../store/actions/misc'
@@ -20,10 +19,6 @@ const TextEditor = () => {
 	const [text, setVal] = useState()
 	const demoSegments = segmentsApi.getAllSegments()
 	const [segments, setSegments] = useState(demoSegments)
-	const positions = useRef([]).current
-	const setPosition = (i, offset) => {
-		positions[i] = offset
-	}
 
 	const dispatch = useDispatch()
 	const store = useStore()
@@ -46,23 +41,37 @@ const TextEditor = () => {
 		setVal(currText)
 	}), [text])
 
-	const moveItem = (i, dragOffset) => {
-		const targetIndex = findIndex(i, dragOffset, positions)
-		if (targetIndex !== i) setSegments(move(segments, i, targetIndex))
-	}
+	const moveSegment = useCallback(
+		(dragIndex, hoverIndex) => {
+			const dragSegment = segments[dragIndex]
+			setSegments(
+				update(segments, {
+					$splice: [
+						[dragIndex, 1],
+						[hoverIndex, 0, dragSegment],
+					],
+				}),
+			)
+		},
+		[segments],
+	)
+
+	const renderSegment = (segment, index) => (
+		<Segment
+			key={`key-${index.toString()}`}
+			index={index}
+			id={segment.id}
+			segmentText={segment.segmentText}
+			segmentTitle={segment.segmentTitle}
+			moveSegment={moveSegment}
+		/>
+	)
 
 	return (
 		<div className={styles.textEditorContainer}>
 			{
-				segments.map((currSegment, index) => (
-					<Segment
-						key={`key-${index.toString()}`}
-						segmentText={currSegment.segmentText}
-						segmentTitle={currSegment.segmentTitle}
-						moveItem={moveItem}
-						setPosition={setPosition}
-						index={index}
-					/>
+				segments.map((segment, index) => (
+					renderSegment(segment, index)
 				))
 			}
 		</div>

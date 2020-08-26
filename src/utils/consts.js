@@ -15,6 +15,8 @@ export const scrollWidthSettngs = [
 	{ id: 2, label: '100%' },
 ]
 
+export const SEGMENT = 'SEGMENT'
+
 export const segmentColors = ['#DF4BCB', '#CFEB70', '#C1C1C1', '#5FA3E8', '#F4A836']
 
 export const BUTTON = 'BUTTON'
