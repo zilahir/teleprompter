@@ -15,11 +15,6 @@ const TextEditor = () => {
 		return result
 	}
 
-	const getItemStyle = (isDragging, draggableStyle) => ({
-		userSelect: 'none',
-		...draggableStyle,
-	})
-
 	const [items, setItems] = useState(segmentsApi.getAllSegments())
 
 	function onDragEnd(result) {
@@ -35,6 +30,21 @@ const TextEditor = () => {
 
 		setItems(newItems)
 	}
+
+	const grid = 8
+
+	const getItemStyle = (isDragging, draggableStyle) => ({
+		// some basic styles to make the items look a bit nicer
+		userSelect: 'none',
+		padding: grid * 2,
+		margin: `0 0 ${grid}px 0`,
+
+		// change background colour if dragging
+		background: isDragging ? 'transport' : 'transport',
+
+		// styles we need to apply on draggables
+		...draggableStyle,
+	})
 
 	return (
 		<DragDropContext onDragEnd={result => onDragEnd(result)}>
@@ -61,6 +71,7 @@ const TextEditor = () => {
 											segmentText={currSegment.segmentText}
 											segmentTitle={currSegment.segmentTitle}
 											index={index}
+											segmentColor={currSegment.segmentColor}
 										/>
 									</div>
 								)}

@@ -2,14 +2,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import random from 'random'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { times } from 'react-icons-kit/fa'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
-import { colors } from '../../utils/consts'
 import ColorPicker from '../ColorPicker'
 
 /**
@@ -26,17 +24,17 @@ const SegmentIndicator = styled.span`
 `
 
 const SegmentText = styled.textarea`
-	height: ${props => props.height}px;
+	
 `
 
 const Segment = ({
+	segmentColor,
 	segmentTitle,
 	segmentText,
 	segmentKey,
 }) => {
 	const thisSegmentRef = useRef(null)
 	const [scrollHeight, setScrollHeight] = useState()
-	const [segmentColor, setSegmentColor] = useState(colors[random.int(0, colors.length - 1)])
 	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
 
 	useEffect(() => {
@@ -85,13 +83,14 @@ const Segment = ({
 				isVisible={isColorPickerOpen}
 				onClose={() => toggleColorPickerOpen(false)}
 				segmentIndex={segmentKey}
-				onChangeColor={color => setSegmentColor(color)}
+				segmentColor={segmentColor}
 			/>
 		</>
 	)
 }
 
 Segment.propTypes = {
+	segmentColor: PropTypes.string.isRequired,
 	segmentKey: PropTypes.number.isRequired,
 	segmentText: PropTypes.string.isRequired,
 	segmentTitle: PropTypes.string.isRequired,
