@@ -24,7 +24,7 @@ const SegmentIndicator = styled.span`
 `
 
 const SegmentText = styled.textarea`
-	
+	height: ${props => props.height}px;
 `
 
 const Segment = ({
