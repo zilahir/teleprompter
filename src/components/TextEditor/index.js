@@ -41,7 +41,7 @@ const TextEditor = () => {
 		padding: grid * 2,
 		margin: `0 0 ${grid}px 0`,
 
-		// change background colour if dragging
+		// change background colour if dragging333
 		background: isDragging ? 'transport' : 'transport',
 
 		// styles we need to apply on draggables

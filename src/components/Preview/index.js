@@ -1,16 +1,19 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import shortid from 'shortid'
 import { Col } from 'react-grid-system'
+import random from 'random'
 import Icon from 'react-icons-kit'
 import { ic_library_add as addSegmentIcon } from 'react-icons-kit/md/ic_library_add'
 import { ic_playlist_add as addPauseIcon } from 'react-icons-kit/md/ic_playlist_add'
 import classnames from 'classnames'
 
-import { HELPER_TOP, INFOBOX_TOP } from '../../utils/consts'
+import { HELPER_TOP, INFOBOX_TOP, colors } from '../../utils/consts'
 import TextEditor from '../TextEditor'
 import styles from './Preview.module.scss'
 import Instruction from '../common/Instruction'
+import { addSegment } from '../../store/actions/segments'
 
 /**
 * @author zilahir
@@ -20,6 +23,16 @@ import Instruction from '../common/Instruction'
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
 	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
+	const dispatch = useDispatch()
+
+	function handleNewSegment() {
+		dispatch(addSegment({
+			segmentTitle: 'Add segment name',
+			segmentText: '',
+			segmentColor: colors[random.int(0, colors.length - 1)],
+			id: shortid.generate(),
+		}))
+	}
 	return (
 		<>
 			<Col
@@ -64,7 +77,7 @@ const Preview = () => {
 							<div className={styles.segmentsHeader}>
 								<button
 									type="button"
-									onClick={() => null}
+									onClick={() => handleNewSegment()}
 									className={styles.button}
 								>
 									<div className={styles.addPrompterIcon}>
