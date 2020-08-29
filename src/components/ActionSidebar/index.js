@@ -102,7 +102,7 @@ const ActionSidebar = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const t = store.getState().text.text
+		const textPreview = store.getState().segments.segments[0].segmentText
 		const sp = store.getState().text.scrollSpeed
 		const uBtn = store.getState().misc.showActiveBtn
 		toggleShowUpdateBtn(uBtn)
@@ -113,7 +113,7 @@ const ActionSidebar = () => {
 			setRemoteAddress(`prompter.me/remote/${slug}`)
 		}
 		setScrollSpeed(sp)
-		setText(t)
+		setText(textPreview)
 	}), [store, text, scrollSpeed, prompterSlug])
 
 	function testAnimation() {
