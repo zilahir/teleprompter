@@ -1,3 +1,9 @@
+import React from 'react'
+import { ic_format_align_left as alignLeft } from 'react-icons-kit/md/ic_format_align_left'
+import { ic_format_align_right as alignRight } from 'react-icons-kit/md/ic_format_align_right'
+import { ic_format_align_center as alignCenter } from 'react-icons-kit/md/ic_format_align_center'
+import Icon from 'react-icons-kit'
+
 export const COLOR_DARK = 'COLOR_DARK'
 export const COLOR_LIGHT = 'COLOR_LIGHT'
 
@@ -113,3 +119,9 @@ export const colors = [
 
 export const SEGMENT = 'SEGMENT'
 export const BREAK = 'BREAK'
+
+export const alignmentOptions = [
+	{ id: 0, label: <Icon icon={alignLeft} size="15px" /> },
+	{ id: 1, label: <Icon icon={alignCenter} size="15px" /> },
+	{ id: 2, label: <Icon icon={alignRight} size="15px" /> },
+]

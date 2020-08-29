@@ -6,11 +6,11 @@ import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import { scrollWidthSettngs, colorSchemeSettings, fontOptions } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings, fontOptions, alignmentOptions } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
-import { toggleMirror, setScrollWidth, setFont } from '../../store/actions/text'
+import { toggleMirror, setScrollWidth, setFont, setTextAlignment } from '../../store/actions/text'
 import { setColorScheme } from '../../store/actions/misc'
 
 /**
@@ -45,6 +45,11 @@ const EditorSidebar = () => {
 		currentFont.label === selectedFont.toLowerCase()
 	))
 
+	const selectedAlignment = useSelector(state => state.text.textAlignment)
+	const activeAlignment = alignmentOptions.find(curentAlignment => (
+		curentAlignment.id === selectedAlignment
+	))
+
 	function handleScrollWidthChange(chosenScrollWidthId) {
 		const chosenValue = scrollWidthSettngs.find(item => (
 			item.id === chosenScrollWidthId
@@ -65,6 +70,10 @@ const EditorSidebar = () => {
 			currentFont => currentFont.id === chosenFontId,
 		)
 		dispatch(setFont(thisChosenFont.label))
+	}
+
+	function handleAlignmentChange(chosenAlignmentId) {
+		dispatch(setTextAlignment(chosenAlignmentId))
 	}
 
 	return (
@@ -132,6 +141,16 @@ const EditorSidebar = () => {
 							items={fontOptions}
 							activeId={activeFont.id}
 							onClick={id => handleFontChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Alignment
+						</p>
+						<Selector
+							items={alignmentOptions}
+							activeId={activeAlignment.id}
+							onClick={id => handleAlignmentChange(id)}
 						/>
 					</div>
 					<div className="toggleWrapper">

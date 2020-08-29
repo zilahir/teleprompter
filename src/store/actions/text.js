@@ -1,4 +1,4 @@
-import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER, SET_FONT } from './actionTypes'
+import { SET_FONT_SIZE, SET_TEXT, SET_LETTER_SPACING, SET_LINE_HEIGHT, TOGGLE_FLIPPED, SET_SCROLL_WIDTH, SET_SCROLL_SPEED, CLEAR_TEXT, RESET_PROMPTER, SET_FONT, SET_TEXT_ALIGNMENT } from './actionTypes'
 
 export const setFontSize = fontSize => ({
 	type: SET_FONT_SIZE,
@@ -69,6 +69,15 @@ export const setFont = chosenFont => dispatch => {
 		type: SET_FONT,
 		payload: {
 			chosenFont,
+		},
+	})
+}
+
+export const setTextAlignment = textAlignment => dispatch => {
+	dispatch({
+		type: SET_TEXT_ALIGNMENT,
+		payload: {
+			textAlignment,
 		},
 	})
 }
