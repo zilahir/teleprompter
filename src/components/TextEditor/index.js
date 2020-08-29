@@ -2,10 +2,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { useStore } from 'react-redux'
+import { useStore, useDispatch } from 'react-redux'
 
 import segmentsApi from '../../utils/fakeApi/segments'
 import Segment from '../Segment'
+import { setSegments } from '../../store/actions/segments'
 
 const TextEditor = () => {
 	const reorder = (list, startIndex, endIndex) => {
@@ -16,8 +17,9 @@ const TextEditor = () => {
 		return result
 	}
 
-	const [segments, setSegments] = useState(segmentsApi.getAllSegments())
+	const [segments, setAllSegments] = useState(segmentsApi.getAllSegments())
 	const store = useStore()
+	const dispatch = useDispatch()
 
 	function onDragEnd(result) {
 		if (!result.destination) {
@@ -30,7 +32,8 @@ const TextEditor = () => {
 			result.destination.index,
 		)
 
-		setSegments(newItems)
+		setAllSegments(newItems)
+		dispatch(setSegments(newItems))
 	}
 
 	const grid = 8
@@ -50,7 +53,7 @@ const TextEditor = () => {
 
 	useEffect(() => store.subscribe(() => {
 		const currentSegmentList = store.getState().segments.segments
-		setSegments(currentSegmentList)
+		setAllSegments(currentSegmentList)
 	}), [store])
 
 	return (
