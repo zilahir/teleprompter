@@ -78,7 +78,7 @@
     .segmentBody {
         margin-top: 15px;
 
-        textarea {
+        .segmentText {
             @include paragraph(14px, #ffffff, 0.42px)
             resize: none;
             border: 0;
@@ -87,11 +87,7 @@
             padding: 10px;
             min-height: fit-content;
             border-radius: $border-radius;
-        }
-    }
 
-    .segmentBody {
-        .segmentText {
             &:focus {
                 outline: none;
             }
