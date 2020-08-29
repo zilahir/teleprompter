@@ -66,6 +66,14 @@ const Segment = ({
 		}))
 	}
 
+	function handleSegmentColorChange(newColor) {
+		dispatch(modifySegment({
+			...thisSegment,
+			segmentColor: newColor,
+		}))
+		toggleColorPickerOpen(false)
+	}
+
 	return (
 		<>
 			<OnseSegment
@@ -106,13 +114,14 @@ const Segment = ({
 						className={styles.segmentText}
 					/>
 				</div>
+				<ColorPicker
+					isVisible={isColorPickerOpen}
+					onClose={() => toggleColorPickerOpen(false)}
+					segmentIndex={segmentKey}
+					segmentColor={segmentColor}
+					onChangeColor={color => handleSegmentColorChange(color)}
+				/>
 			</OnseSegment>
-			<ColorPicker
-				isVisible={isColorPickerOpen}
-				onClose={() => toggleColorPickerOpen(false)}
-				segmentIndex={segmentKey}
-				segmentColor={segmentColor}
-			/>
 		</>
 	)
 }

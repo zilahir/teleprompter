@@ -47,6 +47,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		width: 30px;
 
 		.deleteBtn {
 			border: 0;
@@ -54,7 +55,6 @@
 			margin: 0;
 			padding: 0;
 			color: rgba($color: #ffffff, $alpha: 1.0);
-			margin-left: 10px;
 
 			&:focus {
 				outline: none;
