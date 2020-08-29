@@ -9,7 +9,7 @@ import { ic_library_add as addSegmentIcon } from 'react-icons-kit/md/ic_library_
 import { ic_playlist_add as addPauseIcon } from 'react-icons-kit/md/ic_playlist_add'
 import classnames from 'classnames'
 
-import { HELPER_TOP, INFOBOX_TOP, colors } from '../../utils/consts'
+import { HELPER_TOP, INFOBOX_TOP, colors, SEGMENT, BREAK } from '../../utils/consts'
 import TextEditor from '../TextEditor'
 import styles from './Preview.module.scss'
 import Instruction from '../common/Instruction'
@@ -25,12 +25,13 @@ const Preview = () => {
 	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 	const dispatch = useDispatch()
 
-	function handleNewSegment() {
+	function handleNewSegment(type) {
 		dispatch(addSegment({
 			segmentTitle: 'Add segment name',
 			segmentText: '',
 			segmentColor: colors[random.int(0, colors.length - 1)],
 			id: shortid.generate(),
+			type: type.toLowerCase(),
 		}))
 	}
 	return (
@@ -77,7 +78,7 @@ const Preview = () => {
 							<div className={styles.segmentsHeader}>
 								<button
 									type="button"
-									onClick={() => handleNewSegment()}
+									onClick={() => handleNewSegment(SEGMENT)}
 									className={styles.button}
 								>
 									<div className={styles.addPrompterIcon}>
@@ -91,7 +92,7 @@ const Preview = () => {
 								</button>
 								<button
 									type="button"
-									onClick={() => null}
+									onClick={() => handleNewSegment(BREAK)}
 									className={styles.button}
 								>
 									<div className={styles.addPrompterIcon}>

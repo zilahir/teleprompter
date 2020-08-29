@@ -110,3 +110,6 @@ export const colors = [
 	'#795548',
 	'#607d8b',
 ]
+
+export const SEGMENT = 'SEGMENT'
+export const BREAK = 'BREAK'
