@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from 'react-icons-kit'
 import { times } from 'react-icons-kit/fa'
+import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
 import ColorPicker from '../ColorPicker'
+import { modifySegment } from '../../store/actions/segments'
 
 /**
  * @author zilahir
@@ -32,16 +34,29 @@ const Segment = ({
 	segmentTitle,
 	segmentText,
 	segmentKey,
+	segmentId,
 }) => {
 	const thisSegmentRef = useRef(null)
 	const [scrollHeight, setScrollHeight] = useState()
 	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
+	const dispatch = useDispatch()
+
+	const thisSegment = useSelector(
+		state => state.segments.segments.find(segment => segment.id === segmentId),
+	)
 
 	useEffect(() => {
 		if (thisSegmentRef.current) {
 			setScrollHeight(thisSegmentRef.current.scrollHeight)
 		}
 	}, [])
+
+	function handleSegmentNameChange(newSegmentTitle) {
+		dispatch(modifySegment({
+			...thisSegment,
+			segmentTitle: newSegmentTitle,
+		}))
+	}
 
 	return (
 		<>
@@ -53,6 +68,8 @@ const Segment = ({
 					<Input
 						labelText={null}
 						inputClassName={styles.segmentName}
+						placeholder="Add segment name"
+						onFocusOut={event => handleSegmentNameChange(event.target.value)}
 						inheritedValue={segmentTitle}
 					/>
 					<ul>
@@ -91,6 +108,7 @@ const Segment = ({
 
 Segment.propTypes = {
 	segmentColor: PropTypes.string.isRequired,
+	segmentId: PropTypes.string.isRequired,
 	segmentKey: PropTypes.number.isRequired,
 	segmentText: PropTypes.string.isRequired,
 	segmentTitle: PropTypes.string.isRequired,

@@ -79,6 +79,7 @@ const TextEditor = () => {
 											segmentTitle={currSegment.segmentTitle}
 											index={index}
 											segmentColor={currSegment.segmentColor}
+											segmentId={currSegment.id}
 										/>
 									</div>
 								)}

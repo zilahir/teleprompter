@@ -22,6 +22,7 @@ const Input = props => {
 		children,
 		hasKeyDownEvent,
 		keyDownEvent,
+		onFocusOut,
 	} = props
 	const [value, setValue] = useState(null)
 
@@ -56,6 +57,7 @@ const Input = props => {
 					disabled={isDisabled}
 					placeholder={placeholder}
 					onKeyDown={e => (hasKeyDownEvent ? keyDownEvent(e.key) : null)}
+					onBlur={onFocusOut}
 				/>
 			</label>
 		</div>
@@ -72,6 +74,7 @@ Input.defaultProps = {
 	isDisabled: false,
 	keyDownEvent: null,
 	labelText: '',
+	onFocusOut: () => {},
 	placeholder: '',
 }
 
@@ -85,6 +88,7 @@ Input.propTypes = {
 	isDisabled: PropTypes.bool,
 	keyDownEvent: PropTypes.func,
 	labelText: PropTypes.string,
+	onFocusOut: PropTypes.func,
 	placeholder: PropTypes.string,
 }
 
