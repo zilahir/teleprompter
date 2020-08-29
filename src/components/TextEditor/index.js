@@ -7,6 +7,8 @@ import { useStore, useDispatch } from 'react-redux'
 import segmentsApi from '../../utils/fakeApi/segments'
 import Segment from '../Segment'
 import { setSegments } from '../../store/actions/segments'
+import { SEGMENT } from '../../utils/consts'
+import Break from '../common/Break'
 
 const TextEditor = () => {
 	const reorder = (list, startIndex, endIndex) => {
@@ -76,14 +78,18 @@ const TextEditor = () => {
 											provided.draggableProps.style,
 										)}
 									>
-										<Segment
-											key={`key-${index.toString()}`}
-											segmentText={currSegment.segmentText}
-											segmentTitle={currSegment.segmentTitle}
-											index={index}
-											segmentColor={currSegment.segmentColor}
-											segmentId={currSegment.id}
-										/>
+										{
+											currSegment.type === SEGMENT.toLowerCase() ? (
+												<Segment
+													key={`key-${index.toString()}`}
+													segmentText={currSegment.segmentText}
+													segmentTitle={currSegment.segmentTitle}
+													index={index}
+													segmentColor={currSegment.segmentColor}
+													segmentId={currSegment.id}
+												/>
+											) : <Break id={currSegment.id} />
+										}
 									</div>
 								)}
 							</Draggable>
