@@ -89,4 +89,12 @@
             border-radius: $border-radius;
         }
     }
+
+    .segmentBody {
+        .segmentText {
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 }
