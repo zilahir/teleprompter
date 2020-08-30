@@ -6,13 +6,13 @@ import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { ic_refresh as refreshIcon } from 'react-icons-kit/md/ic_refresh'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR, CREATE, OPEN } from '../../utils/consts'
-import Instruction from '../common/Instruction'
+import { LINK, CREATE, OPEN } from '../../utils/consts'
 import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 import { toggleUpdateBtn } from '../../store/actions/misc'
@@ -201,29 +201,17 @@ const ActionSidebar = () => {
 							</div>
 						</CopyToClipboard>
 					</Input>
-					<Instruction
-						text={HELPER_SIDEBAR}
-						hasPadding={false}
-						maxWidth={250}
-						type={INFOBOX_SIDEBAR}
-						noHide
-					/>
-					<p className={styles.about}>
-						<a href="/about">About Prompter.me</a>
-					</p>
 					<div className={styles.playButtonContainer}>
-						{
-							showUpdateBtn
-								? (
-									<Button
-										onClick={() => updatePrompter()}
-										labelText="Update"
-										buttonClass={styles.updateBtn}
-										isNegative
-									/>
-								)
-								: null
-						}
+						<Button
+							onClick={() => updatePrompter()}
+							labelText="Send updates"
+							buttonClass={styles.updateBtn}
+							isNegative
+							isDisabled={showUpdateBtn}
+							icon={(
+								<Icon size="2em" icon={refreshIcon} />
+							)}
+						/>
 						<Button
 							onClick={() => createPrompter(createLabelText)}
 							labelText={createLabelText}
