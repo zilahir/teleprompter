@@ -82,7 +82,6 @@ const TextEditor = () => {
 											currSegment.type === SEGMENT.toLowerCase() ? (
 												<Segment
 													key={`key-${index.toString()}`}
-													segmentText={currSegment.segmentText}
 													segmentTitle={currSegment.segmentTitle}
 													index={index}
 													segmentColor={currSegment.segmentColor}

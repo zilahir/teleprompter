@@ -32,14 +32,12 @@ const SegmentText = styled.textarea`
 const Segment = ({
 	segmentColor,
 	segmentTitle,
-	segmentText,
 	segmentKey,
 	segmentId,
 }) => {
 	const thisSegmentRef = useRef(null)
 	const [scrollHeight, setScrollHeight] = useState()
 	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
-	const [tempSegmentText, setTempSegmemntText] = useState(segmentText)
 	const dispatch = useDispatch()
 
 	const thisSegment = useSelector(
@@ -107,10 +105,9 @@ const Segment = ({
 				<div className={styles.segmentBody}>
 					<SegmentText
 						ref={thisSegmentRef}
-						value={tempSegmentText}
-						onChange={event => setTempSegmemntText(event.target.value)}
+						value={thisSegment.segmentText}
+						onChange={event => handleSegmentTextChange(event.target.value)}
 						height={scrollHeight}
-						onBlur={event => handleSegmentTextChange(event.target.value)}
 						className={styles.segmentText}
 					/>
 				</div>
@@ -130,7 +127,6 @@ Segment.propTypes = {
 	segmentColor: PropTypes.string.isRequired,
 	segmentId: PropTypes.string.isRequired,
 	segmentKey: PropTypes.number.isRequired,
-	segmentText: PropTypes.string.isRequired,
 	segmentTitle: PropTypes.string.isRequired,
 }
 
