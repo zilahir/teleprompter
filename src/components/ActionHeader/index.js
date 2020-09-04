@@ -162,6 +162,7 @@ const ActionHeader = () => {
 					<ul className={classnames(
 						styles.btnList,
 						styles.flexEnd,
+						isLoggedIn ? styles.hidden : undefined,
 					)}
 					>
 						<li>
@@ -175,6 +176,20 @@ const ActionHeader = () => {
 								labelText="Login"
 								type={LINK}
 								onClick={() => openLoginBox()}
+							/>
+						</li>
+					</ul>
+					<ul className={classnames(
+						styles.btnList,
+						styles.flexEnd,
+						!isLoggedIn ? styles.hidden : undefined,
+					)}
+					>
+						<li>
+							<Button
+								labelText={store.getState().user.user.username || 0}
+								type={LINK}
+								onClick={() => openUserSettingModal()}
 							/>
 						</li>
 					</ul>
@@ -225,6 +240,10 @@ const ActionHeader = () => {
 					/>
 				</div>
 			</Modal>
+			<UserSettingsModal
+				showUserSettingsModal={userSettingsModalOpen}
+				requestClose={() => toggleUserSettingsModal(false)}
+			/>
 		</div>
 	)
 }

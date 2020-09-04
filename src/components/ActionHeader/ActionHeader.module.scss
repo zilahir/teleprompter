@@ -19,6 +19,11 @@
 			}
 		}
 	}
+
+	&.hidden {
+		display: none;
+		visibility: hidden;
+	}
 }
 
 .innerContainer {
