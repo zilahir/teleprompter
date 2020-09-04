@@ -11,6 +11,7 @@ import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
+import styled from 'styled-components'
 
 import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
@@ -28,8 +29,12 @@ import ForgottenPasswordModal from '../ForgottenPasswordModal'
 * @function Login
 * */
 
+const BoxContainer = styled.div`
+	left: ${props => props.left}px;
+`
+
 const Login = props => {
-	const { type, isVisible, requestClose } = props
+	const { type, isVisible, requestClose, leftPosition } = props
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
@@ -178,10 +183,12 @@ const Login = props => {
 			{
 				type === LOGIN
 					? (
-						<div className={classnames(
-							styles.loginBoxContainer,
-							isVisible ? styles.show : styles.hidden,
-						)}
+						<BoxContainer
+							className={classnames(
+								styles.loginBoxContainer,
+								isVisible ? styles.show : styles.hidden,
+							)}
+							left={leftPosition}
 						>
 							<Input
 								placeholder="Email"
@@ -221,16 +228,18 @@ const Login = props => {
 									Invalid email or password. Try again.
 								</p>
 							</div>
-						</div>
+						</BoxContainer>
 					)
 					: type === REGISTER
 						? (
-							<div className={classnames(
-								styles.loginBoxContainer,
-								styles.regContainer,
-								isVisible ? styles.show : styles.hidden,
-								isRegistering || isRegistered ? styles.registering : null,
-							)}
+							<BoxContainer
+								className={classnames(
+									styles.loginBoxContainer,
+									styles.regContainer,
+									isVisible ? styles.show : styles.hidden,
+									isRegistering || isRegistered ? styles.registering : null,
+								)}
+
 							>
 								{
 									isRegistering || isRegistered
@@ -291,14 +300,16 @@ const Login = props => {
 											</>
 										)
 								}
-							</div>
+							</BoxContainer>
 						) : type === LOAD
 							? (
-								<div className={classnames(
-									styles.loginBoxContainer,
-									styles.itemBoxContainer,
-									isVisible ? styles.show : styles.hidden,
-								)}
+								<BoxContainer
+									className={classnames(
+										styles.loginBoxContainer,
+										styles.itemBoxContainer,
+										isVisible ? styles.show : styles.hidden,
+									)}
+									left={leftPosition}
 								>
 									<ul className={styles.savedItems}>
 										{
@@ -333,15 +344,17 @@ const Login = props => {
 											))
 										}
 									</ul>
-								</div>
+								</BoxContainer>
 							) : type === SAVE
 								? (
-									<div className={classnames(
-										styles.loginBoxContainer,
-										styles.itemBoxContainer,
-										styles.saveContainer,
-										isVisible ? styles.show : styles.hidden,
-									)}
+									<BoxContainer
+										className={classnames(
+											styles.loginBoxContainer,
+											styles.itemBoxContainer,
+											styles.saveContainer,
+											isVisible ? styles.show : styles.hidden,
+										)}
+										left={leftPosition}
 									>
 										{
 											isSaving || isSaved
@@ -376,7 +389,7 @@ const Login = props => {
 													</>
 												)
 										}
-									</div>
+									</BoxContainer>
 								)
 								: null
 			}
@@ -417,11 +430,13 @@ const Login = props => {
 }
 
 Login.defaultProps = {
+	leftPosition: 0,
 	requestClose: null,
 }
 
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
+	leftPosition: PropTypes.number,
 	requestClose: PropTypes.func,
 	type: PropTypes.string.isRequired,
 }

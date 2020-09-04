@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
@@ -29,9 +29,13 @@ const ActionHeader = () => {
 	const [showNewModal, toggleNewModal] = useState(false)
 	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
 	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
+	const [boxPosition, setBoxPosition] = useState(0)
 
 	const store = useStore()
 	const dispatch = useDispatch()
+	const projectsBtnRef = useRef(null)
+	const saveRef = useRef(null)
+	const saveAsRef = useRef(null)
 	// const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 
 	function openLoginBox() {
@@ -51,6 +55,7 @@ const ActionHeader = () => {
 	}
 
 	function openLoad() {
+		setBoxPosition(projectsBtnRef.current.getBoundingClientRect().x)
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleSave(false)
@@ -59,6 +64,11 @@ const ActionHeader = () => {
 	}
 
 	function openSave(target) {
+		if (target === SAVE) {
+			setBoxPosition(saveRef.current.getBoundingClientRect().x)
+		} else if (target === SAVE_AS_COPY) {
+			setBoxPosition(saveAsRef.current.getBoundingClientRect().x)
+		}
 		toggleLogin(false)
 		toggleRegister(false)
 		toggleLoad(false)
@@ -140,22 +150,26 @@ const ActionHeader = () => {
 								onClick={() => toggleConfirmNew()}
 							/>
 						</li>
-						<li>
+						<li ref={saveRef}>
 							<Button
 								labelText="Save"
 								type={LINK}
+								onClick={() => openSave(SAVE)}
 							/>
 						</li>
-						<li>
+						<li ref={saveAsRef}>
 							<Button
-								labelText="Saves As..."
+								labelText="Save As..."
 								type={LINK}
+								onClick={() => openSave(SAVE_AS_COPY)}
 							/>
 						</li>
-						<li>
+						<li ref={projectsBtnRef}>
 							<Button
 								labelText="Projects"
 								type={LINK}
+								onClick={() => openLoad()}
+								isVisible={isLoadBtnVisible}
 							/>
 						</li>
 					</ul>
@@ -243,6 +257,18 @@ const ActionHeader = () => {
 			<UserSettingsModal
 				showUserSettingsModal={userSettingsModalOpen}
 				requestClose={() => toggleUserSettingsModal(false)}
+			/>
+			<Login
+				isVisible={showLoad}
+				type={LOAD}
+				requestClose={() => toggleLoad(false)}
+				leftPosition={boxPosition}
+			/>
+			<Login
+				isVisible={showSave}
+				type={SAVE}
+				requestClose={() => toggleSave(false)}
+				leftPosition={boxPosition}
 			/>
 		</div>
 	)
