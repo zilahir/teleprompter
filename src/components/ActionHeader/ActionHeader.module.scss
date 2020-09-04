@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/mixins/paragraph';
 
 .btnList {
 	display: flex;
@@ -36,15 +37,42 @@
 		display: flex;
 		position: relative;
 		left: 20px;
+		overflow: hidden;
 	}
 
 	.middleContainer {
 		flex: 1;
 		display: flex;
 		justify-content: space-between;
+		z-index: 9;
 	}
 
 	.rightContainer {
 		width: 25%;
+	}
+}
+
+.modal {
+	padding: 30px;
+
+	h3 {
+			@include paragraph(14px, #ffffff);
+			font-weight: 300;
+			margin: 0;
+			margin-bottom: 20px;
+			max-width: 500px;
+	}
+
+	p {
+			@include paragraph(14px, #ffffff);
+	}
+
+	.buttonContainer {
+			display: flex;
+			padding-top: 30px;
+			button {
+					margin: 0 10px;
+					font-weight: 300;
+			}
 	}
 }

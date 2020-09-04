@@ -137,6 +137,7 @@ const ActionHeader = () => {
 							<Button
 								labelText="New"
 								type={LINK}
+								onClick={() => toggleConfirmNew()}
 							/>
 						</li>
 						<li>
@@ -173,6 +174,7 @@ const ActionHeader = () => {
 							<Button
 								labelText="Login"
 								type={LINK}
+								onClick={() => openLoginBox()}
 							/>
 						</li>
 					</ul>
@@ -194,6 +196,35 @@ const ActionHeader = () => {
 					</ul>
 				</div>
 			</div>
+			<Login
+				isVisible={showLogin}
+				type={LOGIN}
+				requestClose={() => toggleLogin(false)}
+			/>
+			<Login
+				isVisible={showNewModal}
+				type={NEW_PROMPTER}
+				requestClose={() => toggleNewModal(false)}
+			/>
+			<Modal
+				isShowing={showNewModal}
+				hide={() => toggleNewModal(false)}
+				hasCloseIcon={false}
+				modalTitle="You have unsaved content in your open project. Are you sure you want to clear everything and start a new one?"
+				modalClassName={styles.modal}
+			>
+				<div className={styles.buttonContainer}>
+					<Button
+						labelText="Cancel"
+						onClick={() => toggleNewModal(false)}
+						isNegative
+					/>
+					<Button
+						labelText="Clear"
+						onClick={() => clearCurrentPrompter()}
+					/>
+				</div>
+			</Modal>
 		</div>
 	)
 }
