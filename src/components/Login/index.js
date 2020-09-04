@@ -55,6 +55,7 @@ const Login = props => {
 	const [delProject, setProjectToDel] = useState(null)
 	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
 	const [username, setUsername] = useState(null)
+
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
