@@ -3,8 +3,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
+import random from 'random'
+import shortid from 'shortid'
 
-import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP, SEGMENT, colors } from '../../utils/consts'
 import Logo from '../common/Logo'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
@@ -14,6 +16,7 @@ import Modal from '../common/Modal'
 import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
 import { toggleUpdateBtn } from '../../store/actions/misc'
+import { setSegments } from '../../store/actions/segments'
 
 /**
 * @author zilahir
@@ -110,7 +113,13 @@ const ActionHeader = () => {
 
 	function clearCurrentPrompter() {
 		dispatch(setPrompterSlug(uuidv4().split('-')[0]))
-		dispatch(resetPrompter())
+		dispatch(setSegments([{
+			segmentTitle: 'Add segment name',
+			segmentText: '',
+			segmentColor: colors[random.int(0, colors.length - 1)],
+			id: shortid.generate(),
+			type: SEGMENT.toLowerCase(),
+		}]))
 		dispatch(toggleUpdateBtn(false))
 		toggleNewModal(false)
 	}
