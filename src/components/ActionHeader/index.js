@@ -210,7 +210,9 @@ const ActionHeader = () => {
 					>
 						<li>
 							<Button
-								labelText={store.getState().user.user.username || 0}
+								labelText={
+									store.getState().user.loggedIn ? store.getState().user.user.username : 'Username'
+								}
 								type={LINK}
 								onClick={() => openUserSettingModal()}
 							/>
