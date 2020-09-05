@@ -8,6 +8,7 @@ import { copy } from 'react-icons-kit/feather/copy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ic_refresh as refreshIcon } from 'react-icons-kit/md/ic_refresh'
 import { ic_open_in_new as openIcon } from 'react-icons-kit/md/ic_open_in_new'
+import { magic as createIcon } from 'react-icons-kit/fa/magic'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -45,18 +46,15 @@ const ActionSidebar = () => {
 		window.open(`/player/${prompterSlug}`, '_blank')
 	}
 
-	function createPrompter(state) {
-		if (state === OPEN) {
-			togglePlay()
-			return
-		}
+	function createPrompter() {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
+		const { segments } = store.getState().segments
 		const slug = store.getState().userPrompters.prompterSlug
 		const saveObject = {
 			slug,
-			text: newPrompterObject.text,
+			segments,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -214,11 +212,21 @@ const ActionSidebar = () => {
 							)}
 						/>
 						<Button
-							onClick={() => createPrompter(createLabelText)}
-							labelText={createLabelText}
-							buttonClass={styles.playBtn}
+							buttonClass={styles.updateBtn}
+							labelText="Open Prompter"
+							onClick={() => togglePlay()}
 							icon={(
 								<Icon icon={openIcon} size="1.5em" />
+							)}
+						/>
+						<Button
+							onClick={() => createPrompter()}
+							labelText="Create Prompter"
+							buttonClass={classnames(
+								styles.playBtn,
+							)}
+							icon={(
+								<Icon icon={createIcon} size="1.5em" />
 							)}
 						/>
 					</div>
