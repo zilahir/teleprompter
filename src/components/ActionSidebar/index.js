@@ -46,7 +46,11 @@ const ActionSidebar = () => {
 		window.open(`/player/${prompterSlug}`, '_blank')
 	}
 
-	function createPrompter() {
+	function createPrompter(state) {
+		if (state === OPEN) {
+			togglePlay()
+			return
+		}
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
@@ -206,27 +210,19 @@ const ActionSidebar = () => {
 							labelText="Send Updates"
 							buttonClass={styles.updateBtn}
 							isNegative
-							isDisabled={showUpdateBtn}
+							isVisible={showUpdateBtn}
 							icon={(
 								<Icon size="1.5em" icon={refreshIcon} />
 							)}
 						/>
 						<Button
-							buttonClass={styles.updateBtn}
-							labelText="Open Prompter"
-							onClick={() => togglePlay()}
-							icon={(
-								<Icon icon={openIcon} size="1.5em" />
-							)}
-						/>
-						<Button
 							onClick={() => createPrompter()}
-							labelText="Create Prompter"
+							labelText={createLabelText === OPEN ? 'Open Propmter' : createLabelText}
 							buttonClass={classnames(
 								styles.playBtn,
 							)}
 							icon={(
-								<Icon icon={createIcon} size="1.5em" />
+								<Icon icon={createLabelText === OPEN ? openIcon : createIcon} size="1.5em" />
 							)}
 						/>
 					</div>
