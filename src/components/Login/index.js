@@ -250,7 +250,7 @@ const Login = props => {
 									isVisible ? styles.show : styles.hidden,
 									isRegistering || isRegistered ? styles.registering : null,
 								)}
-
+								left={leftPosition}
 							>
 								{
 									isRegistering || isRegistered

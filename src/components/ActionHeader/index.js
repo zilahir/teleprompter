@@ -39,9 +39,12 @@ const ActionHeader = () => {
 	const projectsBtnRef = useRef(null)
 	const saveRef = useRef(null)
 	const saveAsRef = useRef(null)
+	const loginBtnRef = useRef(null)
+	const signUpBtnRef = useRef(null)
 	// const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 
 	function openLoginBox() {
+		setBoxPosition(loginBtnRef.current.getBoundingClientRect().x)
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleSave(false)
@@ -50,6 +53,7 @@ const ActionHeader = () => {
 	}
 
 	function openRegisterBox() {
+		setBoxPosition(signUpBtnRef.current.getBoundingClientRect().x)
 		toggleLogin(false)
 		toggleLoad(false)
 		toggleSave(false)
@@ -188,13 +192,14 @@ const ActionHeader = () => {
 						isLoggedIn ? styles.hidden : undefined,
 					)}
 					>
-						<li>
+						<li ref={signUpBtnRef}>
 							<Button
 								labelText="Sign Up"
 								type={LINK}
+								onClick={() => openRegisterBox()}
 							/>
 						</li>
-						<li>
+						<li ref={loginBtnRef}>
 							<Button
 								labelText="Login"
 								type={LINK}
@@ -240,11 +245,18 @@ const ActionHeader = () => {
 				isVisible={showLogin}
 				type={LOGIN}
 				requestClose={() => toggleLogin(false)}
+				leftPosition={boxPosition}
 			/>
 			<Login
 				isVisible={showNewModal}
 				type={NEW_PROMPTER}
 				requestClose={() => toggleNewModal(false)}
+			/>
+			<Login
+				isVisible={showRegister}
+				type={REGISTER}
+				requestClose={() => toggleRegister(false)}
+				leftPosition={boxPosition}
 			/>
 			<Modal
 				isShowing={showNewModal}
