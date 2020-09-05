@@ -7,6 +7,7 @@ import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ic_refresh as refreshIcon } from 'react-icons-kit/md/ic_refresh'
+import { ic_open_in_new as openIcon } from 'react-icons-kit/md/ic_open_in_new'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -204,18 +205,21 @@ const ActionSidebar = () => {
 					<div className={styles.playButtonContainer}>
 						<Button
 							onClick={() => updatePrompter()}
-							labelText="Send updates"
+							labelText="Send Updates"
 							buttonClass={styles.updateBtn}
 							isNegative
 							isDisabled={showUpdateBtn}
 							icon={(
-								<Icon size="2em" icon={refreshIcon} />
+								<Icon size="1.5em" icon={refreshIcon} />
 							)}
 						/>
 						<Button
 							onClick={() => createPrompter(createLabelText)}
 							labelText={createLabelText}
 							buttonClass={styles.playBtn}
+							icon={(
+								<Icon icon={openIcon} size="1.5em" />
+							)}
 						/>
 					</div>
 				</div>
