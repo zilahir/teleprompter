@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import styles from './TextScroller.module.scss'
 import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
+import { getFontFamily } from '../../utils/getFontFamily'
 
 /**
 * @author zilahir
@@ -29,6 +30,7 @@ const Text = styled.p`
 	letter-spacing: ${props => props.letterSpacing}vw;
 	line-height: ${props => props.lineHeight};
 	transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
+	font-family: ${props => props.fontFamily};
 `
 
 const useInterval = (callback, delay) => {
@@ -199,6 +201,7 @@ const TextScroller = props => {
 												lineHeight={prompterObject.lineHeight}
 												letterSpacing={prompterObject.letterSpacing}
 												isFlipped={prompterObject.isFlipped}
+												fontFamily={getFontFamily(prompterObject.chosenFont)}
 											>
 												{currSegment.segmentText}
 											</Text>
