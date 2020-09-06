@@ -20,7 +20,7 @@ import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, toggleMirror } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, toggleMirror, setFont, setTextAlignment } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import ForgottenPasswordModal from '../ForgottenPasswordModal'
 import { setSegments } from '../../store/actions/segments'
@@ -111,6 +111,8 @@ const Login = props => {
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
 			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
+			dispatch(setFont(selectedPrompter.meta.chosenFont)),
+			dispatch(setTextAlignment(selectedPrompter.meta.setTextAlignment)),
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterSpacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
