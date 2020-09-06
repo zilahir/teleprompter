@@ -3,12 +3,12 @@
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import { useSocket } from '@zilahir/use-socket.io-client'
+import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 
 /**
@@ -16,14 +16,19 @@ import { toggleFullScreen } from '../../utils/fullScreen'
 * @function TextScroller
 * */
 
+const Segment = styled.div`
+	border-color: ${props => props.segmentColor};
+`
+
 const Scroller = styled.div`
 	max-width: ${props => props.scrollWidth};
-	p {
-		font-size: ${props => props.fontSize}px;
-		letter-spacing: ${props => props.letterSpacing}vw;
-		line-height: ${props => props.lineHeight};
-		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
-	}
+`
+
+const Text = styled.p`
+	font-size: ${props => props.fontSize}px;
+	letter-spacing: ${props => props.letterSpacing}vw;
+	line-height: ${props => props.lineHeight};
+	transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
 `
 
 const useInterval = (callback, delay) => {
@@ -48,7 +53,7 @@ const useInterval = (callback, delay) => {
 
 const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
-	const { text, scrollSpeed, prompterObject } = props
+	const { segments, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
 	const topRef = useRef(null)
 	const bottomRef = useRef(null)
@@ -165,11 +170,7 @@ const TextScroller = props => {
 		<div className={styles.rootContainer}>
 			<Scroller
 				className={styles.scrollerContainer}
-				fontSize={String(prompterObject.fontSize * 50)}
-				lineHeight={prompterObject.lineHeight}
-				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
-				isFlipped={prompterObject.isFlipped}
 				ref={scrollerRef}
 			>
 				<div ref={topRef} />
@@ -179,7 +180,38 @@ const TextScroller = props => {
 					<p
 						ref={textRef}
 					>
-						{text}
+						{
+							segments.map(currSegment => (
+								currSegment.type === SEGMENT.toLowerCase() ? (
+									<Segment
+										segmentColor={currSegment.segmentColor}
+										className={styles.segment}
+										key={currSegment.id}
+									>
+										<div className={styles.segmentTitleContainer}>
+											<p>
+												{currSegment.segmentTitle}
+											</p>
+										</div>
+										<div className={styles.segmentTextContainer}>
+											<Text
+												fontSize={String(prompterObject.fontSize * 50)}
+												lineHeight={prompterObject.lineHeight}
+												letterSpacing={prompterObject.letterSpacing}
+												isFlipped={prompterObject.isFlipped}
+											>
+												{currSegment.segmentText}
+											</Text>
+										</div>
+										<div className={styles.segmentTitleContainer}>
+											<p>
+												{currSegment.segmentTitle}
+											</p>
+										</div>
+									</Segment>
+								) : undefined
+							))
+						}
 					</p>
 				</div>
 				<div ref={bottomRef} />
@@ -195,7 +227,11 @@ const TextScroller = props => {
 TextScroller.propTypes = {
 	prompterObject: PropTypes.objectOf(PropTypes.any).isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
-	text: PropTypes.string.isRequired,
+	segments: PropTypes.arrayOf(
+		PropTypes.objectOf(
+			PropTypes.any,
+		),
+	).isRequired,
 }
 
 export default TextScroller

@@ -216,7 +216,7 @@ const ActionSidebar = () => {
 							)}
 						/>
 						<Button
-							onClick={() => createPrompter()}
+							onClick={() => createPrompter(createLabelText)}
 							labelText={createLabelText === OPEN ? 'Open Propmter' : createLabelText}
 							buttonClass={classnames(
 								styles.playBtn,

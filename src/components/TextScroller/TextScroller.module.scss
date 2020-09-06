@@ -18,7 +18,23 @@
                 font-weight: 600;
                 white-space: pre-wrap;
             }
-        }
+				}
+				
+				.segment {
+					border-width: 2px;
+					border-style: solid;
+					border-radius: 20px;
+
+					.segmentTextContainer {
+						p {
+							padding: 10px 60px;
+						}
+					}
+
+					.segmentTitleContainer {
+						padding: 10px 60px;
+					}
+				}
     }
 }
 

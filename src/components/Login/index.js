@@ -6,8 +6,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import random from 'random'
-import shortid from 'shortid'
 import Icon from 'react-icons-kit'
 import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
@@ -15,7 +13,7 @@ import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
 import styled from 'styled-components'
 
-import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER, colors, SEGMENT } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
@@ -109,13 +107,7 @@ const Login = props => {
 	function handleLoad(selectedPrompter) {
 		dispatch(clearText())
 		Promise.all([
-			dispatch(setSegments([{
-				segmentTitle: 'Add new segment',
-				segmentText: selectedPrompter.text,
-				segmentColor: colors[random.int(0, colors.length - 1)],
-				id: shortid.generate(),
-				type: SEGMENT.toLowerCase(),
-			}])),
+			dispatch(setSegments(selectedPrompter.segments)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
 			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
