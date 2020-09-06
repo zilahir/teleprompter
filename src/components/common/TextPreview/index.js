@@ -5,6 +5,7 @@ import { useStore } from 'react-redux'
 import styled from 'styled-components'
 
 import styles from './TextPreview.module.scss'
+import { getFontFamily } from '../../../utils/getFontFamily'
 
 const Text = styled.div`
 	p {
@@ -12,6 +13,7 @@ const Text = styled.div`
 		line-height: ${props => props.lineHeight} !important;
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
+		font-family: ${props => props.fontFamily};
 	}
 `
 
@@ -22,6 +24,7 @@ const TextMirrored = styled.div`
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
 		transform: scaleY(-1);
+		font-family: ${props => props.fontFamily};
 	}
 `
 
@@ -59,6 +62,7 @@ const TextPreview = props => {
 	const [scrollWidth, setScrollWidth] = useState(null)
 	const [position, setPosition] = useState(0)
 	const [scrollerRefs, setScrollerRefs] = useState([])
+	const [fontFamily, setFontFamily] = useState()
 	const scrollSpeedValue = scrollSpeed * 10
 
 	const STEP = 5
@@ -69,10 +73,13 @@ const TextPreview = props => {
 		const ln = store.getState().text.lineHeight
 		const ls = store.getState().text.letterSpacing
 		const sw = store.getState().text.scrollWidth
+		const ff = store.getState().text.chosenFont
+
 		setFontSize(fs)
 		setLineHeight(ln)
 		setLetterSpacing(ls)
 		setScrollWidth(sw)
+		setFontFamily(ff)
 	}), [store, fontSize, text, scrollWidth])
 
 	useInterval(() => {
@@ -110,6 +117,7 @@ const TextPreview = props => {
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
+					fontFamily={getFontFamily(fontFamily)}
 				>
 					<div
 						className={styles.innerContainer}
@@ -130,6 +138,7 @@ const TextPreview = props => {
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
+					fontFamily={fontFamily}
 				>
 					<div
 						className={styles.innerContainer}
