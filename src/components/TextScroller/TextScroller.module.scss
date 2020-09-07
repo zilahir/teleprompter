@@ -23,6 +23,11 @@
 					border-width: 2px;
 					border-style: solid;
 					border-radius: 20px;
+					margin: 50px 0;
+
+					&:first-of-type {
+						margin: 0;
+					}
 
 					.segmentTextContainer {
 						p {
@@ -32,6 +37,10 @@
 
 					.segmentTitleContainer {
 						padding: 10px 60px;
+
+						p {
+							font-family: 'Barlow';
+						}
 					}
 				}
     }
