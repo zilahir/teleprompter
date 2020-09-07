@@ -2,6 +2,8 @@
 /* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
+import classnames from 'classnames'
+import { useSelector } from 'react-redux'
 import { useSocket } from '@zilahir/use-socket.io-client'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
@@ -65,6 +67,8 @@ const TextScroller = props => {
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
+	const chosenColorSchame = useSelector(state => state.misc.chosenColorScheme)
+
 	useInterval(() => {
 		setPosition(position + STEP)
 		scrollerRef.current.scroll({
@@ -167,9 +171,13 @@ const TextScroller = props => {
 			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
 	}
-	console.debug('scrollSpeed', scrollSpeed)
+
 	return (
-		<div className={styles.rootContainer}>
+		<div className={classnames(
+			styles.rootContainer,
+			styles[chosenColorSchame],
+		)}
+		>
 			<Scroller
 				className={styles.scrollerContainer}
 				scrollWidth={prompterObject.scrollWidth}
