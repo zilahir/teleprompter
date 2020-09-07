@@ -65,12 +65,12 @@ const reducer = (state = initialState, action) => {
 		}
 	case SET_FONT:
 		return {
-			...initialState,
+			...state,
 			chosenFont: action.payload.chosenFont,
 		}
 	case SET_TEXT_ALIGNMENT:
 		return {
-			...initialState,
+			...state,
 			textAlignment: action.payload.textAlignment,
 		}
 	default:
