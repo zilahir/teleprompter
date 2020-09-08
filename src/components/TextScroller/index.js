@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
+import { Waypoint } from 'react-waypoint'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import classnames from 'classnames'
 import { useSelector } from 'react-redux'
@@ -52,6 +51,7 @@ const useInterval = (callback, delay) => {
 				clearInterval(id)
 			}
 		}
+		return true
 	}, [delay])
 }
 
@@ -135,7 +135,6 @@ const TextScroller = props => {
 
 	useEffect(() => {
 		if (prompterObject.isFlipped) {
-			console.debug('flipped', true)
 			setTimeout(() => {
 				setStep(-5)
 				bottomRef.current.scrollIntoView({ behavior: 'auto' })
@@ -174,6 +173,10 @@ const TextScroller = props => {
 		} else if (key === PAGE_DOWN) {
 			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
+	}
+
+	function handlePause() {
+		setPlaying(false)
 	}
 
 	return (
@@ -224,7 +227,9 @@ const TextScroller = props => {
 											</p>
 										</div>
 									</Segment>
-								) : undefined
+								) : (
+									<Waypoint onEnter={() => handlePause()} />
+								)
 							))
 						}
 					</p>

@@ -45,6 +45,7 @@
     "react-scroll": "^1.7.9",
     "react-svg-morph": "^0.2.1",
     "react-toggle": "^4.1.1",
+    "react-waypoint": "^9.0.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
