@@ -107,7 +107,7 @@ const ActionSidebar = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const textPreview = store.getState().segments.segments[0].segmentText
+		const textPreview = store.getState().segments.segments.length ? store.getState().segments.segments[0].segmentText : ''
 		const sp = store.getState().text.scrollSpeed
 		const uBtn = store.getState().misc.showActiveBtn
 		toggleShowUpdateBtn(uBtn)
