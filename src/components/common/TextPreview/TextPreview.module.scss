@@ -2,6 +2,8 @@
 @import '../../../styles/mixins/heading';
 
 .textpreviewContainer {
+    color: #ffffff;
+
     .innerContainer {
         display: flex;
         justify-content: center;
@@ -23,7 +25,6 @@
             padding: 20px;
             @include heading;
             opacity: 0.9;
-            // transform: scaleY(-1);
             word-break: break-all;
             font-weight: 600;
         }
