@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Slider from 'rc-slider'
 import { useDispatch, shallowEqual, useStore } from 'react-redux'
 import 'rc-slider/assets/index.css'
@@ -14,11 +13,6 @@ import { toggleUpdateBtn } from '../../../store/actions/misc'
 * @author zilahir
 * @function SliderAlt
 * */
-
-const SliderContanier = styled.div`
-	width: 185px;
-	margin-bottom: 30px;
-`
 
 const SliderAlt = props => {
 	const { labelText, sliderName, initialValue, step, maxValue, minValue } = props
@@ -46,7 +40,9 @@ const SliderAlt = props => {
 	}
 
 	return (
-		<SliderContanier>
+		<div
+			className="sliderContainer"
+		>
 			<div className="top">
 				<p className="labelText">
 					{labelText}
@@ -66,7 +62,7 @@ const SliderAlt = props => {
 					min={minValue}
 				/>
 			</div>
-		</SliderContanier>
+		</div>
 	)
 }
 

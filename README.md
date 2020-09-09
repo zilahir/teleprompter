@@ -24,7 +24,7 @@ Prompter.me is a _free_, _open source_ teleprompter on the web. Using it doesn't
 
 The project's server side repository can be found [here](https://github.com/zilahir/teleprompter-server).
 
-The server is currently deployed to [`heroku`](https://heroku.com/). You can crate your own instane if you wish to have a _self-hosted_ version of prompter. Or anywhere else if you wish, you need a `node` environment, and a `MongoDB`.
+The server is currently deployed to `AWS – Lambda`. You can crate your own instane if you wish to have a _self-hosted_ version of prompter. Or anywhere else if you wish, you need a `node` environment, and a `MongoDB`.
 
 ## Contributors
 
@@ -49,9 +49,9 @@ This project heavily depends on the following `open source` projects.
 
 ## Developing
 
-Contribution is very welcome! You need to clone this, and the [server](https://github.com/zilahir/teleprompter-server) repository. 
+Contribution is very welcome! You need to clone this, and the [server](https://github.com/zilahir/teleprompter-server) repository.
 
-For the client: 
+For the client:
 
 1. `npm i`
 2. `npm run start`
@@ -69,7 +69,7 @@ This project is deployed via [netlify](https://netlify.com).
 
 Special thanks to [@munkacsimark](https://github.com/munkacsimark/) for helping me out with the scrolling function. :wave:
 
-[This](https://open.spotify.com/track/6ULAF7fV7JPQPPHz1aP3vc?si=M8ieNoCJR6Ob8JatZ8JEAA)  most liszened song during the development of [promoter.me](https://http://prompter.me/).
+[This](https://open.spotify.com/track/6ULAF7fV7JPQPPHz1aP3vc?si=M8ieNoCJR6Ob8JatZ8JEAA) is most listened song during the development of [promoter.me](https://http://prompter.me/).
 
 ## Licence
 

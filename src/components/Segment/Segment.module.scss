@@ -1,38 +1,96 @@
 @import '../../styles/variables';
-@import '../../styles/mixins/heading';
 @import '../../styles/mixins/paragraph';
 
-.segmentContainer {
-    padding: 25px;
+.oneSegment {
+	display: flex;
+	padding: 15px;
+	border-radius: 10px;
     border-width: 2px;
     border-style: solid;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    flex-direction: column;
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+    }
+
     .segmentHeader {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        .deleteIconContainer {
-            display: block;
-            background-color: $gray-4;
-            border-radius: 100%;
-            width: 16px;
-            height: 16px;
+        .segmentName {
+            border-radius: $border-radius;
+            margin: 0;
+            height: 30px;
             display: flex;
-            align-items: center;
-            padding: 3px;
-            div {
-                position: relative;
-                top: -1px;
+            flex: 1;
+            margin-right: 10px;
+
+            label {
+                height: 100%;
+                width: 100%;
+                input {
+                    @include paragraph(14px, #ffffff, 0.42px);
+                    width: 100%;
+                    background: rgba($color: $gray-2, $alpha: 1);
+                    padding: 10px;
+                }
             }
         }
-        h1 {
-            @include paragraph(15px);
+
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+            list-style-type: none;
             margin: 0;
+            padding: 0;
+            width: 70px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            
+            li {
+                display: flex;
+                align-items: center;
+
+                .segmentColorIndicator {
+                    width: 16px;
+                    height: 16px;
+                    display: block;
+                    border-radius: 100%;
+                    margin: 0 10px;
+                }
+
+                .deleteBtn {
+                    color: #ffffff;
+                    background: none;
+                    box-shadow: none;
+                    border: none;
+                    margin: 0;
+                    padding: 0;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
-    p {
-        @include paragraph(14px, #fff, 0.42px);
+
+    .segmentBody {
+        margin-top: 15px;
+
+        .segmentText {
+            @include paragraph(14px, #ffffff, 0.42px)
+            resize: none;
+            border: 0;
+            background: rgba($color: $gray-2, $alpha: 1);
+            width: calc(100% - 20px);
+            padding: 10px;
+            min-height: fit-content;
+            border-radius: $border-radius;
+
+            &:focus {
+                outline: none;
+            }
+        }
     }
 }

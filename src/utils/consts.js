@@ -1,3 +1,9 @@
+import React from 'react'
+import { ic_format_align_left as alignLeft } from 'react-icons-kit/md/ic_format_align_left'
+import { ic_format_align_right as alignRight } from 'react-icons-kit/md/ic_format_align_right'
+import { ic_format_align_center as alignCenter } from 'react-icons-kit/md/ic_format_align_center'
+import Icon from 'react-icons-kit'
+
 export const COLOR_DARK = 'COLOR_DARK'
 export const COLOR_LIGHT = 'COLOR_LIGHT'
 
@@ -70,6 +76,52 @@ export const REMOTE = 'remote'
 export const POLICY = 'policy'
 export const ABOUT = 'about'
 export const FORGOTTEN_PW = 'password'
-export const CREATE = 'CREATE'
+export const CREATE = 'Create Prompter'
 export const CREATED = 'CREATED'
 export const OPEN = 'OPEN'
+export const DARK_THEME = 'DARK'
+export const LIGHT_THEME = 'LIGHT'
+export const SANS = 'SANS'
+export const SERIF = 'SERIF'
+export const MONO = 'MONO'
+
+export const colorSchemeSettings = [
+	{ id: 0, label: `${DARK_THEME.toLowerCase()}` },
+	{ id: 1, label: `${LIGHT_THEME.toLowerCase()}` },
+]
+
+export const fontOptions = [
+	{ id: 0, label: `${SANS.toLowerCase()}` },
+	{ id: 1, label: `${SERIF.toLowerCase()}` },
+	{ id: 2, label: `${MONO.toLowerCase()}` },
+]
+
+export const colors = [
+	'#f44336',
+	'#e91e63',
+	'#9c27b0',
+	'#673ab7',
+	'#3f51b5',
+	'#2196f3',
+	'#03a9f4',
+	'#00bcd4',
+	'#009688',
+	'#4caf50',
+	'#8bc34a',
+	'#cddc39',
+	'#ffeb3b',
+	'#ffc107',
+	'#ff9800',
+	'#ff5722',
+	'#795548',
+	'#607d8b',
+]
+
+export const SEGMENT = 'SEGMENT'
+export const BREAK = 'BREAK'
+
+export const alignmentOptions = [
+	{ id: 0, label: <Icon icon={alignLeft} size="15px" /> },
+	{ id: 1, label: <Icon icon={alignCenter} size="15px" /> },
+	{ id: 2, label: <Icon icon={alignRight} size="15px" /> },
+]
