@@ -1,17 +1,19 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import shortid from 'shortid'
 import { Col } from 'react-grid-system'
+import random from 'random'
 import Icon from 'react-icons-kit'
-import { plus } from 'react-icons-kit/feather/plus'
+import { ic_library_add as addSegmentIcon } from 'react-icons-kit/md/ic_library_add'
+import { ic_playlist_add as addPauseIcon } from 'react-icons-kit/md/ic_playlist_add'
 import classnames from 'classnames'
 
-import { Colors, HELPER_TOP, INFOBOX_TOP } from '../../utils/consts'
-import ActionHeader from '../ActionHeader'
+import { HELPER_TOP, INFOBOX_TOP, colors, SEGMENT, BREAK } from '../../utils/consts'
 import TextEditor from '../TextEditor'
-import PropterIcon from '../common/Icon'
 import styles from './Preview.module.scss'
 import Instruction from '../common/Instruction'
+import { addSegment } from '../../store/actions/segments'
 
 /**
 * @author zilahir
@@ -21,13 +23,23 @@ import Instruction from '../common/Instruction'
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
 	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
+	const dispatch = useDispatch()
+
+	function handleNewSegment(type) {
+		dispatch(addSegment({
+			segmentTitle: 'Add segment name',
+			segmentText: '',
+			segmentColor: colors[random.int(0, colors.length - 1)],
+			id: shortid.generate(),
+			type: type.toLowerCase(),
+		}))
+	}
 	return (
 		<>
 			<Col
 				lg={6}
 				className={styles.previewRoot}
 			>
-				<ActionHeader />
 				<div className={styles.innerContainer}>
 					<div className={styles.previewContainer}>
 						{
@@ -62,44 +74,39 @@ const Preview = () => {
 								Segments
 							</button>
 						</div>
-						{
-							activeButton === 2
-								? (
-									<div className={styles.innerContainer}>
-										<div className={styles.segmentsHeader}>
-											<button
-												type="button"
-												onClick={() => null}
-												className={styles.button}
-											>
-												<div className={styles.addIconContainer}>
-													<PropterIcon
-														color={Colors.gray4}
-														icon={
-															<Icon siz="1em" icon={plus} />
-														}
-													/>
-												</div>
-												<p>
-													Add segment
-												</p>
-											</button>
-											<button
-												type="button"
-												className={styles.button}
-												onClick={() => null}
-											>
-												Clear all
-											</button>
-										</div>
+						<div className={styles.innerContainer}>
+							<div className={styles.segmentsHeader}>
+								<button
+									type="button"
+									onClick={() => handleNewSegment(SEGMENT)}
+									className={styles.button}
+								>
+									<div className={styles.addPrompterIcon}>
+										<Icon
+											icon={addSegmentIcon}
+										/>
 									</div>
-								)
-								: activeButton === 1
-									? (
-										<TextEditor />
-									)
-									: null
-						}
+									<p>
+										Add segment
+									</p>
+								</button>
+								<button
+									type="button"
+									onClick={() => handleNewSegment(BREAK)}
+									className={styles.button}
+								>
+									<div className={styles.addPrompterIcon}>
+										<Icon
+											icon={addPauseIcon}
+										/>
+									</div>
+									<p>
+										Add pause
+									</p>
+								</button>
+							</div>
+							<TextEditor />
+						</div>
 					</div>
 				</div>
 			</Col>

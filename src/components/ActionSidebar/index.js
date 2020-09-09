@@ -6,13 +6,15 @@ import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { ic_refresh as refreshIcon } from 'react-icons-kit/md/ic_refresh'
+import { ic_open_in_new as openIcon } from 'react-icons-kit/md/ic_open_in_new'
+import { magic as createIcon } from 'react-icons-kit/fa/magic'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { HELPER_SIDEBAR, LINK, INFOBOX_SIDEBAR, CREATE, OPEN } from '../../utils/consts'
-import Instruction from '../common/Instruction'
+import { LINK, CREATE, OPEN } from '../../utils/consts'
 import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 import { toggleUpdateBtn } from '../../store/actions/misc'
@@ -21,7 +23,6 @@ import { toggleUpdateBtn } from '../../store/actions/misc'
 * @author zilahir
 * @function ActionSidebar
 * */
-
 
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -53,10 +54,11 @@ const ActionSidebar = () => {
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
+		const { segments } = store.getState().segments
 		const slug = store.getState().userPrompters.prompterSlug
 		const saveObject = {
 			slug,
-			text: newPrompterObject.text,
+			segments,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -65,6 +67,8 @@ const ActionSidebar = () => {
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
 				isFlipped: newPrompterObject.isFlipped,
+				textAlignment: newPrompterObject.textAlignment,
+				chosenFont: newPrompterObject.chosenFont,
 			},
 		}
 		Promise.all([
@@ -103,7 +107,7 @@ const ActionSidebar = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const t = store.getState().text.text
+		const textPreview = store.getState().segments.segments.length ? store.getState().segments.segments[0].segmentText : ''
 		const sp = store.getState().text.scrollSpeed
 		const uBtn = store.getState().misc.showActiveBtn
 		toggleShowUpdateBtn(uBtn)
@@ -114,7 +118,7 @@ const ActionSidebar = () => {
 			setRemoteAddress(`prompter.me/remote/${slug}`)
 		}
 		setScrollSpeed(sp)
-		setText(t)
+		setText(textPreview)
 	}), [store, text, scrollSpeed, prompterSlug])
 
 	function testAnimation() {
@@ -202,33 +206,26 @@ const ActionSidebar = () => {
 							</div>
 						</CopyToClipboard>
 					</Input>
-					<Instruction
-						text={HELPER_SIDEBAR}
-						hasPadding={false}
-						maxWidth={250}
-						type={INFOBOX_SIDEBAR}
-						noHide
-					/>
-					<p className={styles.about}>
-						<a href="/about">About Prompter.me</a>
-					</p>
 					<div className={styles.playButtonContainer}>
-						{
-							showUpdateBtn
-								? (
-									<Button
-										onClick={() => updatePrompter()}
-										labelText="Update"
-										buttonClass={styles.updateBtn}
-										isNegative
-									/>
-								)
-								: null
-						}
+						<Button
+							onClick={() => updatePrompter()}
+							labelText="Send Updates"
+							buttonClass={styles.updateBtn}
+							isNegative
+							isVisible={showUpdateBtn}
+							icon={(
+								<Icon size="1.5em" icon={refreshIcon} />
+							)}
+						/>
 						<Button
 							onClick={() => createPrompter(createLabelText)}
-							labelText={createLabelText}
-							buttonClass={styles.playBtn}
+							labelText={createLabelText === OPEN ? 'Open Propmter' : createLabelText}
+							buttonClass={classnames(
+								styles.playBtn,
+							)}
+							icon={(
+								<Icon icon={createLabelText === OPEN ? openIcon : createIcon} size="1.5em" />
+							)}
 						/>
 					</div>
 				</div>
