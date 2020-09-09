@@ -11,6 +11,7 @@ import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../
 import { clearText, toggleMirror } from '../../store/actions/text'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import Footer from '../Footer'
+import ActionHeader from '../ActionHeader'
 
 /**
 * @author zilahir
@@ -36,6 +37,7 @@ const Main = () => {
 	return (
 		<>
 			<div className={styles.mainContainer}>
+				<ActionHeader />
 				<Container
 					fluid
 				>

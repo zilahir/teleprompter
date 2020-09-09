@@ -25,7 +25,7 @@ const Button = props => {
 	return (
 		<>
 			{
-				type === BUTTON
+				type === BUTTON && isVisible
 					? (
 						<div className={classnames(
 							styles.buttonContainer,

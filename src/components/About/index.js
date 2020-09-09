@@ -64,9 +64,9 @@ const About = () => {
 								How to use Prompter.me?
 							</h1>
 							<p>
-							Prompter.me consists of three main parts: The Editor, which is the front page
-							view when you go to prompter.me, the Prompter, which is the text scroller itself,
-							and the Remote, which is a mobile remote controller.
+								Prompter.me consists of three main parts: The Editor, which is the front page
+								view when you go to prompter.me, the Prompter, which is the text scroller itself,
+								and the Remote, which is a mobile remote controller.
 							</p>
 							<p>
 								In the Editor view, you can enter and edit your script in the text field in
