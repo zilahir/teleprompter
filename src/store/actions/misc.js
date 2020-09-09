@@ -1,4 +1,4 @@
-import { TOGGLE_UPDATE_BTN, HIDE_INSTRUCTION } from './actionTypes'
+import { TOGGLE_UPDATE_BTN, HIDE_INSTRUCTION, SET_COLOR_SCHEME } from './actionTypes'
 
 export const toggleUpdateBtn = boolean => dispatch => new Promise(resolve => {
 	dispatch({
@@ -22,3 +22,12 @@ export const hideInstruction = (whichInstruction, boolean) => dispatch => new Pr
 		success: true,
 	})
 })
+
+export const setColorScheme = chosenColorScheme => dispatch => {
+	dispatch({
+		type: SET_COLOR_SCHEME,
+		payload: {
+			chosenColorScheme,
+		},
+	})
+}
