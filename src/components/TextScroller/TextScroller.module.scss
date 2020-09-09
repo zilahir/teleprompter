@@ -1,10 +1,10 @@
+@import '../../styles/variables';
 @import '../../styles/mixins/hideScrollbar';
 
 .rootContainer  {
     background-color: rgba($color: #000000, $alpha: 1.0);
 
     .scrollerContainer {
-        font-family: 'Barlow';
         overflow-wrap: break-word;
         margin-left: auto;
         margin-right: auto;
@@ -18,8 +18,43 @@
                 font-weight: 600;
                 white-space: pre-wrap;
             }
-        }
-    }
+				}
+				
+				.segment {
+					border-width: 2px;
+					border-style: solid;
+					border-radius: 20px;
+					margin: 50px 0;
+
+					&:first-of-type {
+						margin: 0;
+					}
+
+					.segmentTextContainer {
+						p {
+							padding: 10px 60px;
+						}
+					}
+
+					.segmentTitleContainer {
+						padding: 10px 60px;
+
+						p {
+							font-family: 'Barlow';
+						}
+					}
+				}
+		}
+		
+		&.light {
+			background: rgba($color: #ffffff, $alpha: 1);
+			color: #000000;
+		}
+
+		&.dark {
+			background: rgba($color: #000000, $alpha: 1);
+			color: #ffffff;
+		}
 }
 
 @include hideScrollBar('scrollerContainer')

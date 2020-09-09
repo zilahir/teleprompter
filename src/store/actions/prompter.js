@@ -46,7 +46,6 @@ export const setPrompterSlug = prompterSlug => dispatch => new Promise(resolve =
 	resolve(prompterSlug)
 })
 
-
 export const setPrompterProjectName = projectName => dispatch => new Promise(resolve => {
 	dispatch({
 		type: SET_PROJECT_NAME,

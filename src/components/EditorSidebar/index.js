@@ -6,12 +6,12 @@ import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import Logo from '../common/Logo'
-import { scrollWidthSettngs } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings, fontOptions, alignmentOptions } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
-import { toggleMirror } from '../../store/actions/text'
+import { toggleMirror, setScrollWidth, setFont, setTextAlignment } from '../../store/actions/text'
+import { setColorScheme } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -30,6 +30,52 @@ const EditorSidebar = () => {
 	const scrollSpeed = useSelector(state => state.text.scrollSpeed)
 	const flipped = useSelector(state => state.text.isFlipped)
 
+	const scrollWidth = useSelector(state => state.text.scrollWidth)
+	const activeScrollId = scrollWidthSettngs.find(curr => (
+		curr.label === scrollWidth
+	))
+
+	const colorScheme = useSelector(state => state.misc.chosenColorScheme)
+	const activeColorScheme = colorSchemeSettings.find(currColorScheme => (
+		currColorScheme.label === colorScheme.toLowerCase()
+	))
+
+	const selectedFont = useSelector(state => state.text.chosenFont)
+	const activeFont = fontOptions.find(currentFont => (
+		currentFont.label === selectedFont.toLowerCase()
+	))
+
+	const selectedAlignment = useSelector(state => state.text.textAlignment)
+	const activeAlignment = alignmentOptions.find(curentAlignment => (
+		curentAlignment.id === selectedAlignment
+	))
+
+	function handleScrollWidthChange(chosenScrollWidthId) {
+		const chosenValue = scrollWidthSettngs.find(item => (
+			item.id === chosenScrollWidthId
+		))
+
+		dispatch(setScrollWidth(chosenValue.label))
+	}
+
+	function handleColorSchemeChange(chosenColorSchemeId) {
+		const thisColorScheme = colorSchemeSettings.find(
+			currentColorScheme => currentColorScheme.id === chosenColorSchemeId,
+		)
+		dispatch(setColorScheme(thisColorScheme.label))
+	}
+
+	function handleFontChange(chosenFontId) {
+		const thisChosenFont = fontOptions.find(
+			currentFont => currentFont.id === chosenFontId,
+		)
+		dispatch(setFont(thisChosenFont.label))
+	}
+
+	function handleAlignmentChange(chosenAlignmentId) {
+		dispatch(setTextAlignment(chosenAlignmentId))
+	}
+
 	return (
 		<>
 			<Col
@@ -37,7 +83,6 @@ const EditorSidebar = () => {
 				className={styles.editorSidebarContainer}
 			>
 				<div className={styles.innerContainer}>
-					<Logo />
 					<SliderAlt
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
@@ -63,9 +108,13 @@ const EditorSidebar = () => {
 					/>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>
-								Scroll width
+							Scroll width
 						</p>
-						<Selector items={scrollWidthSettngs} />
+						<Selector
+							items={scrollWidthSettngs}
+							activeId={activeScrollId.id}
+							onClick={id => handleScrollWidthChange(id)}
+						/>
 					</div>
 					<SliderAlt
 						labelText="Scroll speed"
@@ -74,6 +123,36 @@ const EditorSidebar = () => {
 						maxValue={10}
 						step={1}
 					/>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Color Scheme
+						</p>
+						<Selector
+							items={colorSchemeSettings}
+							activeId={activeColorScheme.id}
+							onClick={id => handleColorSchemeChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Font
+						</p>
+						<Selector
+							items={fontOptions}
+							activeId={activeFont.id}
+							onClick={id => handleFontChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Alignment
+						</p>
+						<Selector
+							items={alignmentOptions}
+							activeId={activeAlignment.id}
+							onClick={id => handleAlignmentChange(id)}
+						/>
+					</div>
 					<div className="toggleWrapper">
 						<p>
 							Flip for reflection
