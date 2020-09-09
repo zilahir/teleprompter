@@ -1,6 +1,5 @@
-/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import shortid from 'shortid'
 import { Col } from 'react-grid-system'
 import random from 'random'
@@ -9,10 +8,9 @@ import { ic_library_add as addSegmentIcon } from 'react-icons-kit/md/ic_library_
 import { ic_playlist_add as addPauseIcon } from 'react-icons-kit/md/ic_playlist_add'
 import classnames from 'classnames'
 
-import { HELPER_TOP, INFOBOX_TOP, colors, SEGMENT, BREAK } from '../../utils/consts'
+import { colors, SEGMENT, BREAK } from '../../utils/consts'
 import TextEditor from '../TextEditor'
 import styles from './Preview.module.scss'
-import Instruction from '../common/Instruction'
 import { addSegment } from '../../store/actions/segments'
 
 /**
@@ -22,7 +20,6 @@ import { addSegment } from '../../store/actions/segments'
 
 const Preview = () => {
 	const [activeButton, setActiveButton] = useState(1)
-	const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 	const dispatch = useDispatch()
 
 	function handleNewSegment(type) {
@@ -42,16 +39,6 @@ const Preview = () => {
 			>
 				<div className={styles.innerContainer}>
 					<div className={styles.previewContainer}>
-						{
-							isGuideVisible
-								? (
-									<Instruction
-										text={HELPER_TOP}
-										type={INFOBOX_TOP}
-									/>
-								)
-								: null
-						}
 						<div className={styles.tabContainer}>
 							<button
 								className={classnames(
