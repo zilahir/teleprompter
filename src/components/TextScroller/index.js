@@ -1,29 +1,37 @@
-/* eslint-disable no-console */
-/* eslint-disable consistent-return */
 import React, { useRef, useState, useEffect } from 'react'
+import { Waypoint } from 'react-waypoint'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
+import classnames from 'classnames'
+import { useSelector } from 'react-redux'
 import { useSocket } from '@zilahir/use-socket.io-client'
+import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
+import { getFontFamily } from '../../utils/getFontFamily'
 
 /**
 * @author zilahir
 * @function TextScroller
 * */
 
+const Segment = styled.div`
+	border-color: ${props => props.segmentColor};
+`
+
 const Scroller = styled.div`
 	max-width: ${props => props.scrollWidth};
-	p {
-		font-size: ${props => props.fontSize}px;
-		letter-spacing: ${props => props.letterSpacing}vw;
-		line-height: ${props => props.lineHeight};
-		transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
-	}
+`
+
+const Text = styled.p`
+	font-size: ${props => props.fontSize}px;
+	letter-spacing: ${props => props.letterSpacing}vw;
+	line-height: ${props => props.lineHeight};
+	transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
+	font-family: ${props => props.fontFamily};
 `
 
 const useInterval = (callback, delay) => {
@@ -43,28 +51,29 @@ const useInterval = (callback, delay) => {
 				clearInterval(id)
 			}
 		}
+		return true
 	}, [delay])
 }
 
-
-// const STEP = 5
-
 const TextScroller = props => {
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
-	const { text, scrollSpeed, prompterObject } = props
+	const { segments, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
 	const topRef = useRef(null)
 	const bottomRef = useRef(null)
 	const [playing, setPlaying] = useState(false)
 	const [position, setPosition] = useState(0)
-	const [STEP, setStep] = useState(5)
+	const [STEP, setStep] = useState(1)
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
+	const chosenColorSchame = useSelector(state => state.misc.chosenColorScheme)
+
 	useInterval(() => {
 		setPosition(position + STEP)
 		scrollerRef.current.scroll({
 			top: position,
+			behavior: 'smooth',
 		})
 	}, playing ? scrollSpeedValue : null)
 
@@ -99,7 +108,10 @@ const TextScroller = props => {
 	}
 
 	useEffect(() => {
-		scrollerRef.current.scroll({ top: position })
+		scrollerRef.current.scroll({
+			top: position,
+			behavior: 'smooth',
+		})
 	}, [position])
 
 	useEffect(() => {
@@ -123,7 +135,6 @@ const TextScroller = props => {
 
 	useEffect(() => {
 		if (prompterObject.isFlipped) {
-			console.debug('flipped', true)
 			setTimeout(() => {
 				setStep(-5)
 				bottomRef.current.scrollIntoView({ behavior: 'auto' })
@@ -163,15 +174,20 @@ const TextScroller = props => {
 			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
 	}
+
+	function handlePause() {
+		setPlaying(false)
+	}
+
 	return (
-		<div className={styles.rootContainer}>
+		<div className={classnames(
+			styles.rootContainer,
+			styles[chosenColorSchame],
+		)}
+		>
 			<Scroller
 				className={styles.scrollerContainer}
-				fontSize={String(prompterObject.fontSize * 30)}
-				lineHeight={prompterObject.lineHeight}
-				letterSpacing={prompterObject.letterSpacing}
 				scrollWidth={prompterObject.scrollWidth}
-				isFlipped={prompterObject.isFlipped}
 				ref={scrollerRef}
 			>
 				<div ref={topRef} />
@@ -181,7 +197,41 @@ const TextScroller = props => {
 					<p
 						ref={textRef}
 					>
-						{text}
+						{
+							segments.map(currSegment => (
+								currSegment.type === SEGMENT.toLowerCase() ? (
+									<Segment
+										segmentColor={currSegment.segmentColor}
+										className={styles.segment}
+										key={currSegment.id}
+									>
+										<div className={styles.segmentTitleContainer}>
+											<p>
+												{currSegment.segmentTitle}
+											</p>
+										</div>
+										<div className={styles.segmentTextContainer}>
+											<Text
+												fontSize={String(prompterObject.fontSize * 50)}
+												lineHeight={prompterObject.lineHeight}
+												letterSpacing={prompterObject.letterSpacing}
+												isFlipped={prompterObject.isFlipped}
+												fontFamily={getFontFamily(prompterObject.chosenFont)}
+											>
+												{currSegment.segmentText}
+											</Text>
+										</div>
+										<div className={styles.segmentTitleContainer}>
+											<p>
+												{currSegment.segmentTitle}
+											</p>
+										</div>
+									</Segment>
+								) : (
+									<Waypoint onEnter={() => handlePause()} />
+								)
+							))
+						}
 					</p>
 				</div>
 				<div ref={bottomRef} />
@@ -197,7 +247,11 @@ const TextScroller = props => {
 TextScroller.propTypes = {
 	prompterObject: PropTypes.objectOf(PropTypes.any).isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
-	text: PropTypes.string.isRequired,
+	segments: PropTypes.arrayOf(
+		PropTypes.objectOf(
+			PropTypes.any,
+		),
+	).isRequired,
 }
 
 export default TextScroller

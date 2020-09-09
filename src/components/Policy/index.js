@@ -1,9 +1,11 @@
 import React from 'react'
 import { Row, Container, Col } from 'react-grid-system'
+import ReactGA from 'react-ga'
 import { useHistory } from 'react-router-dom'
 
 import styles from './Policy.module.scss'
 import Button from '../common/Button'
+import { POLICY } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -11,6 +13,7 @@ import Button from '../common/Button'
 * */
 
 const Policy = () => {
+	ReactGA.pageview(`${POLICY}`)
 	const history = useHistory()
 	return (
 		<div className={styles.aboutWrapper}>
@@ -104,12 +107,13 @@ const Policy = () => {
 								tracking users&apos; movement on the website, and gathering demographic information.
 							</p>
 							<p>
-							Cookies and Web Beacons Like any other website, Prompter.me uses &apos;cookies&apos;.
-							These cookies are used to store information including visitors&apos; preferences,
-							and the pages on the website that the visitor accessed or visited.
-							The information is used to optimize the users&apos; experience by
-							customizing our web page content based on visitors&apos;
-							browser type and/or other information.
+								Cookies and Web Beacons Like any other website,
+								Prompter.me uses &apos;cookies&apos;.
+								These cookies are used to store information including visitors&apos; preferences,
+								and the pages on the website that the visitor accessed or visited.
+								The information is used to optimize the users&apos; experience by
+								customizing our web page content based on visitors&apos;
+								browser type and/or other information.
 							</p>
 							<p>
 								Third Party Privacy Policies Prompter.me&apos;s Privacy Policy does not apply

@@ -64,3 +64,22 @@ export const createNewUser = newUserObject => new Promise(resolve => {
 			resolve(resp.data)
 		})
 })
+
+export const checkPassword = userObject => new Promise(resolve => {
+	axios.post(apiEndpoints.checkPassword, JSON.stringify(userObject), {
+		headers,
+	})
+		.then(resp => {
+			resolve(resp.data)
+		})
+})
+
+export const deleteAccount = (userId, authToken) => new Promise(resolve => {
+	axios.defaults.headers.common.authorization = `Bearer ${authToken}`
+	axios.delete(`${apiEndpoints.deleteUser}/${userId}`, {
+		headers,
+	})
+		.then(res => {
+			resolve(res.data)
+		})
+})

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Slider from 'rc-slider'
 import { useDispatch, shallowEqual, useStore } from 'react-redux'
 import 'rc-slider/assets/index.css'
@@ -15,14 +14,9 @@ import { toggleUpdateBtn } from '../../../store/actions/misc'
 * @function SliderAlt
 * */
 
-const SliderContanier = styled.div`
-	width: 185px;
-	margin-bottom: 30px;
-`
-
 const SliderAlt = props => {
 	const { labelText, sliderName, initialValue, step, maxValue, minValue } = props
-	const [value, setValue] = useState(initialValue)
+
 	const dispatch = useDispatch()
 	const store = useStore()
 	function handleValeChange(v) {
@@ -35,7 +29,6 @@ const SliderAlt = props => {
 		} else if (sliderName === SET_SCROLL_SPEED) {
 			dispatch(setScrollSpeed(v))
 		}
-		setValue(v)
 		if (store.getState().userPrompters.prompterObject) {
 			const result = shallowEqual(
 				store.getState().text, store.getState().userPrompters.prompterObject,
@@ -45,20 +38,23 @@ const SliderAlt = props => {
 			}
 		}
 	}
+
 	return (
-		<SliderContanier>
+		<div
+			className="sliderContainer"
+		>
 			<div className="top">
 				<p className="labelText">
 					{labelText}
 				</p>
 				<p className="sliderValue">
-					{value}
+					{initialValue}
 				</p>
 			</div>
 			<div className="sliderInner">
 				<Slider
 					className="slider"
-					value={value}
+					value={initialValue}
 					onChange={val => handleValeChange(val)}
 					name={sliderName}
 					step={step}
@@ -66,7 +62,7 @@ const SliderAlt = props => {
 					min={minValue}
 				/>
 			</div>
-		</SliderContanier>
+		</div>
 	)
 }
 

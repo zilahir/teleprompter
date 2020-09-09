@@ -2,21 +2,23 @@
 @import '../../styles/mixins/label';
 
 .editorSidebarContainer {
-    height: 100vh;
     background-color: $gray-2;
     padding-top: 40px;
+
     .innerContainer {
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
         margin-right: 45px;
         flex-direction: column;
+
         .selectorContainer {
             position: relative;
             left: -10px;
             margin: 0px -10px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             margin-top: 10px;
+
             .widthLabel {
                 margin-top: 0;
                 @include labelText;

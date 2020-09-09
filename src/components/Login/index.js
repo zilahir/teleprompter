@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
@@ -11,32 +11,37 @@ import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
+import styled from 'styled-components'
 
-import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE } from '../../utils/consts'
+import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, toggleMirror, setFont, setTextAlignment } from '../../store/actions/text'
 import Modal from '../common/Modal'
-import { apiEndpoints } from '../../utils/apiEndpoints'
+import ForgottenPasswordModal from '../ForgottenPasswordModal'
+import { setSegments } from '../../store/actions/segments'
 
 /**
 * @author zilahir
 * @function Login
 * */
 
+const BoxContainer = styled.div`
+	left: ${props => props.left}px;
+`
+
 const Login = props => {
-	const { type, isVisible, requestClose } = props
+	const { type, isVisible, requestClose, leftPosition } = props
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
 	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
 	const [chosenPassword, setChosenPassword] = useState(null)
-	const [confirmedPassowrd, setConfirmedPassword] = useState(null)
 	const [passwordMismatch, togglePasswordMismatch] = useState(null)
 	const [email, setEmail] = useState(null)
 	const [password, setPassword] = useState(null)
@@ -46,6 +51,9 @@ const Login = props => {
 	const [isRegistered, setIsRegistered] = useState(false)
 	const [isModalOpen, toggleModalOpen] = useState(false)
 	const [delProject, setProjectToDel] = useState(null)
+	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
+	const [username, setUsername] = useState(null)
+
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
@@ -62,13 +70,14 @@ const Login = props => {
 	}
 
 	function handleSave() {
+		const slug = store.getState().userPrompters.prompterSlug
+		const { segments } = store.getState().segments
 		toggleSavingLoader(true)
 		const newPrompterObject = store.getState().text
 		const { user } = store.getState().user
-		const slug = store.getState().userPrompters.prompterSlug
 		const saveObject = {
 			slug,
-			text: newPrompterObject.text,
+			segments,
 			userId: user.userId,
 			projectName,
 			meta: {
@@ -98,14 +107,16 @@ const Login = props => {
 	function handleLoad(selectedPrompter) {
 		dispatch(clearText())
 		Promise.all([
-			dispatch(setText(selectedPrompter.text)),
+			dispatch(setSegments(selectedPrompter.segments)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
-			dispatch(setFontSize(selectedPrompter.meta.fontSite)),
+			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
-			dispatch(setLetterSpacing(selectedPrompter.meta.letterPacing)),
+			dispatch(setFont(selectedPrompter.meta.chosenFont)),
+			dispatch(setTextAlignment(selectedPrompter.meta.setTextAlignment)),
+			dispatch(setLetterSpacing(selectedPrompter.meta.letterSpacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
-			dispatch(setPrompterSlug(selectedPrompter.id)),
+			dispatch(setPrompterSlug(selectedPrompter.slug)),
 			dispatch(toggleMirror(selectedPrompter.meta.isFlipped)),
 		]).then(() => {
 			requestClose()
@@ -131,7 +142,6 @@ const Login = props => {
 	}
 
 	function handlePasswordConfirmation(pw) {
-		setConfirmedPassword(pw)
 		if (pw !== chosenPassword) {
 			togglePasswordMismatch(true)
 		} else {
@@ -144,6 +154,7 @@ const Login = props => {
 		const newUserObject = {
 			email: chosenEmail,
 			password: chosenPassword,
+			username,
 		}
 		Promise.all([
 			createNewUser(newUserObject),
@@ -177,10 +188,12 @@ const Login = props => {
 			{
 				type === LOGIN
 					? (
-						<div className={classnames(
-							styles.loginBoxContainer,
-							isVisible ? styles.show : styles.hidden,
-						)}
+						<BoxContainer
+							className={classnames(
+								styles.loginBoxContainer,
+								isVisible ? styles.show : styles.hidden,
+							)}
+							left={leftPosition}
 						>
 							<Input
 								placeholder="Email"
@@ -191,6 +204,8 @@ const Login = props => {
 								placeholder="Password"
 								inputClassName={styles.loginInput}
 								getBackValue={v => setPassword(v)}
+								hasKeyDownEvent
+								keyDownEvent={e => (e.toLowerCase() === ENTER ? handleLogin() : null)}
 								inputType={PASSWORD}
 							/>
 							<Button
@@ -198,6 +213,17 @@ const Login = props => {
 								onClick={() => handleLogin()}
 								buttonClass={styles.loginBtn}
 							/>
+							<div
+								className={styles.forgottenContainer}
+								role="button"
+								onKeyDown={null}
+								tabIndex={-1}
+								onClick={() => toggleForgottenPasswordModal(true)}
+							>
+								<p>
+									I forgot my password!
+								</p>
+							</div>
 							<div className={classnames(
 								styles.errorContainer,
 								!isLoginError ? styles.hidden : null,
@@ -207,16 +233,18 @@ const Login = props => {
 									Invalid email or password. Try again.
 								</p>
 							</div>
-						</div>
+						</BoxContainer>
 					)
 					: type === REGISTER
 						? (
-							<div className={classnames(
-								styles.loginBoxContainer,
-								styles.regContainer,
-								isVisible ? styles.show : styles.hidden,
-								isRegistering || isRegistered ? styles.registering : null,
-							)}
+							<BoxContainer
+								className={classnames(
+									styles.loginBoxContainer,
+									styles.regContainer,
+									isVisible ? styles.show : styles.hidden,
+									isRegistering || isRegistered ? styles.registering : null,
+								)}
+								left={leftPosition}
 							>
 								{
 									isRegistering || isRegistered
@@ -232,7 +260,7 @@ const Login = props => {
 													getBackValue={v => setChosenEmail(v)}
 												/>
 												<Input
-													placeholder="Password  (requited min 8 chars)"
+													placeholder="Password  (required min 8 chars)"
 													inputClassName={styles.loginInput}
 													inputType={PASSWORD}
 													getBackValue={v => setChosenPassword(v)}
@@ -245,7 +273,11 @@ const Login = props => {
 													inputType={PASSWORD}
 													getBackValue={v => handlePasswordConfirmation(v)}
 												/>
-
+												<Input
+													placeholder="Username (optional)"
+													inputClassName={styles.loginInput}
+													getBackValue={v => setUsername(v)}
+												/>
 												<div className={classnames(
 													styles.errorContainer,
 													!passwordMismatch ? styles.hidden : null,
@@ -273,14 +305,16 @@ const Login = props => {
 											</>
 										)
 								}
-							</div>
+							</BoxContainer>
 						) : type === LOAD
 							? (
-								<div className={classnames(
-									styles.loginBoxContainer,
-									styles.itemBoxContainer,
-									isVisible ? styles.show : styles.hidden,
-								)}
+								<BoxContainer
+									className={classnames(
+										styles.loginBoxContainer,
+										styles.itemBoxContainer,
+										isVisible ? styles.show : styles.hidden,
+									)}
+									left={leftPosition}
 								>
 									<ul className={styles.savedItems}>
 										{
@@ -315,15 +349,17 @@ const Login = props => {
 											))
 										}
 									</ul>
-								</div>
+								</BoxContainer>
 							) : type === SAVE
 								? (
-									<div className={classnames(
-										styles.loginBoxContainer,
-										styles.itemBoxContainer,
-										styles.saveContainer,
-										isVisible ? styles.show : styles.hidden,
-									)}
+									<BoxContainer
+										className={classnames(
+											styles.loginBoxContainer,
+											styles.itemBoxContainer,
+											styles.saveContainer,
+											isVisible ? styles.show : styles.hidden,
+										)}
+										left={leftPosition}
 									>
 										{
 											isSaving || isSaved
@@ -358,7 +394,7 @@ const Login = props => {
 													</>
 												)
 										}
-									</div>
+									</BoxContainer>
 								)
 								: null
 			}
@@ -390,16 +426,22 @@ const Login = props => {
 					/>
 				</div>
 			</Modal>
+			<ForgottenPasswordModal
+				showPasswordModal={showPasswordModal}
+				requestClose={() => toggleForgottenPasswordModal(false)}
+			/>
 		</>
 	)
 }
 
 Login.defaultProps = {
+	leftPosition: 0,
 	requestClose: null,
 }
 
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
+	leftPosition: PropTypes.number,
 	requestClose: PropTypes.func,
 	type: PropTypes.string.isRequired,
 }

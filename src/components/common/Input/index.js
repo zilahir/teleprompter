@@ -20,6 +20,9 @@ const Input = props => {
 		getBackValue,
 		placeholder,
 		children,
+		hasKeyDownEvent,
+		keyDownEvent,
+		onFocusOut,
 	} = props
 	const [value, setValue] = useState(null)
 
@@ -36,12 +39,16 @@ const Input = props => {
 		)}
 		>
 			<label className={styles.label}>
-				<span className={styles.labelText}>
-					{labelText}
-					{
-						children && children
-					}
-				</span>
+				{
+					labelText && (
+						<span className={styles.labelText}>
+							{labelText}
+							{
+								children && children
+							}
+						</span>
+					)
+				}
 				<input
 					className={styles.input}
 					type={inputType.toLowerCase()}
@@ -49,6 +56,8 @@ const Input = props => {
 					value={value || inheritedValue}
 					disabled={isDisabled}
 					placeholder={placeholder}
+					onKeyDown={e => (hasKeyDownEvent ? keyDownEvent(e.key) : null)}
+					onBlur={onFocusOut}
 				/>
 			</label>
 		</div>
@@ -58,22 +67,28 @@ const Input = props => {
 Input.defaultProps = {
 	children: null,
 	getBackValue: null,
+	hasKeyDownEvent: false,
 	inheritedValue: '',
 	inputClassName: null,
 	inputType: 'text',
 	isDisabled: false,
+	keyDownEvent: null,
 	labelText: '',
+	onFocusOut: () => {},
 	placeholder: '',
 }
 
 Input.propTypes = {
 	children: PropTypes.node,
 	getBackValue: PropTypes.func,
+	hasKeyDownEvent: PropTypes.bool,
 	inheritedValue: PropTypes.string,
 	inputClassName: PropTypes.string,
 	inputType: PropTypes.string,
 	isDisabled: PropTypes.bool,
+	keyDownEvent: PropTypes.func,
 	labelText: PropTypes.string,
+	onFocusOut: PropTypes.func,
 	placeholder: PropTypes.string,
 }
 

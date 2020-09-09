@@ -14,10 +14,15 @@
 
     span {
         margin-left: 4px;
+        color: #ffffff;
         &:hover {
             color: $purple;
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
         }
     }
 

@@ -7,7 +7,7 @@
     box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.8);
     background-color: $login-box-bg-color;
     top: 50px;
-    right: 50px;
+    right: unset;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,7 +62,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba($color: #00993C, $alpha: 0.8);
+            background-color: rgba($color: $success, $alpha: 0.8);
             p {
                 text-transform: uppercase;
             }
@@ -75,7 +75,7 @@
         display: block;
     }
     .loginInput {
-        margin: 0 10px;
+        margin: 10px;
         input {
             font-size: 14px !important;
         }
@@ -96,7 +96,6 @@
         }
     }
     &.itemBoxContainer {
-        left: 100px;
         right: unset;
         padding: 0;
         .savedItems {
@@ -156,6 +155,20 @@
         padding-top: 10px;
         p {
             @include paragraph(14px, $orange, 0);
+        }
+    }
+
+    .forgottenContainer {
+        p {
+            @include paragraph(14px, $purple, 0);
+            margin-top: 20px;
+            opacity: .8;
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+                transition: all 0.2s ease;
+                text-decoration: underline;
+            }
         }
     }
 }

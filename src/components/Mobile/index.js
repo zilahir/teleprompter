@@ -17,7 +17,9 @@ const Mobile = () => {
 
 	return (
 		<div className={styles.mobileContainer}>
-			<Logo />
+			<Logo
+				className={styles.mobileLogo}
+			/>
 			<div className={styles.innerContainer}>
 				<Input
 					labelText="Enter your session id"

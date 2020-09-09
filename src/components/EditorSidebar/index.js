@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { useStore, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import Logo from '../common/Logo'
-import { scrollWidthSettngs } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings, fontOptions, alignmentOptions } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
-import { toggleMirror } from '../../store/actions/text'
+import { toggleMirror, setScrollWidth, setFont, setTextAlignment } from '../../store/actions/text'
+import { setColorScheme } from '../../store/actions/misc'
 
 /**
 * @author zilahir
@@ -19,13 +19,63 @@ import { toggleMirror } from '../../store/actions/text'
 * */
 
 const EditorSidebar = () => {
-	const [isFlipped, setFlipped] = useState(false)
-	const store = useStore()
 	const dispatch = useDispatch()
 	function handleFlip(boolean) {
 		dispatch(toggleMirror(boolean.target.checked))
-		setFlipped(boolean.target.checked)
 	}
+
+	const fontSize = useSelector(state => state.text.fontSize)
+	const letterSpacing = useSelector(state => state.text.letterSpacing)
+	const lineHeight = useSelector(state => state.text.lineHeight)
+	const scrollSpeed = useSelector(state => state.text.scrollSpeed)
+	const flipped = useSelector(state => state.text.isFlipped)
+
+	const scrollWidth = useSelector(state => state.text.scrollWidth)
+	const activeScrollId = scrollWidthSettngs.find(curr => (
+		curr.label === scrollWidth
+	))
+
+	const colorScheme = useSelector(state => state.misc.chosenColorScheme)
+	const activeColorScheme = colorSchemeSettings.find(currColorScheme => (
+		currColorScheme.label === colorScheme.toLowerCase()
+	))
+
+	const selectedFont = useSelector(state => state.text.chosenFont)
+	const activeFont = fontOptions.find(currentFont => (
+		currentFont.label === selectedFont.toLowerCase()
+	))
+
+	const selectedAlignment = useSelector(state => state.text.textAlignment)
+	const activeAlignment = alignmentOptions.find(curentAlignment => (
+		curentAlignment.id === selectedAlignment
+	))
+
+	function handleScrollWidthChange(chosenScrollWidthId) {
+		const chosenValue = scrollWidthSettngs.find(item => (
+			item.id === chosenScrollWidthId
+		))
+
+		dispatch(setScrollWidth(chosenValue.label))
+	}
+
+	function handleColorSchemeChange(chosenColorSchemeId) {
+		const thisColorScheme = colorSchemeSettings.find(
+			currentColorScheme => currentColorScheme.id === chosenColorSchemeId,
+		)
+		dispatch(setColorScheme(thisColorScheme.label))
+	}
+
+	function handleFontChange(chosenFontId) {
+		const thisChosenFont = fontOptions.find(
+			currentFont => currentFont.id === chosenFontId,
+		)
+		dispatch(setFont(thisChosenFont.label))
+	}
+
+	function handleAlignmentChange(chosenAlignmentId) {
+		dispatch(setTextAlignment(chosenAlignmentId))
+	}
+
 	return (
 		<>
 			<Col
@@ -33,18 +83,17 @@ const EditorSidebar = () => {
 				className={styles.editorSidebarContainer}
 			>
 				<div className={styles.innerContainer}>
-					<Logo />
 					<SliderAlt
 						labelText="Text size"
 						sliderName={SET_FONT_SIZE}
-						initialValue={store.getState().text.fontSize}
+						initialValue={fontSize}
 						maxValue={10}
 						step={1}
 					/>
 					<SliderAlt
 						labelText="Letter spacing"
 						sliderName={SET_LETTER_SPACING}
-						initialValue={store.getState().text.letterSpacing}
+						initialValue={letterSpacing}
 						minValue={0}
 						maxValue={2}
 						step={0.01}
@@ -52,31 +101,65 @@ const EditorSidebar = () => {
 					<SliderAlt
 						labelText="Line height"
 						sliderName={SET_LINE_HEIGHT}
-						initialValue={store.getState().text.lineHeight}
+						initialValue={lineHeight}
 						step={0.1}
 						maxValue={3}
 						minValue={1}
 					/>
 					<div className={styles.selectorContainer}>
 						<p className={styles.widthLabel}>
-								Scroll width
+							Scroll width
 						</p>
-						<Selector items={scrollWidthSettngs} />
+						<Selector
+							items={scrollWidthSettngs}
+							activeId={activeScrollId.id}
+							onClick={id => handleScrollWidthChange(id)}
+						/>
 					</div>
 					<SliderAlt
 						labelText="Scroll speed"
 						sliderName={SET_SCROLL_SPEED}
-						initialValue={store.getState().text.scrollSpeed}
+						initialValue={scrollSpeed}
 						maxValue={10}
 						step={1}
 					/>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Color Scheme
+						</p>
+						<Selector
+							items={colorSchemeSettings}
+							activeId={activeColorScheme.id}
+							onClick={id => handleColorSchemeChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Font
+						</p>
+						<Selector
+							items={fontOptions}
+							activeId={activeFont.id}
+							onClick={id => handleFontChange(id)}
+						/>
+					</div>
+					<div className={styles.selectorContainer}>
+						<p className={styles.widthLabel}>
+							Alignment
+						</p>
+						<Selector
+							items={alignmentOptions}
+							activeId={activeAlignment.id}
+							onClick={id => handleAlignmentChange(id)}
+						/>
+					</div>
 					<div className="toggleWrapper">
 						<p>
 							Flip for reflection
 						</p>
 						<Toggle
 							onChange={bool => handleFlip(bool)}
-							checked={isFlipped}
+							checked={flipped}
 							icons={null}
 						/>
 					</div>

@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useStore } from 'react-redux'
+import ReactGA from 'react-ga'
+import { useStore, useSelector } from 'react-redux'
 import { useSocket } from '@zilahir/use-socket.io-client'
 
 import TextScroller from '../TextScroller'
 import Loader from '../Loader'
 import Header from './Header'
+import { PLAYER } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -14,8 +16,8 @@ import Header from './Header'
 * */
 
 const Player = () => {
+	ReactGA.pageview(`/${PLAYER}`)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
-	const [text, setText] = useState('')
 	// eslint-disable-next-line no-unused-vars
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
@@ -23,8 +25,9 @@ const Player = () => {
 	const [updatedPrompterObject, updatePrompterObject] = useState({})
 	const store = useStore()
 	const { slug } = useParams()
+	const segments = useSelector(state => state.segments.segments)
+
 	useEffect(() => {
-		setText(store.getState().userPrompters.prompterObject.text)
 		setPrompterObject(store.getState().userPrompters.prompterObject)
 	}, [store])
 
@@ -41,6 +44,9 @@ const Player = () => {
 	function handleUpdate() {
 		setPrompterObject(updatedPrompterObject.meta)
 		toggleUpdateBtn(false)
+		/* if (updatedPrompterObject.text !== text) {
+			setText(updatedPrompterObject.text)
+		} */ // TODO: this needs update
 		console.debug('updatedPrompterObject', updatedPrompterObject)
 	}
 
@@ -55,10 +61,10 @@ const Player = () => {
 					!isLoading
 						? (
 							<TextScroller
-								text={text}
+								segments={segments}
 								slug={slug}
 								prompterObject={promoterObject}
-								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 2}
+								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 10}
 							/>
 						)
 						: <Loader isLoading={isLoading} />

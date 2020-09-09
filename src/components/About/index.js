@@ -1,9 +1,11 @@
 import React from 'react'
+import ReactGA from 'react-ga'
 import { Row, Container, Col } from 'react-grid-system'
 import { useHistory } from 'react-router-dom'
 
 import styles from '../Policy/Policy.module.scss'
 import Button from '../common/Button'
+import { ABOUT } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -12,6 +14,7 @@ import Button from '../common/Button'
 
 const About = () => {
 	const history = useHistory()
+	ReactGA.pageview(`${ABOUT}`)
 	return (
 		<div className={styles.aboutWrapper}>
 			<Container
@@ -61,9 +64,9 @@ const About = () => {
 								How to use Prompter.me?
 							</h1>
 							<p>
-							Prompter.me consists of three main parts: The Editor, which is the front page
-							view when you go to prompter.me, the Prompter, which is the text scroller itself,
-							and the Remote, which is a mobile remote controller.
+								Prompter.me consists of three main parts: The Editor, which is the front page
+								view when you go to prompter.me, the Prompter, which is the text scroller itself,
+								and the Remote, which is a mobile remote controller.
 							</p>
 							<p>
 								In the Editor view, you can enter and edit your script in the text field in

@@ -1,3 +1,8 @@
+@import '../../styles/variables';
+
 .mainContainer {
-    height: 100vh;
+    background: rgba($color: $gray-3, $alpha: 1);
+    .heightFixer {
+        height: calc(100vh - 44px);
+    }
 }

@@ -46,7 +46,6 @@ export const setPrompterSlug = prompterSlug => dispatch => new Promise(resolve =
 	resolve(prompterSlug)
 })
 
-
 export const setPrompterProjectName = projectName => dispatch => new Promise(resolve => {
 	dispatch({
 		type: SET_PROJECT_NAME,
@@ -119,6 +118,29 @@ export const deletePrompter = (idToDel, authToken) => new Promise(resolve => {
 
 export const updatePrompterNoAuth = updatedPrompterObject => new Promise(resolve => {
 	axios.patch(`${apiEndpoints.updatePrompterNoAuth}/${updatedPrompterObject.slug}`, updatedPrompterObject, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				isSuccess: true,
+				...res,
+			})
+		})
+})
+
+export const isProverSaved = slug => new Promise(resolve => {
+	axios.get(`${apiEndpoints.getPrompterBySlug}/${slug}`, {
+		headers,
+	})
+		.then(res => {
+			resolve({
+				...res.data,
+			})
+		})
+})
+
+export const updatePrompter = updatedPrompterObject => new Promise(resolve => {
+	axios.patch(`${apiEndpoints.modifyPrompter}/${updatedPrompterObject.slug}`, updatedPrompterObject, {
 		headers,
 	})
 		.then(res => {

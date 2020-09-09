@@ -2,24 +2,7 @@
 @import '../../styles/mixins/paragraph';
 
 .textEditorContainer {
-    height: 100%;
-    margin: 0 50px;
-    padding: 20px;
-
-    .textArea {
-        width: 100%;
-        height: 80vh;
-        resize: none;
-        border: none;
-        background-color: $gray-2;
-        color: #fff;
-        border-radius: 20px;
-        font-family: 'Barlow';
-        letter-spacing: 1.2px;
-        padding: 20px;
-        border: 2px solid $gray-7;
-        &:focus {
-            outline: none;
-        }
-    }
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }

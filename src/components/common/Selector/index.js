@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useStore, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
+import { theme } from '../../../utils/theme'
 import { setScrollWidth } from '../../../store/actions/text'
 import { Colors as teleprompterColors } from '../../../utils/consts'
 import styles from './Selector.module.scss'
@@ -15,28 +16,20 @@ import styles from './Selector.module.scss'
 
 const Item = styled.div`
 	background-color: ${props => (props.isActive ? teleprompterColors.purple : teleprompterColors.gray1)};
-	border-top-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
-	border-bottom-left-radius: ${props => (props.isFirst ? '10px' : '0px')};
-	border-top-right-radius: ${props => (props.isLast ? '10px' : '0px')};
-	border-bottom-right-radius: ${props => (props.isLast ? '10px' : '0px')};
+	border-top-left-radius: ${props => (props.isFirst ? `${theme.misc.borderRadius}px` : 0)};
+	border-bottom-left-radius: ${props => (props.isFirst ? `${theme.misc.borderRadius}px` : 0)};
+	border-top-right-radius: ${props => (props.isLast ? `${theme.misc.borderRadius}px` : 0)};
+	border-bottom-right-radius: ${props => (props.isLast ? `${theme.misc.borderRadius}px` : 0)};
 	
 `
 
 const Selector = props => {
-	const { items } = props
+	const { items, activeId, onClick } = props
 	const store = useStore()
 	const dispatch = useDispatch()
-	const getActiveWidth = items.find(curr => (
-		curr.label === store.getState().text.scrollWidth
-	))
 
-	const [isActive, setActive] = useState(getActiveWidth.id)
-	function handleChange(index) {
-		const chosenValue = items.find(item => (
-			item.id === index
-		))
-		dispatch(setScrollWidth(chosenValue.label))
-		setActive(index)
+	function handleChange(chosenId) {
+		onClick(chosenId)
 	}
 	return (
 		<div className={styles.selectorContainer}>
@@ -46,8 +39,8 @@ const Selector = props => {
 						key={item.id}
 						isFirst={index === 0}
 						isLast={index === items.length - 1}
-						isActive={isActive === index}
-						onClick={() => handleChange(index)}
+						isActive={activeId === index}
+						onClick={() => handleChange(item.id)}
 						className={styles.selectorItem}
 					>
 						<p className={styles.label}>
@@ -61,9 +54,11 @@ const Selector = props => {
 }
 
 Selector.propTypes = {
+	activeId: PropTypes.number.isRequired,
 	items: PropTypes.arrayOf(
 		PropTypes.any,
 	).isRequired,
+	onClick: PropTypes.func.isRequired,
 }
 
 export default Selector

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 import teleprompterLogo from '../../../assets/prompterme-logo-light.svg'
@@ -16,9 +17,13 @@ const LogoImage = styled.img`
 `
 
 const Logo = props => {
-	const { size, type } = props
+	const { size, type, className } = props
 	return (
-		<div className={styles.logoContainer}>
+		<div className={classnames(
+			styles.logoContainer,
+			className,
+		)}
+		>
 			<LogoImage
 				src={teleprompterLogo}
 				size={size}
@@ -29,11 +34,13 @@ const Logo = props => {
 }
 
 Logo.defaultProps = {
+	className: null,
 	size: 200,
 	type: COLOR_LIGHT,
 }
 
 Logo.propTypes = {
+	className: PropTypes.string,
 	size: PropTypes.number,
 	type: PropTypes.string,
 }
