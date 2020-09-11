@@ -5,6 +5,7 @@
     background-color: $gray-2;
     .innerContainer {
         margin: 50px 40px;
+        max-width: 230px;
 
         .testAnimation {
             padding: 10px 0;
@@ -34,6 +35,15 @@
             }
 
             .playBtn {
+                transition: all 0.2 ease-in-out;
+                &.hidden {
+                    opacity: 0;
+                }
+
+                &.visible {
+                    opacity: 1;
+                }
+
                 button {
                     box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5);
                     text-transform: capitalize;

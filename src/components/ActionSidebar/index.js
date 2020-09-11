@@ -14,10 +14,11 @@ import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import styles from './ActionSidebar.module.scss'
-import { LINK, CREATE, OPEN } from '../../utils/consts'
+import { LINK, CREATE, OPEN, INLINE_LOADER } from '../../utils/consts'
 import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } from '../../store/actions/prompter'
 import { apiEndpoints } from '../../utils/apiEndpoints'
 import { toggleUpdateBtn } from '../../store/actions/misc'
+import Loader from '../Loader'
 
 /**
 * @author zilahir
@@ -34,6 +35,7 @@ const ActionSidebar = () => {
 	const [remoteAddress, setRemoteAddress] = useState(null)
 	const [streamAddress, setStreamAddress] = useState(null)
 	const [createLabelText, setCreateBtnLabelText] = useState(CREATE)
+	const [isLoading, toggleLoading] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -51,6 +53,7 @@ const ActionSidebar = () => {
 			togglePlay()
 			return
 		}
+		toggleLoading(true)
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
 		const newPrompterObject = store.getState().text
@@ -76,8 +79,9 @@ const ActionSidebar = () => {
 			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			setTimeout(() => {
+				// toggleLoading(false)
 				setCreateBtnLabelText(OPEN)
-			}, 100)
+			}, 1000)
 		})
 	}
 
@@ -217,11 +221,18 @@ const ActionSidebar = () => {
 								<Icon size="1.5em" icon={refreshIcon} />
 							)}
 						/>
+						<Loader
+							type={INLINE_LOADER}
+							isLoading={isLoading}
+							width={30}
+							height={30}
+						/>
 						<Button
 							onClick={() => createPrompter(createLabelText)}
 							labelText={createLabelText === OPEN ? 'Open Prompter' : createLabelText}
 							buttonClass={classnames(
 								styles.playBtn,
+								isLoading ? styles.hidden : styles.visible,
 							)}
 							icon={(
 								<Icon icon={createLabelText === OPEN ? openIcon : createIcon} size="1.5em" />
