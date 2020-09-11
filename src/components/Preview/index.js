@@ -24,7 +24,7 @@ const Preview = () => {
 
 	function handleNewSegment(type) {
 		dispatch(addSegment({
-			segmentTitle: 'Add segment name',
+			segmentTitle: '',
 			segmentText: '',
 			segmentColor: colors[random.int(0, colors.length - 1)],
 			id: shortid.generate(),

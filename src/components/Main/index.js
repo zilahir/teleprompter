@@ -28,7 +28,7 @@ const Main = () => {
 	useEffect(() => {
 		Promise.all([
 			dispatch(setSegments([{
-				segmentTitle: 'Add segment name',
+				segmentTitle: '',
 				segmentText: '',
 				segmentColor: colors[random.int(0, colors.length - 1)],
 				id: shortid.generate(),

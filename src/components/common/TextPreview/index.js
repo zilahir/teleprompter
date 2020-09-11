@@ -138,7 +138,7 @@ const TextPreview = props => {
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
-					fontFamily={fontFamily}
+					fontFamily={getFontFamily(fontFamily)}
 				>
 					<div
 						className={styles.innerContainer}

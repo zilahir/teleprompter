@@ -118,7 +118,7 @@ const ActionHeader = () => {
 	function clearCurrentPrompter() {
 		dispatch(setPrompterSlug(uuidv4().split('-')[0]))
 		dispatch(setSegments([{
-			segmentTitle: 'Add segment name',
+			segmentTitle: '',
 			segmentText: '',
 			segmentColor: colors[random.int(0, colors.length - 1)],
 			id: shortid.generate(),
