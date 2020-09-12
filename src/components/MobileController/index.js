@@ -5,14 +5,16 @@ import { useSocket } from '@zilahir/use-socket.io-client'
 import classnames from 'classnames'
 import styled from 'styled-components'
 import { MorphReplace } from 'react-svg-morph'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import FastRewindIcon from '@material-ui/icons/FastRewind'
+import FastForwardIcon from '@material-ui/icons/FastForward'
+import InfoIcon from '@material-ui/icons/Info'
 
-import backward from '../../assets/controls/backward.svg'
-import forward from '../../assets/controls/forward.svg'
 import styles from './MobileContainer.module.scss'
-import down from '../../assets/controls/angle-up.svg'
-import up from '../../assets/controls/angle-up-1.svg'
 import arrowBg from '../../assets/controls/bg.svg'
 import { REMOTE } from '../../utils/consts'
+import Logo from '../common/Logo'
 
 /**
  * @author zilahir
@@ -78,6 +80,15 @@ const MobileController = () => {
 
 	return (
 		<div className={styles.mainContainer}>
+			<div className={styles.logoContainer}>
+				<Logo />
+				<p className={styles.slug}>
+					{slug}
+					<span className={styles.infoIcon}>
+						<InfoIcon htmlColor="#ffffff" />
+					</span>
+				</p>
+			</div>
 			<BTN
 				className={styles.top}
 				role="button"
@@ -85,7 +96,7 @@ const MobileController = () => {
 				tabIndex={-1}
 				onClick={() => jumpUp()}
 			>
-				<img src={up} alt="up" />
+				<KeyboardArrowUpIcon fontSize="large" htmlColor="#ffffff" />
 			</BTN>
 			<div className={styles.middle}>
 				<BTN
@@ -95,7 +106,7 @@ const MobileController = () => {
 					)}
 					onClick={() => decScrollingSpeed()}
 				>
-					<img src={backward} alt="backwards" />
+					<FastRewindIcon htmlColor="#ffffff" />
 				</BTN>
 				<div
 					className={classnames(
@@ -132,7 +143,7 @@ const MobileController = () => {
 					tabIndex={-1}
 					onClick={() => incScrollingSpeed()}
 				>
-					<img src={forward} alt="backwards" />
+					<FastForwardIcon htmlColor="#ffffff" />
 				</BTN>
 			</div>
 			<BTN
@@ -142,7 +153,7 @@ const MobileController = () => {
 				tabIndex={-1}
 				onClick={() => jumpDown()}
 			>
-				<img src={down} alt="down" />
+				<KeyboardArrowDownIcon fontSize="large" htmlColor="#ffffff" />
 			</BTN>
 		</div>
 	)

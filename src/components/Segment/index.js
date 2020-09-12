@@ -3,9 +3,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Icon from 'react-icons-kit'
-import { times } from 'react-icons-kit/fa'
 import { useSelector, useDispatch } from 'react-redux'
+import CloseIcon from '@material-ui/icons/Close'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
@@ -97,7 +96,7 @@ const Segment = ({
 						</li>
 						<li>
 							<button type="button" className={styles.deleteBtn}>
-								<Icon icon={times} />
+								<CloseIcon htmlColor="#ffffff" />
 							</button>
 						</li>
 					</ul>
