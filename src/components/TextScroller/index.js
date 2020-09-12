@@ -12,6 +12,7 @@ import styles from './TextScroller.module.scss'
 import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 import { getFontFamily } from '../../utils/getFontFamily'
+import Break from '../common/Break'
 
 /**
 * @author zilahir
@@ -228,7 +229,10 @@ const TextScroller = props => {
 										</div>
 									</Segment>
 								) : (
-									<Waypoint onEnter={() => handlePause()} />
+									<>
+										<Waypoint onEnter={() => handlePause()} />
+										<Break />
+									</>
 								)
 							))
 						}
