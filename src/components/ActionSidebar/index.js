@@ -6,9 +6,9 @@ import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { ic_refresh as refreshIcon } from 'react-icons-kit/md/ic_refresh'
-import { ic_open_in_new as openIcon } from 'react-icons-kit/md/ic_open_in_new'
-import { magic as createIcon } from 'react-icons-kit/fa/magic'
+import RefreshIcon from '@material-ui/icons/Refresh'
+import LaunchIcon from '@material-ui/icons/Launch'
+import MovieFilterIcon from '@material-ui/icons/MovieFilter'
 
 import TextPreview from '../common/TextPreview'
 import Input from '../common/Input'
@@ -79,7 +79,7 @@ const ActionSidebar = () => {
 			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			setTimeout(() => {
-				// toggleLoading(false)
+				toggleLoading(false)
 				setCreateBtnLabelText(OPEN)
 			}, 1000)
 		})
@@ -217,9 +217,9 @@ const ActionSidebar = () => {
 							buttonClass={styles.updateBtn}
 							isNegative
 							isVisible={showUpdateBtn}
-							icon={(
-								<Icon size="1.5em" icon={refreshIcon} />
-							)}
+							icon={
+								<RefreshIcon htmlColor="#ffffff" />
+							}
 						/>
 						<Loader
 							type={INLINE_LOADER}
@@ -235,7 +235,7 @@ const ActionSidebar = () => {
 								isLoading ? styles.hidden : styles.visible,
 							)}
 							icon={(
-								<Icon icon={createLabelText === OPEN ? openIcon : createIcon} size="1.5em" />
+								createLabelText === OPEN ? <LaunchIcon htmlColor="#ffffff" /> : <MovieFilterIcon htmlColor="#ffffff" />
 							)}
 						/>
 					</div>

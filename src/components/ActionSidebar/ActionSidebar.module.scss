@@ -36,6 +36,7 @@
 
             .playBtn {
                 transition: all 0.2 ease-in-out;
+
                 &.hidden {
                     opacity: 0;
                 }
@@ -47,6 +48,11 @@
                 button {
                     box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5);
                     text-transform: capitalize;
+
+                    div {
+                        position: relative;
+                        top: 2px;
+                    }
                 }
             }
         }
