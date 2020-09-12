@@ -26,14 +26,11 @@
         }
 
         &:hover {
-            p {
+            p, svg {
                 text-decoration: none;
                 cursor: pointer;
                 color: $purple;
                 transition: all .2s ease;
-            }
-            div {
-                color: $purple;
             }
         }
     }

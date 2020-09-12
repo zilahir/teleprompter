@@ -3,9 +3,8 @@ import { useDispatch } from 'react-redux'
 import shortid from 'shortid'
 import { Col } from 'react-grid-system'
 import random from 'random'
-import Icon from 'react-icons-kit'
-import { ic_library_add as addSegmentIcon } from 'react-icons-kit/md/ic_library_add'
-import { ic_playlist_add as addPauseIcon } from 'react-icons-kit/md/ic_playlist_add'
+import PostAddIcon from '@material-ui/icons/PostAdd'
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
 import classnames from 'classnames'
 
 import { colors, SEGMENT, BREAK } from '../../utils/consts'
@@ -69,9 +68,7 @@ const Preview = () => {
 									className={styles.button}
 								>
 									<div className={styles.addPrompterIcon}>
-										<Icon
-											icon={addSegmentIcon}
-										/>
+										<PostAddIcon htmlColor="#ffffff" />
 									</div>
 									<p>
 										Add segment
@@ -83,9 +80,7 @@ const Preview = () => {
 									className={styles.button}
 								>
 									<div className={styles.addPrompterIcon}>
-										<Icon
-											icon={addPauseIcon}
-										/>
+										<PlaylistAddIcon htmlColor="#ffffff" />
 									</div>
 									<p>
 										Add pause
