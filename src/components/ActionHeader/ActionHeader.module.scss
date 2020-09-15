@@ -43,6 +43,11 @@
 		position: relative;
 		left: 20px;
 		overflow: hidden;
+
+		div {
+			position: fixed;
+			top: 10px;
+		}
 	}
 
 	.middleContainer {
