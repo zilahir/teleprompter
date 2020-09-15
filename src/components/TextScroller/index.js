@@ -42,6 +42,7 @@ const useInterval = (callback, delay) => {
 		savedCallback.current = callback
 	}, [callback])
 
+	// eslint-disable-next-line consistent-return
 	useEffect(() => {
 		function tick() {
 			savedCallback.current()
@@ -52,7 +53,6 @@ const useInterval = (callback, delay) => {
 				clearInterval(id)
 			}
 		}
-		return true
 	}, [delay])
 }
 
@@ -230,8 +230,9 @@ const TextScroller = props => {
 									</Segment>
 								) : (
 									<>
-										<Waypoint onEnter={() => handlePause()} />
-										<Break />
+										<Waypoint onEnter={() => handlePause()}>
+											<Break />
+										</Waypoint>
 									</>
 								)
 							))

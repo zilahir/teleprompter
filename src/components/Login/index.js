@@ -87,6 +87,8 @@ const Login = props => {
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
 				isFlipped: newPrompterObject.isFlipped,
+				chosenFont: newPrompterObject.chosenFont,
+				textAlignment: newPrompterObject.textAlignment,
 			},
 		}
 		Promise.all([
