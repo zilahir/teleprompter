@@ -9,7 +9,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
 import ColorPicker from '../ColorPicker'
-import { modifySegment } from '../../store/actions/segments'
+import { modifySegment, setSegments } from '../../store/actions/segments'
 
 /**
  * @author zilahir
@@ -43,6 +43,8 @@ const Segment = ({
 		state => state.segments.segments.find(segment => segment.id === segmentId),
 	)
 
+	const allSegments = useSelector(state => state.segments.segments)
+
 	useEffect(() => {
 		if (thisSegmentRef.current) {
 			setScrollHeight(thisSegmentRef.current.scrollHeight)
@@ -71,6 +73,11 @@ const Segment = ({
 		toggleColorPickerOpen(false)
 	}
 
+	function handleSegmentDelete() {
+		const filteredSegments = allSegments.filter(segment => segment.id !== segmentId)
+		dispatch(setSegments(filteredSegments))
+	}
+
 	return (
 		<>
 			<OnseSegment
@@ -95,7 +102,11 @@ const Segment = ({
 							/>
 						</li>
 						<li>
-							<button type="button" className={styles.deleteBtn}>
+							<button
+								type="button"
+								className={styles.deleteBtn}
+								onClick={() => handleSegmentDelete()}
+							>
 								<CloseIcon htmlColor="#ffffff" />
 							</button>
 						</li>
