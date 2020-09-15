@@ -114,7 +114,7 @@ const Login = props => {
 			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
 			dispatch(setFont(selectedPrompter.meta.chosenFont)),
-			dispatch(setTextAlignment(selectedPrompter.meta.setTextAlignment)),
+			dispatch(setTextAlignment(selectedPrompter.meta.textAlignment)),
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterSpacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
