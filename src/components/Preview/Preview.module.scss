@@ -12,8 +12,13 @@
         box-shadow: none;
         width: fit-content;
         display: flex;
-        align-items: center;
+        align-items: end;
         padding-left: 0;
+
+        p {
+            position: relative;
+            top: 2px;
+        }
 
         &:last-of-type {
             @include paragraph(14px, #fff);
