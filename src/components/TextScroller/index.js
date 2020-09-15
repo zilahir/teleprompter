@@ -230,9 +230,10 @@ const TextScroller = props => {
 									</Segment>
 								) : (
 									<>
-										<Waypoint onEnter={() => handlePause()}>
+										<Waypoint bottomOffset={300} onEnter={() => handlePause()} />
+										<div className={styles.breakContainer}>
 											<Break />
-										</Waypoint>
+										</div>
 									</>
 								)
 							))
