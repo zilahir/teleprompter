@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT, SANS } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 import { getFontFamily } from '../../utils/getFontFamily'
 import Break from '../common/Break'
@@ -33,6 +33,7 @@ const Text = styled.p`
 	line-height: ${props => props.lineHeight};
 	transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
 	font-family: ${props => props.fontFamily};
+	font-weight: ${props => props.fontWeight};
 `
 
 const useInterval = (callback, delay) => {
@@ -218,6 +219,7 @@ const TextScroller = props => {
 												letterSpacing={prompterObject.letterSpacing}
 												isFlipped={prompterObject.isFlipped}
 												fontFamily={getFontFamily(prompterObject.chosenFont)}
+												fontWeight={prompterObject.chosenFont === SANS ? 500 : 400}
 											>
 												{currSegment.segmentText}
 											</Text>
