@@ -61,6 +61,7 @@ const Button = props => {
 									type="button"
 									onClick={onClick}
 									className={styles.linkButton}
+									disabled={disabled}
 								>
 									{labelText}
 								</button>

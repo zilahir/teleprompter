@@ -5,21 +5,20 @@
 .userSettingsModal {
   width: 520px;
 
-  .innerContainer {
-    // padding: 30px;
-  }
+  
   .topContainer {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    h1 {
 
+    h1 {
       @include heading();
       font-size: 25px;
       letter-spacing: 0.75px;
       text-align: center;
       margin: 10px 0;
       margin-bottom: 0;
+      color: #ffffff;
     }
 
     h2 {
@@ -30,6 +29,7 @@
       margin: 10px 0;
       margin-top: 0;
       font-weight: 400;
+      color: #ffffff;
     }
 
     p {

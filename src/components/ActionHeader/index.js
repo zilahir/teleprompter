@@ -168,6 +168,7 @@ const ActionHeader = () => {
 								labelText="Save"
 								type={LINK}
 								onClick={() => openSave(SAVE)}
+								disabled={!isLoggedIn}
 							/>
 						</li>
 						<li ref={saveAsRef}>
@@ -175,6 +176,7 @@ const ActionHeader = () => {
 								labelText="Save As..."
 								type={LINK}
 								onClick={() => openSave(SAVE_AS_COPY)}
+								disabled={!isLoggedIn}
 							/>
 						</li>
 						<li ref={projectsBtnRef}>

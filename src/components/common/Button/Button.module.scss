@@ -43,13 +43,23 @@
         background-color: transparent;
         @include paragraph(14px, #fff, 0.85px);
         transition: all .2s ease;
+
         &:hover {
             cursor: pointer;
             color: $purple;
             transition: all .2s ease;
         }
+
         &:focus {
             outline: none;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+
+            &:hover {
+                pointer-events: none;
+            }
         }
     }
 }
