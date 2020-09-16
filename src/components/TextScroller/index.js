@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import styles from './TextScroller.module.scss'
-import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT, SANS } from '../../utils/consts'
+import { keyListeners, SPACE, F6, LEFT, RIGHT, DOWN, UP, PAGEUP, PAGE_DOWN, SEGMENT, SANS, alignmentOptions } from '../../utils/consts'
 import { toggleFullScreen } from '../../utils/fullScreen'
 import { getFontFamily } from '../../utils/getFontFamily'
 import Break from '../common/Break'
@@ -34,6 +34,7 @@ const Text = styled.p`
 	transform: ${props => (props.isFlipped ? 'scaleY(-1)' : null)};
 	font-family: ${props => props.fontFamily};
 	font-weight: ${props => props.fontWeight};
+	text-align: ${props => props.textAlignment};
 `
 
 const useInterval = (callback, delay) => {
@@ -70,7 +71,6 @@ const TextScroller = props => {
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
 	const chosenColorSchame = useSelector(state => state.misc.chosenColorScheme)
-
 	useInterval(() => {
 		setPosition(position + STEP)
 		scrollerRef.current.scroll({
@@ -220,6 +220,11 @@ const TextScroller = props => {
 												isFlipped={prompterObject.isFlipped}
 												fontFamily={getFontFamily(prompterObject.chosenFont)}
 												fontWeight={prompterObject.chosenFont === SANS ? 500 : 400}
+												textAlignment={
+													alignmentOptions.find(
+														alignment => alignment.id === prompterObject.textAlignment,
+													).option.toLowerCase()
+												}
 											>
 												{currSegment.segmentText}
 											</Text>

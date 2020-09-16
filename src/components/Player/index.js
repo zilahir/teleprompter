@@ -21,7 +21,7 @@ const Player = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
-	const [promoterObject, setPrompterObject] = useState({})
+	const [prompterObject, setPrompterObject] = useState(undefined)
 	const [updatedPrompterObject, updatePrompterObject] = useState({})
 	const store = useStore()
 	const { slug } = useParams()
@@ -58,12 +58,12 @@ const Player = () => {
 			/>
 			<div>
 				{
-					!isLoading
+					!isLoading && prompterObject
 						? (
 							<TextScroller
 								segments={segments}
 								slug={slug}
-								prompterObject={promoterObject}
+								prompterObject={prompterObject}
 								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 10}
 							/>
 						)

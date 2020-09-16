@@ -119,9 +119,10 @@ export const colors = [
 
 export const SEGMENT = 'SEGMENT'
 export const BREAK = 'BREAK'
+export const CENTER = 'CENTER'
 
 export const alignmentOptions = [
-	{ id: 0, label: <Icon icon={alignLeft} size="15px" /> },
-	{ id: 1, label: <Icon icon={alignCenter} size="15px" /> },
-	{ id: 2, label: <Icon icon={alignRight} size="15px" /> },
+	{ id: 0, label: <Icon icon={alignLeft} size="15px" />, option: LEFT },
+	{ id: 1, label: <Icon icon={alignCenter} size="15px" />, option: CENTER },
+	{ id: 2, label: <Icon icon={alignRight} size="15px" />, option: RIGHT },
 ]
