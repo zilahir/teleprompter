@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close'
+import TextareaAutosize from 'react-autosize-textarea'
 
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
@@ -24,10 +25,6 @@ const SegmentIndicator = styled.span`
 	background-color: ${props => props.segmentColor};
 `
 
-const SegmentText = styled.textarea`
-	height: ${props => props.height}px;
-`
-
 const Segment = ({
 	segmentColor,
 	segmentTitle,
@@ -35,7 +32,6 @@ const Segment = ({
 	segmentId,
 }) => {
 	const thisSegmentRef = useRef(null)
-	const [scrollHeight, setScrollHeight] = useState()
 	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
 	const dispatch = useDispatch()
 
@@ -44,12 +40,6 @@ const Segment = ({
 	)
 
 	const allSegments = useSelector(state => state.segments.segments)
-
-	useEffect(() => {
-		if (thisSegmentRef.current) {
-			setScrollHeight(thisSegmentRef.current.scrollHeight)
-		}
-	}, [])
 
 	function handleSegmentNameChange(newSegmentTitle) {
 		dispatch(modifySegment({
@@ -113,12 +103,11 @@ const Segment = ({
 					</ul>
 				</div>
 				<div className={styles.segmentBody}>
-					<SegmentText
-						ref={thisSegmentRef}
-						value={thisSegment.segmentText}
+					<TextareaAutosize
 						onChange={event => handleSegmentTextChange(event.target.value)}
-						height={scrollHeight}
 						className={styles.segmentText}
+						value={thisSegment.segmentText}
+						ref={thisSegmentRef}
 					/>
 				</div>
 				<ColorPicker
