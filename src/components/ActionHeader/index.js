@@ -17,6 +17,7 @@ import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import { setSegments } from '../../store/actions/segments'
+import AboutModal from '../AboutModal'
 
 /**
 * @author zilahir
@@ -33,6 +34,7 @@ const ActionHeader = () => {
 	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
 	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
 	const [boxPosition, setBoxPosition] = useState(0)
+	const [isAboutPageVisible, toggleAboutModal] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -119,7 +121,7 @@ const ActionHeader = () => {
 		dispatch(setPrompterSlug(uuidv4().split('-')[0]))
 		dispatch(setSegments([{
 			segmentTitle: '',
-			segmentText: '',
+			segmentTexűt: '',
 			segmentColor: colors[random.int(0, colors.length - 1)],
 			id: shortid.generate(),
 			type: SEGMENT.toLowerCase(),
@@ -232,6 +234,7 @@ const ActionHeader = () => {
 							<Button
 								labelText="About Prompter.me"
 								type={LINK}
+								onClick={() => toggleAboutModal(currState => !currState)}
 							/>
 						</li>
 						<li>
@@ -294,6 +297,11 @@ const ActionHeader = () => {
 				type={SAVE}
 				requestClose={() => toggleSave(false)}
 				leftPosition={boxPosition}
+			/>
+			<AboutModal
+				isVisible={isAboutPageVisible}
+				handleClose={() => toggleAboutModal(false)}
+				selector={document.querySelector('#prompter-root')}
 			/>
 		</div>
 	)

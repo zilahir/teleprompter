@@ -35,6 +35,8 @@
 	padding-left: 0;
 	padding-right: 0;
 	background: rgba($color: $gray-1, $alpha: 1.0);
+	position: relative;
+	z-index: 99;
 
 	.logoContainer {
 		justify-content: flex-end;

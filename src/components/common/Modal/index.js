@@ -26,6 +26,8 @@ const Modal = (
 		modalTitle,
 		overlayColor,
 		hasCloseIcon,
+		selector,
+		wrapperClassname,
 	},
 ) => (isShowing ? ReactDOM.createPortal(
 	<>
@@ -34,7 +36,16 @@ const Modal = (
 			className={overlayClassName}
 			onClick={hide}
 		/>
-		<div className={ModalStyle.modalWrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
+		<div
+			className={classnames(
+				ModalStyle.modalWrapper,
+				wrapperClassname,
+			)}
+			aria-modal
+			aria-hidden
+			tabIndex={-1}
+			role="dialog"
+		>
 			<div className={classnames(
 				ModalStyle.modal,
 				modalClassName,
@@ -73,7 +84,7 @@ const Modal = (
 				{children}
 			</div>
 		</div>
-	</>, document.body,
+	</>, selector,
 ) : null)
 
 Modal.defaultProps = {
@@ -82,6 +93,8 @@ Modal.defaultProps = {
 	modalTitle: null,
 	overlayClassName: ModalStyle.modalOverlay,
 	overlayColor: null,
+	selector: document.body,
+	wrapperClassname: null,
 }
 
 Modal.propTypes = {
@@ -90,6 +103,8 @@ Modal.propTypes = {
 	modalTitle: propTypes.string,
 	overlayClassName: propTypes.string,
 	overlayColor: propTypes.string,
+	selector: propTypes.string,
+	wrapperClassname: propTypes.string,
 }
 
 export default Modal

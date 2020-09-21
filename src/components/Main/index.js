@@ -50,6 +50,7 @@ const Main = () => {
 				<ActionHeader />
 				<Container
 					fluid
+					id="prompter-root"
 				>
 					<Row
 						className={styles.heightFixer}
