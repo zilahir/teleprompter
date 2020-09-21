@@ -55,9 +55,17 @@
 			margin: 0;
 			padding: 0;
 			color: rgba($color: #ffffff, $alpha: 1.0);
+			display: inline-block;
+			font-size: unset;
+			width: 24px;
+			height: 24px;
 
 			&:focus {
 				outline: none;
+			}
+
+			&:hover {
+				cursor: pointer;
 			}
 		}
 	}

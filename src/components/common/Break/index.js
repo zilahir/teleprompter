@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { ic_pause as pauseIcon } from 'react-icons-kit/md/ic_pause'
-import { times as deleteIcon } from 'react-icons-kit/fa/times'
+import CloseIcon from '@material-ui/icons/Close'
 import Icon from 'react-icons-kit'
 
 import styles from './Break.module.scss'
+import { setSegments } from '../../../store/actions/segments'
 
 /**
  * @author zilahir
@@ -14,8 +16,11 @@ import styles from './Break.module.scss'
 const Break = ({
 	id,
 }) => {
+	const dispatch = useDispatch()
+	const allSegments = useSelector(state => state.segments.segments)
 	function handleDelete() {
-		return id
+		const filteredSegments = allSegments.filter(segment => segment.id !== id)
+		dispatch(setSegments(filteredSegments))
 	}
 	return (
 		<div className={styles.oneBreak}>
@@ -30,7 +35,7 @@ const Break = ({
 					className={styles.deleteBtn}
 					onClick={() => handleDelete()}
 				>
-					<Icon icon={deleteIcon} size="15px" />
+					<CloseIcon htmlColor="#ffffff" />
 				</button>
 			</div>
 		</div>
