@@ -21,6 +21,7 @@ const AboutModal = ({
 			hide={handleClose}
 			selector={selector}
 			wrapperClassname={styles.aboutModalWrapper}
+			overlayClassName={styles.aboutModalOverlay}
 		>
 			<About />
 		</Modal>

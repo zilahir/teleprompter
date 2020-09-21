@@ -3,17 +3,12 @@ import classnames from 'classnames'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
-import Icon from 'react-icons-kit'
-import { close } from 'react-icons-kit/fa'
+import CloseIcon from '@material-ui/icons/Close'
 
 import ModalStyle from './Modal.module.scss'
 
 const ModalOverlay = styled.div`
 	background: ${props => props.overlayColor};
-`
-
-const IconContainer = styled.div`
-	color: ${props => props.iconColor};
 `
 
 const Modal = (
@@ -71,11 +66,7 @@ const Modal = (
 									aria-label="Close"
 									onClick={hide}
 								>
-									<IconContainer
-										color="#ffffff"
-									>
-										<Icon size="2em" icon={close} />
-									</IconContainer>
+									<CloseIcon htmlColor="#ffffff" />
 								</button>
 							)
 							: null
