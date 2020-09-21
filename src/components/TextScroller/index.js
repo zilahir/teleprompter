@@ -66,7 +66,7 @@ const TextScroller = props => {
 	const bottomRef = useRef(null)
 	const [playing, setPlaying] = useState(false)
 	const [position, setPosition] = useState(0)
-	const [STEP, setStep] = useState(1)
+	const [STEP, setStep] = useState(5)
 	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
@@ -75,7 +75,6 @@ const TextScroller = props => {
 		setPosition(position + STEP)
 		scrollerRef.current.scroll({
 			top: position,
-			behavior: 'smooth',
 		})
 	}, playing ? scrollSpeedValue : null)
 
@@ -112,7 +111,6 @@ const TextScroller = props => {
 	useEffect(() => {
 		scrollerRef.current.scroll({
 			top: position,
-			behavior: 'smooth',
 		})
 	}, [position])
 
