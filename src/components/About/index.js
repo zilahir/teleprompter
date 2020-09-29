@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactGA from 'react-ga'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Row, Container, Col } from 'react-grid-system'
+import CloseIcon from '@material-ui/icons/Close'
 
 import styles from '../Policy/Policy.module.scss'
 import { ABOUT } from '../../utils/consts'
@@ -11,7 +13,9 @@ import { ABOUT } from '../../utils/consts'
 * @function About
 * */
 
-const About = () => {
+const About = ({
+	onClose,
+}) => {
 	ReactGA.pageview(`${ABOUT}`)
 	return (
 		<div className={classnames(
@@ -27,6 +31,15 @@ const About = () => {
 						className={styles.middle}
 						lg={12}
 					>
+						<div className={styles.closeBtnContainer}>
+							<button
+								type="button"
+								onClick={onClose}
+								className={styles.closeBtn}
+							>
+								<CloseIcon htmlColor="#ffffff" />
+							</button>
+						</div>
 						<div className={styles.textContainer}>
 							<h1 className={styles.title}>
 								What is Prompter.me?
@@ -71,6 +84,10 @@ const About = () => {
 			</Container>
 		</div>
 	)
+}
+
+About.propTypes = {
+	onClose: PropTypes.func.isRequired,
 }
 
 export default About

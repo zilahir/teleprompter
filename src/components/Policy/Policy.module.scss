@@ -63,3 +63,24 @@
 	}
 }
 
+
+.closeBtnContainer {
+	display: flex;
+	justify-content: flex-end;
+
+	.closeBtn {
+		background: none;
+		border: 0;
+		margin: 0;
+		padding: 0;
+		box-shadow: 0;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+}

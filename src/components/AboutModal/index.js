@@ -22,8 +22,9 @@ const AboutModal = ({
 			selector={selector}
 			wrapperClassname={styles.aboutModalWrapper}
 			overlayClassName={styles.aboutModalOverlay}
+			hasCloseIcon
 		>
-			<About />
+			<About onClose={handleClose} />
 		</Modal>
 	</>
 )
