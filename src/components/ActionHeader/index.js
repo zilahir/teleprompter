@@ -5,6 +5,7 @@ import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import random from 'random'
 import shortid from 'shortid'
+import { useHistory } from 'react-router'
 
 import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP, SEGMENT, colors } from '../../utils/consts'
 import Logo from '../common/Logo'
@@ -43,6 +44,7 @@ const ActionHeader = () => {
 	const saveAsRef = useRef(null)
 	const loginBtnRef = useRef(null)
 	const signUpBtnRef = useRef(null)
+	const history = useHistory()
 	// const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 
 	function openLoginBox() {
@@ -241,6 +243,7 @@ const ActionHeader = () => {
 							<Button
 								labelText="How to Use"
 								type={LINK}
+								onClick={() => history.push('/policy')}
 							/>
 						</li>
 					</ul>
