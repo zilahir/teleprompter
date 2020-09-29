@@ -2,9 +2,10 @@ import React from 'react'
 import { Row, Container, Col } from 'react-grid-system'
 import ReactGA from 'react-ga'
 import { useHistory } from 'react-router-dom'
+import CloseIcon from '@material-ui/icons/Close'
+import classnames from 'classnames'
 
 import styles from './Policy.module.scss'
-import Button from '../common/Button'
 import { POLICY } from '../../utils/consts'
 
 /**
@@ -16,18 +17,29 @@ const Policy = () => {
 	ReactGA.pageview(`${POLICY}`)
 	const history = useHistory()
 	return (
-		<div className={styles.aboutWrapper}>
+		<div className={classnames(
+			styles.aboutWrapper,
+			styles.dark,
+		)}
+		>
 			<Container
 				fluid
 			>
 				<Row>
-					<Col className={styles.dark} lg={3} />
-					<Col className={styles.middle} lg={6}>
-						<Button
-							labelText="Back"
-							onClick={() => history.goBack()}
-							buttonClass={styles.buttonContainer}
-						/>
+					<Col className={styles.middle} lg={12}>
+						<div className={classnames(
+							styles.closeBtnContainer,
+							styles.policyBtn,
+						)}
+						>
+							<button
+								type="button"
+								onClick={() => history.goBack()}
+								className={styles.closeBtn}
+							>
+								<CloseIcon htmlColor="#ffffff" />
+							</button>
+						</div>
 						<div className={styles.textContainer}>
 							<p>
 								Privacy Policy for Prompter.me
@@ -158,7 +170,6 @@ const Policy = () => {
 							</p>
 						</div>
 					</Col>
-					<Col className={styles.dark} lg={3} />
 				</Row>
 			</Container>
 		</div>
