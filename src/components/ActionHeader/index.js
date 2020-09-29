@@ -19,6 +19,7 @@ import UserSettingsModal from '../UserSettingsModal'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import { setSegments } from '../../store/actions/segments'
 import AboutModal from '../AboutModal'
+import HowToUseModal from '../HowToUseModal'
 
 /**
 * @author zilahir
@@ -36,6 +37,7 @@ const ActionHeader = () => {
 	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
 	const [boxPosition, setBoxPosition] = useState(0)
 	const [isAboutPageVisible, toggleAboutModal] = useState(false)
+	const [isHowToUseModalOpen, toggleHowToUseModal] = useState(false)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -45,7 +47,6 @@ const ActionHeader = () => {
 	const loginBtnRef = useRef(null)
 	const signUpBtnRef = useRef(null)
 	const history = useHistory()
-	// const isGuideVisible = useSelector(state => state.misc.instructions[INFOBOX_TOP])
 
 	function openLoginBox() {
 		setBoxPosition(loginBtnRef.current.getBoundingClientRect().x)
@@ -243,6 +244,7 @@ const ActionHeader = () => {
 							<Button
 								labelText="How to Use"
 								type={LINK}
+								onClick={() => toggleHowToUseModal(currState => !currState)}
 							/>
 						</li>
 					</ul>
@@ -303,6 +305,11 @@ const ActionHeader = () => {
 			<AboutModal
 				isVisible={isAboutPageVisible}
 				handleClose={() => toggleAboutModal(false)}
+				selector={document.querySelector('#prompter-root')}
+			/>
+			<HowToUseModal
+				isVisible={isHowToUseModalOpen}
+				handleClose={() => toggleHowToUseModal(false)}
 				selector={document.querySelector('#prompter-root')}
 			/>
 		</div>
