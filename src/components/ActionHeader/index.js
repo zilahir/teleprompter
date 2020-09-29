@@ -243,7 +243,6 @@ const ActionHeader = () => {
 							<Button
 								labelText="How to Use"
 								type={LINK}
-								onClick={() => history.push('/policy')}
 							/>
 						</li>
 					</ul>
