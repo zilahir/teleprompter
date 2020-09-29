@@ -4,8 +4,11 @@
 .footerContainer {
   background-color: rgba($color: $gray-1, $alpha: 1.0);
   padding: 10px 20px;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 40px);
   z-index: 9;
+  overflow: hidden;
 
   .innerContainer {
     display: flex;

@@ -1,10 +1,10 @@
 @import "../../styles/variables";
 
-.aboutModalWrapper {
-	width: 100%;
-	overflow: hidden;
-	overflow-y: auto;
-	height: 100%;
+.howtoUseModalWrapper {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .aboutModalOverlay {
@@ -18,4 +18,8 @@
 	z-index: 9;
 	backdrop-filter: blur($modal-backdrop-blur-value / 2);
 	left: 0;
+}
+
+.aboutWrapper {
+  max-height: 100vh;
 }
