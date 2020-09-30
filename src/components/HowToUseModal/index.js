@@ -73,17 +73,17 @@ const HowToUseModal = ({
 								play and control it in the prompter and use the remote on
 								your phone to control the prompterfrom a distance.
 							</p>
-							<h1>
+							<h2>
 								Editor
-							</h1>
+							</h2>
 							<p>
 								The editor is where you land when you go to prompter.me on a computer.
 								It’s where you control the content of the prompter, its speed, and its appearance.
 							</p>
 							<ul>
-								<h1>
+								<h3>
 									At the top, you have the main menu:
-								</h1>
+								</h3>
 								<li>
 									<p>
 										New starts a new project. All unsaved progress will be lost.
@@ -128,9 +128,9 @@ const HowToUseModal = ({
 								</li>
 							</ul>
 							<ul>
-								<h1>
+								<h3>
 									The properties of the prompter are on the left:
-								</h1>
+								</h3>
 								<li>
 									<p>
 										Text size: Controls the size
@@ -183,12 +183,12 @@ const HowToUseModal = ({
 									</p>
 								</li>
 							</ul>
-							<h1>
+							<h3>
 								- Flip for reflection: This mirrors the prompter, when turned on.
 								This is useful, if you’re reflecting your prompter onto a piece of glass
 								in front of the camera. This way you won’t have to flip the whole screen.
 								The text editor is in the middle:
-							</h1>
+							</h3>
 							<p>
 								The text editor is based on segments. You can just use the
 								one segment, but especially if your script is divided into several parts,
@@ -213,9 +213,9 @@ const HowToUseModal = ({
 								automatically pauses there. This is very useful if you’re recording
 								and want to take breaks between segments.
 							</p>
-							<h1>
+							<h3>
 								The preview is at the top right:
-							</h1>
+							</h3>
 							<p>
 								The preview approximates what you’re prompter will look like.
 								The box below is the prompter, the box above is the prompter, mirrored.
@@ -223,9 +223,9 @@ const HowToUseModal = ({
 								Test Scroll gives you an idea of the scroll speed.
 							</p>
 							<ul>
-								<h1>
+								<h3>
 									The prompter controls are on the right:
-								</h1>
+								</h3>
 								<li>
 									<p>
 										Session ID displays the unique ID for your session.
@@ -262,9 +262,9 @@ const HowToUseModal = ({
 									</p>
 								</li>
 							</ul>
-							<h1>
+							<h3>
 								Prompter
-							</h1>
+							</h3>
 							<p>
 								The prompter is where the words scroll.
 								You can open the prompter on any device with a web browser using the stream address.
