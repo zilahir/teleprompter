@@ -5,6 +5,7 @@ import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
+import { isEqual } from 'lodash'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import LaunchIcon from '@material-ui/icons/Launch'
@@ -111,10 +112,15 @@ const ActionSidebar = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
+		const hasChanged = isEqual(store.getState().text, store.getState().userPrompters.prompterObject)
+		if (!hasChanged && store.getState().userPrompters.prompterObject) {
+			toggleShowUpdateBtn(true)
+		}
+	}), [store])
+
+	useEffect(() => store.subscribe(() => {
 		const textPreview = store.getState().segments.segments.length ? store.getState().segments.segments[0].segmentText : ''
 		const sp = store.getState().text.scrollSpeed
-		const uBtn = store.getState().misc.showActiveBtn
-		toggleShowUpdateBtn(uBtn)
 		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
 			const slug = store.getState().userPrompters.prompterSlug
 			setPrompterSlug(slug)
