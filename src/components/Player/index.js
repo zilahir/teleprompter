@@ -44,10 +44,6 @@ const Player = () => {
 	function handleUpdate() {
 		setPrompterObject(updatedPrompterObject.meta)
 		toggleUpdateBtn(false)
-		/* if (updatedPrompterObject.text !== text) {
-			setText(updatedPrompterObject.text)
-		} */ // TODO: this needs update
-		console.debug('updatedPrompterObject', updatedPrompterObject)
 	}
 
 	return (

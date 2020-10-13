@@ -100,6 +100,8 @@ const ActionSidebar = () => {
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
 				isFlipped: newPrompterObject.isFlipped,
+				textAlignment: newPrompterObject.textAlignment,
+				chosenFont: newPrompterObject.chosenFont,
 			},
 		}
 		Promise.all([
