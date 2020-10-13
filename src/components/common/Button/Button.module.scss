@@ -3,7 +3,7 @@
 
 .buttonContainer {
     .button {
-        width: 242px;
+        min-width: 242px;
         height: 57px;
         border-radius: 32px;
         background-color: rgba($color: $purple, $alpha: 0.9);
