@@ -182,11 +182,15 @@ const HowToUseModal = ({
 										but centered and right aligned are available, too.
 									</p>
 								</li>
+								<li>
+									<p>
+										Flip for reflection: This mirrors the prompter, when turned on.
+										This is useful, if you’re reflecting your prompter onto a piece of glass
+										in front of the camera. This way you won’t have to flip the whole screen.
+									</p>
+								</li>
 							</ul>
 							<h3>
-								- Flip for reflection: This mirrors the prompter, when turned on.
-								This is useful, if you’re reflecting your prompter onto a piece of glass
-								in front of the camera. This way you won’t have to flip the whole screen.
 								The text editor is in the middle:
 							</h3>
 							<p>
