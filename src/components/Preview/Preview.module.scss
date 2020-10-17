@@ -5,59 +5,65 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    justify-content: space-between;
+    justify-content: flex-start;
     .button {
         background: transparent;
         border: none;
         box-shadow: none;
         width: fit-content;
         display: flex;
-        align-items: center;
+        align-items: end;
+        padding-left: 0;
+
+        p {
+            position: relative;
+            top: 2px;
+        }
+
         &:last-of-type {
             @include paragraph(14px, #fff);
             font-weight: 400;
-            &:hover {
-                text-decoration: underline;
-            }
+            margin-left: 30px;
         }
+
         &:focus {
             outline: none;
         }
+
         &:hover {
-            cursor: pointer;
-            p {
-                text-decoration: underline;
-                cursor: inherit;
+            p, svg {
+                text-decoration: none;
+                cursor: pointer;
+                color: $purple;
+                transition: all .2s ease;
             }
         }
     }
-    .addIconContainer {
-        div {
-            position: relative;
-            top: -2px;
-        }
-        width: 16px;
-        height: 16px;
-        background-color: $purple;
-        padding: 3px;
-        border-radius: 100%;
+
+    .addPrompterIcon {
+        color: #ffffff;
+        width: 24px;
+        height: 24px;
     }
+
     p {
-        @include paragraph(15px, #fff);
-        font-weight: 600;
+        @include paragraph(15px, #fff, 0);
         margin-left: 10px;
     }
 }
 
 .previewContainer {
-    margin-left: -34px;
     display: flex;
     flex-direction: column;
     flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+
     .tabContainer {
         display: none;
         position: relative;
         margin: 30px;
+
         &:after {
             content: '';
             width: 100%;
@@ -67,6 +73,7 @@
             bottom: 0;
             left: 0;
         }
+
         .tabButton {
             border: none;
             background: transparent;
@@ -74,9 +81,11 @@
             height: 50px;
             padding: 8px 50px;
             margin-right: 10px;
+
             &:focus {
                 outline: none;
             }
+
             &.tabButtonActive {
                 border-top-left-radius: 15px;
                 border-top-right-radius: 15px;
@@ -90,11 +99,10 @@
         }
     }
     .innerContainer {
-        margin: 0 80px;
-        padding: 50px 0;
+        margin: 0 40px;
+        padding: 20px 0;
     }
-    overflow: hidden;
-    max-height: 100vh;
+
     &::-webkit-scrollbar-thumb {
         background: #3C3F48;
         border-radius: 20px;
@@ -109,9 +117,10 @@
 }
 
 .previewRoot {
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
 .innerContainer {
@@ -119,4 +128,5 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    padding-bottom: 100px;
 }

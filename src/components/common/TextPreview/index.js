@@ -5,6 +5,8 @@ import { useStore } from 'react-redux'
 import styled from 'styled-components'
 
 import styles from './TextPreview.module.scss'
+import { getFontFamily } from '../../../utils/getFontFamily'
+import { alignmentOptions } from '../../../utils/consts'
 
 const Text = styled.div`
 	p {
@@ -12,6 +14,8 @@ const Text = styled.div`
 		line-height: ${props => props.lineHeight} !important;
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
+		font-family: ${props => props.fontFamily};
+		text-align: ${props => props.textAlignment};
 	}
 `
 
@@ -22,6 +26,8 @@ const TextMirrored = styled.div`
 		letter-spacing: ${props => props.letterSpacing}vw !important;
 		max-width: ${props => props.scrollWidth};
 		transform: scaleY(-1);
+		font-family: ${props => props.fontFamily};
+		text-align: ${props => props.textAlignment};
 	}
 `
 
@@ -50,7 +56,6 @@ const useInterval = (callback, delay) => {
 	}, [delay])
 }
 
-
 const TextPreview = props => {
 	const { text, isAnimationRunning, scrollSpeed } = props
 	const store = useStore()
@@ -60,6 +65,8 @@ const TextPreview = props => {
 	const [scrollWidth, setScrollWidth] = useState(null)
 	const [position, setPosition] = useState(0)
 	const [scrollerRefs, setScrollerRefs] = useState([])
+	const [fontFamily, setFontFamily] = useState()
+	const [textAlignment, setTextAlignment] = useState(null)
 	const scrollSpeedValue = scrollSpeed * 10
 
 	const STEP = 5
@@ -70,10 +77,19 @@ const TextPreview = props => {
 		const ln = store.getState().text.lineHeight
 		const ls = store.getState().text.letterSpacing
 		const sw = store.getState().text.scrollWidth
+		const ff = store.getState().text.chosenFont
+		const ta = store.getState().text.textAlignment
+
 		setFontSize(fs)
 		setLineHeight(ln)
 		setLetterSpacing(ls)
 		setScrollWidth(sw)
+		setFontFamily(ff)
+		setTextAlignment(
+			alignmentOptions.find(
+				alignment => alignment.id === ta,
+			).option.toLowerCase(),
+		)
 	}), [store, fontSize, text, scrollWidth])
 
 	useInterval(() => {
@@ -99,7 +115,6 @@ const TextPreview = props => {
 		return () => scrollerRefs.forEach(currRef => currRef.current.removeEventListener('scroll', scrollHandler))
 	}, [])
 
-
 	return (
 		<div className={styles.textpreviewContainer}>
 			<div
@@ -112,6 +127,8 @@ const TextPreview = props => {
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
+					fontFamily={getFontFamily(fontFamily)}
+					textAlignment={textAlignment}
 				>
 					<div
 						className={styles.innerContainer}
@@ -132,6 +149,8 @@ const TextPreview = props => {
 					lineHeight={lineHeight}
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
+					fontFamily={getFontFamily(fontFamily)}
+					textAlignment={textAlignment}
 				>
 					<div
 						className={styles.innerContainer}

@@ -65,7 +65,6 @@ export const createNewUser = newUserObject => new Promise(resolve => {
 		})
 })
 
-
 export const checkPassword = userObject => new Promise(resolve => {
 	axios.post(apiEndpoints.checkPassword, JSON.stringify(userObject), {
 		headers,

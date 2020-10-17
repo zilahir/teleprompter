@@ -11,7 +11,7 @@ import { Colors, FULL_LOADER, INLINE_LOADER } from '../../utils/consts'
 * @function Loader
 * */
 
-const Loader = ({ isLoading, color, type }) => (
+const Loader = ({ isLoading, color, type, width, height }) => (
 	<>
 		{
 			isLoading && type === FULL_LOADER
@@ -31,8 +31,8 @@ const Loader = ({ isLoading, color, type }) => (
 							<ReactLoading
 								type="spin"
 								color={color}
-								width={10}
-								height={10}
+								width={width}
+								height={height}
 							/>
 						</div>
 					)
@@ -43,14 +43,18 @@ const Loader = ({ isLoading, color, type }) => (
 
 Loader.defaultProps = {
 	color: Colors.purple,
+	height: 10,
 	isLoading: false,
 	type: FULL_LOADER,
+	width: 10,
 }
 
 Loader.propTypes = {
 	color: PropTypes.string,
+	height: PropTypes.number,
 	isLoading: PropTypes.bool,
 	type: PropTypes.string,
+	width: PropTypes.number,
 }
 
 export default Loader

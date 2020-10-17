@@ -1,9 +1,8 @@
-html {
-    background: #3a3a3a;
-}
-
 body {
-    color: white;
     margin: 0;
     padding: 0;
+}
+
+#root {
+    position: relative;
 }

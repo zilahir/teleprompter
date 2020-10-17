@@ -1,68 +1,104 @@
-@import '../../styles/mixins/paragraph.scss';
+@import '../../styles/variables';
+@import '../../styles/mixins/paragraph';
 
-.actionHeaderContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 30px;
-    padding-top: 40px;
+.btnList {
+	display: flex;
+	list-style-type: none;
+	li {
+		margin-right: 20px;
+	}
 
-    &.alignEnd {
-        justify-content: flex-end;
-    }
-    .actionList {
-        list-style-type: none;
-        display: inline-flex;
-        li {
-            margin-right: 10px;
-        }
-    }
-    .loggedInActionList {
-        list-style-type: none;
-        display: inline-flex;
-        li {
-            margin-right: 20px;
-        }
-    }
+	&.flexStart {
+		padding-left: 0;
+	}
+
+	&.flexEnd {
+		li {
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+	}
+
+	&.hidden {
+		display: none;
+		visibility: hidden;
+	}
+}
+
+.innerContainer {
+	display: flex;
+	align-items: center;
+}
+
+.topHeaderRoot {
+	padding-left: 0;
+	padding-right: 0;
+	background: rgba($color: $gray-1, $alpha: 1.0);
+	position: relative;
+	z-index: 99;
+
+	.logoContainer {
+		justify-content: flex-end;
+		display: flex;
+		position: relative;
+		left: 20px;
+		overflow: hidden;
+		flex: 0 0 25%;
+		width: 25%;
+		left: auto;
+		right: auto;
+
+		div {
+			width: 250px;
+			img {
+				max-width: 133px;
+			}
+		}
+	}
+
+	.middleContainer {
+		width: 50%;
+		flex: 0 0 50%;
+		display: flex;
+		justify-content: space-between;
+		z-index: 9;
+	}
+
+	.rightContainer {
+		flex: 0 0 25%;
+		width: 25%;
+		left: auto;
+		right: auto;
+		position: relative;
+
+		.btnList {
+			margin-left: 20px;
+		}
+	}
 }
 
 .modal {
-    padding: 30px;
+	padding: 30px;
 
-    h3 {
-        @include paragraph(14px, #ffffff);
-        font-weight: 300;
-        margin: 0;
-        margin-bottom: 20px;
-        max-width: 500px;
-    }
+	h3 {
+			@include paragraph(14px, #ffffff);
+			font-weight: 300;
+			margin: 0;
+			margin-bottom: 20px;
+			max-width: 500px;
+	}
 
-    p {
-        @include paragraph(14px, #ffffff);
-    }
+	p {
+			@include paragraph(14px, #ffffff);
+	}
 
-    .buttonContainer {
-        display: flex;
-        padding-top: 30px;
-        button {
-            margin: 0 10px;
-            font-weight: 300;
-        }
-    }
-}
-
-.metaContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 30px;
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        margin-right: 10px; 
-    }
-
-    &.hidden {
-        display: none;
-    }
+	.buttonContainer {
+			display: flex;
+			padding-top: 30px;
+			button {
+					margin: 0 10px;
+					font-weight: 300;
+			}
+	}
 }

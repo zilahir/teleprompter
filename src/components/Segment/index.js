@@ -1,69 +1,132 @@
-/* eslint-disable no-undef */
-import React from 'react'
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useStore, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import Icon from 'react-icons-kit'
-import { times } from 'react-icons-kit/fa/times'
+import { useSelector, useDispatch } from 'react-redux'
+import CloseIcon from '@material-ui/icons/Close'
+import TextareaAutosize from 'react-autosize-textarea'
 
-import PrompterIcon from '../common/Icon'
-import { Colors } from '../../utils/consts'
-// import { setSegments } from '.././../store/actions/segments'
 import styles from './Segment.module.scss'
+import Input from '../common/Input'
+import ColorPicker from '../ColorPicker'
+import { modifySegment, setSegments } from '../../store/actions/segments'
 
 /**
-* @author zilahir
-* @function Segment
-* */
+ * @author zilahir
+ * @function Segemnt
+ * */
 
-const SegmentContainer = styled.div`
-	border-color: ${props => props.segmentColor};
+const OnseSegment = styled.div`
+	border-color: ${props => props.borderColor};
 `
 
-const Segment = props => {
-	const { segmentText, segmentName, segmentColor, segmentId } = props
-	const store = useStore()
+const SegmentIndicator = styled.span`
+	background-color: ${props => props.segmentColor};
+`
+
+const Segment = ({
+	segmentColor,
+	segmentTitle,
+	segmentKey,
+	segmentId,
+}) => {
+	const thisSegmentRef = useRef(null)
+	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
 	const dispatch = useDispatch()
-	function handleSegmentDelete() {
-		const allSegments = store.getState().segments.segments
-		const filtered = allSegments.filter(segment => (
-			segment.id !== segmentId
-		))
-		Promise.all([
-			dispatch(setSegments(filtered)),
-		])
+
+	const thisSegment = useSelector(
+		state => state.segments.segments.find(segment => segment.id === segmentId),
+	)
+
+	const allSegments = useSelector(state => state.segments.segments)
+
+	function handleSegmentNameChange(newSegmentTitle) {
+		dispatch(modifySegment({
+			...thisSegment,
+			segmentTitle: newSegmentTitle,
+		}))
 	}
+
+	function handleSegmentTextChange(newSegmentText) {
+		dispatch(modifySegment({
+			...thisSegment,
+			segmentText: newSegmentText,
+		}))
+	}
+
+	function handleSegmentColorChange(newColor) {
+		dispatch(modifySegment({
+			...thisSegment,
+			segmentColor: newColor,
+		}))
+		toggleColorPickerOpen(false)
+	}
+
+	function handleSegmentDelete() {
+		const filteredSegments = allSegments.filter(segment => segment.id !== segmentId)
+		dispatch(setSegments(filteredSegments))
+	}
+
 	return (
-		<SegmentContainer
-			className={styles.segmentContainer}
-			segmentColor={segmentColor}
-		>
-			<div className={styles.segmentHeader}>
-				<h1>
-					{segmentName} {segmentId}
-				</h1>
-				<div className={styles.deleteIconContainer}>
-					<PrompterIcon
-						color={Colors.gray4}
-						onClick={() => handleSegmentDelete()}
-						icon={
-							<Icon icon={times} size="1em" />
-						}
+		<>
+			<OnseSegment
+				className={styles.oneSegment}
+				borderColor={segmentColor}
+			>
+				<div className={styles.segmentHeader}>
+					<Input
+						labelText={null}
+						inputClassName={styles.segmentName}
+						placeholder="Add segment name"
+						onFocusOut={event => handleSegmentNameChange(event.target.value)}
+						inheritedValue={segmentTitle}
+					/>
+					<ul>
+						<li
+							onClick={() => toggleColorPickerOpen(currStatus => !currStatus)}
+						>
+							<SegmentIndicator
+								segmentColor={segmentColor}
+								className={styles.segmentColorIndicator}
+							/>
+						</li>
+						<li>
+							<button
+								type="button"
+								className={styles.deleteBtn}
+								onClick={() => handleSegmentDelete()}
+							>
+								<CloseIcon htmlColor="#ffffff" />
+							</button>
+						</li>
+					</ul>
+				</div>
+				<div className={styles.segmentBody}>
+					<TextareaAutosize
+						onChange={event => handleSegmentTextChange(event.target.value)}
+						className={styles.segmentText}
+						value={thisSegment.segmentText}
+						ref={thisSegmentRef}
 					/>
 				</div>
-			</div>
-			<p>
-				{segmentText}
-			</p>
-		</SegmentContainer>
+				<ColorPicker
+					isVisible={isColorPickerOpen}
+					onClose={() => toggleColorPickerOpen(false)}
+					segmentIndex={segmentKey}
+					segmentColor={segmentColor}
+					onChangeColor={color => handleSegmentColorChange(color)}
+				/>
+			</OnseSegment>
+		</>
 	)
 }
 
 Segment.propTypes = {
 	segmentColor: PropTypes.string.isRequired,
-	segmentId: PropTypes.number.isRequired,
-	segmentName: PropTypes.string.isRequired,
-	segmentText: PropTypes.string.isRequired,
+	segmentId: PropTypes.string.isRequired,
+	segmentKey: PropTypes.number.isRequired,
+	segmentTitle: PropTypes.string.isRequired,
 }
 
 export default Segment

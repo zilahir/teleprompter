@@ -2,9 +2,10 @@ import React from 'react'
 import { Row, Container, Col } from 'react-grid-system'
 import ReactGA from 'react-ga'
 import { useHistory } from 'react-router-dom'
+import CloseIcon from '@material-ui/icons/Close'
+import classnames from 'classnames'
 
 import styles from './Policy.module.scss'
-import Button from '../common/Button'
 import { POLICY } from '../../utils/consts'
 
 /**
@@ -16,18 +17,29 @@ const Policy = () => {
 	ReactGA.pageview(`${POLICY}`)
 	const history = useHistory()
 	return (
-		<div className={styles.aboutWrapper}>
+		<div className={classnames(
+			styles.aboutWrapper,
+			styles.dark,
+		)}
+		>
 			<Container
 				fluid
 			>
 				<Row>
-					<Col className={styles.dark} lg={3} />
-					<Col className={styles.middle} lg={6}>
-						<Button
-							labelText="Back"
-							onClick={() => history.goBack()}
-							buttonClass={styles.buttonContainer}
-						/>
+					<Col className={styles.middle} lg={12}>
+						<div className={classnames(
+							styles.closeBtnContainer,
+							styles.policyBtn,
+						)}
+						>
+							<button
+								type="button"
+								onClick={() => history.goBack()}
+								className={styles.closeBtn}
+							>
+								<CloseIcon htmlColor="#ffffff" />
+							</button>
+						</div>
 						<div className={styles.textContainer}>
 							<p>
 								Privacy Policy for Prompter.me
@@ -107,12 +119,13 @@ const Policy = () => {
 								tracking users&apos; movement on the website, and gathering demographic information.
 							</p>
 							<p>
-							Cookies and Web Beacons Like any other website, Prompter.me uses &apos;cookies&apos;.
-							These cookies are used to store information including visitors&apos; preferences,
-							and the pages on the website that the visitor accessed or visited.
-							The information is used to optimize the users&apos; experience by
-							customizing our web page content based on visitors&apos;
-							browser type and/or other information.
+								Cookies and Web Beacons Like any other website,
+								Prompter.me uses &apos;cookies&apos;.
+								These cookies are used to store information including visitors&apos; preferences,
+								and the pages on the website that the visitor accessed or visited.
+								The information is used to optimize the users&apos; experience by
+								customizing our web page content based on visitors&apos;
+								browser type and/or other information.
 							</p>
 							<p>
 								Third Party Privacy Policies Prompter.me&apos;s Privacy Policy does not apply
@@ -157,7 +170,6 @@ const Policy = () => {
 							</p>
 						</div>
 					</Col>
-					<Col className={styles.dark} lg={3} />
 				</Row>
 			</Container>
 		</div>

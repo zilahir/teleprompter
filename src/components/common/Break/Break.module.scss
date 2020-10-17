@@ -1,0 +1,72 @@
+@import '../../../styles/variables';
+
+.oneBreak {
+	display: flex;
+	height: 30px;
+	background: rgba($color: $gray-2, $alpha: 1.0);
+	border-radius: $border-radius * 2;
+	padding: 0 10px;
+
+	&:focus {
+		outline: none;
+	}
+
+	.middle {
+		flex: 1;
+		display: flex;
+		position: relative;
+		color: #ffffff;
+		justify-content: center;
+		align-items: center;
+
+		.icon {
+			&:before {
+				content: '';
+				height: 2px;
+				width: calc((100% / 2) - 20px);
+				position: absolute;
+				background-color: rgba($color: #ffffff, $alpha: 1.0);
+				left: 0;
+				top: 50%;
+			}
+	
+			&:after {
+				content: '';
+				height: 2px;
+				width: calc((100% / 2) - 20px);
+				position: absolute;
+				background-color: rgba($color: #ffffff, $alpha: 1.0);
+				right: 0;
+				top: 50%;
+			}
+		}
+	}
+
+	.deleteIconContainer {
+		color: rgba($color: #ffffff, $alpha: 1.0);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+
+		.deleteBtn {
+			border: 0;
+			background: none;
+			margin: 0;
+			padding: 0;
+			color: rgba($color: #ffffff, $alpha: 1.0);
+			display: inline-block;
+			font-size: unset;
+			width: 24px;
+			height: 24px;
+
+			&:focus {
+				outline: none;
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}

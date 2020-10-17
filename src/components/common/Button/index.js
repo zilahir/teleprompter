@@ -25,7 +25,7 @@ const Button = props => {
 	return (
 		<>
 			{
-				type === BUTTON
+				type === BUTTON && isVisible
 					? (
 						<div className={classnames(
 							styles.buttonContainer,
@@ -61,6 +61,7 @@ const Button = props => {
 									type="button"
 									onClick={onClick}
 									className={styles.linkButton}
+									disabled={disabled}
 								>
 									{labelText}
 								</button>

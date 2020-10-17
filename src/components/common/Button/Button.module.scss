@@ -3,7 +3,7 @@
 
 .buttonContainer {
     .button {
-        width: 242px;
+        min-width: 242px;
         height: 57px;
         border-radius: 32px;
         background-color: rgba($color: $purple, $alpha: 0.9);
@@ -36,6 +36,8 @@
 
         .icon {
             margin-right: 10px;
+            width: 24px;
+            height: 24px;
         }
     }
     .linkButton {
@@ -43,13 +45,23 @@
         background-color: transparent;
         @include paragraph(14px, #fff, 0.85px);
         transition: all .2s ease;
+
         &:hover {
             cursor: pointer;
             color: $purple;
             transition: all .2s ease;
         }
+
         &:focus {
             outline: none;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+
+            &:hover {
+                pointer-events: none;
+            }
         }
     }
 }

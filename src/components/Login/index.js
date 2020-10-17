@@ -11,6 +11,7 @@ import { useDispatch, useStore } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
+import styled from 'styled-components'
 
 import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
@@ -19,17 +20,22 @@ import Button from '../common/Button'
 import { authUser, createNewUser } from '../../store/actions/authUser'
 import { getAllUserPrompter, setPrompterSlug, setPrompterProjectName, deletePrompter, createNewPrompter } from '../../store/actions/prompter'
 import Loader from '../Loader'
-import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, setText, toggleMirror } from '../../store/actions/text'
+import { setFontSize, setLineHeight, setLetterSpacing, setScrollWidth, setScrollSpeed, clearText, toggleMirror, setFont, setTextAlignment } from '../../store/actions/text'
 import Modal from '../common/Modal'
 import ForgottenPasswordModal from '../ForgottenPasswordModal'
+import { setSegments } from '../../store/actions/segments'
 
 /**
 * @author zilahir
 * @function Login
 * */
 
+const BoxContainer = styled.div`
+	left: ${props => props.left}px;
+`
+
 const Login = props => {
-	const { type, isVisible, requestClose } = props
+	const { type, isVisible, requestClose, leftPosition } = props
 	const dispatch = useDispatch()
 	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
@@ -47,6 +53,7 @@ const Login = props => {
 	const [delProject, setProjectToDel] = useState(null)
 	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
 	const [username, setUsername] = useState(null)
+
 	function handleLogin() {
 		Promise.all([
 			dispatch(authUser({ email, password })),
@@ -64,12 +71,13 @@ const Login = props => {
 
 	function handleSave() {
 		const slug = store.getState().userPrompters.prompterSlug
+		const { segments } = store.getState().segments
 		toggleSavingLoader(true)
 		const newPrompterObject = store.getState().text
 		const { user } = store.getState().user
 		const saveObject = {
 			slug,
-			text: newPrompterObject.text,
+			segments,
 			userId: user.userId,
 			projectName,
 			meta: {
@@ -79,6 +87,8 @@ const Login = props => {
 				scrollWidth: newPrompterObject.scrollWidth,
 				scrollSpeed: newPrompterObject.scrollSpeed,
 				isFlipped: newPrompterObject.isFlipped,
+				chosenFont: newPrompterObject.chosenFont,
+				textAlignment: newPrompterObject.textAlignment,
 			},
 		}
 		Promise.all([
@@ -99,10 +109,12 @@ const Login = props => {
 	function handleLoad(selectedPrompter) {
 		dispatch(clearText())
 		Promise.all([
-			dispatch(setText(selectedPrompter.text)),
+			dispatch(setSegments(selectedPrompter.segments)),
 			dispatch(setPrompterProjectName(selectedPrompter.projectName)),
 			dispatch(setFontSize(selectedPrompter.meta.fontSize)),
 			dispatch(setLineHeight(selectedPrompter.meta.lineHeight)),
+			dispatch(setFont(selectedPrompter.meta.chosenFont)),
+			dispatch(setTextAlignment(selectedPrompter.meta.textAlignment)),
 			dispatch(setLetterSpacing(selectedPrompter.meta.letterSpacing)),
 			dispatch(setScrollWidth(selectedPrompter.meta.scrollWidth)),
 			dispatch(setScrollSpeed(selectedPrompter.meta.scrollSpeed)),
@@ -178,10 +190,12 @@ const Login = props => {
 			{
 				type === LOGIN
 					? (
-						<div className={classnames(
-							styles.loginBoxContainer,
-							isVisible ? styles.show : styles.hidden,
-						)}
+						<BoxContainer
+							className={classnames(
+								styles.loginBoxContainer,
+								isVisible ? styles.show : styles.hidden,
+							)}
+							left={leftPosition}
 						>
 							<Input
 								placeholder="Email"
@@ -221,16 +235,18 @@ const Login = props => {
 									Invalid email or password. Try again.
 								</p>
 							</div>
-						</div>
+						</BoxContainer>
 					)
 					: type === REGISTER
 						? (
-							<div className={classnames(
-								styles.loginBoxContainer,
-								styles.regContainer,
-								isVisible ? styles.show : styles.hidden,
-								isRegistering || isRegistered ? styles.registering : null,
-							)}
+							<BoxContainer
+								className={classnames(
+									styles.loginBoxContainer,
+									styles.regContainer,
+									isVisible ? styles.show : styles.hidden,
+									isRegistering || isRegistered ? styles.registering : null,
+								)}
+								left={leftPosition}
 							>
 								{
 									isRegistering || isRegistered
@@ -291,14 +307,16 @@ const Login = props => {
 											</>
 										)
 								}
-							</div>
+							</BoxContainer>
 						) : type === LOAD
 							? (
-								<div className={classnames(
-									styles.loginBoxContainer,
-									styles.itemBoxContainer,
-									isVisible ? styles.show : styles.hidden,
-								)}
+								<BoxContainer
+									className={classnames(
+										styles.loginBoxContainer,
+										styles.itemBoxContainer,
+										isVisible ? styles.show : styles.hidden,
+									)}
+									left={leftPosition}
 								>
 									<ul className={styles.savedItems}>
 										{
@@ -333,15 +351,17 @@ const Login = props => {
 											))
 										}
 									</ul>
-								</div>
+								</BoxContainer>
 							) : type === SAVE
 								? (
-									<div className={classnames(
-										styles.loginBoxContainer,
-										styles.itemBoxContainer,
-										styles.saveContainer,
-										isVisible ? styles.show : styles.hidden,
-									)}
+									<BoxContainer
+										className={classnames(
+											styles.loginBoxContainer,
+											styles.itemBoxContainer,
+											styles.saveContainer,
+											isVisible ? styles.show : styles.hidden,
+										)}
+										left={leftPosition}
 									>
 										{
 											isSaving || isSaved
@@ -376,7 +396,7 @@ const Login = props => {
 													</>
 												)
 										}
-									</div>
+									</BoxContainer>
 								)
 								: null
 			}
@@ -417,11 +437,13 @@ const Login = props => {
 }
 
 Login.defaultProps = {
+	leftPosition: 0,
 	requestClose: null,
 }
 
 Login.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
+	leftPosition: PropTypes.number,
 	requestClose: PropTypes.func,
 	type: PropTypes.string.isRequired,
 }

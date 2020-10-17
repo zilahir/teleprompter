@@ -4,7 +4,8 @@
 .actionSidebarContainer {
     background-color: $gray-2;
     .innerContainer {
-        margin: 50px 40px;
+        margin: 30px 40px;
+        max-width: 230px;
 
         .testAnimation {
             padding: 10px 0;
@@ -13,16 +14,45 @@
         }
 
         .playButtonContainer {
+
+            button {
+                font-weight: 600;
+                text-transform: none;
+                font-size: 16px;
+                letter-spacing: 0.45px;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+
             .updateBtn {
                 margin-bottom: 20px;
+                display: flex;
+
                 button {
-                    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5)
+                    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5);
                 }
             }
 
             .playBtn {
+                transition: all 0.2 ease-in-out;
+
+                &.hidden {
+                    opacity: 0;
+                }
+
+                &.visible {
+                    opacity: 1;
+                }
+
                 button {
-                    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5)
+                    box-shadow: 3px 3px 20px rgba($color: #000000, $alpha: 0.5);
+                    text-transform: capitalize;
+
+                    div {
+                        position: relative;
+                        top: 2px;
+                    }
                 }
             }
         }

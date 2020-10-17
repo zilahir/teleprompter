@@ -14,7 +14,6 @@ import Logo from '../common/Logo'
 import { getPasswordResetObject, resetPassword, setPasswordRecoveryToUsed } from '../../store/actions/user'
 import { FORGOTTEN_PW } from '../../utils/consts'
 
-
 /**
 * @author zilahir
 * @function Password

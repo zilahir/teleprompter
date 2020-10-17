@@ -21,6 +21,7 @@
 	opacity: 0.9;
 	z-index: 9;
 	backdrop-filter: blur($modal-backdrop-blur-value / 2);
+	left: 0;
 }
 
 .modalWrapper {
@@ -72,6 +73,20 @@
 
 			.closeBtn {
 				background: none;
+				border: none;
+				box-shadow: none;
+				align-self: flex-end;
+				display: flex;
+				justify-content: flex-end;
+				width: 100%;
+
+				&:focus {
+					outline: none;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
 			}
 		}
 	}
