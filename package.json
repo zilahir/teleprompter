@@ -18,7 +18,7 @@
     "array-move": "^3.0.1",
     "axios": "^0.19.1",
     "classnames": "^2.2.6",
-    "framer-motion": "^2.6.6",
+    "framer-motion": "^2.9.1",
     "hex-to-rgba": "^2.0.1",
     "lodash": "^4.17.20",
     "moment": "^2.24.0",
