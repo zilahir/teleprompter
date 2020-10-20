@@ -182,7 +182,7 @@ const TextScroller = props => {
 	return (
 		<div className={classnames(
 			styles.rootContainer,
-			styles[chosenColorSchame],
+			styles[chosenColorSchame.toLowerCase()],
 		)}
 		>
 			<Scroller

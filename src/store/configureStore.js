@@ -10,7 +10,7 @@ import userPrompters from './reducers/prompter'
 import misc from './reducers/misc'
 
 const persistConfig = {
-	key: 'root',
+	key: 'rootv2',
 	storage,
 }
 
