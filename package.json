@@ -16,7 +16,7 @@
     "@popmotion/popcorn": "^0.4.4",
     "@zilahir/use-socket.io-client": "^1.2.0",
     "array-move": "^3.0.1",
-    "axios": "^0.19.1",
+    "axios": "^0.21.0",
     "classnames": "^2.2.6",
     "framer-motion": "^2.9.1",
     "hex-to-rgba": "^2.0.1",
