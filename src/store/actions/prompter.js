@@ -150,3 +150,12 @@ export const updatePrompter = updatedPrompterObject => new Promise(resolve => {
 			})
 		})
 })
+
+export const getPrompterBySlug = slug => new Promise(resolve => {
+	axios.get(`${apiEndpoints.getPrompterBySlugNoAuth}/${slug}`, {
+		headers,
+	})
+		.then(response => {
+			resolve(response.data)
+		})
+})
