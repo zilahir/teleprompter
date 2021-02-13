@@ -20,4 +20,5 @@ export const apiEndpoints = {
 	sendPasswordRecoveryEmail: `${apiRoot}/email/password`,
 	checkPassword: `${apiRoot}/auth/checkpassword`,
 	deleteUser: `${apiRoot}/users`,
+	getPrompterBySlugNoAuth: `${apiRoot}/prompternoauth`,
 }
