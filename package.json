@@ -7,6 +7,9 @@
     "email": "zilahi@gmail.com",
     "url": "https://richardzilahi.hu"
   },
+  "engines": {
+    "node": ">=0.10.3 <15"
+  },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
