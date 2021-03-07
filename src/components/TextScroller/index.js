@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useRef, useState, useEffect } from 'react'
 import { Waypoint } from 'react-waypoint'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
@@ -67,7 +68,7 @@ const TextScroller = props => {
 	const [playing, setPlaying] = useState(false)
 	const [position, setPosition] = useState(0)
 	const [STEP, setStep] = useState(1)
-	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed)
+	const [scrollSpeedValue, setScrollSpeedValue] = useState(scrollSpeed * 0.5)
 	const scrollerRef = useRef(null)
 	const { slug } = useParams()
 	const chosenColorSchame = useSelector(state => state.misc.chosenColorScheme)

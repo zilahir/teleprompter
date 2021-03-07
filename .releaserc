@@ -10,10 +10,8 @@
       "preset": "conventionalcommits",
 			"config": "conventional-changelog-conventionalcommits",
       "parserOpts": {
-        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
-				"issuePrefixes": "XES-",
-				"issueUrlFormat": "https://salesinteractive.atlassian.net/browse/${prefix}${id}"
-      }
+        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
+				}
     }],
 		["@semantic-release/npm"],
     ["@semantic-release/release-notes-generator", {
@@ -30,7 +28,7 @@
 			"changelogFile": "./CHANGELOG.md"
 		}],
 		["@semantic-release/git", {
-				"assets": ["package.json", "./src/**/*.{js, scss, css, ts, tsx, json}", "./docs/CHANGELOG.md"]
+				"assets": ["package.json", "./src/**/*.{js, scss, css, ts, tsx, json}", "./CHANGELOG.md"]
 			}
 		]
   ]
