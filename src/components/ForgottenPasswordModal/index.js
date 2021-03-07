@@ -7,6 +7,8 @@ import styles from './ForgottenPasswordModal.module.scss'
 import Input from '../common/Input'
 import Button from '../common/Button'
 import { requestPasswordRecovery, getToken, sendPasswordRecoveryEmail } from '../../store/actions/user'
+import Loader from '../Loader'
+import { INLINE_LOADER } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -16,16 +18,19 @@ import { requestPasswordRecovery, getToken, sendPasswordRecoveryEmail } from '..
 const ForgottenPasswordModal = props => {
 	const { showPasswordModal, requestClose } = props
 	const [email, setEmail] = useState(null)
+	const [isEmailsent, toggleEmailSent] = useState(false)
+	const [isLoading, togleLoading] = useState(false)
 
 	function sendForgottenPasswordEmail() {
 		const slug = uuidv4().split('-')[0]
+		togleLoading(isLoading)
 		const requestPassword = requestPasswordRecovery(slug, email)
 		requestPassword.then(() => {
 			const token = getToken(email)
 			token.then(tokenRes => {
 				const sendEmail = sendPasswordRecoveryEmail(email, slug, tokenRes.token)
 				sendEmail.then(() => {
-					// TODO: show success message
+					toggleEmailSent(true)
 				})
 			})
 		})
@@ -39,28 +44,44 @@ const ForgottenPasswordModal = props => {
 				modalClassName={styles.forgottenPasswordModal}
 				hasCloseIcon={false}
 			>
-				<p>
-					Enter your email address, and we will send you a password.
-				</p>
-				<div className={styles.inputContainer}>
-					<Input
-						placeholder="Email"
-						inputClassName={styles.input}
-						getBackValue={v => setEmail(v)}
-					/>
-				</div>
-				<div className={styles.btnContainer}>
-					<Button
-						labelText="Cancel"
-						onClick={requestClose}
-						isNegative
-					/>
-					<Button
-						labelText="Send"
-						disabled={!email || false}
-						onClick={() => sendForgottenPasswordEmail()}
-					/>
-				</div>
+				{
+					!isEmailsent ? (
+						<>
+							<p>
+								Enter your email address, and we will send a recovery email
+							</p>
+							<div className={styles.inputContainer}>
+								<Input
+									placeholder="Email"
+									inputClassName={styles.input}
+									getBackValue={v => setEmail(v)}
+								/>
+							</div>
+							<div className={styles.btnContainer}>
+								<Button
+									labelText="Cancel"
+									onClick={requestClose}
+									isNegative
+								/>
+								<Button
+									labelText={
+										isLoading ? <Loader width={20} height={20} type={INLINE_LOADER} isLoading={isLoading} /> : 'Send'
+									}
+									disabled={!email || isLoading}
+									onClick={() => sendForgottenPasswordEmail()}
+								/>
+							</div>
+						</>
+					) : (
+						<div className={styles.emailSentContainer}>
+							<p>We have sent you an email. Check your inbox!</p>
+							<Button
+								labelText="Got it"
+								onClick={requestClose}
+							/>
+						</div>
+					)
+				}
 			</Modal>
 		</>
 	)

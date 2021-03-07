@@ -172,6 +172,11 @@ const Login = props => {
 		})
 	}
 	const { usersPrompters } = store.getState().userPrompters
+
+	function handleForgotPassword() {
+		toggleForgottenPasswordModal(true)
+		requestClose()
+	}
 	return (
 		<>
 			{
@@ -220,7 +225,7 @@ const Login = props => {
 								role="button"
 								onKeyDown={null}
 								tabIndex={-1}
-								onClick={() => toggleForgottenPasswordModal(true)}
+								onClick={() => handleForgotPassword()}
 							>
 								<p>
 									I forgot my password!

@@ -12,7 +12,7 @@ import Button from '../common/Button'
 import Input from '../common/Input'
 import Logo from '../common/Logo'
 import { getPasswordResetObject, resetPassword, setPasswordRecoveryToUsed } from '../../store/actions/user'
-import { FORGOTTEN_PW } from '../../utils/consts'
+import { FORGOTTEN_PW, PASSWORD } from '../../utils/consts'
 
 /**
 * @author zilahir
@@ -106,9 +106,11 @@ const Password = () => {
 												<Input
 													placeholder="New password"
 													getBackValue={v => setNewPassword(v)}
+													inputType={PASSWORD}
 													labelText="New password"
 												/>
 												<Input
+													inputType={PASSWORD}
 													placeholder="Confirm new password"
 													getBackValue={v => setConfirmNewpassword(v)}
 													labelText="Confirm new password"

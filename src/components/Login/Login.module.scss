@@ -159,6 +159,10 @@
     }
 
     .forgottenContainer {
+        &:focus {
+            outline: none
+        }
+
         p {
             @include paragraph(14px, $purple, 0);
             margin-top: 20px;

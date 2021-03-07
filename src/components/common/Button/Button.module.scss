@@ -12,6 +12,10 @@
         border: none;
         font-weight: 800;
 
+        &:focus {
+            outline: none;
+        }
+
         &:hover {
             cursor: pointer;
             background-color: rgba($color: $purple, $alpha: 1);
