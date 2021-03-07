@@ -1,5 +1,6 @@
 @import '../../styles/variables';
 @import '../../styles/mixins/label';
+@import '../../styles/mixins/paragraph';
 
 .editorSidebarContainer {
     background-color: $gray-2;
@@ -23,6 +24,39 @@
                 margin-top: 0;
                 @include labelText;
                 font-weight: 400;
+            }
+        }
+    }
+}
+
+.footerContanier {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 4px 0px;
+    margin-right: 45px;
+    padding-bottom: 10px;
+    padding-top: 20px;
+
+    .github {
+        color: inherit;
+        margin-top: 10px;
+        svg {
+            fill: $purple;
+        }
+    }
+    p {
+        @include paragraph(14px, #ffffff, 0.42px);
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            margin-left: 20px;
+
+        span {
+            &.purple {
+                color: $purple;
             }
         }
     }

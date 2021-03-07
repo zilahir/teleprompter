@@ -12,7 +12,6 @@ import styles from './Main.module.scss'
 import { setPrompterSlug, getAllUserPrompter, clearPrompterObject } from '../../store/actions/prompter'
 import { toggleMirror } from '../../store/actions/text'
 import { toggleUpdateBtn } from '../../store/actions/misc'
-import Footer from '../Footer'
 import ActionHeader from '../ActionHeader'
 import { setSegments } from '../../store/actions/segments'
 import { colors, SEGMENT } from '../../utils/consts'
@@ -61,7 +60,6 @@ const Main = () => {
 					</Row>
 				</Container>
 			</div>
-			<Footer />
 		</>
 	)
 }

@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Col } from 'react-grid-system'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
+import Icon from 'react-icons-kit'
+import { github } from 'react-icons-kit/fa/github'
 
 import SliderAlt from '../common/SliderAlt'
 import Selector from '../common/Selector'
-import { scrollWidthSettngs, colorSchemeSettings, fontOptions, alignmentOptions } from '../../utils/consts'
+import { scrollWidthSettngs, colorSchemeSettings, fontOptions, alignmentOptions, Colors } from '../../utils/consts'
 import { SET_FONT_SIZE, SET_LINE_HEIGHT, SET_LETTER_SPACING, SET_SCROLL_SPEED } from '../../store/actions/actionTypes'
 import styles from './EditorSidebar.module.scss'
 import './Toggle.scss'
@@ -163,6 +165,20 @@ const EditorSidebar = () => {
 							icons={null}
 						/>
 					</div>
+				</div>
+				<div className={styles.footerContanier}>
+					<p>
+						<a
+							rel="noopener noreferrer"
+							target="_blank"
+							href="https://www.netlify.com"
+						>
+							Powered <span className={styles.purple}>by Netlify</span>
+						</a>
+					</p>
+					<a className={styles.github} href="https://github.com/zilahir/teleprompter">
+						<Icon icon={github} size="34px" color={Colors.purple} />
+					</a>
 				</div>
 			</Col>
 		</>
