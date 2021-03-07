@@ -1,14 +1,24 @@
 name: 'Release'
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
 
 jobs:
+  semantic:
+    name: "Creating Release"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: bahmutov/npm-install@v1
+      - run: npx semantic-release
   deploy:
     name: 'Deploy to Netlify'
+    runs-on: ubuntu-latest
     steps:
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.MY_TOKEN_SECRET }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_DEPLOY_TO_PROD: true
+          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
