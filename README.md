@@ -28,7 +28,7 @@ The server is currently deployed to `AWS – Lambda`. You can crate your own ins
 
 ## Contributors
 
-- :nail_care: _design_: Mikko Oitinen 🇫🇮
+- :nail_care: _design_: Mikko Oitinen 🇫🇮 ([design](https://xd.adobe.com/view/614443a6-af97-49a7-603e-e82e2c667a77-1775/))
 - :computer: _dev_: Richard Zilahi [http](https://richardzilahi.hu) 🇭🇺
 
 ## Project dependencies
