@@ -1,6 +1,6 @@
 {
   "name": "teleprompter",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "private": true,
   "author": {
     "name": "Richard Zilahi",
@@ -92,6 +92,7 @@
     "@zilahir/eslint-config": "^1.0.1",
     "@zilahir/stylelint-config": "^3.0.7",
     "commitizen": "^4.2.3",
+    "conventional-changelog-conventionalcommits": "^4.5.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",

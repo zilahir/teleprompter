@@ -18,7 +18,6 @@
 		["@semantic-release/npm"],
     ["@semantic-release/release-notes-generator", {
       "preset": "conventionalcommits",
-			"commit": "commits",
 			"config": "conventional-changelog-conventionalcommits",
       "parserOpts": {
         "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
