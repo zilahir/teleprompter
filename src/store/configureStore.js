@@ -1,5 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import createMigrate from 'redux-persist/es/createMigrate'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -8,10 +9,13 @@ import text from './reducers/text'
 import user from './reducers/user'
 import userPrompters from './reducers/prompter'
 import misc from './reducers/misc'
+import { migrateStore } from './migrations/ver2'
 
 const persistConfig = {
-	key: 'rootv2',
+	key: 'root',
 	storage,
+	version: 2,
+	migrate: createMigrate(migrateStore, { debug: false }),
 }
 
 const rootReducer = combineReducers({
