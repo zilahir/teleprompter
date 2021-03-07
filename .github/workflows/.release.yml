@@ -25,7 +25,6 @@ jobs:
       - run: npm run build
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
-          node-version: '12.8.1'
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_DEPLOY_TO_PROD: true
           NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
