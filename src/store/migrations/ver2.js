@@ -1,12 +1,10 @@
-import { SANS } from '../../utils/consts'
+import { textState } from '../reducers/text'
 
 export const migrateStore = {
-	2: state => ({
+	3: state => ({
 		...state,
 		text: {
-			...state.text,
-			textAlignment: 0,
-			chosenFont: SANS,
+			...textState,
 		},
 	}),
 }

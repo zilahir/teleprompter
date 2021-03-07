@@ -14,8 +14,8 @@ import { migrateStore } from './migrations/ver2'
 const persistConfig = {
 	key: 'root',
 	storage,
-	version: 2,
-	migrate: createMigrate(migrateStore, { debug: false }),
+	version: 3,
+	migrate: createMigrate(migrateStore, { debug: true }),
 }
 
 const rootReducer = combineReducers({
