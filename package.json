@@ -1,7 +1,7 @@
 {
   "name": "teleprompter",
   "version": "2.1.0",
-  "private": true,
+  "private": false,
   "author": {
     "name": "Richard Zilahi",
     "email": "zilahi@gmail.com",
