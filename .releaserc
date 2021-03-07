@@ -1,0 +1,38 @@
+{
+	"branches": [
+		"master",
+		{ name: 'dev', prerelease: true },
+		{ name: 'next', prerelease: true },
+		"next-major",
+		],
+  "plugins": [
+    ["@semantic-release/commit-analyzer", {
+      "preset": "conventionalcommits",
+			"config": "conventional-changelog-conventionalcommits",
+      "parserOpts": {
+        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
+				"issuePrefixes": "XES-",
+				"issueUrlFormat": "https://salesinteractive.atlassian.net/browse/${prefix}${id}"
+      }
+    }],
+		["@semantic-release/npm"],
+    ["@semantic-release/release-notes-generator", {
+      "preset": "conventionalcommits",
+			"commit": "commits",
+			"config": "conventional-changelog-conventionalcommits",
+      "parserOpts": {
+        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"],
+      },
+      "writerOpts": {
+        "commitsSort": ["subject", "scope"],
+      }
+    }],
+		["@semantic-release/changelog", {
+			"changelogFile": "./CHANGELOG.md"
+		}],
+		["@semantic-release/git", {
+				"assets": ["package.json", "./src/**/*.{js, scss, css, ts, tsx, json}", "./docs/CHANGELOG.md"]
+			}
+		]
+  ]
+}
