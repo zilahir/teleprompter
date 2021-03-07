@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
@@ -223,7 +224,7 @@ const ActionHeader = () => {
 						<li>
 							<Button
 								labelText={
-									store.getState().user.loggedIn ? store.getState().user.user.username : 'Username'
+									isLoggedIn ? store.getState().user.user.email : 'Username'
 								}
 								type={LINK}
 								onClick={() => openUserSettingModal()}
