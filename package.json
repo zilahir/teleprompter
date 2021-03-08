@@ -92,7 +92,7 @@
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/npm": "github:semantic-release/npm",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "@typescript-eslint/parser": "^2.34.0",
+    "@typescript-eslint/parser": "^4.16.1",
     "@zilahir/eslint-config": "^1.0.1",
     "@zilahir/stylelint-config": "^3.0.7",
     "commitizen": "^4.2.3",
