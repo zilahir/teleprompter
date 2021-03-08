@@ -1,0 +1,31 @@
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+name: Stale Bot workflow
+jobs:
+  build:
+    name: stale
+    runs-on: ubuntu-latest
+    steps:
+      - name: stale
+        id: stale
+        uses: gatsbyjs/stale@0.1.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DAYS_BEFORE_STALE: 20
+          DAYS_BEFORE_CLOSE: 30
+          OPERATIONS_PER_RUN: 5000
+          STALE_ISSUE_MESSAGE: |
+            YO!
+
+            This issue has gone quiet. Spooky quiet. 👻
+            If you want to keep this open, let's do something about it together! 💪 Either fix the issue in question, or add a #wontfix label, and close it.
+            
+            The issue will be closed in 10 days.
+          CLOSE_MESSAGE: |
+            YO!
+
+            Since nothing has happened here in the last 30 dsys, this ticket is now closing. If whatever this issue concerns, and still needs to ba taken care of, create a new ticket.
+          EXEMPT_ISSUE_LABELS: |
+            not stale
+            status: triage needed
