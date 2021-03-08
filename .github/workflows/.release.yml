@@ -13,19 +13,24 @@ jobs:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
       - run: npx semantic-release
-  deploy:
+  release:
     name: 'Deploy to Netlify'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
       - uses: actions/setup-node@v2
         with:
             node-version: '14'
-      - uses: actions/checkout@v2
+      - name: NPM install
       - uses: bahmutov/npm-install@v1
-      - run: npm run build
-      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
+      - name: Deploy production to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.2.0
         with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_DEPLOY_TO_PROD: true
-          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          comment-on-commit: true
+          draft: false
