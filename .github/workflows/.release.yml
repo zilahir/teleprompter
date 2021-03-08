@@ -27,7 +27,9 @@ jobs:
           
       - name: NPM install
         uses: bahmutov/npm-install@v1
-        run: npm install
+      
+      - name: Build Application
+        run: npm run build
 
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0
