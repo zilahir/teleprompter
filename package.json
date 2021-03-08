@@ -27,7 +27,7 @@
     "lodash": "^4.17.20",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "random": "^3.0.3",
+    "random": "^2.2.0",
     "rc-slider": "^9.2.3",
     "react": "^17.0.1",
     "react-autosize-textarea": "^7.1.0",
@@ -69,7 +69,9 @@
     "eject": "react-scripts eject",
     "format": "prettier --write",
     "lint:js": "eslint --ext .js,.jsx .",
-    "lint:scss": "stylelint"
+    "lint:scss": "stylelint",
+    "prepare": "husky install",
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -117,12 +119,6 @@
       "yarn lint:js",
       "git add"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-commit": "yarn lint-staged"
-    }
   },
   "eslint-plugin-jsx-a11y": "^6.2.3"
 }
