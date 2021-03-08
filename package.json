@@ -69,9 +69,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --write",
     "lint:js": "eslint --ext .js,.jsx .",
-    "lint:scss": "stylelint",
-    "prepare": "husky install",
-    "postinstall": "husky install"
+    "lint:scss": "stylelint"
   },
   "eslintConfig": {
     "extends": "react-app"
