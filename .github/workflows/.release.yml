@@ -19,12 +19,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Set up Node.js
       - uses: actions/setup-node@v2
         with:
             node-version: '14'
+          
       - name: NPM install
         uses: bahmutov/npm-install@v1
+        run: npm install
+
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0
         with:
