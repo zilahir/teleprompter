@@ -57,14 +57,16 @@
             position: absolute;
             bottom: 0;
             overflow: hidden;
-            border-bottom-right-radius: 20px;
-            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: rgba($color: $success, $alpha: 0.8);
             p {
+                @include paragraph(12px, #ffffff, 0);
                 text-transform: uppercase;
+                padding: 20px 0;
             }
         }
     }

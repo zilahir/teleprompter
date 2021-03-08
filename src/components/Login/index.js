@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
@@ -136,6 +134,7 @@ const Login = props => {
 	function handlePrompterDelte(delObject) {
 		const { user } = store.getState().user
 		Promise.all([
+			// eslint-disable-next-line no-underscore-dangle
 			deletePrompter(delObject._id),
 		]).then(() => {
 			toggleModalOpen(false)
