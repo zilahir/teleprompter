@@ -11,6 +11,7 @@ import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
 import styled from 'styled-components'
 
+import { textState } from '../../store/reducers/text'
 import { LOGIN, REGISTER, PASSWORD, LOAD, SAVE, ENTER } from '../../utils/consts'
 import styles from './Login.module.scss'
 import Input from '../common/Input'
@@ -104,7 +105,14 @@ const Login = props => {
 		})
 	}
 
-	function handleLoad(selectedPrompter) {
+	function handleLoad(prompter) {
+		const selectedPrompter = {
+			...prompter,
+			meta: {
+				...prompter.meta,
+				...textState,
+			},
+		}
 		dispatch(clearText())
 		Promise.all([
 			dispatch(setSegments(selectedPrompter.segments)),
