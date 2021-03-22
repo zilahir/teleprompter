@@ -31,7 +31,7 @@
     "rc-slider": "^9.2.3",
     "react": "^17.0.1",
     "react-autosize-textarea": "^7.1.0",
-    "react-beautiful-dnd": "^13.0.0",
+    "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.18.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-device-detect": "^1.15.0",
