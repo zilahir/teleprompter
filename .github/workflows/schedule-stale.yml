@@ -1,31 +1,18 @@
+name: 'Close stale issues and PR'
 on:
   schedule:
-    - cron: "0 */12 * * *"
-name: Stale Bot workflow
+    - cron: '0 */12 * * *'
+
 jobs:
-  build:
-    name: stale
+  stale:
     runs-on: ubuntu-latest
     steps:
-      - name: stale
-        id: stale
-        uses: gatsbyjs/stale@0.1.0
+      - uses: actions/stale@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DAYS_BEFORE_STALE: 20
-          DAYS_BEFORE_CLOSE: 30
-          OPERATIONS_PER_RUN: 5000
-          STALE_ISSUE_MESSAGE: |
-            YO!
-
-            This issue has gone quiet. Spooky quiet. 👻
-            If you want to keep this open, let's do something about it together! 💪 Either fix the issue in question, or add a #wontfix label, and close it.
-            
-            The issue will be closed in 10 days.
-          CLOSE_MESSAGE: |
-            YO!
-
-            Since nothing has happened here in the last 30 dsys, this ticket is now closing. If whatever this issue concerns, and still needs to ba taken care of, create a new ticket.
-          EXEMPT_ISSUE_LABELS: |
-            not stale
-            status: triage needed
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: 'This issue is stale because it has been open 10 days with no activity. Remove stale label or comment or this will be closed in 30 days.'
+          stale-pr-message: 'This PR is stale because it has been open 50 days with no activity. Remove stale label or comment or this will be closed in 10 days.'
+          close-issue-message: 'This issue was closed because it has been stalled for 30 days with no activity.'
+          days-before-stale: 10
+          days-before-close: 30
+          days-before-pr-close: -1
