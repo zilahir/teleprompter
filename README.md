@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/80ef0317-b439-43a0-baf8-cd7646408ee4/deploy-status)](https://app.netlify.com/sites/prompterme/deploys) ![Dependabot](https://badgen.net/dependabot/zilahir/teleprompter?icon=dependabot) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 
 <p align="center">
@@ -11,8 +11,6 @@
 <p align="center">
 An opensource teleprompter application for the browser.
 </p>
-
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 # Teleprompter
 
@@ -35,7 +33,7 @@ The server is currently deployed to `AWS – Lambda`. You can crate your own ins
 
 ## Project dependencies
 
-This project heavily depends on the following `open source` projects. 
+This project heavily depends on the following `open source` projects.
 
 1. [`redux`](https://github.com/reduxjs/redux)
 2. [`react-redux`](https://github.com/reduxjs/react-redux)
@@ -45,9 +43,9 @@ This project heavily depends on the following `open source` projects.
 6. [`use-socket.io-client`](https://github.com/iamgyz/use-socket.io-client)
 7. [`uuid`](https://github.com/uuidjs/uuid)
 8. [`classnames`](https://github.com/JedWatson/classnames)
-7. [`prop-tpyes`](https://github.com/facebook/prop-types)
-8. [`hex-to-rgba`](https://github.com/misund/hex-to-rgba)
-9. [... and a lot other](https://github.com/zilahir/teleprompter/blob/master/package.json)
+9. [`prop-tpyes`](https://github.com/facebook/prop-types)
+10. [`hex-to-rgba`](https://github.com/misund/hex-to-rgba)
+11. [... and a lot other](https://github.com/zilahir/teleprompter/blob/master/package.json)
 
 ## Developing
 
