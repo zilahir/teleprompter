@@ -60,7 +60,7 @@ const useInterval = (callback, delay) => {
 }
 
 const TextScroller = props => {
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
 	const { segments, scrollSpeed, prompterObject } = props
 	const textRef = useRef(null)
 	const topRef = useRef(null)

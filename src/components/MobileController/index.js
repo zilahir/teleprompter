@@ -32,7 +32,7 @@ const MobileController = () => {
 	ReactGA.pageview(`${REMOTE}`)
 	const { slug } = useParams()
 	const [isPlaying, togglePlaying] = useState(false)
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
 	function handleStartStop() {
 		togglePlaying(!isPlaying)
 	}

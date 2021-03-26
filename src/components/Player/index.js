@@ -18,7 +18,7 @@ import { getPrompterBySlug } from '../../store/actions/prompter'
 
 const Player = () => {
 	ReactGA.pageview(`/${PLAYER}`)
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
 	const [prompterObject, setPrompterObject] = useState(undefined)
