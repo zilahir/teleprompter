@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import { useStore, useDispatch } from 'react-redux'
+import { useStore, useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import random from 'random'
 import shortid from 'shortid'
@@ -35,6 +35,7 @@ const ActionHeader = () => {
 	const [boxPosition, setBoxPosition] = useState(0)
 	const [isAboutPageVisible, toggleAboutModal] = useState(false)
 	const [isHowToUseModalOpen, toggleHowToUseModal] = useState(false)
+	const { userPrompters, user, text } = useSelector(store => store)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -81,13 +82,12 @@ const ActionHeader = () => {
 		toggleRegister(false)
 		toggleLoad(false)
 		toggleNewModal(false)
-		isProverSaved(store.getState().userPrompters.prompterSlug).then(isSavedResult => {
+		isProverSaved(userPrompters.prompterSlug).then(isSavedResult => {
 			if (!isSavedResult.isSuccess || target === SAVE_AS_COPY) {
 				toggleSave(!showSave)
 			} else {
-				const slug = store.getState().userPrompters.prompterSlug
-				const updatePrompterObject = store.getState().text
-				const { user } = store.getState().user
+				const slug = userPrompters.prompterSlug
+				const updatePrompterObject = text
 				const saveObject = {
 					slug,
 					text: updatePrompterObject.text,
@@ -134,9 +134,9 @@ const ActionHeader = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const savedPrompters = store.getState().userPrompters.usersPrompters.length
+		const savedPrompters = store.userPrompters.usersPrompters.length
 		setIsLoadVisible(savedPrompters)
-		if (store.getState().user.loggedIn) {
+		if (user.loggedIn) {
 			setIsLoggedIn(true)
 		} else {
 			setIsLoggedIn(false)
@@ -219,7 +219,7 @@ const ActionHeader = () => {
 						<li>
 							<Button
 								labelText={
-									isLoggedIn ? store.getState().user.user.email : 'Username'
+									isLoggedIn ? user.user.email : 'Username'
 								}
 								type={LINK}
 								onClick={() => openUserSettingModal()}
