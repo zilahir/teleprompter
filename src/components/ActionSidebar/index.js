@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import classnames from 'classnames'
 import { useSocket } from '@zilahir/use-socket.io-client'
@@ -20,7 +20,6 @@ import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } fro
 import { apiEndpoints } from '../../utils/apiEndpoints'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import Loader from '../Loader'
-import rootContext from '../Main/rootContext'
 
 /**
 * @author zilahir
@@ -41,7 +40,6 @@ const ActionSidebar = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
-	const { textPreview } = useContext(rootContext)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
 	if (socket) {
 		socket.connect()
@@ -164,7 +162,6 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text={textPreview}
 						isAnimationRunning={isAnimationStarted}
 						scrollSpeed={10 - scrollSpeed}
 					/>

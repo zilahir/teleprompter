@@ -1,12 +1,13 @@
 /* eslint-disable consistent-return */
-import React, { useEffect, useState, useRef, createRef } from 'react'
+import React, { useEffect, useState, useRef, createRef, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import styles from './TextPreview.module.scss'
 import { getFontFamily } from '../../../utils/getFontFamily'
 import { alignmentOptions } from '../../../utils/consts'
+import rootContext from '../../Main/rootContext'
 
 const Text = styled.div`
 	p {
@@ -57,40 +58,20 @@ const useInterval = (callback, delay) => {
 }
 
 const TextPreview = props => {
-	const { text, isAnimationRunning, scrollSpeed } = props
-	const store = useStore()
-	const [fontSize, setFontSize] = useState(null)
-	const [lineHeight, setLineHeight] = useState(null)
-	const [letterSpacing, setLetterSpacing] = useState(null)
-	const [scrollWidth, setScrollWidth] = useState(null)
+	const { isAnimationRunning, scrollSpeed } = props
+	const { textPreview } = useContext(rootContext)
 	const [position, setPosition] = useState(0)
 	const [scrollerRefs, setScrollerRefs] = useState([])
-	const [fontFamily, setFontFamily] = useState()
-	const [textAlignment, setTextAlignment] = useState(null)
 	const scrollSpeedValue = scrollSpeed * 10
+	const { text } = useSelector(state => state)
+
+	const { fontSize, lineHeight, letterSpacing, scrollWidth, fontFamily, textAlignment } = text
 
 	const STEP = 5
-	// const scrollerRef = useRef(null)
 
-	useEffect(() => store.subscribe(() => {
-		const fs = store.getState().text.fontSize
-		const ln = store.getState().text.lineHeight
-		const ls = store.getState().text.letterSpacing
-		const sw = store.getState().text.scrollWidth
-		const ff = store.getState().text.chosenFont
-		const ta = store.getState().text.textAlignment
-
-		setFontSize(fs)
-		setLineHeight(ln)
-		setLetterSpacing(ls)
-		setScrollWidth(sw)
-		setFontFamily(ff)
-		setTextAlignment(
-			alignmentOptions.find(
-				alignment => alignment.id === ta,
-			).option.toLowerCase(),
-		)
-	}), [store, fontSize, text, scrollWidth])
+	const chosenTextAlignment = alignmentOptions.find(
+		alignment => alignment.id === textAlignment,
+	).option.toLowerCase()
 
 	useInterval(() => {
 		setPosition(position + STEP)
@@ -128,13 +109,13 @@ const TextPreview = props => {
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 					fontFamily={getFontFamily(fontFamily)}
-					textAlignment={textAlignment}
+					textAlignment={chosenTextAlignment}
 				>
 					<div
 						className={styles.innerContainer}
 					>
 						<p>
-							{text}
+							{textPreview}
 						</p>
 					</div>
 				</TextMirrored>
@@ -150,13 +131,13 @@ const TextPreview = props => {
 					letterSpacing={letterSpacing}
 					scrollWidth={scrollWidth}
 					fontFamily={getFontFamily(fontFamily)}
-					textAlignment={textAlignment}
+					textAlignment={chosenTextAlignment}
 				>
 					<div
 						className={styles.innerContainer}
 					>
 						<p>
-							{text}
+							{textPreview}
 						</p>
 					</div>
 				</Text>
@@ -168,7 +149,6 @@ const TextPreview = props => {
 TextPreview.propTypes = {
 	isAnimationRunning: PropTypes.bool.isRequired,
 	scrollSpeed: PropTypes.number.isRequired,
-	text: PropTypes.string.isRequired,
 }
 
 export default TextPreview
