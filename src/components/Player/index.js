@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactGA from 'react-ga'

@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useStore, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import { theme } from '../../../utils/theme'
-import { setScrollWidth } from '../../../store/actions/text'
 import { Colors as teleprompterColors } from '../../../utils/consts'
 import styles from './Selector.module.scss'
 
@@ -25,8 +22,6 @@ const Item = styled.div`
 
 const Selector = props => {
 	const { items, activeId, onClick } = props
-	const store = useStore()
-	const dispatch = useDispatch()
 
 	function handleChange(chosenId) {
 		onClick(chosenId)

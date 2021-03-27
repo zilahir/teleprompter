@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import ReactGA from 'react-ga'
 import { Row, Container, Col } from 'react-grid-system'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import classnames from 'classnames'
 import { alertTriangle } from 'react-icons-kit/feather/alertTriangle'
 import Icon from 'react-icons-kit'
@@ -20,7 +19,6 @@ import { FORGOTTEN_PW, PASSWORD } from '../../utils/consts'
 * */
 
 const Password = () => {
-	const history = useHistory()
 	const [newPassword, setNewPassword] = useState(null)
 	const [confirmNewPassword, setConfirmNewpassword] = useState(null)
 	const [alertMessage, setAlertMessage] = useState({})
@@ -31,10 +29,6 @@ const Password = () => {
 
 	ReactGA.pageview(`${FORGOTTEN_PW}`)
 	function handlePasswordUpdate() {
-		const updatePasswordObject = {
-			newPassword,
-			confirmNewPassword,
-		}
 		const passwordReset = resetPassword(newPassword, token, userId)
 		passwordReset.then(() => {
 			setPasswordRecoveryToUsed(slug).then(res => {

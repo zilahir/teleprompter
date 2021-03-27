@@ -1,21 +1,17 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
-import { useStore, useDispatch, useSelector } from 'react-redux'
+import { useStore, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import random from 'random'
 import shortid from 'shortid'
-import { useHistory } from 'react-router'
 
-import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, INFOBOX_TOP, SEGMENT, colors } from '../../utils/consts'
+import { LINK, LOGIN, REGISTER, SAVE, SAVE_AS_COPY, LOAD, NEW_PROMPTER, SEGMENT, colors } from '../../utils/consts'
 import Logo from '../common/Logo'
 import Button from '../common/Button'
 import styles from './ActionHeader.module.scss'
 import Login from '../Login'
 import { setPrompterSlug, isProverSaved, updatePrompter } from '../../store/actions/prompter'
 import Modal from '../common/Modal'
-import { resetPrompter } from '../../store/actions/text'
 import UserSettingsModal from '../UserSettingsModal'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import { setSegments } from '../../store/actions/segments'
@@ -47,7 +43,6 @@ const ActionHeader = () => {
 	const saveAsRef = useRef(null)
 	const loginBtnRef = useRef(null)
 	const signUpBtnRef = useRef(null)
-	const history = useHistory()
 
 	function openLoginBox() {
 		setBoxPosition(loginBtnRef.current.getBoundingClientRect().x)

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStore, useDispatch } from 'react-redux'
@@ -38,11 +36,6 @@ const UserSettingsModal = props => {
 	)
 	const history = useHistory()
 	const dispatch = useDispatch()
-
-	function validateForm() {
-		const result = false
-		return result
-	}
 
 	function confirmCheckbox() {
 		toggleConfirmed(!isConfirmed)

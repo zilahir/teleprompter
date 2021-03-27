@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
@@ -7,7 +6,6 @@ import styled from 'styled-components'
 
 import styles from './Instruction.module.scss'
 import { hideInstruction } from '../../../store/actions/misc'
-import { INFOBOX_SIDEBAR } from '../../../utils/consts'
 
 /**
 * @author zilahir
