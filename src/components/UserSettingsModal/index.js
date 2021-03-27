@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useStore, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Icon from 'react-icons-kit'
 import { alertTriangle } from 'react-icons-kit/feather/alertTriangle'
@@ -22,7 +22,6 @@ import { PASSWORD } from '../../utils/consts'
 * */
 
 const UserSettingsModal = props => {
-	const store = useStore()
 	const { showUserSettingsModal, requestClose } = props
 	const [currentPassword, setCurrentPassword] = useState('')
 	const [newPassword, setNewPassword] = useState(null)
@@ -30,9 +29,10 @@ const UserSettingsModal = props => {
 	const [passwordForAccountDeletion, setPwForAccountDeletion] = useState(null)
 	const [isConfirmed, toggleConfirmed] = useState(false)
 	const [alertMessage, setAlertMessage] = useState({})
+	const { user } = useSelector(store => store)
 	const [newUsername, setNewUsername] = useState(
-		store.getState().user.loggedIn
-			? store.getState().user.user.username : '',
+		user.loggedIn
+			? user.user.username : '',
 	)
 	const history = useHistory()
 	const dispatch = useDispatch()
@@ -53,11 +53,11 @@ const UserSettingsModal = props => {
 	function modifyUser() {
 		if (isConfirmed) {
 			checkPassword({
-				email: store.getState().user.user.email,
+				email: user.user.email,
 				password: passwordForAccountDeletion,
 			}).then(res => {
 				if (res.isSuccess) {
-					deleteAccount(store.getState().user.user.userId, store.getState().user.user.accessToken)
+					deleteAccount(user.user.userId, user.user.accessToken)
 						.then(() => {
 							dispatch(removeUser())
 							history.go()
@@ -65,11 +65,11 @@ const UserSettingsModal = props => {
 				}
 			})
 		} else if (newPassword && newPassword === newPasswordConfirm && newPassword.length > 7) {
-			const { accessToken } = store.getState().user.user
-			const { userId } = store.getState().user.user
+			const { accessToken } = user
+			const { userId } = user.user
 
 			checkPassword({
-				email: store.getState().user.user.email,
+				email: user.user.email,
 				password: currentPassword,
 			}).then(res => {
 				if (res.isSuccess) {
@@ -134,14 +134,14 @@ const UserSettingsModal = props => {
 					</div>
 					<h1>
 						{
-							store.getState().user.loggedIn
-								? store.getState().user.user.username : ''
+							user.loggedIn
+								? user.user.username : ''
 						}
 					</h1>
 					<h2>
 						{
-							store.getState().user.loggedIn
-								? store.getState().user.user.email
+							user.loggedIn
+								? user.user.email
 								: ''
 						}
 					</h2>
@@ -163,8 +163,8 @@ const UserSettingsModal = props => {
 							getBackValue={v => setNewUsername(v)}
 							inheritedValue={newUsername}
 							inputClassName={
-								store.getState().user.loggedIn
-									&& newUsername !== store.getState().user.user.username ? styles.newUsername : null
+								user.loggedIn
+									&& newUsername !== user.user.username ? styles.newUsername : null
 							}
 						/>
 					</div>
