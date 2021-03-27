@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useStore, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { Row, Container } from 'react-grid-system'
 import shortid from 'shortid'
@@ -24,8 +24,8 @@ import RootContext from './rootContext'
 
 const Main = () => {
 	const dispatch = useDispatch()
-	const store = useStore()
 	const [textPreview, setTextPreview] = useState('')
+	const { user } = useSelector(state => state)
 	useEffect(() => {
 		Promise.all([
 			dispatch(setSegments([{
@@ -40,8 +40,8 @@ const Main = () => {
 			dispatch(toggleUpdateBtn(false)),
 			dispatch(setPrompterSlug(uuidv4().split('-')[0])),
 		]).then(() => {
-			if (store.getState().user.loggedIn) {
-				dispatch(getAllUserPrompter(store.getState().user.user.userId))
+			if (user.loggedIn) {
+				dispatch(getAllUserPrompter(user.user.userId))
 			}
 		})
 	}, [])
