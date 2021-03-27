@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Col } from 'react-grid-system'
 import classnames from 'classnames'
 import { useSocket } from '@zilahir/use-socket.io-client'
@@ -20,6 +20,7 @@ import { copyPrompterObject, createNewPrompterNoAuth, updatePrompterNoAuth } fro
 import { apiEndpoints } from '../../utils/apiEndpoints'
 import { toggleUpdateBtn } from '../../store/actions/misc'
 import Loader from '../Loader'
+import rootContext from '../Main/rootContext'
 
 /**
 * @author zilahir
@@ -28,7 +29,6 @@ import Loader from '../Loader'
 
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
-	const [givenText, setText] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const [prompterSlug, setPrompterSlug] = useState(null)
@@ -41,6 +41,7 @@ const ActionSidebar = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
+	const { textPreview } = useContext(rootContext)
 	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
 	if (socket) {
 		socket.connect()
@@ -121,7 +122,6 @@ const ActionSidebar = () => {
 	}), [store])
 
 	useEffect(() => store.subscribe(() => {
-		const textPreview = segments.segments.length ? segments.segments[0].segmentText : ''
 		const sp = text.scrollSpeed
 		if (typeof userPrompters.prompterSlug !== 'undefined') {
 			const slug = userPrompters.prompterSlug
@@ -130,7 +130,6 @@ const ActionSidebar = () => {
 			setRemoteAddress(`prompter.me/remote/${slug}`)
 		}
 		setScrollSpeed(sp)
-		setText(textPreview)
 	}), [store, text, scrollSpeed, prompterSlug])
 
 	function testAnimation() {
@@ -165,7 +164,7 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text={givenText}
+						text={textPreview}
 						isAnimationRunning={isAnimationStarted}
 						scrollSpeed={10 - scrollSpeed}
 					/>

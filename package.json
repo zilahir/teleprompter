@@ -62,7 +62,7 @@
   },
   "scripts": {
     "cm": "cz",
-    "start": "PORT=4444 react-scripts start",
+    "start": "CI=false PORT=4444 react-scripts start",
     "build": "CI=false && react-scripts build",
     "build-production": "env-cmd -f config/.env.prod react-scripts build",
     "test": "react-scripts test",

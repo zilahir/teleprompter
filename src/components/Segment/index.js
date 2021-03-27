@@ -1,12 +1,14 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close'
 import TextareaAutosize from 'react-autosize-textarea'
 
+import rootContext from '../Main/rootContext'
 import styles from './Segment.module.scss'
 import Input from '../common/Input'
 import ColorPicker from '../ColorPicker'
@@ -34,6 +36,7 @@ const Segment = ({
 	const thisSegmentRef = useRef(null)
 	const [isColorPickerOpen, toggleColorPickerOpen] = useState(false)
 	const dispatch = useDispatch()
+	const context = useContext(rootContext)
 
 	const thisSegment = useSelector(
 		state => state.segments.segments.find(segment => segment.id === segmentId),
@@ -55,6 +58,10 @@ const Segment = ({
 		}))
 	}
 
+	function segmentTextOnBlur(event) {
+		context.setTextPreview(event.target.value)
+	}
+
 	function handleSegmentColorChange(newColor) {
 		dispatch(modifySegment({
 			...thisSegment,
@@ -68,6 +75,10 @@ const Segment = ({
 		dispatch(setSegments(filteredSegments))
 	}
 
+	function handleFocusOut(event) {
+		handleSegmentNameChange(event.target.value)
+	}
+
 	return (
 		<>
 			<OnseSegment
@@ -79,7 +90,7 @@ const Segment = ({
 						labelText={null}
 						inputClassName={styles.segmentName}
 						placeholder="Add segment name"
-						onFocusOut={event => handleSegmentNameChange(event.target.value)}
+						onFocusOut={event => handleFocusOut(event)}
 						inheritedValue={segmentTitle}
 					/>
 					<ul>
@@ -108,6 +119,7 @@ const Segment = ({
 						className={styles.segmentText}
 						value={thisSegment.segmentText}
 						ref={thisSegmentRef}
+						onBlur={event => segmentTextOnBlur(event)}
 					/>
 				</div>
 				<ColorPicker
