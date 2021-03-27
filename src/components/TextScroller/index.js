@@ -125,6 +125,8 @@ const TextScroller = props => {
 		socket.on('jumpDown', jumpDown)
 	}, [socket])
 
+	console.debug('segments', segments)
+
 	const scrollHandler = event => {
 		setPosition(event.currentTarget.scrollTop)
 	}

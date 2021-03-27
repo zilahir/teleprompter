@@ -29,6 +29,7 @@ const Player = () => {
 	useEffect(() => {
 		toggleIsLoading(true)
 		getPrompterBySlug(slug).then(result => {
+			console.debug('result', result)
 			if (result.isSuccess) {
 				setPrompterObject(result.prompter.meta)
 				setSegments(result.prompter.segments)

@@ -5,7 +5,7 @@ import { useSocket } from '@zilahir/use-socket.io-client'
 import { useStore, useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
-import { isEqual } from 'lodash'
+import { isEqual, isNull } from 'lodash'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import LaunchIcon from '@material-ui/icons/Launch'
@@ -61,7 +61,7 @@ const ActionSidebar = () => {
 		const slug = userPrompters.prompterSlug
 		const saveObject = {
 			slug,
-			segments,
+			segments: segments.segments,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -87,7 +87,7 @@ const ActionSidebar = () => {
 
 	function updatePrompter() {
 		const newPrompterObject = text
-		const slug = userPrompters
+		const slug = userPrompters.prompterSlug
 		const updateObject = {
 			slug,
 			text: newPrompterObject.text,
@@ -112,12 +112,12 @@ const ActionSidebar = () => {
 		})
 	}
 
-	useEffect(() => store.subscribe(() => {
+	useEffect(() => {
 		const hasChanged = isEqual(text, userPrompters.prompterObject)
-		if (!hasChanged && userPrompters) {
+		if (!hasChanged && !isNull(userPrompters.prompterObject)) {
 			toggleShowUpdateBtn(true)
 		}
-	}), [store])
+	}, [userPrompters.prompterObject, text])
 
 	useEffect(() => store.subscribe(() => {
 		const sp = text.scrollSpeed
