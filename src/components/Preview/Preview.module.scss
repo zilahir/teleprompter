@@ -12,13 +12,8 @@
         box-shadow: none;
         width: fit-content;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         padding-left: 0;
-
-        p {
-            position: relative;
-            top: 2px;
-        }
 
         &:last-of-type {
             @include paragraph(14px, #fff);
@@ -48,7 +43,7 @@
 
     p {
         @include paragraph(15px, #fff, 0);
-        margin-left: 10px;
+        margin-left: 5px;
     }
 }
 
