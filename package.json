@@ -34,7 +34,7 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-color": "^2.18.1",
     "react-copy-to-clipboard": "^5.0.2",
-    "react-device-detect": "^1.15.0",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^16.13.1",
     "react-ga": "^3.3.0",
     "react-grid-system": "^7.1.2",
