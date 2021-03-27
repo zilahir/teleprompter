@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import classnames from 'classnames'
-import { useStore, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import random from 'random'
 import shortid from 'shortid'
@@ -28,16 +28,14 @@ const ActionHeader = () => {
 	const [showRegister, toggleRegister] = useState(false)
 	const [showLoad, toggleLoad] = useState(false)
 	const [showSave, toggleSave] = useState(false)
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [showNewModal, toggleNewModal] = useState(false)
-	const [isLoadBtnVisible, setIsLoadVisible] = useState(false)
 	const [userSettingsModalOpen, toggleUserSettingsModal] = useState(false)
 	const [boxPosition, setBoxPosition] = useState(0)
 	const [isAboutPageVisible, toggleAboutModal] = useState(false)
 	const [isHowToUseModalOpen, toggleHowToUseModal] = useState(false)
 	const { userPrompters, user, text } = useSelector(store => store)
 
-	const store = useStore()
+	const isLoggedIn = user.loggedIn
 	const dispatch = useDispatch()
 	const projectsBtnRef = useRef(null)
 	const saveRef = useRef(null)
@@ -133,16 +131,6 @@ const ActionHeader = () => {
 		toggleUserSettingsModal(true)
 	}
 
-	useEffect(() => store.subscribe(() => {
-		const savedPrompters = store.getState().userPrompters.usersPrompters.length
-		setIsLoadVisible(savedPrompters)
-		if (user.loggedIn) {
-			setIsLoggedIn(true)
-		} else {
-			setIsLoggedIn(false)
-		}
-	}), [isLoggedIn])
-
 	return (
 		<div
 			className={styles.topHeaderRoot}
@@ -170,6 +158,7 @@ const ActionHeader = () => {
 								type={LINK}
 								onClick={() => openSave(SAVE)}
 								disabled={!isLoggedIn}
+								isVisible={isLoggedIn}
 							/>
 						</li>
 						<li ref={saveAsRef}>
@@ -178,6 +167,7 @@ const ActionHeader = () => {
 								type={LINK}
 								onClick={() => openSave(SAVE_AS_COPY)}
 								disabled={!isLoggedIn}
+								isVisible={isLoggedIn}
 							/>
 						</li>
 						<li ref={projectsBtnRef}>
@@ -185,7 +175,9 @@ const ActionHeader = () => {
 								labelText="Projects"
 								type={LINK}
 								onClick={() => openLoad()}
-								isVisible={isLoadBtnVisible}
+								isVisible={
+									userPrompters.usersPrompters.length > 0
+								}
 							/>
 						</li>
 					</ul>
