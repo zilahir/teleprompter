@@ -1,3 +1,10 @@
+### [1.0.3](https://github.com/zilahir/teleprompter/compare/v1.0.2...v1.0.3) (2021-03-27)
+
+
+### Bug Fixes
+
+* **prompter-saving:** fixed prompter saving object ([dd342bc](https://github.com/zilahir/teleprompter/commit/dd342bcda77e46bf0b85b50ad5e08423522756a9))
+
 ### [1.0.2](https://github.com/zilahir/teleprompter/compare/v1.0.1...v1.0.2) (2021-03-27)
 
 
