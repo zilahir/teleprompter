@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactGA from 'react-ga'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useSocket } from '@zilahir/use-socket.io-client'
 
 import TextScroller from '../TextScroller'
@@ -23,8 +23,8 @@ const Player = () => {
 	const [prompterObject, setPrompterObject] = useState(undefined)
 	const [segments, setSegments] = useState([])
 	const [updatedPrompterObject, updatePrompterObject] = useState({})
-	const store = useStore()
 	const { slug } = useParams()
+	const { text } = useSelector(store => store)
 
 	useEffect(() => {
 		toggleIsLoading(true)
@@ -35,7 +35,7 @@ const Player = () => {
 			}
 			toggleIsLoading(false)
 		})
-	}, [store])
+	}, [])
 
 	if (socket) {
 		socket.on('updatePrompter', updatedPrompter => {
@@ -65,7 +65,7 @@ const Player = () => {
 								segments={segments}
 								slug={slug}
 								prompterObject={prompterObject}
-								scrollSpeed={(10 - store.getState().text.scrollSpeed) * 10}
+								scrollSpeed={(10 - text.scrollSpeed) * 10}
 							/>
 						)
 						: <Loader isLoading={isLoading} />

@@ -82,9 +82,13 @@
   }
   
   .inputContainer {
+    input {
+      border: 2px solid transparent;
+    }
+
     .newUsername {
       input {
-          border: 0;
+          border: 2px solid $orange;
       }
   }
     .newPasswordContainer {

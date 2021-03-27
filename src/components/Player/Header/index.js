@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { refresh } from 'react-icons-kit/fa/refresh'
 import PropTypes from 'prop-types'
@@ -13,8 +13,7 @@ import Button from '../../common/Button'
 * */
 
 const Header = props => {
-	const store = useStore()
-	const { prompterSlug } = store.getState().userPrompters
+	const { userPrompters } = useSelector(store => store)
 	const { isUpdateBtnVisible, updateBtnClick } = props
 	return (
 		<header className={styles.playerHeader}>
@@ -54,7 +53,7 @@ const Header = props => {
 				</div>
 				<div>
 					<p>
-						Your session ID is <span>{prompterSlug}</span>
+						Your session ID is <span>{userPrompters.prompterSlug}</span>
 					</p>
 				</div>
 				<div>

@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Icon from 'react-icons-kit'
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { triangle } from 'react-icons-kit/feather/triangle'
 import { trash } from 'react-icons-kit/feather/trash'
 import classnames from 'classnames'
@@ -36,7 +36,6 @@ const BoxContainer = styled.div`
 const Login = props => {
 	const { type, isVisible, requestClose, leftPosition } = props
 	const dispatch = useDispatch()
-	const store = useStore()
 	const [projectName, setProjectName] = useState(null)
 	const [isLoginError, setLoginError] = useState(false)
 	const [chosenEmail, setChosenEmail] = useState(null)
@@ -52,6 +51,7 @@ const Login = props => {
 	const [delProject, setProjectToDel] = useState(null)
 	const [showPasswordModal, toggleForgottenPasswordModal] = useState(false)
 	const [username, setUsername] = useState(null)
+	const { userPrompters, segments, text, user } = useSelector(state => state)
 
 	function handleLogin() {
 		Promise.all([
@@ -69,11 +69,9 @@ const Login = props => {
 	}
 
 	function handleSave() {
-		const slug = store.getState().userPrompters.prompterSlug
-		const { segments } = store.getState().segments
+		const slug = userPrompters.prompterSlug
 		toggleSavingLoader(true)
-		const newPrompterObject = store.getState().text
-		const { user } = store.getState().user
+		const newPrompterObject = text
 		const saveObject = {
 			slug,
 			segments,
@@ -140,7 +138,6 @@ const Login = props => {
 	}
 
 	function handlePrompterDelte(delObject) {
-		const { user } = store.getState().user
 		Promise.all([
 			// eslint-disable-next-line no-underscore-dangle
 			deletePrompter(delObject._id),
@@ -178,7 +175,6 @@ const Login = props => {
 			}, 1000)
 		})
 	}
-	const { usersPrompters } = store.getState().userPrompters
 
 	function handleForgotPassword() {
 		toggleForgottenPasswordModal(true)
@@ -332,7 +328,7 @@ const Login = props => {
 								>
 									<ul className={styles.savedItems}>
 										{
-											usersPrompters.map(currItem => (
+											userPrompters.usersPrompters.map(currItem => (
 												<li
 													role="button"
 													key={currItem.id}

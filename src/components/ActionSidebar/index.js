@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Col } from 'react-grid-system'
 import classnames from 'classnames'
 import { useSocket } from '@zilahir/use-socket.io-client'
-import { useStore, useDispatch } from 'react-redux'
+import { useStore, useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-icons-kit'
 import { copy } from 'react-icons-kit/feather/copy'
 import { isEqual } from 'lodash'
@@ -28,7 +28,6 @@ import Loader from '../Loader'
 
 const ActionSidebar = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
-	const [text, setText] = useState('')
 	const [isAnimationStarted, toggleAnimation] = useState(false)
 	const [scrollSpeed, setScrollSpeed] = useState(1)
 	const [prompterSlug, setPrompterSlug] = useState(null)
@@ -37,6 +36,7 @@ const ActionSidebar = () => {
 	const [streamAddress, setStreamAddress] = useState(null)
 	const [createLabelText, setCreateBtnLabelText] = useState(CREATE)
 	const [isLoading, toggleLoading] = useState(false)
+	const { userPrompters, segments, text } = useSelector(store => store)
 
 	const store = useStore()
 	const dispatch = useDispatch()
@@ -57,9 +57,8 @@ const ActionSidebar = () => {
 		toggleLoading(true)
 		setIsPlaying(!isPlaying)
 		socket.emit('isPlaying', !isPlaying)
-		const newPrompterObject = store.getState().text
-		const { segments } = store.getState().segments
-		const slug = store.getState().userPrompters.prompterSlug
+		const newPrompterObject = text
+		const slug = userPrompters.prompterSlug
 		const saveObject = {
 			slug,
 			segments,
@@ -76,7 +75,7 @@ const ActionSidebar = () => {
 			},
 		}
 		Promise.all([
-			dispatch(copyPrompterObject(store.getState().text)),
+			dispatch(copyPrompterObject(text)),
 			createNewPrompterNoAuth(saveObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			setTimeout(() => {
@@ -87,8 +86,8 @@ const ActionSidebar = () => {
 	}
 
 	function updatePrompter() {
-		const newPrompterObject = store.getState().text
-		const slug = store.getState().userPrompters.prompterSlug
+		const newPrompterObject = text
+		const slug = userPrompters
 		const updateObject = {
 			slug,
 			text: newPrompterObject.text,
@@ -105,7 +104,7 @@ const ActionSidebar = () => {
 			},
 		}
 		Promise.all([
-			dispatch(copyPrompterObject(store.getState().text)),
+			dispatch(copyPrompterObject(text)),
 			updatePrompterNoAuth(updateObject, apiEndpoints.newPrompterWithoutAuth),
 		]).then(() => {
 			toggleUpdateBtn(false)
@@ -114,23 +113,21 @@ const ActionSidebar = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const hasChanged = isEqual(store.getState().text, store.getState().userPrompters.prompterObject)
-		if (!hasChanged && store.getState().userPrompters.prompterObject) {
+		const hasChanged = isEqual(text, userPrompters.prompterObject)
+		if (!hasChanged && userPrompters) {
 			toggleShowUpdateBtn(true)
 		}
 	}), [store])
 
 	useEffect(() => store.subscribe(() => {
-		const textPreview = store.getState().segments.segments.length ? store.getState().segments.segments[0].segmentText : ''
-		const sp = store.getState().text.scrollSpeed
-		if (typeof store.getState().userPrompters.prompterSlug !== 'undefined') {
-			const slug = store.getState().userPrompters.prompterSlug
+		const sp = text.scrollSpeed
+		if (typeof userPrompters.prompterSlug !== 'undefined') {
+			const slug = userPrompters.prompterSlug
 			setPrompterSlug(slug)
 			setStreamAddress(`prompter.me/player/${slug}`)
 			setRemoteAddress(`prompter.me/remote/${slug}`)
 		}
 		setScrollSpeed(sp)
-		setText(textPreview)
 	}), [store, text, scrollSpeed, prompterSlug])
 
 	function testAnimation() {
@@ -165,7 +162,6 @@ const ActionSidebar = () => {
 			>
 				<div className={styles.innerContainer}>
 					<TextPreview
-						text={text}
 						isAnimationRunning={isAnimationStarted}
 						scrollSpeed={10 - scrollSpeed}
 					/>

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useRef, useState, useEffect } from 'react'
 import { Waypoint } from 'react-waypoint'
 import KeyboardEventHandler from 'react-keyboard-event-handler'

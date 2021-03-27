@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useStore, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { Row, Container } from 'react-grid-system'
 import shortid from 'shortid'
@@ -15,6 +15,7 @@ import { toggleUpdateBtn } from '../../store/actions/misc'
 import ActionHeader from '../ActionHeader'
 import { setSegments } from '../../store/actions/segments'
 import { colors, SEGMENT } from '../../utils/consts'
+import RootContext from './rootContext'
 
 /**
 * @author zilahir
@@ -23,7 +24,8 @@ import { colors, SEGMENT } from '../../utils/consts'
 
 const Main = () => {
 	const dispatch = useDispatch()
-	const store = useStore()
+	const [textPreview, setTextPreview] = useState('')
+	const { user } = useSelector(state => state)
 	useEffect(() => {
 		Promise.all([
 			dispatch(setSegments([{
@@ -38,8 +40,8 @@ const Main = () => {
 			dispatch(toggleUpdateBtn(false)),
 			dispatch(setPrompterSlug(uuidv4().split('-')[0])),
 		]).then(() => {
-			if (store.getState().user.loggedIn) {
-				dispatch(getAllUserPrompter(store.getState().user.user.userId))
+			if (user.loggedIn) {
+				dispatch(getAllUserPrompter(user.user.userId))
 			}
 		})
 	}, [])
@@ -54,9 +56,16 @@ const Main = () => {
 					<Row
 						className={styles.heightFixer}
 					>
-						<EditorSidebar />
-						<Preview />
-						<ActionSidebar />
+						<RootContext.Provider
+							value={{
+								textPreview,
+								setTextPreview,
+							}}
+						>
+							<EditorSidebar />
+							<Preview />
+							<ActionSidebar />
+						</RootContext.Provider>
 					</Row>
 				</Container>
 			</div>
