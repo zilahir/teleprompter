@@ -134,7 +134,7 @@ const ActionHeader = () => {
 	}
 
 	useEffect(() => store.subscribe(() => {
-		const savedPrompters = store.userPrompters.usersPrompters.length
+		const savedPrompters = store.getState().userPrompters.usersPrompters.length
 		setIsLoadVisible(savedPrompters)
 		if (user.loggedIn) {
 			setIsLoggedIn(true)
