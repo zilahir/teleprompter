@@ -22,7 +22,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "env-cmd": "^10.1.0",
-    "framer-motion": "^4.0.3",
+    "framer-motion": "^4.1.11",
     "hex-to-rgba": "^2.0.1",
     "lodash": "^4.17.20",
     "moment": "^2.24.0",
