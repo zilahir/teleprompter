@@ -40,7 +40,7 @@ const ActionSidebar = () => {
 
 	const store = useStore()
 	const dispatch = useDispatch()
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000/' : process.env.REACT_APP_BACKEND_V2)
 	if (socket) {
 		socket.connect()
 	}
@@ -90,7 +90,7 @@ const ActionSidebar = () => {
 		const slug = userPrompters.prompterSlug
 		const updateObject = {
 			slug,
-			text: newPrompterObject.text,
+			segments: segments.segments,
 			projectName: `project_${slug}`,
 			meta: {
 				fontSize: newPrompterObject.fontSize,
@@ -118,6 +118,12 @@ const ActionSidebar = () => {
 			toggleShowUpdateBtn(true)
 		}
 	}, [userPrompters.prompterObject, text])
+
+	useEffect(() => {
+		if (userPrompters.prompterObject) {
+			toggleShowUpdateBtn(true)
+		}
+	}, [segments.segments])
 
 	useEffect(() => store.subscribe(() => {
 		const sp = text.scrollSpeed

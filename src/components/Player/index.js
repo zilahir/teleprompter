@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactGA from 'react-ga'
@@ -17,7 +18,7 @@ import { getPrompterBySlug } from '../../store/actions/prompter'
 
 const Player = () => {
 	ReactGA.pageview(`/${PLAYER}`)
-	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : process.env.REACT_APP_BACKEND_V2)
+	const [socket] = useSocket(process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000' : process.env.REACT_APP_BACKEND_V2)
 	const [isLoading, toggleIsLoading] = useState(false)
 	const [isUpdateBtnVisible, toggleUpdateBtn] = useState(false)
 	const [prompterObject, setPrompterObject] = useState(undefined)
@@ -29,7 +30,6 @@ const Player = () => {
 	useEffect(() => {
 		toggleIsLoading(true)
 		getPrompterBySlug(slug).then(result => {
-			console.debug('result', result)
 			if (result.isSuccess) {
 				setPrompterObject(result.prompter.meta)
 				setSegments(result.prompter.segments)
@@ -48,7 +48,9 @@ const Player = () => {
 	}
 
 	function handleUpdate() {
+		console.log('updatedPrompterObject', updatedPrompterObject)
 		setPrompterObject(updatedPrompterObject.meta)
+		setSegments(updatedPrompterObject.segments)
 		toggleUpdateBtn(false)
 	}
 

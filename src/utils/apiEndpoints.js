@@ -22,3 +22,5 @@ export const apiEndpoints = {
 	deleteUser: `${apiRoot}/users`,
 	getPrompterBySlugNoAuth: `${apiRoot}/prompternoauth`,
 }
+
+export const socketEndpoint = 'ws://localhost:5000'
